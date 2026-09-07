@@ -1,0 +1,221 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/system-builder/traceability.schema.json",
+  "title": "System Builder Traceability",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "requirements"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "requirements": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^(FR|NFR)-[0-9]{3,}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "priority",
+          "status"
+        ],
+        "properties": {
+          "priority": {
+            "type": "string",
+            "enum": [
+              "must",
+              "should",
+              "could"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "identified",
+              "specified",
+              "planned",
+              "in_progress",
+              "implemented",
+              "verified",
+              "deferred",
+              "cancelled"
+            ]
+          },
+          "development_steps": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^DEV-[0-9]{3,}$"
+            },
+            "default": []
+          },
+          "acceptance_criteria": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^AC-[0-9]{3,}$"
+            },
+            "default": []
+          },
+          "verification": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^TEST-[0-9]{3,}$"
+            },
+            "default": []
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "acceptance_criteria": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^AC-[0-9]{3,}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "requirement",
+          "status"
+        ],
+        "properties": {
+          "requirement": {
+            "type": "string",
+            "pattern": "^(FR|NFR)-[0-9]{3,}$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "defined",
+              "planned",
+              "verified",
+              "failed",
+              "deferred"
+            ]
+          },
+          "verification": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^TEST-[0-9]{3,}$"
+            },
+            "default": []
+          }
+        }
+      },
+      "default": {}
+    },
+    "development_steps": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^DEV-[0-9]{3,}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "planned",
+              "in_progress",
+              "completed",
+              "blocked",
+              "cancelled"
+            ]
+          },
+          "requirements": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^(FR|NFR)-[0-9]{3,}$"
+            },
+            "default": []
+          }
+        }
+      },
+      "default": {}
+    },
+    "verification": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^TEST-[0-9]{3,}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "status"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "unit",
+              "integration",
+              "api",
+              "ui",
+              "e2e",
+              "build",
+              "lint",
+              "typecheck",
+              "security",
+              "acceptance",
+              "manual",
+              "other"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "planned",
+              "passed",
+              "failed",
+              "blocked",
+              "not_run"
+            ]
+          },
+          "requirements": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^(FR|NFR)-[0-9]{3,}$"
+            },
+            "default": []
+          },
+          "acceptance_criteria": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^AC-[0-9]{3,}$"
+            },
+            "default": []
+          }
+        }
+      },
+      "default": {}
+    }
+  }
+}

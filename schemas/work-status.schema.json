@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/system-builder/work-status.schema.json",
+  "title": "System Builder Work Status",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "active_work",
+    "progress",
+    "blockers",
+    "verification",
+    "source_state"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "active_work": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "plan",
+        "selected_step"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "CREATE",
+            "CHANGE",
+            "IMPROVE",
+            "PLAN",
+            "EXECUTE",
+            "REPAIR",
+            "RELEASE"
+          ]
+        },
+        "plan": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "change_request": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "selected_step": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[A-Z]+-[0-9]{2,4}$"
+        }
+      }
+    },
+    "progress": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "completed",
+        "in_progress",
+        "next"
+      ],
+      "properties": {
+        "completed": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z]+-[0-9]{2,4}$"
+          },
+          "uniqueItems": true
+        },
+        "in_progress": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[A-Z]+-[0-9]{2,4}$"
+        },
+        "next": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "recommended"
+          ],
+          "properties": {
+            "recommended": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[A-Z]+-[0-9]{2,4}$"
+            },
+            "reason": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "description",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^BLK-[0-9]{2,4}$"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "open",
+              "resolved"
+            ]
+          }
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "last_status",
+        "baseline"
+      ],
+      "properties": {
+        "last_status": {
+          "enum": [
+            "not_run",
+            "passed",
+            "failed",
+            "pass_with_known_red",
+            "blocked"
+          ]
+        },
+        "baseline": {
+          "enum": [
+            "unknown",
+            "green",
+            "known_red"
+          ]
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "source_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "drift"
+      ],
+      "properties": {
+        "drift": {
+          "enum": [
+            "unknown",
+            "none",
+            "detected"
+          ]
+        },
+        "reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "active_work": {
+            "properties": {
+              "selected_step": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "progress": {
+            "properties": {
+              "in_progress": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "progress": {
+            "properties": {
+              "in_progress": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "active_work": {
+            "properties": {
+              "selected_step": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

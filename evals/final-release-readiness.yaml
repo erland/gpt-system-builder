@@ -1,0 +1,92 @@
+schema_version: 1
+review: SB-40-final-release-readiness
+decision: READY_WITH_WARNINGS
+required_gates_passed: 15
+required_gates_total: 15
+warnings:
+- Live Coolify target verification remains pending because no live Coolify environment
+  was available; it is not reported as PASS.
+blockers: []
+note: Fresh critical gates were rerun in SB-40. E2E CREATE/CHANGE/Docker-Coolify gates
+  reuse persisted PASS reports from SB-34–SB-36; they were not silently reclassified
+  after the full rerun hit the execution limit.
+artifacts:
+  chat_sha256: 8ec5358ac3dd406c507a2a5735c86f043d97fa1a9ffdef50eab83f7a00032ed0
+  custom_gpt_sha256: 09422a0cbba8d89c40017a8d8fb0280565b42d0683267e9195bd220b2f448330
+gates:
+- gate: runtime_instruction
+  required: true
+  result: pass
+  evidence: 'PASS: canonical runtime instruction valid (13686 chars, 17 direct references)'
+  evidence_type: fresh
+- gate: knowledge_architecture
+  required: true
+  result: pass
+  evidence: 'PASS: Knowledge architecture valid (3 reference files)'
+  evidence_type: fresh
+- gate: project_ci_workflow
+  required: true
+  result: pass
+  evidence: 'PASS: System Builder project CI valid'
+  evidence_type: fresh
+- gate: release_workflow
+  required: true
+  result: pass
+  evidence: 'PASS: GitHub Release build valid'
+  evidence_type: fresh
+- gate: build_chat
+  required: true
+  result: pass
+  evidence: /mnt/data/system-builder-sb40-final/final-readiness-artifacts/system-builder-chat-readiness.zip
+  evidence_type: fresh
+- gate: build_custom
+  required: true
+  result: pass
+  evidence: /mnt/data/system-builder-sb40-final/final-readiness-artifacts/system-builder-custom-gpt-readiness.zip
+  evidence_type: fresh
+- gate: validate_chat
+  required: true
+  result: pass
+  evidence: 'PASS: Chat ZIP runtime valid (35 files)'
+  evidence_type: fresh
+- gate: validate_custom
+  required: true
+  result: pass
+  evidence: 'PASS: Custom GPT distribution valid (7935 instruction chars, 7 Knowledge
+    files)'
+  evidence_type: fresh
+- gate: runtime_parity
+  required: true
+  result: pass
+  evidence: 'PASS: 18/18 parity, critical=0'
+  evidence_type: fresh
+- gate: e2e_create
+  required: true
+  result: pass
+  evidence: evals/e2e/small-create/evaluation-report.md
+  evidence_type: stored_e2e_report
+- gate: e2e_change
+  required: true
+  result: pass
+  evidence: evals/e2e/existing-system-change/evaluation-report.md
+  evidence_type: stored_e2e_report
+- gate: e2e_docker_coolify
+  required: true
+  result: pass
+  evidence: evals/e2e/docker-coolify/evaluation-report.md
+  evidence_type: stored_e2e_report
+- gate: repository_hygiene
+  required: true
+  result: pass
+  evidence: lightweight final hygiene scan
+  evidence_type: fresh
+- gate: project_blockers
+  required: true
+  result: pass
+  evidence: project-status blockers empty
+  evidence_type: fresh
+- gate: custom_instruction_limit
+  required: true
+  result: pass
+  evidence: 7935 <= 8000 chars
+  evidence_type: fresh

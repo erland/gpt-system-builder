@@ -1,0 +1,5 @@
+schema_version: 1
+requirements:
+  REQ-1:
+    priority: mandatory
+    status: done

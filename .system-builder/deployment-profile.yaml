@@ -1,0 +1,42 @@
+schema_version: 1
+profile_name: system-builder-development
+packaging:
+  type: docker
+  image_registry: ghcr
+  image_name: system-builder
+  multi_stage_build: true
+  run_as_non_root: true
+target:
+  platform: generic_container_platform
+  environment: development
+runtime:
+  stateless: true
+  replicas: 1
+  port: 8080
+  startup_command: null
+database:
+  type: none
+  deployment: none
+  migrations: null
+  connection_via_environment: null
+persistence:
+  application_files: none
+  volumes: []
+network:
+  reverse_proxy: platform
+  tls: platform
+  public_exposure: false
+  base_path: null
+health:
+  enabled: true
+  liveness_endpoint: /health
+  readiness_endpoint: /health
+  startup_endpoint: null
+configuration:
+  environment_variables: []
+  secrets_via_environment: true
+  config_files: []
+delivery:
+  build_in_ci: true
+  publish_artifact: false
+  deployment_trigger: manual

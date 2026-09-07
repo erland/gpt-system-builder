@@ -1,0 +1,24 @@
+schema_version: 1
+active_work:
+  mode: EXECUTE
+  plan: docs/development-plan.md
+  change_request: null
+  selected_step: DEV-003
+progress:
+  completed:
+  - DEV-001
+  - DEV-002
+  in_progress: DEV-003
+  next:
+    recommended: DEV-003
+    reason: First incomplete verified step.
+blockers: []
+verification:
+  last_status: passed
+  baseline: green
+  commands:
+  - pytest
+  notes: Example state.
+source_state:
+  drift: none
+  reference: sha256:example

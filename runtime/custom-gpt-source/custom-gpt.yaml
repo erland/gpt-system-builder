@@ -1,0 +1,26 @@
+name: System Builder
+description: Expert GPT for creating, changing, improving, testing, packaging, deploying
+  and releasing software systems step by step.
+distribution: custom_gpt
+version: 0.1.0-dev
+instructions_file: instructions.txt
+instruction_characters: 7935
+knowledge_files:
+- 01-modes-and-workflow.md
+- 02-spec-architecture-plan.md
+- 03-risk-test-security.md
+- 04-source-delivery.md
+- 05-deployment.md
+- 06-operations-release.md
+- 07-reference.md
+recommended_capabilities:
+  web: true
+  code_interpreter_data_analysis: true
+  image_generation: false
+behavior_contract:
+  one_completed_step_per_run_default: true
+  source_state_over_chat_memory: true
+  critical_behavior_in_knowledge_only: false
+  false_pass_forbidden: true
+  zip_mode: true
+  github_mode: true

@@ -1,0 +1,41 @@
+schema_version: 1
+requirements:
+  FR-001:
+    priority: must
+    status: verified
+    development_steps:
+    - DEV-006
+    acceptance_criteria:
+    - AC-001
+    verification:
+    - TEST-001
+  FR-002:
+    priority: should
+    status: planned
+    development_steps:
+    - DEV-012
+    acceptance_criteria: []
+    verification: []
+acceptance_criteria:
+  AC-001:
+    requirement: FR-001
+    status: verified
+    verification:
+    - TEST-001
+development_steps:
+  DEV-006:
+    status: completed
+    requirements:
+    - FR-001
+  DEV-012:
+    status: planned
+    requirements:
+    - FR-002
+verification:
+  TEST-001:
+    type: acceptance
+    status: passed
+    requirements:
+    - FR-001
+    acceptance_criteria:
+    - AC-001

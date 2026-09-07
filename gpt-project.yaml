@@ -1,0 +1,201 @@
+schema_version: 1
+project:
+  id: system-builder
+  name: System Builder
+  description: GPT for developing new and existing software systems from need or change
+    request through specification, architecture, planning, implementation, verification,
+    packaging, deployment readiness and operations documentation.
+  language: sv
+profile:
+  reference: zip_first_advanced
+  deviations:
+  - GitHub mode is a first-class source mode alongside ZIP mode.
+runtimes:
+  planned:
+  - chat_zip
+  - custom_gpt
+source_modes:
+  planned:
+  - zip
+  - github
+  zip_policy: docs/zip-mode.md
+canonical:
+  instructions: src/instructions/system.md
+  knowledge_root: knowledge
+  schemas_root: schemas
+  scripts_root: scripts
+  development_plan: docs/development-plan.md
+  scope: docs/canonical-scope.md
+  complexity_model: docs/project-complexity.md
+  document_state_architecture: docs/document-state-architecture.md
+  project_schema: schemas/project.schema.json
+  work_status_schema: schemas/work-status.schema.json
+  project_state: .system-builder/project.yaml
+  work_status: .system-builder/work-status.yaml
+  traceability: docs/traceability.md
+  deployment_profile: docs/deployment-profile.md
+  functional_specification_standard: docs/functional-specification-standard.md
+  architecture_standard: docs/architecture-standard.md
+  decision_records_standard: docs/decision-records-standard.md
+  product_decisions: docs/product-decisions.md
+  development_plan_standard: docs/development-plan-standard.md
+  risk_feasibility_standard: docs/risk-feasibility-standard.md
+  test_verification_standard: docs/test-verification-standard.md
+  security_baseline: docs/security-baseline.md
+  create_mode: docs/create-mode.md
+  change_mode: docs/change-mode.md
+  improve_mode: docs/improve-mode.md
+  next_step_state_machine: docs/next-step-state-machine.md
+  zip_mode: docs/zip-mode.md
+  github_mode: docs/github-mode.md
+  repository_hygiene: docs/repository-hygiene.md
+  github_actions_baseline: docs/github-actions-baseline.md
+  deployment_packaging_patterns: docs/deployment-packaging-patterns.md
+  docker_baseline: docs/docker-baseline.md
+  coolify_profile: docs/coolify-profile.md
+  operational_documentation_standard: docs/configuration-installation-operations-standard.md
+  release_readiness_standard: docs/release-readiness-standard.md
+  knowledge_architecture: docs/knowledge-architecture.md
+status:
+  machine_readable: project-status.yaml
+  human_readable: STATUS.md
+format_strategy:
+  human_readable: markdown
+  machine_readable: yaml
+  validation: json_schema
+build:
+  project_zip_script: scripts/build_project_zip.py
+  generated_root: dist
+machine_state:
+  traceability: .system-builder/traceability.yaml
+  deployment_profile: .system-builder/deployment-profile.yaml
+schemas:
+  traceability: schemas/traceability.schema.json
+  deployment_profile: schemas/deployment-profile.schema.json
+templates:
+  functional_specification: templates/functional-specification-template.md
+  functional_specification_small: templates/functional-specification-small-template.md
+  architecture: templates/architecture-template.md
+  architecture_small: templates/architecture-small-template.md
+  adr: templates/adr-template.md
+  product_decisions: templates/product-decisions-template.md
+  development_plan: templates/development-plan-template.md
+  development_plan_small: templates/development-plan-small-template.md
+  risk_feasibility: templates/risk-feasibility-template.md
+  risk_feasibility_small: templates/risk-feasibility-small-template.md
+  test_strategy: templates/test-strategy-template.md
+  test_strategy_small: templates/test-strategy-small-template.md
+  security_review: templates/security-review-template.md
+  security_baseline_small: templates/security-baseline-small-template.md
+  create_intake: templates/create-intake-template.md
+  change_request: templates/change-request-template.md
+  change_impact_analysis: templates/change-impact-analysis-template.md
+  improve_intake: templates/improve-intake-template.md
+  next_step_assessment: templates/next-step-assessment-template.md
+  zip_run_assessment: templates/zip-run-assessment-template.md
+  github_run_assessment: templates/github-run-assessment-template.md
+  gitignore_baseline: templates/gitignore-baseline.txt
+  dockerignore_baseline: templates/dockerignore-baseline.txt
+  github_actions_ci: templates/github-actions-ci-template.yml
+  deployment_packaging_plan: templates/deployment-packaging-plan-template.md
+  dockerfile: templates/Dockerfile.template
+  dockerignore_application: templates/dockerignore-application-baseline.txt
+  coolify_deployment_profile: templates/coolify-deployment-profile-template.md
+  configuration: templates/configuration-template.md
+  installation: templates/installation-template.md
+  operations: templates/operations-template.md
+  release_readiness: templates/release-readiness-template.md
+  knowledge_file: templates/knowledge-file-template.md
+ci:
+  entrypoint: scripts/ci-project.sh
+  workflow: .github/workflows/ci.yml
+  project_validator: scripts/validate_system_builder_ci.py
+  build_distributions_fresh: true
+  runtime_parity_gate: true
+  e2e_regression_gate: true
+  hygiene_gate: true
+knowledge:
+  index: knowledge/README.md
+  classification:
+  - reference
+  - example
+  critical_behavior_in_knowledge_only: false
+runtime:
+  canonical_instruction: runtime/canonical-instructions.md
+  manifest: runtime/runtime-manifest.yaml
+  default_completed_steps_per_run: 1
+  source_state_over_chat_memory: true
+  false_pass_forbidden: true
+distributions:
+  chat_zip:
+    builder: scripts/build_chat_runtime_zip.py
+    validator: scripts/validate_chat_runtime_zip.py
+    entrypoint: runtime/canonical-instructions.md
+    artifact_pattern: system-builder-chat-v*.zip
+    status: implemented
+    behavior_manifest: explicit
+  custom_gpt:
+    builder: scripts/build_custom_gpt_distribution.py
+    validator: scripts/validate_custom_gpt_distribution.py
+    instruction_character_limit: 8000
+    instruction_characters: 7935
+    knowledge_file_count: 7
+    status: implemented
+    source_dir: runtime/custom-gpt-source
+evals:
+  instruction_adherence:
+    suite: evals/instruction-adherence.yaml
+    static_requirements: evals/static-contract-requirements.yaml
+    static_runner: scripts/run_static_instruction_evals.py
+    validator: scripts/validate_instruction_evals.py
+    live_scorecard_template: evals/live-eval-scorecard-template.yaml
+    case_count: 18
+    critical_case_count: 10
+    chat_static_result: pass
+    custom_gpt_static_result: pass
+    status: implemented
+  e2e_small_create:
+    scenario: evals/e2e/small-create/scenario.md
+    report: evals/e2e/small-create/evaluation-report.md
+    runner: scripts/run_e2e_small_create_eval.py
+    result: pass
+  e2e_existing_change:
+    scenario: evals/e2e/existing-system-change/scenario.md
+    report: evals/e2e/existing-system-change/evaluation-report.md
+    runner: scripts/run_e2e_existing_change_eval.py
+    result: pass
+  e2e_docker_coolify:
+    scenario: evals/e2e/docker-coolify/scenario.md
+    report: evals/e2e/docker-coolify/evaluation-report.md
+    runner: scripts/run_e2e_docker_coolify_eval.py
+    result: pass
+    live_coolify: pending
+    docker_build: not_run
+  runtime_parity:
+    contract: evals/runtime-parity-contract.yaml
+    report: evals/runtime-parity-report.md
+    validator: scripts/validate_runtime_parity.py
+    dimensions: 18
+    critical_failures: 0
+    result: pass
+release:
+  workflow: .github/workflows/release.yml
+  builder: scripts/build_release.sh
+  validator: scripts/validate_release_workflow.py
+  version_source: git_tag
+  artifacts:
+  - system-builder-chat-<version>.zip
+  - system-builder-custom-gpt-<version>.zip
+  - SHA256SUMS.txt
+  - release-metadata.yaml
+  status: release_candidate
+  candidate_version: 1.0.0-rc.1
+  candidate_tag: v1.0.0-rc.1
+release_readiness:
+  final_report: evals/final-release-readiness-report.md
+  final_summary: evals/final-release-readiness.yaml
+  validator: scripts/validate_final_release_readiness.py
+  decision: READY_WITH_WARNINGS
+  blockers: 0
+  warnings: 1
+version: 1.0.0-rc.1

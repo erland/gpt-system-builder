@@ -1,0 +1,13 @@
+.git
+.github
+.system-builder
+__pycache__
+*.py[cod]
+.env
+.env.*
+!.env.example
+*.log
+*.tmp
+*.zip
+tests
+docs

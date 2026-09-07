@@ -1,0 +1,17 @@
+schema_version: 1
+mode: CREATE
+completed_steps:
+- DEV-001
+blockers: []
+verification:
+  static_docker:
+    result: pass
+  app_static:
+    result: pass
+  live_coolify:
+    result: pending
+    reason: No Coolify instance available in eval environment
+next_step:
+  recommended: DEV-002
+  title: Perform live Coolify deployment verification
+  reason: Static/container contract is valid; live target verification remains pending.

@@ -1,0 +1,141 @@
+schema_version: 1
+dimensions:
+- id: PAR-001
+  name: modes
+  severity: critical
+  groups:
+  - - create
+  - - change
+  - - improve
+- id: PAR-002
+  name: one-step
+  severity: critical
+  groups:
+  - - one safe development step
+    - one completed step
+  - - stop
+- id: PAR-003
+  name: source-state
+  severity: critical
+  groups:
+  - - actual current source
+    - actual source
+  - - chat memory
+- id: PAR-004
+  name: repair
+  severity: critical
+  groups:
+  - - repair
+  - - verification fails
+    - verification failure
+    - failed required verification
+- id: PAR-005
+  name: false-pass
+  severity: critical
+  groups:
+  - - unrun check as pass
+- id: PAR-006
+  name: zip
+  severity: critical
+  groups:
+  - - complete project zip
+  - - path traversal
+- id: PAR-007
+  name: github
+  severity: critical
+  groups:
+  - - reuse the active pr
+    - reuse active pr
+  - - work series
+    - same series
+- id: PAR-008
+  name: create-flow
+  severity: high
+  groups:
+  - - functional spec
+    - functional specification
+  - - architecture
+  - - development plan
+- id: PAR-009
+  name: change-flow
+  severity: high
+  groups:
+  - - baseline
+  - - impact analysis
+  - - current-state docs
+    - current-state spec
+    - current-state functional
+- id: PAR-010
+  name: improve-preserve
+  severity: high
+  groups:
+  - - preserved intended behavior
+    - preserve external behavior
+    - behavior preserved
+    - intended external behavior remains unchanged
+- id: PAR-011
+  name: docker-security
+  severity: critical
+  groups:
+  - - non-root
+  - - secrets outside image
+    - runtime secrets outside image
+    - secrets outside source/artifacts
+- id: PAR-012
+  name: postgresql-separation
+  severity: critical
+  groups:
+  - - postgresql server must not be embedded
+- id: PAR-013
+  name: coolify
+  severity: high
+  groups:
+  - - coolify
+  - - external postgresql
+  - - reverse proxy/tls
+    - proxy/tls
+- id: PAR-014
+  name: operations
+  severity: high
+  groups:
+  - - configuration.md
+  - - installation.md
+  - - operations.md
+- id: PAR-015
+  name: release
+  severity: critical
+  groups:
+  - - ready
+  - - ready_with_warnings
+  - - not_ready
+- id: PAR-016
+  name: knowledge
+  severity: critical
+  groups:
+  - - knowledge is reference material
+    - knowledge is reference
+  - - critical runtime rules
+    - critical behavior
+- id: PAR-017
+  name: questions
+  severity: medium
+  groups:
+  - - real user/business choices
+    - genuine user/business choices
+    - real user/business decision
+  - - routine internal implementation choices
+    - routine internal implementation decisions
+- id: PAR-018
+  name: output-stop
+  severity: high
+  groups:
+  - - next recommended step
+    - next recommended
+  - - then stop
+manifest_rules:
+  one_completed_step_per_run_default: true
+  source_state_over_chat_memory: true
+  critical_behavior_in_knowledge_only: false
+  false_pass_forbidden: true
+  zip_mode: true
+  github_mode: true

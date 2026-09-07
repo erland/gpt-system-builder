@@ -1,0 +1,29 @@
+schema_version: 1
+active_work:
+  mode: EXECUTE
+  plan: docs/development-plan.md
+  change_request: null
+  selected_step: null
+progress:
+  completed:
+  - SB-01
+  - SB-02
+  - SB-03
+  - SB-04
+  - SB-05
+  - SB-06
+  in_progress: null
+  next:
+    recommended: SB-07
+    reason: Project and work-status machine contracts are implemented and validated;
+      traceability is next.
+blockers: []
+verification:
+  last_status: passed
+  baseline: green
+  commands:
+  - python3 scripts/validate_state_contracts.py
+  notes: SB-06 schema contract suite passed.
+source_state:
+  drift: none
+  reference: null

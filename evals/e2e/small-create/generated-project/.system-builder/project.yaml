@@ -1,0 +1,7 @@
+schema_version: 1
+project:
+  id: tiny-status-api
+  name: Tiny Status API
+  mode: CREATE
+  complexity: small
+  source_mode: zip

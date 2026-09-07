@@ -1,0 +1,43 @@
+schema_version: 1
+profile_name: kubernetes-basic
+packaging:
+  type: oci
+  image_registry: private
+  image_name: example-service
+  multi_stage_build: true
+  run_as_non_root: true
+target:
+  platform: kubernetes
+  environment: production
+runtime:
+  stateless: true
+  replicas: 2
+  port: 8080
+  startup_command: null
+database:
+  type: postgresql
+  deployment: external
+  migrations: separate_job
+  connection_via_environment: true
+persistence:
+  application_files: none
+  volumes: []
+network:
+  reverse_proxy: platform
+  tls: platform
+  public_exposure: true
+  base_path: /
+health:
+  enabled: true
+  liveness_endpoint: /health/live
+  readiness_endpoint: /health/ready
+  startup_endpoint: /health/startup
+configuration:
+  environment_variables:
+  - DATABASE_URL
+  secrets_via_environment: true
+  config_files: []
+delivery:
+  build_in_ci: true
+  publish_artifact: true
+  deployment_trigger: manual

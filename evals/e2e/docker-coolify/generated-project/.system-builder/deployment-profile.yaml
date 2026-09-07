@@ -1,0 +1,20 @@
+schema_version: 1
+profile: coolify-external-postgresql
+application:
+  artifact: docker-image
+  dockerfile: Dockerfile
+  internal_port: 8080
+  bind_address: 0.0.0.0
+  stateless: true
+  runtime_user: appuser
+database:
+  type: postgresql
+  mode: external
+  public_exposure: false
+platform:
+  reverse_proxy_owner: Coolify
+  tls_owner: Coolify
+health:
+  path: /health
+  expected_status: 200
+live_verification: pending
