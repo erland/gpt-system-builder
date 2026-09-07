@@ -61,6 +61,11 @@ $PYTHON scripts/run_e2e_small_create_eval.py --scenario-root evals/e2e/small-cre
 $PYTHON scripts/run_e2e_existing_change_eval.py --scenario-root evals/e2e/existing-system-change
 $PYTHON scripts/run_e2e_docker_coolify_eval.py --scenario-root evals/e2e/docker-coolify
 
+echo "== Clean generated CI artifacts before hygiene =="
+rm -rf "$DIST_DIR"
+find evals -type d -name __pycache__ -prune -exec rm -rf {} +
+find evals -type f -name '*.pyc' -delete
+
 echo "== Repository hygiene =="
 $PYTHON scripts/scan_repository_hygiene.py .
 
