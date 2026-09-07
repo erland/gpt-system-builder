@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from pathlib import Path
 import argparse,re,sys
-SECRET=[re.compile(r"(?i)^\s*ENV\s+.*(?:PASSWORD|TOKEN|SECRET|API_KEY)\s*=",re.M),re.compile(r"(?i)^\s*ARG\s+.*(?:PASSWORD|TOKEN|SECRET|API_KEY)\s*=",re.M)]
+SENSITIVE_ENV_PATTERNS=[re.compile(r"(?i)^\s*ENV\s+.*(?:PASSWORD|TOKEN|SECRET|API_KEY)\s*=",re.M),re.compile(r"(?i)^\s*ARG\s+.*(?:PASSWORD|TOKEN|SECRET|API_KEY)\s*=",re.M)]
 EMBED=re.compile(r"(?i)(apt|apk|yum|dnf).*(postgresql-server|postgresql\b)")
 def main():
  p=argparse.ArgumentParser();p.add_argument("dockerfile");p.add_argument("--dockerignore");a=p.parse_args();t=Path(a.dockerfile).read_text();e=[]
@@ -14,7 +14,7 @@ def main():
  if not re.search(r"^\s*(ENTRYPOINT|CMD)\s+",t,re.M|re.I):e.append("missing ENTRYPOINT/CMD")
  if re.search(r"^\s*COPY\s+\.\s+/\s*$",t,re.M|re.I):e.append("unsafe COPY . /")
  if EMBED.search(t):e.append("app image must not install PostgreSQL server")
- for pat in SECRET:
+ for pat in SENSITIVE_ENV_PATTERNS:
   if pat.search(t):e.append("secret-like ENV/ARG declaration detected")
  if a.dockerignore:
   x=Path(a.dockerignore).read_text() if Path(a.dockerignore).exists() else ""
