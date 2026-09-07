@@ -1,0 +1,28 @@
+schema_version: 1
+runtime_id: system-builder
+primary_instruction: runtime/canonical-instructions.md
+core_references:
+- docs/create-mode.md
+- docs/change-mode.md
+- docs/improve-mode.md
+- docs/next-step-state-machine.md
+- docs/zip-mode.md
+- docs/github-mode.md
+- docs/release-readiness-standard.md
+standards:
+- docs/functional-specification-standard.md
+- docs/architecture-standard.md
+- docs/development-plan-standard.md
+- docs/risk-feasibility-standard.md
+- docs/test-verification-standard.md
+- docs/security-baseline.md
+- docs/deployment-packaging-patterns.md
+- docs/docker-baseline.md
+- docs/coolify-profile.md
+- docs/configuration-installation-operations-standard.md
+knowledge_index: knowledge/README.md
+rules:
+  critical_behavior_in_knowledge_only: false
+  default_completed_steps_per_run: 1
+  source_state_over_chat_memory: true
+  false_pass_forbidden: true

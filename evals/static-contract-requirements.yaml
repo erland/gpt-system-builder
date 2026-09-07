@@ -1,0 +1,65 @@
+schema_version: 1
+requirements:
+- id: REQ-ONE-STEP
+  severity: critical
+  groups:
+  - - one safe development step
+    - one completed step
+  - - do not automatically continue
+    - then stop
+- id: REQ-SOURCE
+  severity: critical
+  groups:
+  - - actual current source
+    - actual source
+  - - chat memory
+- id: REQ-REPAIR
+  severity: critical
+  groups:
+  - - repair
+  - - verification fails
+    - verification failure
+    - required verification failure
+- id: REQ-ZIP
+  severity: critical
+  groups:
+  - - complete project zip
+  - - path traversal
+- id: REQ-GITHUB
+  severity: critical
+  groups:
+  - - reuse the active pr
+    - reuse active pr
+    - reuse existing pr
+  - - work series
+    - same series
+- id: REQ-FALSE-PASS
+  severity: critical
+  groups:
+  - - never report an unrun check as pass
+    - never report an unrun check as pass.
+- id: REQ-RELEASE
+  severity: critical
+  groups:
+  - - ready_with_warnings
+  - - green ci alone
+    - do not equate green ci
+- id: REQ-COOLIFY
+  severity: critical
+  groups:
+  - - postgresql server must not be embedded
+    - postgresql server must not be embedded in the app image
+  - - coolify
+- id: REQ-KNOWLEDGE
+  severity: high
+  groups:
+  - - knowledge is reference material
+    - knowledge is reference
+  - - critical runtime rules
+    - critical behavior
+- id: REQ-MODES
+  severity: high
+  groups:
+  - - create
+  - - change
+  - - improve

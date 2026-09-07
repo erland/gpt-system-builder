@@ -1,0 +1,29 @@
+schema_version: 1
+events:
+- order: 1
+  phase: read_current_system
+- order: 2
+  phase: baseline
+- order: 3
+  phase: change_request
+- order: 4
+  phase: impact_analysis
+- order: 5
+  phase: update_current_state_spec
+- order: 6
+  phase: change_plan
+- order: 7
+  phase: select_and_lock
+  step: DEV-001
+- order: 8
+  phase: implementation
+  step: DEV-001
+- order: 9
+  phase: regression_verification
+  step: DEV-001
+- order: 10
+  phase: state_update
+  step: DEV-001
+- order: 11
+  phase: stop
+  next: DEV-002

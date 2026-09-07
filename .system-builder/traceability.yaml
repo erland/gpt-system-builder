@@ -1,0 +1,128 @@
+schema_version: 1
+requirements: {}
+acceptance_criteria: {}
+development_steps:
+  DEV-001:
+    status: completed
+    requirements: []
+  DEV-002:
+    status: completed
+    requirements: []
+  DEV-003:
+    status: completed
+    requirements: []
+  DEV-004:
+    status: completed
+    requirements: []
+  DEV-005:
+    status: completed
+    requirements: []
+  DEV-006:
+    status: completed
+    requirements: []
+  DEV-007:
+    status: completed
+    requirements: []
+  DEV-008:
+    status: planned
+    requirements: []
+  DEV-009:
+    status: completed
+    requirements: []
+  DEV-010:
+    status: completed
+    requirements: []
+  DEV-011:
+    status: planned
+    requirements: []
+  DEV-012:
+    status: completed
+    requirements: []
+  DEV-013:
+    status: completed
+    requirements: []
+  DEV-014:
+    status: completed
+    requirements: []
+  DEV-015:
+    status: completed
+    requirements: []
+  DEV-016:
+    status: completed
+    requirements: []
+  DEV-017:
+    status: completed
+    requirements: []
+  DEV-018:
+    status: completed
+    requirements: []
+  DEV-019:
+    status: completed
+    requirements: []
+  DEV-020:
+    status: completed
+    requirements: []
+  DEV-021:
+    status: completed
+    requirements: []
+  DEV-022:
+    status: completed
+    requirements: []
+  DEV-023:
+    status: completed
+    requirements: []
+  DEV-024:
+    status: completed
+    requirements: []
+  DEV-025:
+    status: completed
+    requirements: []
+  DEV-026:
+    status: completed
+    requirements: []
+  DEV-027:
+    status: completed
+    requirements: []
+  DEV-028:
+    status: completed
+    requirements: []
+  DEV-029:
+    status: completed
+    requirements: []
+  DEV-030:
+    status: completed
+    requirements: []
+  DEV-031:
+    status: completed
+    requirements: []
+  DEV-032:
+    status: completed
+    requirements: []
+  DEV-033:
+    status: completed
+    requirements: []
+  DEV-034:
+    status: completed
+    requirements: []
+  DEV-035:
+    status: completed
+    requirements: []
+  DEV-036:
+    status: completed
+    requirements: []
+  DEV-037:
+    status: completed
+    requirements: []
+  DEV-038:
+    status: completed
+    requirements: []
+  DEV-039:
+    status: completed
+    requirements: []
+  DEV-040:
+    status: completed
+    requirements: []
+  DEV-041:
+    status: completed
+    requirements: []
+verification: {}

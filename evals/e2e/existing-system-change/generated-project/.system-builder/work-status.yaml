@@ -1,0 +1,24 @@
+schema_version: 1
+mode: CHANGE
+complexity: small
+work_series: CR-001
+active_work:
+  selected_step: null
+  state: idle
+completed_steps:
+- DEV-001
+in_progress_steps: []
+blockers: []
+verification:
+  baseline:
+    result: pass
+    evidence:
+    - increment/reset tests green before change
+  DEV-001:
+    result: pass
+    evidence:
+    - 'full unittest regression: PASS'
+next_step:
+  recommended: DEV-002
+  title: Final change acceptance review
+  reason: DEV-001 is complete and regression is green.

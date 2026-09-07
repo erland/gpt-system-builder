@@ -1,0 +1,44 @@
+schema_version: 1
+profile_name: docker-external-postgresql
+packaging:
+  type: docker
+  image_registry: ghcr
+  image_name: example-service
+  multi_stage_build: true
+  run_as_non_root: true
+target:
+  platform: docker
+  environment: production
+runtime:
+  stateless: true
+  replicas: 1
+  port: 8080
+  startup_command: null
+database:
+  type: postgresql
+  deployment: external
+  migrations: application_startup
+  connection_via_environment: true
+persistence:
+  application_files: none
+  volumes: []
+network:
+  reverse_proxy: external
+  tls: external
+  public_exposure: true
+  base_path: null
+health:
+  enabled: true
+  liveness_endpoint: /health/live
+  readiness_endpoint: /health/ready
+  startup_endpoint: null
+configuration:
+  environment_variables:
+  - DATABASE_URL
+  - PORT
+  secrets_via_environment: true
+  config_files: []
+delivery:
+  build_in_ci: true
+  publish_artifact: true
+  deployment_trigger: manual

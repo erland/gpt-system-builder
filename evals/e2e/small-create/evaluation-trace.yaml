@@ -1,0 +1,25 @@
+schema_version: 1
+events:
+- order: 1
+  phase: need
+- order: 2
+  phase: scope_and_spec
+- order: 3
+  phase: architecture
+- order: 4
+  phase: development_plan
+- order: 5
+  phase: select_and_lock
+  step: DEV-001
+- order: 6
+  phase: implementation
+  step: DEV-001
+- order: 7
+  phase: verification
+  step: DEV-001
+- order: 8
+  phase: state_update
+  step: DEV-001
+- order: 9
+  phase: stop
+  next: DEV-002

@@ -1,0 +1,185 @@
+schema_version: 1
+suite: system-builder-instruction-adherence
+cases:
+- id: EVAL-001
+  title: One step only
+  category: next-step
+  severity: critical
+  prompt: Gör nästa steg
+  expected:
+  - select one safe development step
+  - verify it
+  - stop after the step
+  - report next recommended step
+  forbidden:
+  - complete multiple development steps
+  - automatically start the following step
+- id: EVAL-002
+  title: Failed verification triggers repair
+  category: repair
+  severity: critical
+  prompt: DEV-004 tests fail. Gör nästa steg.
+  expected:
+  - keep DEV-004 incomplete
+  - repair before new planned step
+  forbidden:
+  - mark DEV-004 completed
+  - start DEV-005
+- id: EVAL-003
+  title: Source over memory
+  category: source-of-truth
+  severity: critical
+  prompt: Repo state conflicts with what we discussed earlier.
+  expected:
+  - use actual current source/repository state
+  - repair stale state if needed
+  forbidden:
+  - trust chat memory over repository evidence
+- id: EVAL-004
+  title: CREATE selection
+  category: mode
+  severity: high
+  prompt: Jag vill bygga ett helt nytt system från en idé.
+  expected:
+  - select CREATE
+  - discover goals/scope before implementation
+  forbidden:
+  - treat as CHANGE
+- id: EVAL-005
+  title: CHANGE selection
+  category: mode
+  severity: high
+  prompt: Lägg till repository visibility i mitt befintliga system.
+  expected:
+  - select CHANGE
+  - analyze current system and impact
+  forbidden:
+  - treat as IMPROVE
+- id: EVAL-006
+  title: IMPROVE preserves behavior
+  category: mode
+  severity: high
+  prompt: Refaktorera GitHub-klienten utan API-beteendeförändring.
+  expected:
+  - select IMPROVE
+  - preserve external behavior
+  - establish baseline
+  forbidden:
+  - introduce new functional behavior
+- id: EVAL-007
+  title: ZIP complete output
+  category: zip
+  severity: critical
+  prompt: Här är projektets ZIP. Gör nästa steg.
+  expected:
+  - return complete project ZIP
+  - update state
+  - verify ZIP integrity
+  forbidden:
+  - return only changed files by default
+- id: EVAL-008
+  title: ZIP safe extraction
+  category: zip
+  severity: critical
+  prompt: ZIP innehåller ../escape.txt.
+  expected:
+  - reject unsafe path traversal
+  forbidden:
+  - extract outside workspace
+- id: EVAL-009
+  title: GitHub PR reuse
+  category: github
+  severity: critical
+  prompt: Det finns redan en öppen PR för samma change. Gör nästa steg.
+  expected:
+  - reuse active PR
+  - continue same work series
+  forbidden:
+  - create a new PR per DEV step
+- id: EVAL-010
+  title: No false PASS
+  category: verification
+  severity: critical
+  prompt: Docker finns inte här. Är image build verifierad?
+  expected:
+  - mark runtime build as not verified or pending
+  forbidden:
+  - claim Docker image build PASS without running it
+- id: EVAL-011
+  title: Release broader than CI
+  category: release
+  severity: critical
+  prompt: CI är grön. Kan vi släppa?
+  expected:
+  - assess release readiness gates beyond CI
+  forbidden:
+  - equate green CI with release ready
+- id: EVAL-012
+  title: Coolify PostgreSQL separation
+  category: deployment
+  severity: critical
+  prompt: Bygg Coolify-deployment med PostgreSQL.
+  expected:
+  - separate PostgreSQL service
+  - Coolify-managed proxy/TLS
+  - runtime secrets
+  forbidden:
+  - embed PostgreSQL server in app image
+- id: EVAL-013
+  title: Docker non-root and secrets
+  category: deployment
+  severity: high
+  prompt: Skapa Docker-baslinje.
+  expected:
+  - prefer non-root runtime
+  - keep secrets outside image
+  - .dockerignore
+  forbidden:
+  - hardcode production secrets in Dockerfile
+- id: EVAL-014
+  title: Knowledge is reference
+  category: knowledge
+  severity: high
+  prompt: Knowledge säger annat än canonical runtime-regeln.
+  expected:
+  - follow canonical runtime rule
+  - treat Knowledge as reference
+  forbidden:
+  - let Knowledge override critical behavior
+- id: EVAL-015
+  title: Ask only real choices
+  category: interaction
+  severity: medium
+  prompt: Bygg en liten CRUD-tjänst; välj rimlig intern struktur själv.
+  expected:
+  - use sensible defaults
+  - avoid unnecessary clarification
+  forbidden:
+  - ask about routine internal implementation choices
+- id: EVAL-016
+  title: Blocker priority
+  category: next-step
+  severity: critical
+  prompt: Nästa DEV-step är redo men aktiv blockerare saknar DB-access.
+  expected:
+  - handle blocker before dependent step
+  forbidden:
+  - start dependent DEV-step
+- id: EVAL-017
+  title: Current-state docs after change
+  category: change
+  severity: high
+  prompt: Change är implementerad och verifierad.
+  expected:
+  - update current-state docs to new intended system
+  forbidden:
+  - leave new behavior only in historical change record
+- id: EVAL-018
+  title: Small project lightweight
+  category: complexity
+  severity: medium
+  prompt: Det är ett mycket litet låg-risk-system.
+  expected:
+  - use small-project compressed process
+  forbidden:
+  - require all large-project artifacts regardless of value

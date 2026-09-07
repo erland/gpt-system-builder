@@ -1,0 +1,17 @@
+# syntax=docker/dockerfile:1
+
+FROM <build-image>:<explicit-version> AS build
+WORKDIR /app
+COPY <manifest-files> ./
+RUN <locked-dependency-install>
+COPY . .
+RUN <build-command>
+
+FROM <runtime-image>:<explicit-version> AS runtime
+WORKDIR /app
+RUN <create-runtime-user>
+COPY --from=build /app/<artifact> /app/<artifact>
+ENV PORT=8080
+EXPOSE 8080
+USER <runtime-user>
+ENTRYPOINT ["<runtime-command>", "<artifact>"]

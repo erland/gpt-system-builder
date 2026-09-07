@@ -1,0 +1,20 @@
+schema_version: 1
+project:
+  name: example-service
+  type: web-service
+  description: Minimal valid System Builder project state.
+source:
+  mode: zip
+  repository: null
+  default_branch: null
+complexity: huge
+stack:
+  languages:
+  - python
+  frontend: null
+  backend: fastapi
+  database: postgresql
+delivery:
+  packaging: docker
+  target: coolify
+  registry: ghcr

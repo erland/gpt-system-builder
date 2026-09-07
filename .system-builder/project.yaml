@@ -1,0 +1,23 @@
+schema_version: 1
+project:
+  name: system-builder
+  type: gpt-project
+  description: Canonical project state for the System Builder GPT project.
+source:
+  mode: zip
+  repository: null
+  default_branch: null
+complexity: large
+stack:
+  languages:
+  - python
+  - markdown
+  - yaml
+  - json
+  frontend: null
+  backend: null
+  database: null
+delivery:
+  packaging: zip
+  target: chat-zip-and-custom-gpt
+  registry: null

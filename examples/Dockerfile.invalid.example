@@ -1,0 +1,4 @@
+FROM ubuntu:latest
+ARG API_TOKEN=secretvalue
+RUN apt-get update && apt-get install -y postgresql
+CMD ["sleep","infinity"]

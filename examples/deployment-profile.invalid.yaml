@@ -1,0 +1,15 @@
+schema_version: 1
+packaging:
+  type: docker
+target:
+  platform: coolify
+runtime:
+  stateless: true
+database:
+  type: postgresql
+  deployment: embedded
+network:
+  reverse_proxy: platform
+  tls: platform
+health:
+  enabled: true

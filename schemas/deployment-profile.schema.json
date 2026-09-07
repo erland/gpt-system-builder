@@ -1,0 +1,379 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/system-builder/deployment-profile.schema.json",
+  "title": "System Builder Deployment Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "packaging",
+    "target",
+    "runtime",
+    "database",
+    "network",
+    "health"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "profile_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "packaging": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "none",
+            "native",
+            "archive",
+            "docker",
+            "oci"
+          ]
+        },
+        "image_registry": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "ghcr",
+            "dockerhub",
+            "gitlab",
+            "private",
+            "other"
+          ]
+        },
+        "image_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "multi_stage_build": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "run_as_non_root": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "platform"
+      ],
+      "properties": {
+        "platform": {
+          "type": "string",
+          "enum": [
+            "local",
+            "docker",
+            "coolify",
+            "kubernetes",
+            "generic_container_platform",
+            "vm",
+            "other"
+          ]
+        },
+        "environment": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "development",
+            "test",
+            "staging",
+            "production",
+            "mixed"
+          ]
+        }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stateless"
+      ],
+      "properties": {
+        "stateless": {
+          "type": "boolean"
+        },
+        "replicas": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "port": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "startup_command": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "database": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "deployment"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "none",
+            "postgresql",
+            "mysql",
+            "mariadb",
+            "sqlite",
+            "other"
+          ]
+        },
+        "deployment": {
+          "type": "string",
+          "enum": [
+            "none",
+            "embedded",
+            "external",
+            "sidecar",
+            "separate_service"
+          ]
+        },
+        "migrations": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "application_startup",
+            "separate_job",
+            "manual",
+            "other"
+          ]
+        },
+        "connection_via_environment": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "persistence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "application_files": {
+          "type": "string",
+          "enum": [
+            "none",
+            "ephemeral",
+            "volume",
+            "object_storage",
+            "external_service"
+          ]
+        },
+        "volumes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "purpose"
+            ],
+            "properties": {
+              "purpose": {
+                "type": "string",
+                "minLength": 1
+              },
+              "mount_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "required": {
+                "type": "boolean"
+              }
+            }
+          },
+          "default": []
+        }
+      },
+      "default": {
+        "application_files": "none",
+        "volumes": []
+      }
+    },
+    "network": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reverse_proxy",
+        "tls"
+      ],
+      "properties": {
+        "reverse_proxy": {
+          "type": "string",
+          "enum": [
+            "none",
+            "application",
+            "platform",
+            "external"
+          ]
+        },
+        "tls": {
+          "type": "string",
+          "enum": [
+            "none",
+            "application",
+            "platform",
+            "external"
+          ]
+        },
+        "public_exposure": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "base_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "health": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "liveness_endpoint": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "readiness_endpoint": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "startup_endpoint": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "configuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "environment_variables": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]*$"
+          },
+          "default": []
+        },
+        "secrets_via_environment": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "config_files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      },
+      "default": {
+        "environment_variables": [],
+        "config_files": []
+      }
+    },
+    "delivery": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "build_in_ci": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "publish_artifact": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "deployment_trigger": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "manual",
+            "git_push",
+            "release",
+            "platform",
+            "other"
+          ]
+        }
+      },
+      "default": {}
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}
