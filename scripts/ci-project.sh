@@ -52,11 +52,15 @@ $PYTHON scripts/validate_all_distributions.py --manifest "$BUILD_MANIFEST"
 
 CHAT_ZIP="$DIST_DIR/system-builder-chat-ci.zip"
 CUSTOM_ZIP="$DIST_DIR/system-builder-custom-gpt-ci.zip"
+CLAUDE_ZIP="$DIST_DIR/system-builder-claude-projects-ci.zip"
+OPENCODE_ZIP="$DIST_DIR/system-builder-opencode-ci.zip"
 
 echo "== Instruction adherence and parity =="
 $PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution chat_zip --artifact "$CHAT_ZIP"
 $PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution custom_gpt --artifact "$CUSTOM_ZIP"
-$PYTHON scripts/validate_runtime_parity.py --contract evals/runtime-parity-contract.yaml --chat "$CHAT_ZIP" --custom "$CUSTOM_ZIP"
+$PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution claude_projects --artifact "$CLAUDE_ZIP"
+$PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution opencode --artifact "$OPENCODE_ZIP"
+$PYTHON scripts/validate_runtime_parity.py --contract evals/runtime-parity-contract.yaml --chat "$CHAT_ZIP" --custom "$CUSTOM_ZIP" --claude "$CLAUDE_ZIP" --opencode "$OPENCODE_ZIP"
 
 echo "== E2E regression =="
 $PYTHON scripts/run_e2e_small_create_eval.py --scenario-root evals/e2e/small-create

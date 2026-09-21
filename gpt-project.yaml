@@ -195,6 +195,8 @@ evals:
     critical_case_count: 10
     chat_static_result: pass
     custom_gpt_static_result: pass
+    claude_projects_static_result: pass
+    opencode_static_result: pass
     status: implemented
   e2e_small_create:
     scenario: evals/e2e/small-create/scenario.md
@@ -217,7 +219,18 @@ evals:
     contract: evals/runtime-parity-contract.yaml
     report: evals/runtime-parity-report.md
     validator: scripts/validate_runtime_parity.py
-    dimensions: 18
+    dimensions:
+    - behavior
+    - capability
+    - artifact
+    - workspace_state
+    - tool
+    runtimes:
+    - chat_zip
+    - custom_gpt
+    - claude_projects
+    - opencode
+    claude_projects_parity: reduced
     critical_failures: 0
     result: pass
 release:

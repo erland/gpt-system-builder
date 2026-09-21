@@ -4,30 +4,36 @@
 **PASS – runtime migration in progress**
 
 ## Senast slutförda steg
-### SB-46 – Modernisera build, lint och project hygiene
+### SB-47 – Utöka evals och runtime parity
 
-Build och hygiene är nu runtime-generiska för alla fyra aktiverade runtime-mål.
+Instruction adherence och runtime parity omfattar nu samtliga aktiverade runtimes:
 
-Infört:
+- Chat ZIP
+- Custom GPT
+- Claude Projects
+- OpenCode
 
-- `runtime/distribution-registry.yaml` som gemensamt register,
-- `build.targets` för Chat ZIP, Custom GPT, Claude Projects och OpenCode,
-- generisk build och validation för samtliga distributioner,
-- registry-validator som synkar registry, project config och runtime contract,
-- CI använder registret i stället för fyra duplicerade build/validate-block,
-- hygiene blockerar genererade runtime-projektioner i canonical source tree.
+Parity bedöms explicit över fem canonical dimensioner:
+
+- behavior
+- capability
+- artifact
+- workspace_state
+- tool
+
+Claude Projects är fortsatt **reduced parity** och måste dokumentera de saknade exekveringsförmågorna utan att dölja dem som full equivalence.
 
 ## Verifiering
 
-- SB-45 CI: PASS
-- aktiva targets måste matcha build.targets och planerade runtimes
-- aktiva runtimes måste vara implemented i runtime contract
-- artifact patterns måste vara unika och versionsparametriserade
-- generated runtime adapters får inte bli canonical source
-- befintlig Chat/Custom parity-körning bevaras tills SB-47 generaliserar parity-evalsen
+- SB-46 CI: PASS
+- static instruction adherence körs för alla fyra distributioner
+- samma canonical behavior-markers krävs i alla fyra runtime-entrypoints
+- capability/artifact/workspace_state/tool jämförs mot canonical runtime contract
+- Claude reduced parity kräver explicit dokumenterade begränsningar och bevarad no-false-PASS/state-authority
+- OpenCode tool mapping måste motsvara canonical deklarerad tool-mängd och approval-policy
 
 ## Blockerare
 Inga.
 
 ## Nästa steg
-**SB-47 – Utöka evals och runtime parity.**
+**SB-48 – Uppdatera CI, release och dokumentation.**

@@ -7,8 +7,8 @@ plan:
   total_steps: 49
 progress:
   current_phase: runtime-migration
-  current_step: 46
-  last_completed_step: 46
+  current_step: 47
+  last_completed_step: 47
   completed_steps:
   - 1
   - 2
@@ -56,6 +56,7 @@ progress:
   - 44
   - 45
   - 46
+  - 47
   completed_step_ids:
   - SB-01
   - SB-02
@@ -103,6 +104,7 @@ progress:
   - SB-44
   - SB-45
   - SB-46
+  - SB-47
   skipped_steps: []
   inserted_steps: []
 state:
@@ -110,9 +112,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: SB-47
-  title: Utöka evals och runtime parity
-  reason: SB-46 har infört ett gemensamt distributionsregister, generisk build/validation och runtime-aware hygiene. Nästa steg är att utöka behavior/parity-evals till samtliga aktiverade runtimes.
+  recommended: SB-48
+  title: Uppdatera CI, release och dokumentation
+  reason: SB-47 har generaliserat instruction adherence och runtime parity till fyra runtimes och fem canonical parity-dimensioner. Nästa steg är att uppdatera release-assets, release workflow och användardokumentation för hela målbilden.
 resume:
   supported: true
   required_files:
@@ -474,6 +476,8 @@ validation:
   - instruction_adherence_critical_cases_present
   - chat_static_adherence_pass
   - custom_gpt_static_adherence_pass
+  - claude_projects_static_adherence_pass
+  - opencode_static_adherence_pass
   - semantic_alternative_groups_used
   - live_eval_scorecard_present
   - e2e_small_create_pass
@@ -513,6 +517,9 @@ validation:
   - all_active_distributions_built_generically
   - all_active_distributions_validated_generically
   - runtime_projection_leakage_hygiene_enforced
+  - four_runtime_parity_pass
+  - behavior_capability_artifact_workspace_state_tool_parity_defined
+  - claude_reduced_parity_explicit
   - ci_distribution_registry_sync_enforced
 hygiene:
   last_result: pass
