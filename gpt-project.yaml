@@ -241,8 +241,13 @@ release:
   artifacts:
   - system-builder-chat-<version>.zip
   - system-builder-custom-gpt-<version>.zip
+  - system-builder-claude-projects-<version>.zip
+  - system-builder-opencode-<version>.zip
   - SHA256SUMS.txt
   - release-metadata.yaml
+  - distribution-build-manifest.json
+  runtime_count: 4
+  registry_driven: true
   status: release_candidate
   candidate_version: 1.0.0-rc.1
   candidate_tag: v1.0.0-rc.1

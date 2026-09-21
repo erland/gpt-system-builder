@@ -4,36 +4,36 @@
 **PASS – runtime migration in progress**
 
 ## Senast slutförda steg
-### SB-47 – Utöka evals och runtime parity
+### SB-48 – Uppdatera CI, release och dokumentation
 
-Instruction adherence och runtime parity omfattar nu samtliga aktiverade runtimes:
+Releaseflödet är nu uppdaterat för hela GPT Byggaren 1.4-runtime-målbilden.
+
+GitHub Release bygger och publicerar:
 
 - Chat ZIP
 - Custom GPT
 - Claude Projects
 - OpenCode
+- SHA256 checksums
+- release metadata
+- distribution build manifest
 
-Parity bedöms explicit över fem canonical dimensioner:
+Releasebygget använder samma distributionsregister som ordinarie CI och kör static instruction adherence samt runtime parity för alla fyra runtimes.
 
-- behavior
-- capability
-- artifact
-- workspace_state
-- tool
-
-Claude Projects är fortsatt **reduced parity** och måste dokumentera de saknade exekveringsförmågorna utan att dölja dem som full equivalence.
+README beskriver nu runtime-målbild, lokal build/validation och samtliga release-assets.
 
 ## Verifiering
 
-- SB-46 CI: PASS
-- static instruction adherence körs för alla fyra distributioner
-- samma canonical behavior-markers krävs i alla fyra runtime-entrypoints
-- capability/artifact/workspace_state/tool jämförs mot canonical runtime contract
-- Claude reduced parity kräver explicit dokumenterade begränsningar och bevarad no-false-PASS/state-authority
-- OpenCode tool mapping måste motsvara canonical deklarerad tool-mängd och approval-policy
+- SB-47 repair CI: PASS
+- release bygger alla fyra runtime-distributioner via gemensamt registry
+- alla fyra distributioner valideras före publicering
+- instruction adherence körs för alla fyra
+- runtime parity körs med Chat, Custom GPT, Claude Projects och OpenCode
+- checksummor och release metadata härleds från build manifest
+- release-validatorn kräver samtliga fyra runtime-assets
 
 ## Blockerare
 Inga.
 
 ## Nästa steg
-**SB-48 – Uppdatera CI, release och dokumentation.**
+**SB-49 – Full regression och ny release candidate.**

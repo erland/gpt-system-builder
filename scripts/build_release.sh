@@ -19,9 +19,9 @@ fi
 
 VERSION="${TAG#v}"
 ARTIFACT_DIR="${ARTIFACT_DIR:-release-artifacts}"
-CHAT_ZIP="$ARTIFACT_DIR/system-builder-chat-$VERSION.zip"
-CUSTOM_ZIP="$ARTIFACT_DIR/system-builder-custom-gpt-$VERSION.zip"
+BUILD_MANIFEST="$ARTIFACT_DIR/distribution-build-manifest.json"
 CHECKSUMS="$ARTIFACT_DIR/SHA256SUMS.txt"
+METADATA="$ARTIFACT_DIR/release-metadata.yaml"
 
 rm -rf "$ARTIFACT_DIR"
 mkdir -p "$ARTIFACT_DIR"
@@ -30,31 +30,55 @@ echo "== Pre-release validation =="
 bash scripts/ci-project.sh
 
 echo "== Build release distributions =="
-$PYTHON scripts/build_chat_runtime_zip.py --project-root . --output "$CHAT_ZIP"
-$PYTHON scripts/build_custom_gpt_distribution.py --source-dir runtime/custom-gpt-source --output "$CUSTOM_ZIP"
+$PYTHON scripts/build_all_distributions.py --output-dir "$ARTIFACT_DIR" --version "$VERSION"
 
 echo "== Validate release distributions =="
-$PYTHON scripts/validate_chat_runtime_zip.py "$CHAT_ZIP"
-$PYTHON scripts/validate_custom_gpt_distribution.py "$CUSTOM_ZIP"
+$PYTHON scripts/validate_all_distributions.py --manifest "$BUILD_MANIFEST"
+
+CHAT_ZIP="$ARTIFACT_DIR/system-builder-chat-$VERSION.zip"
+CUSTOM_ZIP="$ARTIFACT_DIR/system-builder-custom-gpt-$VERSION.zip"
+CLAUDE_ZIP="$ARTIFACT_DIR/system-builder-claude-projects-$VERSION.zip"
+OPENCODE_ZIP="$ARTIFACT_DIR/system-builder-opencode-$VERSION.zip"
+
+echo "== Runtime adherence and parity =="
 $PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution chat_zip --artifact "$CHAT_ZIP"
 $PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution custom_gpt --artifact "$CUSTOM_ZIP"
-$PYTHON scripts/validate_runtime_parity.py --contract evals/runtime-parity-contract.yaml --chat "$CHAT_ZIP" --custom "$CUSTOM_ZIP"
+$PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution claude_projects --artifact "$CLAUDE_ZIP"
+$PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution opencode --artifact "$OPENCODE_ZIP"
+$PYTHON scripts/validate_runtime_parity.py --contract evals/runtime-parity-contract.yaml --chat "$CHAT_ZIP" --custom "$CUSTOM_ZIP" --claude "$CLAUDE_ZIP" --opencode "$OPENCODE_ZIP"
 
-echo "== Write checksums =="
-(
-  cd "$ARTIFACT_DIR"
-  sha256sum "$(basename "$CHAT_ZIP")" "$(basename "$CUSTOM_ZIP")" > "$(basename "$CHECKSUMS")"
-)
+echo "== Write checksums and metadata =="
+$PYTHON - "$BUILD_MANIFEST" "$CHECKSUMS" "$METADATA" "$TAG" "$VERSION" <<'PY'
+from pathlib import Path
+import hashlib, json, sys, yaml
 
-cat > "$ARTIFACT_DIR/release-metadata.yaml" <<EOF
-name: System Builder
-version: "$VERSION"
-tag: "$TAG"
-artifacts:
-  - "$(basename "$CHAT_ZIP")"
-  - "$(basename "$CUSTOM_ZIP")"
-checksums: "$(basename "$CHECKSUMS")"
-source_of_version: release_tag
-EOF
+manifest_path=Path(sys.argv[1])
+checksums_path=Path(sys.argv[2])
+metadata_path=Path(sys.argv[3])
+tag=sys.argv[4]
+version=sys.argv[5]
+manifest=json.loads(manifest_path.read_text(encoding="utf-8"))
+artifacts=[]
+checksum_lines=[]
+for runtime,path_text in manifest["artifacts"].items():
+    path=Path(path_text)
+    if not path.is_absolute():
+        path=Path.cwd()/path
+    data=path.read_bytes()
+    digest=hashlib.sha256(data).hexdigest()
+    artifacts.append({"runtime":runtime,"file":path.name,"sha256":digest})
+    checksum_lines.append(f"{digest}  {path.name}")
+checksums_path.write_text("\n".join(checksum_lines)+"\n",encoding="utf-8")
+metadata={
+    "name":"System Builder",
+    "version":version,
+    "tag":tag,
+    "artifacts":artifacts,
+    "checksums":checksums_path.name,
+    "source_of_version":"release_tag",
+    "distribution_registry":"runtime/distribution-registry.yaml",
+}
+metadata_path.write_text(yaml.safe_dump(metadata,sort_keys=False),encoding="utf-8")
+PY
 
 echo "PASS: release artifacts built for $TAG"

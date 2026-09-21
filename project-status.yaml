@@ -7,8 +7,8 @@ plan:
   total_steps: 49
 progress:
   current_phase: runtime-migration
-  current_step: 47
-  last_completed_step: 47
+  current_step: 48
+  last_completed_step: 48
   completed_steps:
   - 1
   - 2
@@ -57,6 +57,7 @@ progress:
   - 45
   - 46
   - 47
+  - 48
   completed_step_ids:
   - SB-01
   - SB-02
@@ -105,6 +106,7 @@ progress:
   - SB-45
   - SB-46
   - SB-47
+  - SB-48
   skipped_steps: []
   inserted_steps: []
 state:
@@ -112,9 +114,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: SB-48
-  title: Uppdatera CI, release och dokumentation
-  reason: SB-47 har generaliserat instruction adherence och runtime parity till fyra runtimes och fem canonical parity-dimensioner. Nästa steg är att uppdatera release-assets, release workflow och användardokumentation för hela målbilden.
+  recommended: SB-49
+  title: Full regression och ny release candidate
+  reason: SB-48 har gjort releasebygget registry-drivet för alla fyra runtimes och uppdaterat release metadata, workflow-validering och användardokumentation. Nästa steg är full regression, release readiness och en ny reproducerbar release candidate.
 resume:
   supported: true
   required_files:
@@ -521,6 +523,11 @@ validation:
   - behavior_capability_artifact_workspace_state_tool_parity_defined
   - claude_reduced_parity_explicit
   - ci_distribution_registry_sync_enforced
+  - four_runtime_release_build_pass
+  - four_runtime_release_checksums_present
+  - four_runtime_release_metadata_present
+  - release_workflow_four_runtime_valid
+  - readme_runtime_release_documentation_current
 hygiene:
   last_result: pass
   findings: []
