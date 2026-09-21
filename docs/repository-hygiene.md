@@ -618,3 +618,12 @@ SB-22 är klart när:
 - ZIP/GitHub/release hygiene gates definierats,
 - merge-safe ignore generation definierats,
 - validator/scanner finns.
+
+
+## 45. Runtime-adapterprojektioner
+
+Runtime-specifika adapterfiler som kan härledas från canonical kontrakt klassificeras som **GENERATED**. Exempel är OpenCode-`AGENTS.md`, `opencode.json`, `.opencode/runtime-contract.json`, Claude Projects `project-instructions.md` och compatibility-filer.
+
+Sådana projektioner får inte bli nya canonical sanningskällor i GPT-projektets source tree. Distributionsregistret anger därför förbjudna runtime-projektioner i canonical root och hygiene-scannern blockerar sådan leakage.
+
+Builder/validator-listor för aktiverade runtimes ska komma från ett gemensamt distributionsregister i stället för att dupliceras mellan CI-, release- och lokala buildflöden.

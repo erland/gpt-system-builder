@@ -1,6 +1,7 @@
 schema_version: 1
 runtime_id: system-builder
 primary_instruction: runtime/canonical-instructions.md
+runtime_contract: runtime/runtime-contract.json
 core_references:
 - docs/create-mode.md
 - docs/change-mode.md

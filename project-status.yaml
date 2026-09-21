@@ -4,11 +4,11 @@ project:
   name: System Builder
 plan:
   path: docs/development-plan.md
-  total_steps: 41
+  total_steps: 49
 progress:
-  current_phase: foundation
-  current_step: 41
-  last_completed_step: 41
+  current_phase: release-candidate
+  current_step: 49
+  last_completed_step: 49
   completed_steps:
   - 1
   - 2
@@ -51,6 +51,14 @@ progress:
   - 39
   - 40
   - 41
+  - 42
+  - 43
+  - 44
+  - 45
+  - 46
+  - 47
+  - 48
+  - 49
   completed_step_ids:
   - SB-01
   - SB-02
@@ -93,6 +101,14 @@ progress:
   - SB-39
   - SB-40
   - SB-41
+  - SB-42
+  - SB-43
+  - SB-44
+  - SB-45
+  - SB-46
+  - SB-47
+  - SB-48
+  - SB-49
   skipped_steps: []
   inserted_steps: []
 state:
@@ -100,10 +116,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: null
-  title: Ingen ytterligare planerad utveckling
-  reason: SB-01–SB-41 är slutförda. System Builder är paketerad som 1.0.0-rc.1 och
-    redo för GitHub Release/publicering.
+  recommended: release
+  title: Merge PR och publicera v1.0.0-rc.2
+  reason: SB-01–SB-49 är genomförda. Efter grön SB-49 CI kan PR #2 mergas och taggen v1.0.0-rc.2 användas för den registry-drivna GitHub Release-processen.
 resume:
   supported: true
   required_files:
@@ -193,10 +208,26 @@ resume:
   - scripts/validate_knowledge_architecture.py
   - runtime/canonical-instructions.md
   - runtime/runtime-manifest.yaml
+  - runtime/runtime-contract.json
+  - runtime/distribution-registry.yaml
+  - schemas/behavior-contract.schema.json
+  - schemas/capability-contract.schema.json
+  - schemas/artifact-contract.schema.json
+  - schemas/workspace-state-contract.schema.json
+  - schemas/tool-contract.schema.json
+  - scripts/validate_runtime_contract.py
   - scripts/validate_runtime_instruction.py
+  - scripts/build_all_distributions.py
+  - scripts/validate_all_distributions.py
+  - scripts/validate_distribution_registry.py
+  - scripts/validate_release_candidate.py
   - scripts/build_chat_runtime_zip.py
   - scripts/validate_chat_runtime_zip.py
   - scripts/build_custom_gpt_distribution.py
+  - scripts/build_claude_projects_distribution.py
+  - scripts/build_opencode_distribution.py
+  - scripts/validate_opencode_distribution.py
+  - scripts/validate_claude_projects_distribution.py
   - scripts/validate_custom_gpt_distribution.py
   - evals/instruction-adherence.yaml
   - evals/static-contract-requirements.yaml
@@ -450,6 +481,8 @@ validation:
   - instruction_adherence_critical_cases_present
   - chat_static_adherence_pass
   - custom_gpt_static_adherence_pass
+  - claude_projects_static_adherence_pass
+  - opencode_static_adherence_pass
   - semantic_alternative_groups_used
   - live_eval_scorecard_present
   - e2e_small_create_pass
@@ -473,6 +506,36 @@ validation:
   - e2e_coolify_health_pass
   - e2e_coolify_live_verification_pending_not_false_pass
   - e2e_docker_coolify_complete_zip_pass
+  - runtime_contract_valid
+  - runtime_contract_negative_fixture_rejected
+  - runtime_contract_active_runtime_set_valid
+  - claude_projects_distribution_build_pass
+  - claude_projects_distribution_validation_pass
+  - claude_projects_reduced_parity_explicit
+  - opencode_distribution_build_pass
+  - opencode_distribution_validation_pass
+  - opencode_agents_md_generated
+  - opencode_project_root_separation_valid
+  - opencode_mutating_tools_require_approval
+  - opencode_no_undeclared_custom_tools
+  - distribution_registry_valid
+  - all_active_distributions_built_generically
+  - all_active_distributions_validated_generically
+  - runtime_projection_leakage_hygiene_enforced
+  - four_runtime_parity_pass
+  - behavior_capability_artifact_workspace_state_tool_parity_defined
+  - claude_reduced_parity_explicit
+  - ci_distribution_registry_sync_enforced
+  - four_runtime_release_build_pass
+  - four_runtime_release_checksums_present
+  - four_runtime_release_metadata_present
+  - release_workflow_four_runtime_valid
+  - readme_runtime_release_documentation_current
+  - sb49_full_regression_gate_defined
+  - sb49_release_candidate_consistent
+  - sb49_four_runtime_readiness_pass
+  - sb49_openai_plugin_decision_explicit
+  - sb49_no_blockers
 hygiene:
   last_result: pass
   findings: []

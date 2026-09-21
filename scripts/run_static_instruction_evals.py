@@ -1,13 +1,22 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import argparse,zipfile,yaml,sys,json
-def load_text(path,dist):
-    with zipfile.ZipFile(path,"r") as z:
-        return z.read("runtime/canonical-instructions.md" if dist=="chat_zip" else "instructions.txt").decode("utf-8")
+import argparse, zipfile, yaml, sys, json
+
+ENTRYPOINTS = {
+    "chat_zip": "runtime/canonical-instructions.md",
+    "custom_gpt": "instructions.txt",
+    "claude_projects": "project-instructions.md",
+    "opencode": "AGENTS.md",
+}
+
+def load_text(path, dist):
+    with zipfile.ZipFile(path, "r") as z:
+        return z.read(ENTRYPOINTS[dist]).decode("utf-8")
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--requirements",required=True)
-    ap.add_argument("--distribution",choices=["chat_zip","custom_gpt"],required=True)
+    ap.add_argument("--distribution",choices=sorted(ENTRYPOINTS),required=True)
     ap.add_argument("--artifact",required=True)
     ap.add_argument("--json",action="store_true")
     a=ap.parse_args()

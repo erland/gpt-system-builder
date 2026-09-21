@@ -6,8 +6,7 @@ cd "$ROOT"
 
 PYTHON="${PYTHON:-python3}"
 DIST_DIR="${DIST_DIR:-dist-ci}"
-CHAT_ZIP="$DIST_DIR/system-builder-chat-ci.zip"
-CUSTOM_ZIP="$DIST_DIR/system-builder-custom-gpt-ci.zip"
+BUILD_MANIFEST="$DIST_DIR/distribution-build-manifest.json"
 
 rm -rf "$DIST_DIR"
 mkdir -p "$DIST_DIR"
@@ -41,20 +40,29 @@ $PYTHON scripts/validate_operational_docs.py operations examples/operations.exam
 $PYTHON scripts/validate_release_readiness.py examples/release-readiness.example.md
 $PYTHON scripts/validate_knowledge_architecture.py .
 $PYTHON scripts/validate_runtime_instruction.py .
+$PYTHON scripts/validate_runtime_contract.py
+$PYTHON scripts/validate_distribution_registry.py
+$PYTHON scripts/validate_final_release_readiness.py evals/final-release-readiness.yaml
+$PYTHON scripts/validate_release_candidate.py
 $PYTHON scripts/validate_instruction_evals.py evals/instruction-adherence.yaml
 
 echo "== Fresh distribution build =="
-$PYTHON scripts/build_chat_runtime_zip.py --project-root . --output "$CHAT_ZIP"
-$PYTHON scripts/build_custom_gpt_distribution.py --source-dir runtime/custom-gpt-source --output "$CUSTOM_ZIP"
+$PYTHON scripts/build_all_distributions.py --output-dir "$DIST_DIR" --version ci
 
 echo "== Distribution validation =="
-$PYTHON scripts/validate_chat_runtime_zip.py "$CHAT_ZIP"
-$PYTHON scripts/validate_custom_gpt_distribution.py "$CUSTOM_ZIP"
+$PYTHON scripts/validate_all_distributions.py --manifest "$BUILD_MANIFEST"
+
+CHAT_ZIP="$DIST_DIR/system-builder-chat-ci.zip"
+CUSTOM_ZIP="$DIST_DIR/system-builder-custom-gpt-ci.zip"
+CLAUDE_ZIP="$DIST_DIR/system-builder-claude-projects-ci.zip"
+OPENCODE_ZIP="$DIST_DIR/system-builder-opencode-ci.zip"
 
 echo "== Instruction adherence and parity =="
 $PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution chat_zip --artifact "$CHAT_ZIP"
 $PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution custom_gpt --artifact "$CUSTOM_ZIP"
-$PYTHON scripts/validate_runtime_parity.py --contract evals/runtime-parity-contract.yaml --chat "$CHAT_ZIP" --custom "$CUSTOM_ZIP"
+$PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution claude_projects --artifact "$CLAUDE_ZIP"
+$PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution opencode --artifact "$OPENCODE_ZIP"
+$PYTHON scripts/validate_runtime_parity.py --contract evals/runtime-parity-contract.yaml --chat "$CHAT_ZIP" --custom "$CUSTOM_ZIP" --claude "$CLAUDE_ZIP" --opencode "$OPENCODE_ZIP"
 
 echo "== E2E regression =="
 $PYTHON scripts/run_e2e_small_create_eval.py --scenario-root evals/e2e/small-create
