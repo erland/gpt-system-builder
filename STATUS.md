@@ -1,39 +1,41 @@
 # System Builder – Status
 
 ## Övergripande status
-**PASS – runtime migration in progress**
+**READY_WITH_WARNINGS – runtime migration complete**
 
 ## Senast slutförda steg
-### SB-48 – Uppdatera CI, release och dokumentation
+### SB-49 – Full regression och ny release candidate
 
-Releaseflödet är nu uppdaterat för hela GPT Byggaren 1.4-runtime-målbilden.
-
-GitHub Release bygger och publicerar:
+Migreringsplanen SB-42–SB-49 är genomförd. System Builder har nu fyra aktiverade runtime-distributioner från samma canonical kontrakt:
 
 - Chat ZIP
 - Custom GPT
 - Claude Projects
 - OpenCode
-- SHA256 checksums
-- release metadata
-- distribution build manifest
 
-Releasebygget använder samma distributionsregister som ordinarie CI och kör static instruction adherence samt runtime parity för alla fyra runtimes.
+OpenAI Plugin v1 är fortsatt explicit bedömd som reduced / not planned.
 
-README beskriver nu runtime-målbild, lokal build/validation och samtliga release-assets.
+## Release candidate
+
+- Version: `1.0.0-rc.2`
+- Tagg: `v1.0.0-rc.2`
+- Release readiness: `READY_WITH_WARNINGS`
+- Blockerare: 0
+- Required gates: 19/19 PASS
+
+Varningen är oförändrad: live-verifiering mot en faktisk Coolify-miljö har inte körts och rapporteras därför inte som PASS.
 
 ## Verifiering
 
-- SB-47 repair CI: PASS
-- release bygger alla fyra runtime-distributioner via gemensamt registry
-- alla fyra distributioner valideras före publicering
-- instruction adherence körs för alla fyra
-- runtime parity körs med Chat, Custom GPT, Claude Projects och OpenCode
-- checksummor och release metadata härleds från build manifest
-- release-validatorn kräver samtliga fyra runtime-assets
+- SB-48 CI: PASS
+- fyra runtime-distributioner byggs färskt i CI
+- alla fyra valideras
+- instruction adherence passerar för alla fyra
+- runtime parity accepterad över behavior/capability/artifact/workspace_state/tool
+- CREATE/CHANGE/Docker-Coolify E2E ingår i full regression
+- runtime-aware repository hygiene ingår
+- release candidate-validering håller VERSION, tagg, registry, runtime compatibility och readiness synkade
 
-## Blockerare
-Inga.
+## Nästa åtgärd
 
-## Nästa steg
-**SB-49 – Full regression och ny release candidate.**
+Efter grön SB-49 CI kan PR #2 mergas. Därefter kan taggen `v1.0.0-rc.2` användas för att publicera den nya GitHub Release-kandidaten.

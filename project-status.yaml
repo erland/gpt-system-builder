@@ -6,9 +6,9 @@ plan:
   path: docs/development-plan.md
   total_steps: 49
 progress:
-  current_phase: runtime-migration
-  current_step: 48
-  last_completed_step: 48
+  current_phase: release-candidate
+  current_step: 49
+  last_completed_step: 49
   completed_steps:
   - 1
   - 2
@@ -58,6 +58,7 @@ progress:
   - 46
   - 47
   - 48
+  - 49
   completed_step_ids:
   - SB-01
   - SB-02
@@ -107,6 +108,7 @@ progress:
   - SB-46
   - SB-47
   - SB-48
+  - SB-49
   skipped_steps: []
   inserted_steps: []
 state:
@@ -114,9 +116,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: SB-49
-  title: Full regression och ny release candidate
-  reason: SB-48 har gjort releasebygget registry-drivet för alla fyra runtimes och uppdaterat release metadata, workflow-validering och användardokumentation. Nästa steg är full regression, release readiness och en ny reproducerbar release candidate.
+  recommended: release
+  title: Merge PR och publicera v1.0.0-rc.2
+  reason: SB-01–SB-49 är genomförda. Efter grön SB-49 CI kan PR #2 mergas och taggen v1.0.0-rc.2 användas för den registry-drivna GitHub Release-processen.
 resume:
   supported: true
   required_files:
@@ -218,6 +220,7 @@ resume:
   - scripts/build_all_distributions.py
   - scripts/validate_all_distributions.py
   - scripts/validate_distribution_registry.py
+  - scripts/validate_release_candidate.py
   - scripts/build_chat_runtime_zip.py
   - scripts/validate_chat_runtime_zip.py
   - scripts/build_custom_gpt_distribution.py
@@ -528,6 +531,11 @@ validation:
   - four_runtime_release_metadata_present
   - release_workflow_four_runtime_valid
   - readme_runtime_release_documentation_current
+  - sb49_full_regression_gate_defined
+  - sb49_release_candidate_consistent
+  - sb49_four_runtime_readiness_pass
+  - sb49_openai_plugin_decision_explicit
+  - sb49_no_blockers
 hygiene:
   last_result: pass
   findings: []

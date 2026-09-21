@@ -14,9 +14,9 @@ Se `docs/development-plan.md`.
 
 ## Aktuellt läge
 
-SB-01–SB-48 är genomförda i migrationsserien mot GPT Byggaren 1.4.0.
+SB-01–SB-49 är genomförda. Migreringen mot GPT Byggaren 1.4.0 är färdig och nästa release candidate är **1.0.0-rc.2**.
 
-Nästa rekommenderade steg är **SB-49 – Full regression och ny release candidate**.
+Efter grön final CI kan PR #2 mergas och taggen `v1.0.0-rc.2` publiceras.
 
 ## Runtime-målbild
 
@@ -50,7 +50,7 @@ python3 scripts/validate_all_distributions.py --manifest dist/distribution-build
 
 ## Release
 
-Git-taggen styr versionsnumret. Releasebygget kör full CI, bygger och validerar alla fyra runtime-distributionerna, kör instruction adherence och runtime parity och skapar checksummor samt release metadata.
+Git-taggen styr versionsnumret. Aktuell kandidat är `v1.0.0-rc.2`. Releasebygget kör full CI, bygger och validerar alla fyra runtime-distributionerna, kör instruction adherence och runtime parity och skapar checksummor samt release metadata.
 
 En release innehåller:
 

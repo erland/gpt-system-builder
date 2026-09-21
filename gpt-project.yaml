@@ -249,13 +249,15 @@ release:
   runtime_count: 4
   registry_driven: true
   status: release_candidate
-  candidate_version: 1.0.0-rc.1
-  candidate_tag: v1.0.0-rc.1
+  candidate_version: 1.0.0-rc.2
+  candidate_tag: v1.0.0-rc.2
 release_readiness:
   final_report: evals/final-release-readiness-report.md
   final_summary: evals/final-release-readiness.yaml
   validator: scripts/validate_final_release_readiness.py
+  release_candidate_validator: scripts/validate_release_candidate.py
   decision: READY_WITH_WARNINGS
+  required_gates: 19
   blockers: 0
   warnings: 1
-version: 1.0.0-rc.1
+version: 1.0.0-rc.2
