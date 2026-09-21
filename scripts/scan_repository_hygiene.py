@@ -2,23 +2,38 @@
 from pathlib import Path
 import argparse, json, os, re, sys
 
+import yaml
+
 TEMP_NAMES = {".DS_Store", "Thumbs.db"}
 TEMP_SUFFIXES = {".tmp", ".swp", ".log"}
-GENERATED_DIRS = {"node_modules", "__pycache__", ".pytest_cache", "target", "dist", "build", "coverage", ".venv"}
+GENERATED_DIRS = {"node_modules", "__pycache__", ".pytest_cache", "target", "dist", "dist-ci", "release-artifacts", "build", "coverage", ".venv"}
 SECRET_NAMES = {".env", ".env.production", ".env.local"}
 KEY_PATTERNS = [
     re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
     re.compile(r"(?i)\b(api[_-]?key|token|password|secret)\s*[:=]\s*['\"]?[^\\s'\"]{8,}")
 ]
 
+def load_runtime_hygiene(root: Path):
+    registry = root / "runtime" / "distribution-registry.yaml"
+    if not registry.is_file():
+        return {"generated_roots": [], "forbidden_runtime_projection_paths": []}
+    data = yaml.safe_load(registry.read_text(encoding="utf-8")) or {}
+    return data.get("hygiene", {}) or {}
+
 def scan(root: Path):
     findings = {"pass": [], "warning": [], "blocked": []}
+    runtime_hygiene = load_runtime_hygiene(root)
+    generated_roots = set(runtime_hygiene.get("generated_roots", []))
+    forbidden = set(runtime_hygiene.get("forbidden_runtime_projection_paths", []))
+    for rel in sorted(forbidden):
+        if (root / rel).exists():
+            findings["blocked"].append({"path": rel, "reason": "generated runtime projection present in canonical source tree"})
     for p in root.rglob("*"):
         rel = p.relative_to(root).as_posix()
         parts = set(p.parts)
         if ".git" in parts:
             continue
-        if p.is_dir() and p.name in GENERATED_DIRS:
+        if p.is_dir() and (p.name in GENERATED_DIRS or rel in generated_roots):
             findings["warning"].append({"path": rel, "reason": "generated/dependency directory present"})
             continue
         if not p.is_file():

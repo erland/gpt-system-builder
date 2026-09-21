@@ -6,10 +6,7 @@ cd "$ROOT"
 
 PYTHON="${PYTHON:-python3}"
 DIST_DIR="${DIST_DIR:-dist-ci}"
-CHAT_ZIP="$DIST_DIR/system-builder-chat-ci.zip"
-CUSTOM_ZIP="$DIST_DIR/system-builder-custom-gpt-ci.zip"
-CLAUDE_ZIP="$DIST_DIR/system-builder-claude-projects-ci.zip"
-OPENCODE_ZIP="$DIST_DIR/system-builder-opencode-ci.zip"
+BUILD_MANIFEST="$DIST_DIR/distribution-build-manifest.json"
 
 rm -rf "$DIST_DIR"
 mkdir -p "$DIST_DIR"
@@ -44,19 +41,17 @@ $PYTHON scripts/validate_release_readiness.py examples/release-readiness.example
 $PYTHON scripts/validate_knowledge_architecture.py .
 $PYTHON scripts/validate_runtime_instruction.py .
 $PYTHON scripts/validate_runtime_contract.py
+$PYTHON scripts/validate_distribution_registry.py
 $PYTHON scripts/validate_instruction_evals.py evals/instruction-adherence.yaml
 
 echo "== Fresh distribution build =="
-$PYTHON scripts/build_chat_runtime_zip.py --project-root . --output "$CHAT_ZIP"
-$PYTHON scripts/build_custom_gpt_distribution.py --source-dir runtime/custom-gpt-source --output "$CUSTOM_ZIP"
-$PYTHON scripts/build_claude_projects_distribution.py --project-root . --output "$CLAUDE_ZIP"
-$PYTHON scripts/build_opencode_distribution.py --project-root . --output "$OPENCODE_ZIP"
+$PYTHON scripts/build_all_distributions.py --output-dir "$DIST_DIR" --version ci
 
 echo "== Distribution validation =="
-$PYTHON scripts/validate_chat_runtime_zip.py "$CHAT_ZIP"
-$PYTHON scripts/validate_custom_gpt_distribution.py "$CUSTOM_ZIP"
-$PYTHON scripts/validate_claude_projects_distribution.py "$CLAUDE_ZIP"
-$PYTHON scripts/validate_opencode_distribution.py "$OPENCODE_ZIP"
+$PYTHON scripts/validate_all_distributions.py --manifest "$BUILD_MANIFEST"
+
+CHAT_ZIP="$DIST_DIR/system-builder-chat-ci.zip"
+CUSTOM_ZIP="$DIST_DIR/system-builder-custom-gpt-ci.zip"
 
 echo "== Instruction adherence and parity =="
 $PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution chat_zip --artifact "$CHAT_ZIP"

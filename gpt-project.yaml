@@ -71,6 +71,14 @@ format_strategy:
 build:
   project_zip_script: scripts/build_project_zip.py
   generated_root: dist
+  distribution_registry: runtime/distribution-registry.yaml
+  targets:
+  - chat_zip
+  - custom_gpt
+  - claude_projects
+  - opencode
+  all_distributions_builder: scripts/build_all_distributions.py
+  all_distributions_validator: scripts/validate_all_distributions.py
 machine_state:
   traceability: .system-builder/traceability.yaml
   deployment_profile: .system-builder/deployment-profile.yaml
@@ -118,6 +126,7 @@ templates:
   knowledge_file: templates/knowledge-file-template.md
 ci:
   entrypoint: scripts/ci-project.sh
+  distribution_registry_validator: scripts/validate_distribution_registry.py
   workflow: .github/workflows/ci.yml
   project_validator: scripts/validate_system_builder_ci.py
   build_distributions_fresh: true

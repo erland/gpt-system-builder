@@ -37,10 +37,9 @@ def main():
     if ep.exists():
         t=ep.read_text(encoding="utf-8")
         required=[
-            "build_chat_runtime_zip.py",
-            "build_custom_gpt_distribution.py",
-            "validate_chat_runtime_zip.py",
-            "validate_custom_gpt_distribution.py",
+            "validate_distribution_registry.py",
+            "build_all_distributions.py",
+            "validate_all_distributions.py",
             "run_static_instruction_evals.py",
             "validate_runtime_parity.py",
             "run_e2e_small_create_eval.py",
@@ -52,7 +51,7 @@ def main():
             if x not in t: errs.append(f"entrypoint missing {x}")
         if "dist-ci" not in t:
             errs.append("fresh CI distribution directory missing")
-        build_pos=t.find("build_chat_runtime_zip.py")
+        build_pos=t.find("build_all_distributions.py")
         parity_pos=t.find("validate_runtime_parity.py")
         if build_pos < 0 or parity_pos < 0 or build_pos > parity_pos:
             errs.append("distribution build must precede parity validation")

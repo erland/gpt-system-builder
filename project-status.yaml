@@ -7,8 +7,8 @@ plan:
   total_steps: 49
 progress:
   current_phase: runtime-migration
-  current_step: 45
-  last_completed_step: 45
+  current_step: 46
+  last_completed_step: 46
   completed_steps:
   - 1
   - 2
@@ -55,6 +55,7 @@ progress:
   - 43
   - 44
   - 45
+  - 46
   completed_step_ids:
   - SB-01
   - SB-02
@@ -101,6 +102,7 @@ progress:
   - SB-43
   - SB-44
   - SB-45
+  - SB-46
   skipped_steps: []
   inserted_steps: []
 state:
@@ -108,9 +110,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: SB-46
-  title: Modernisera build, lint och project hygiene
-  reason: SB-45 har implementerat OpenCode som peer runtime med AGENTS.md, runtime snapshot, projectRoot-separation, deklarerad tool-mapping och approval-policy. Nästa steg är att göra build/hygiene runtime-generisk.
+  recommended: SB-47
+  title: Utöka evals och runtime parity
+  reason: SB-46 har infört ett gemensamt distributionsregister, generisk build/validation och runtime-aware hygiene. Nästa steg är att utöka behavior/parity-evals till samtliga aktiverade runtimes.
 resume:
   supported: true
   required_files:
@@ -201,6 +203,7 @@ resume:
   - runtime/canonical-instructions.md
   - runtime/runtime-manifest.yaml
   - runtime/runtime-contract.json
+  - runtime/distribution-registry.yaml
   - schemas/behavior-contract.schema.json
   - schemas/capability-contract.schema.json
   - schemas/artifact-contract.schema.json
@@ -208,6 +211,9 @@ resume:
   - schemas/tool-contract.schema.json
   - scripts/validate_runtime_contract.py
   - scripts/validate_runtime_instruction.py
+  - scripts/build_all_distributions.py
+  - scripts/validate_all_distributions.py
+  - scripts/validate_distribution_registry.py
   - scripts/build_chat_runtime_zip.py
   - scripts/validate_chat_runtime_zip.py
   - scripts/build_custom_gpt_distribution.py
@@ -503,6 +509,11 @@ validation:
   - opencode_project_root_separation_valid
   - opencode_mutating_tools_require_approval
   - opencode_no_undeclared_custom_tools
+  - distribution_registry_valid
+  - all_active_distributions_built_generically
+  - all_active_distributions_validated_generically
+  - runtime_projection_leakage_hygiene_enforced
+  - ci_distribution_registry_sync_enforced
 hygiene:
   last_result: pass
   findings: []
