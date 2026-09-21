@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "runtime_id": "system-builder",
+  "behavior": {
+    "contract_version": 1,
+    "canonical_instruction": "runtime/canonical-instructions.md",
+    "critical_behavior_location": "canonical_instruction",
+    "knowledge_may_not_be_required_for_core_behavior": true,
+    "required_markers": [
+      "## 3. One-step rule",
+      "actual current source and repository/project state",
+      "Never report an unrun check as PASS",
+      "ZIP is a first-class source/delivery mode",
+      "GitHub is a first-class source mode"
+    ]
+  },
+  "capabilities": {
+    "contract_version": 1,
+    "recommendation_mode": "inferred_from_use_case",
+    "ask_user_only_when_business_choice_is_ambiguous": true,
+    "requirements": {
+      "web": {
+        "level": "recommended",
+        "reason": "Current platform, dependency, policy and external-system facts may require verification."
+      },
+      "filesystem": {
+        "read": "required",
+        "write": "required"
+      },
+      "shell": {
+        "level": "recommended",
+        "reason": "Project-local build, test and packaging commands are preferred when available."
+      },
+      "code_execution": {
+        "level": "required",
+        "reason": "Implementation and required verification must be executable rather than prose-only."
+      },
+      "structured_data": {
+        "level": "required"
+      },
+      "persistent_state": {
+        "level": "required",
+        "reason": "Work must resume from project state rather than chat memory."
+      },
+      "external_tools": {
+        "level": "recommended",
+        "preferred_protocols": [
+          "mcp",
+          "api"
+        ],
+        "reason": "GitHub and other repository/integration actions are first-class when the source mode requires them."
+      },
+      "image_generation": {
+        "level": "not_required"
+      }
+    }
+  },
+  "artifacts": {
+    "contract_version": 1,
+    "outputs": {
+      "functional_specification": {
+        "kind": "document",
+        "format": "markdown",
+        "requirement": "conditional",
+        "condition": "scope_requires_functional_specification",
+        "persistence": "persistent",
+        "multiplicity": "one",
+        "description": "Current-state functional specification."
+      },
+      "architecture": {
+        "kind": "document",
+        "format": "markdown",
+        "requirement": "conditional",
+        "condition": "scope_requires_architecture",
+        "persistence": "persistent",
+        "multiplicity": "one",
+        "description": "Current-state architecture description."
+      },
+      "development_plan": {
+        "kind": "document",
+        "format": "markdown",
+        "requirement": "required",
+        "persistence": "persistent",
+        "multiplicity": "one",
+        "description": "Small, verifiable development steps."
+      },
+      "work_status": {
+        "kind": "data",
+        "format": "yaml",
+        "requirement": "required",
+        "persistence": "persistent",
+        "multiplicity": "one",
+        "filename_pattern": ".system-builder/work-status.yaml",
+        "description": "Authoritative execution state for resume."
+      },
+      "verification_evidence": {
+        "kind": "report",
+        "format": "structured",
+        "requirement": "required",
+        "persistence": "persistent",
+        "multiplicity": "many",
+        "description": "Evidence that required build/test/eval/deployment checks actually ran."
+      },
+      "project_package": {
+        "kind": "package",
+        "format": "zip",
+        "requirement": "conditional",
+        "condition": "zip_source_mode",
+        "persistence": "persistent",
+        "multiplicity": "one",
+        "description": "Complete updated project ZIP used as the next canonical ZIP input."
+      },
+      "repository_update": {
+        "kind": "metadata",
+        "format": "git",
+        "requirement": "conditional",
+        "condition": "github_source_mode",
+        "persistence": "persistent",
+        "multiplicity": "one",
+        "description": "Branch/commit/PR state for the completed step."
+      }
+    },
+    "legacy_mapping": {
+      "zip_output": "project_package",
+      "commit_or_pr": "repository_update",
+      "test_result": "verification_evidence"
+    }
+  },
+  "workspace_state": {
+    "contract_version": 1,
+    "schema": "schemas/workspace-state-contract.schema.json",
+    "workspace": {
+      "requirement": "required",
+      "persistence": "required",
+      "portable": true,
+      "separate_from_assistant": true,
+      "artifact": "project_package",
+      "description": "The target software project is the portable workspace; System Builder runtime files are not the workspace authority."
+    },
+    "state": {
+      "requirement": "required",
+      "persistence": "required",
+      "authority": "workspace_file",
+      "format": "yaml",
+      "path": ".system-builder/work-status.yaml",
+      "conversation_fallback": false,
+      "description": "Repository/project state is authoritative and must make resume independent of prior conversation history."
+    },
+    "runtime_preferences": {
+      "chat": "conversation_or_file",
+      "agent": "workspace_file"
+    }
+  },
+  "tools": {
+    "contract_version": 1,
+    "schema": "schemas/tool-contract.schema.json",
+    "tools": [
+      {
+        "id": "workspace-read",
+        "type": "api_action",
+        "requirement": "required",
+        "purpose": "Read source, canonical documentation and machine state from the active project workspace.",
+        "action": "workspace.read",
+        "deterministic": true,
+        "mutates_workspace": false,
+        "working_directory": "workspace",
+        "runtime_fallback": "block"
+      },
+      {
+        "id": "workspace-write",
+        "type": "api_action",
+        "requirement": "required",
+        "purpose": "Apply the selected implementation step and update affected canonical docs/state.",
+        "action": "workspace.write",
+        "deterministic": false,
+        "mutates_workspace": true,
+        "working_directory": "workspace",
+        "runtime_fallback": "block"
+      },
+      {
+        "id": "run-verification",
+        "type": "api_action",
+        "requirement": "required",
+        "purpose": "Run project-defined build, tests, lint, typecheck, evals or deployment verification required by the selected step.",
+        "action": "project.verify",
+        "deterministic": false,
+        "mutates_workspace": false,
+        "working_directory": "workspace",
+        "runtime_fallback": "block"
+      },
+      {
+        "id": "repository-actions",
+        "type": "api_action",
+        "requirement": "recommended",
+        "purpose": "Read and mutate branch, commit, pull request and CI state in GitHub source mode.",
+        "action": "repository.github",
+        "deterministic": false,
+        "mutates_workspace": true,
+        "working_directory": "workspace",
+        "runtime_fallback": "manual"
+      },
+      {
+        "id": "package-project",
+        "type": "api_action",
+        "requirement": "recommended",
+        "purpose": "Build and integrity-check a complete project ZIP in ZIP source mode.",
+        "action": "project.package",
+        "deterministic": true,
+        "mutates_workspace": false,
+        "working_directory": "workspace",
+        "runtime_fallback": "manual"
+      }
+    ]
+  },
+  "runtime_compatibility": {
+    "chat_zip": {
+      "status": "implemented",
+      "target": "equivalent"
+    },
+    "custom_gpt": {
+      "status": "implemented",
+      "target": "equivalent_with_platform_constraints"
+    },
+    "claude_projects": {
+      "status": "planned",
+      "target": "reduced"
+    },
+    "opencode": {
+      "status": "planned",
+      "target": "equivalent"
+    },
+    "openai_plugin": {
+      "status": "not_planned",
+      "target": "reduced"
+    }
+  }
+}

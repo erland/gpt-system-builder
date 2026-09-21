@@ -4,30 +4,23 @@
 **PASS – runtime migration in progress**
 
 ## Senast slutförda steg
-### SB-42 – Migreringsanalys och runtime-målbild
+### SB-43 – Inför plattformsneutrala runtime-kontrakt
 
-Migreringen mot GPT Byggaren 1.4.0 är analyserad.
+System Builder har nu ett gemensamt runtime-kontrakt enligt GPT Byggaren 1.4.0:s kontraktsmodell.
 
-Beslutad målbild:
-
-- Chat ZIP – fortsatt aktiverad
-- Custom GPT – fortsatt aktiverad
-- Claude Projects – aktiveras med dokumenterad reduced parity
-- OpenCode – aktiveras
-- OpenAI Plugin v1 – bedömd men aktiveras inte i nuläget
-
-Den tidigare releasekandidaten **1.0.0-rc.1** bevaras som historiskt resultat, men projektet har återgått till aktiv utveckling innan stabil release.
+Canonical kontrakt omfattar behavior, capabilities, artifacts, workspace/state, tools och runtime compatibility.
 
 ## Verifiering
 
-- befintlig repository-status inventerad
-- ingen öppen PR fanns före migrationsserien
-- runtime-kandidater enligt GPT Byggaren 1.4.0 är explicit bedömda
-- inga canonical domänregler har ändrats i SB-42
-- project hygiene: inga nya genererade artefakter eller temporärfiler introduceras
+- SB-42 CI: PASS
+- JSON Schemas för behavior/capability/artifact/workspace-state/tool införda
+- runtime/runtime-contract.json införd
+- scripts/validate_runtime_contract.py införd i ordinarie CI
+- validatorn kontrollerar giltigt kontrakt och att en avsiktligt ogiltig capability-variant avvisas
+- aktiverad runtime-mängd valideras som Chat ZIP + Custom GPT + Claude Projects + OpenCode
 
 ## Blockerare
 Inga.
 
 ## Nästa steg
-**SB-43 – Inför plattformsneutrala runtime-kontrakt.**
+**SB-44 – Implementera Claude Projects-runtime.**

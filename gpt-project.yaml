@@ -60,6 +60,7 @@ canonical:
   operational_documentation_standard: docs/configuration-installation-operations-standard.md
   release_readiness_standard: docs/release-readiness-standard.md
   knowledge_architecture: docs/knowledge-architecture.md
+  runtime_contract: runtime/runtime-contract.json
 status:
   machine_readable: project-status.yaml
   human_readable: STATUS.md
@@ -76,6 +77,11 @@ machine_state:
 schemas:
   traceability: schemas/traceability.schema.json
   deployment_profile: schemas/deployment-profile.schema.json
+  behavior_contract: schemas/behavior-contract.schema.json
+  capability_contract: schemas/capability-contract.schema.json
+  artifact_contract: schemas/artifact-contract.schema.json
+  workspace_state_contract: schemas/workspace-state-contract.schema.json
+  tool_contract: schemas/tool-contract.schema.json
 templates:
   functional_specification: templates/functional-specification-template.md
   functional_specification_small: templates/functional-specification-small-template.md
@@ -126,6 +132,8 @@ knowledge:
   critical_behavior_in_knowledge_only: false
 runtime:
   canonical_instruction: runtime/canonical-instructions.md
+  contract: runtime/runtime-contract.json
+  contract_validator: scripts/validate_runtime_contract.py
   manifest: runtime/runtime-manifest.yaml
   default_completed_steps_per_run: 1
   source_state_over_chat_memory: true

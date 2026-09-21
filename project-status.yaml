@@ -7,8 +7,8 @@ plan:
   total_steps: 49
 progress:
   current_phase: runtime-migration
-  current_step: 42
-  last_completed_step: 42
+  current_step: 43
+  last_completed_step: 43
   completed_steps:
   - 1
   - 2
@@ -52,6 +52,7 @@ progress:
   - 40
   - 41
   - 42
+  - 43
   completed_step_ids:
   - SB-01
   - SB-02
@@ -95,6 +96,7 @@ progress:
   - SB-40
   - SB-41
   - SB-42
+  - SB-43
   skipped_steps: []
   inserted_steps: []
 state:
@@ -102,9 +104,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: SB-43
-  title: Inför plattformsneutrala runtime-kontrakt
-  reason: SB-42 har fastställt målbilden Chat ZIP, Custom GPT, Claude Projects och OpenCode. Nästa beroende är generiska behavior/capability/artifact/workspace_state/tool-kontrakt före nya adapters.
+  recommended: SB-44
+  title: Implementera Claude Projects-runtime
+  reason: SB-43 har infört gemensamma behavior/capability/artifact/workspace_state/tool-kontrakt och CI-validering. Claude Projects är nästa adapter i migrationsplanen.
 resume:
   supported: true
   required_files:
@@ -194,6 +196,13 @@ resume:
   - scripts/validate_knowledge_architecture.py
   - runtime/canonical-instructions.md
   - runtime/runtime-manifest.yaml
+  - runtime/runtime-contract.json
+  - schemas/behavior-contract.schema.json
+  - schemas/capability-contract.schema.json
+  - schemas/artifact-contract.schema.json
+  - schemas/workspace-state-contract.schema.json
+  - schemas/tool-contract.schema.json
+  - scripts/validate_runtime_contract.py
   - scripts/validate_runtime_instruction.py
   - scripts/build_chat_runtime_zip.py
   - scripts/validate_chat_runtime_zip.py
@@ -474,6 +483,9 @@ validation:
   - e2e_coolify_health_pass
   - e2e_coolify_live_verification_pending_not_false_pass
   - e2e_docker_coolify_complete_zip_pass
+  - runtime_contract_valid
+  - runtime_contract_negative_fixture_rejected
+  - runtime_contract_active_runtime_set_valid
 hygiene:
   last_result: pass
   findings: []

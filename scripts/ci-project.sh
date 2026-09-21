@@ -41,6 +41,7 @@ $PYTHON scripts/validate_operational_docs.py operations examples/operations.exam
 $PYTHON scripts/validate_release_readiness.py examples/release-readiness.example.md
 $PYTHON scripts/validate_knowledge_architecture.py .
 $PYTHON scripts/validate_runtime_instruction.py .
+$PYTHON scripts/validate_runtime_contract.py
 $PYTHON scripts/validate_instruction_evals.py evals/instruction-adherence.yaml
 
 echo "== Fresh distribution build =="
