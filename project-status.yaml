@@ -7,8 +7,8 @@ plan:
   total_steps: 49
 progress:
   current_phase: runtime-migration
-  current_step: 44
-  last_completed_step: 44
+  current_step: 45
+  last_completed_step: 45
   completed_steps:
   - 1
   - 2
@@ -54,6 +54,7 @@ progress:
   - 42
   - 43
   - 44
+  - 45
   completed_step_ids:
   - SB-01
   - SB-02
@@ -99,6 +100,7 @@ progress:
   - SB-42
   - SB-43
   - SB-44
+  - SB-45
   skipped_steps: []
   inserted_steps: []
 state:
@@ -106,9 +108,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: SB-45
-  title: Implementera OpenCode-runtime
-  reason: SB-44 har implementerat och CI-kopplat Claude Projects-distributionen med explicit reduced parity. OpenCode är nästa runtime-adapter i migrationsplanen.
+  recommended: SB-46
+  title: Modernisera build, lint och project hygiene
+  reason: SB-45 har implementerat OpenCode som peer runtime med AGENTS.md, runtime snapshot, projectRoot-separation, deklarerad tool-mapping och approval-policy. Nästa steg är att göra build/hygiene runtime-generisk.
 resume:
   supported: true
   required_files:
@@ -210,6 +212,8 @@ resume:
   - scripts/validate_chat_runtime_zip.py
   - scripts/build_custom_gpt_distribution.py
   - scripts/build_claude_projects_distribution.py
+  - scripts/build_opencode_distribution.py
+  - scripts/validate_opencode_distribution.py
   - scripts/validate_claude_projects_distribution.py
   - scripts/validate_custom_gpt_distribution.py
   - evals/instruction-adherence.yaml
@@ -493,6 +497,12 @@ validation:
   - claude_projects_distribution_build_pass
   - claude_projects_distribution_validation_pass
   - claude_projects_reduced_parity_explicit
+  - opencode_distribution_build_pass
+  - opencode_distribution_validation_pass
+  - opencode_agents_md_generated
+  - opencode_project_root_separation_valid
+  - opencode_mutating_tools_require_approval
+  - opencode_no_undeclared_custom_tools
 hygiene:
   last_result: pass
   findings: []

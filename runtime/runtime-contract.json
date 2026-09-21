@@ -226,7 +226,7 @@
       "target": "reduced"
     },
     "opencode": {
-      "status": "planned",
+      "status": "implemented",
       "target": "equivalent"
     },
     "openai_plugin": {

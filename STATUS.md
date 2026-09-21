@@ -4,31 +4,34 @@
 **PASS – runtime migration in progress**
 
 ## Senast slutförda steg
-### SB-44 – Implementera Claude Projects-runtime
+### SB-45 – Implementera OpenCode-runtime
 
-Claude Projects är nu en byggbar runtime-distribution härledd från System Builders
-canonical instruktion och plattformsneutrala runtime-kontrakt.
+OpenCode är nu en byggbar peer-runtime härledd från samma canonical System Builder-kontrakt.
 
 Distributionen innehåller:
 
-- `project-instructions.md` från canonical runtime-instruktion,
+- root `AGENTS.md` genererad från canonical runtime-instruktion,
+- `.opencode/runtime-contract.json` som adapter-snapshot,
+- `.opencode/tool-mapping.json` som mappar canonical tool capabilities till OpenCode,
+- `opencode.json` med approval-policy,
 - relevant Knowledge,
-- `runtime-contract.json` som snapshot,
-- `compatibility.md` med explicit **reduced parity**,
-- README med installations-/användningsinstruktioner.
+- tydlig separation mellan runtime-workspace och målprojekt via `projectRoot`.
+
+Inga custom script-tools genereras eftersom canonical tool-kontraktet inte deklarerar några konkreta script-tools. Detta undviker att hela `scripts/` implicit exponeras.
 
 ## Verifiering
 
-- SB-43 CI: PASS
-- builder för Claude Projects införd
-- validator för Claude Projects införd
-- ordinarie CI bygger och validerar Claude Projects-ZIP
-- validatorn kräver canonical behavior-markers
-- validatorn förbjuder development-only state/scripts i distributionen
-- validatorn kräver att reduced parity och begränsningar för exekvering/GitHub/state är explicita
+- SB-44 CI: PASS
+- OpenCode builder införd
+- OpenCode validator införd
+- ordinarie CI bygger och validerar OpenCode-ZIP
+- `CLAUDE.md` förbjuds i OpenCode-distributionen
+- muterande edit- och shell-operationer kräver approval
+- tool mapping måste exakt motsvara deklarerad canonical tool-mängd
+- projectRoot/workspace-separation valideras
 
 ## Blockerare
 Inga.
 
 ## Nästa steg
-**SB-45 – Implementera OpenCode-runtime.**
+**SB-46 – Modernisera build, lint och project hygiene.**

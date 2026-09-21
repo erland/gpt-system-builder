@@ -154,8 +154,14 @@ distributions:
     compatibility: reduced
     migration_step: SB-44
   opencode:
-    status: planned
-    compatibility: equivalent_target
+    builder: scripts/build_opencode_distribution.py
+    validator: scripts/validate_opencode_distribution.py
+    artifact_pattern: system-builder-opencode-v*.zip
+    status: implemented
+    compatibility: equivalent
+    instructions: AGENTS.md
+    runtime_contract_snapshot: .opencode/runtime-contract.json
+    config: opencode.json
     migration_step: SB-45
   openai_plugin:
     status: not_planned
