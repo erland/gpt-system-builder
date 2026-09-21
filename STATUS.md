@@ -1,28 +1,33 @@
 # System Builder – Status
 
 ## Övergripande status
-**PASS – release candidate packaged**
+**PASS – runtime migration in progress**
 
 ## Senast slutförda steg
-### SB-41 – Paketera stabil release candidate v1.0.0
+### SB-42 – Migreringsanalys och runtime-målbild
 
-Version: **1.0.0-rc.1**
+Migreringen mot GPT Byggaren 1.4.0 är analyserad.
 
-- slutstädning: PASS
-- source project ZIP hålls fri från genererade release-ZIP:ar
-- Chat ZIP: PASS
-- Custom GPT: PASS
-- instruction adherence: PASS
-- runtime parity: PASS
-- checksums/release metadata: PASS
+Beslutad målbild:
 
-Readiness: **READY_WITH_WARNINGS**
+- Chat ZIP – fortsatt aktiverad
+- Custom GPT – fortsatt aktiverad
+- Claude Projects – aktiveras med dokumenterad reduced parity
+- OpenCode – aktiveras
+- OpenAI Plugin v1 – bedömd men aktiveras inte i nuläget
 
-Kvarvarande warning:
-- live Coolify target verification är PENDING och inte rapporterad som PASS.
+Den tidigare releasekandidaten **1.0.0-rc.1** bevaras som historiskt resultat, men projektet har återgått till aktiv utveckling innan stabil release.
+
+## Verifiering
+
+- befintlig repository-status inventerad
+- ingen öppen PR fanns före migrationsserien
+- runtime-kandidater enligt GPT Byggaren 1.4.0 är explicit bedömda
+- inga canonical domänregler har ändrats i SB-42
+- project hygiene: inga nya genererade artefakter eller temporärfiler introduceras
 
 ## Blockerare
 Inga.
 
 ## Nästa steg
-Ingen ytterligare utvecklingspunkt finns i den fastställda planen. Nästa operativa steg är GitHub Release `v1.0.0-rc.1`.
+**SB-43 – Inför plattformsneutrala runtime-kontrakt.**

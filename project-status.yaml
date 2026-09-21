@@ -4,11 +4,11 @@ project:
   name: System Builder
 plan:
   path: docs/development-plan.md
-  total_steps: 41
+  total_steps: 49
 progress:
-  current_phase: foundation
-  current_step: 41
-  last_completed_step: 41
+  current_phase: runtime-migration
+  current_step: 42
+  last_completed_step: 42
   completed_steps:
   - 1
   - 2
@@ -51,6 +51,7 @@ progress:
   - 39
   - 40
   - 41
+  - 42
   completed_step_ids:
   - SB-01
   - SB-02
@@ -93,6 +94,7 @@ progress:
   - SB-39
   - SB-40
   - SB-41
+  - SB-42
   skipped_steps: []
   inserted_steps: []
 state:
@@ -100,10 +102,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: null
-  title: Ingen ytterligare planerad utveckling
-  reason: SB-01–SB-41 är slutförda. System Builder är paketerad som 1.0.0-rc.1 och
-    redo för GitHub Release/publicering.
+  recommended: SB-43
+  title: Inför plattformsneutrala runtime-kontrakt
+  reason: SB-42 har fastställt målbilden Chat ZIP, Custom GPT, Claude Projects och OpenCode. Nästa beroende är generiska behavior/capability/artifact/workspace_state/tool-kontrakt före nya adapters.
 resume:
   supported: true
   required_files:

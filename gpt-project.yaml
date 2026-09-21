@@ -14,6 +14,10 @@ runtimes:
   planned:
   - chat_zip
   - custom_gpt
+  - claude_projects
+  - opencode
+  assessed_not_planned:
+  - openai_plugin
 source_modes:
   planned:
   - zip
@@ -134,6 +138,18 @@ distributions:
     artifact_pattern: system-builder-chat-v*.zip
     status: implemented
     behavior_manifest: explicit
+  claude_projects:
+    status: planned
+    compatibility: reduced
+    migration_step: SB-44
+  opencode:
+    status: planned
+    compatibility: equivalent_target
+    migration_step: SB-45
+  openai_plugin:
+    status: not_planned
+    compatibility: reduced
+    reason: critical workspace/state and repository tool requirements are not fully covered by Plugin v1
   custom_gpt:
     builder: scripts/build_custom_gpt_distribution.py
     validator: scripts/validate_custom_gpt_distribution.py

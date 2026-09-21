@@ -1163,3 +1163,138 @@ Planen får ändras när ny evidens visar att ett annat steg bör prioriteras. B
 **SB-01 – Skapa grundprojektet**
 
 Det är första steget där den faktiska System Builder-projekt-ZIP:en ska skapas.
+
+---
+
+# Fortsättningsplan – GPT Byggaren 1.4.0 runtime migration
+
+Den tidigare planen SB-01–SB-41 är genomförd. Följande steg utökar projektet utan att skriva om den historiken.
+
+## SB-42 – Migreringsanalys och runtime-målbild
+
+### Mål
+
+Inventera System Builder mot GPT Byggaren 1.4.0 och fastställ vilka registrerade peer runtimes som ska aktiveras.
+
+### Leverans
+
+- `docs/gpt-builder-1.4-runtime-migration.md`
+- explicit bedömning av ChatGPT Chat, ChatGPT Custom, Claude Projects, OpenCode och OpenAI Plugin,
+- uppdaterad projektmålbild och status.
+
+### Klart när
+
+- samtliga registrerade runtimes är bedömda,
+- aktiverade runtimes är motiverade,
+- reducerad/ej rekommenderad parity är explicit,
+- nästa tekniska beroende är identifierat.
+
+---
+
+## SB-43 – Inför plattformsneutrala runtime-kontrakt
+
+### Mål
+
+Definiera canonical kontrakt för behavior, capabilities, artifacts, workspace/state och tools samt en generisk runtime compatibility-modell.
+
+### Klart när
+
+- kontrakten har canonical representation,
+- runtime-adaptrar kan härledas utan att bli nya sanningskällor,
+- befintliga Chat/Custom-beteenden kan mappas till den generiska modellen,
+- validering finns för kontrakten.
+
+---
+
+## SB-44 – Implementera Claude Projects-runtime
+
+### Mål
+
+Bygg en portabel Claude Projects-distribution från canonical kontrakt.
+
+### Klart när
+
+- Project Instructions härleds från canonical instruktion,
+- relevant Knowledge paketeras,
+- runtime-contract snapshot ingår,
+- begränsningar för lokal tool-/script- och GitHub-exekvering dokumenteras som reduced parity,
+- builder och validator passerar.
+
+---
+
+## SB-45 – Implementera OpenCode-runtime
+
+### Mål
+
+Bygg en OpenCode workspace-runtime från canonical kontrakt.
+
+### Klart när
+
+- root `AGENTS.md` genereras från canonical instruktion,
+- `.opencode/runtime-contract.json` genereras,
+- endast deklarerade runtime-tools exponeras,
+- muterande tools kräver lämpligt godkännande,
+- projectRoot/workspace-separation är tydlig,
+- builder och validator passerar.
+
+---
+
+## SB-46 – Modernisera build, lint och project hygiene
+
+### Mål
+
+Gör byggsystem och hygiene runtime-generiska för de fyra aktiverade distributionerna.
+
+### Klart när
+
+- samtliga aktiverade distributionsmål kan byggas deterministiskt,
+- generated/runtime/development-filer klassificeras korrekt,
+- ingen adapter blir canonical source,
+- lint/hygiene fångar runtime-specifika fel.
+
+---
+
+## SB-47 – Utöka evals och runtime parity
+
+### Mål
+
+Generalisera instruction adherence och runtime parity från två till fyra aktiverade runtimes.
+
+### Klart när
+
+- critical behavior verifieras över Chat ZIP, Custom GPT, Claude Projects och OpenCode,
+- parity använder behavior/capability/artifact/workspace_state/tool,
+- reducerad Claude-funktionalitet redovisas explicit,
+- kritiska saknade krav blockerar berörd runtime.
+
+---
+
+## SB-48 – Uppdatera CI, release och dokumentation
+
+### Mål
+
+Bygg och validera alla aktiverade runtimes i GitHub Actions och GitHub Release.
+
+### Klart när
+
+- CI bygger och validerar fyra runtime-distributioner,
+- release-taggen styr samtliga versionsnummer,
+- release assets, checksums och metadata omfattar alla aktiverade runtimes,
+- README/PROJECT/status beskriver aktuell runtime-målbild.
+
+---
+
+## SB-49 – Full regression och ny release candidate
+
+### Mål
+
+Genomför final hygiene, full regression och release readiness efter migreringen.
+
+### Klart när
+
+- alla obligatoriska validators/evals/E2E passerar,
+- runtime parity är accepterad för alla aktiverade runtimes,
+- OpenAI Plugin-beslutet är fortsatt explicit,
+- inga blockers återstår,
+- en ny reproducerbar release candidate kan byggas och publiceras.
+

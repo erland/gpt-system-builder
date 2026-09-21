@@ -2,7 +2,7 @@
 
 System Builder är ett GPT-projekt för stegvis systemutveckling från behov eller förändringsönskemål till ett fungerande, verifierat, dokumenterat och paketerat system.
 
-Projektet ska stödja både nya system och vidareutveckling av befintliga system, arbeta i ZIP- och GitHub-läge och bygga både Chat ZIP och Custom GPT från samma canonical kontrakt.
+Projektet stödjer nya system och vidareutveckling av befintliga system samt arbetar i ZIP- och GitHub-läge.
 
 ## Projektstatus
 
@@ -14,13 +14,21 @@ Se `docs/development-plan.md`.
 
 ## Aktuellt läge
 
-SB-01 är genomfört. Grundprojektet är skapat och nästa rekommenderade steg är **SB-02 – Definiera canonical identitet och scope**.
+SB-01–SB-42 är genomförda. Projektet är inne i en runtime-migrering mot GPT Byggaren 1.4.0.
 
-## Distributioner
+Nästa rekommenderade steg är **SB-43 – Inför plattformsneutrala runtime-kontrakt**.
 
-Planerade runtime-distributioner:
+## Runtime-målbild
+
+Aktiverade eller planerade runtime-distributioner:
 
 - Chat ZIP
 - Custom GPT
+- Claude Projects
+- OpenCode
+
+OpenAI Plugin v1 är bedömd men inte planerad som distribution eftersom System Builders kritiska workspace/state- och repository-tool-flöden inte kan täckas med fullgod parity i nuvarande pluginmodell.
+
+Se `docs/gpt-builder-1.4-runtime-migration.md` för migrationsanalysen.
 
 Dessutom byggs en komplett projekt-ZIP efter varje genomfört utvecklingssteg.
