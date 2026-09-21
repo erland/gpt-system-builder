@@ -147,7 +147,10 @@ distributions:
     status: implemented
     behavior_manifest: explicit
   claude_projects:
-    status: planned
+    builder: scripts/build_claude_projects_distribution.py
+    validator: scripts/validate_claude_projects_distribution.py
+    artifact_pattern: system-builder-claude-projects-v*.zip
+    status: implemented
     compatibility: reduced
     migration_step: SB-44
   opencode:

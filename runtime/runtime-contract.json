@@ -222,7 +222,7 @@
       "target": "equivalent_with_platform_constraints"
     },
     "claude_projects": {
-      "status": "planned",
+      "status": "implemented",
       "target": "reduced"
     },
     "opencode": {

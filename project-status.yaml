@@ -7,8 +7,8 @@ plan:
   total_steps: 49
 progress:
   current_phase: runtime-migration
-  current_step: 43
-  last_completed_step: 43
+  current_step: 44
+  last_completed_step: 44
   completed_steps:
   - 1
   - 2
@@ -53,6 +53,7 @@ progress:
   - 41
   - 42
   - 43
+  - 44
   completed_step_ids:
   - SB-01
   - SB-02
@@ -97,6 +98,7 @@ progress:
   - SB-41
   - SB-42
   - SB-43
+  - SB-44
   skipped_steps: []
   inserted_steps: []
 state:
@@ -104,9 +106,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: SB-44
-  title: Implementera Claude Projects-runtime
-  reason: SB-43 har infört gemensamma behavior/capability/artifact/workspace_state/tool-kontrakt och CI-validering. Claude Projects är nästa adapter i migrationsplanen.
+  recommended: SB-45
+  title: Implementera OpenCode-runtime
+  reason: SB-44 har implementerat och CI-kopplat Claude Projects-distributionen med explicit reduced parity. OpenCode är nästa runtime-adapter i migrationsplanen.
 resume:
   supported: true
   required_files:
@@ -207,6 +209,8 @@ resume:
   - scripts/build_chat_runtime_zip.py
   - scripts/validate_chat_runtime_zip.py
   - scripts/build_custom_gpt_distribution.py
+  - scripts/build_claude_projects_distribution.py
+  - scripts/validate_claude_projects_distribution.py
   - scripts/validate_custom_gpt_distribution.py
   - evals/instruction-adherence.yaml
   - evals/static-contract-requirements.yaml
@@ -486,6 +490,9 @@ validation:
   - runtime_contract_valid
   - runtime_contract_negative_fixture_rejected
   - runtime_contract_active_runtime_set_valid
+  - claude_projects_distribution_build_pass
+  - claude_projects_distribution_validation_pass
+  - claude_projects_reduced_parity_explicit
 hygiene:
   last_result: pass
   findings: []

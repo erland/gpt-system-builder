@@ -8,6 +8,7 @@ PYTHON="${PYTHON:-python3}"
 DIST_DIR="${DIST_DIR:-dist-ci}"
 CHAT_ZIP="$DIST_DIR/system-builder-chat-ci.zip"
 CUSTOM_ZIP="$DIST_DIR/system-builder-custom-gpt-ci.zip"
+CLAUDE_ZIP="$DIST_DIR/system-builder-claude-projects-ci.zip"
 
 rm -rf "$DIST_DIR"
 mkdir -p "$DIST_DIR"
@@ -47,10 +48,12 @@ $PYTHON scripts/validate_instruction_evals.py evals/instruction-adherence.yaml
 echo "== Fresh distribution build =="
 $PYTHON scripts/build_chat_runtime_zip.py --project-root . --output "$CHAT_ZIP"
 $PYTHON scripts/build_custom_gpt_distribution.py --source-dir runtime/custom-gpt-source --output "$CUSTOM_ZIP"
+$PYTHON scripts/build_claude_projects_distribution.py --project-root . --output "$CLAUDE_ZIP"
 
 echo "== Distribution validation =="
 $PYTHON scripts/validate_chat_runtime_zip.py "$CHAT_ZIP"
 $PYTHON scripts/validate_custom_gpt_distribution.py "$CUSTOM_ZIP"
+$PYTHON scripts/validate_claude_projects_distribution.py "$CLAUDE_ZIP"
 
 echo "== Instruction adherence and parity =="
 $PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution chat_zip --artifact "$CHAT_ZIP"

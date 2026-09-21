@@ -4,23 +4,31 @@
 **PASS – runtime migration in progress**
 
 ## Senast slutförda steg
-### SB-43 – Inför plattformsneutrala runtime-kontrakt
+### SB-44 – Implementera Claude Projects-runtime
 
-System Builder har nu ett gemensamt runtime-kontrakt enligt GPT Byggaren 1.4.0:s kontraktsmodell.
+Claude Projects är nu en byggbar runtime-distribution härledd från System Builders
+canonical instruktion och plattformsneutrala runtime-kontrakt.
 
-Canonical kontrakt omfattar behavior, capabilities, artifacts, workspace/state, tools och runtime compatibility.
+Distributionen innehåller:
+
+- `project-instructions.md` från canonical runtime-instruktion,
+- relevant Knowledge,
+- `runtime-contract.json` som snapshot,
+- `compatibility.md` med explicit **reduced parity**,
+- README med installations-/användningsinstruktioner.
 
 ## Verifiering
 
-- SB-42 CI: PASS
-- JSON Schemas för behavior/capability/artifact/workspace-state/tool införda
-- runtime/runtime-contract.json införd
-- scripts/validate_runtime_contract.py införd i ordinarie CI
-- validatorn kontrollerar giltigt kontrakt och att en avsiktligt ogiltig capability-variant avvisas
-- aktiverad runtime-mängd valideras som Chat ZIP + Custom GPT + Claude Projects + OpenCode
+- SB-43 CI: PASS
+- builder för Claude Projects införd
+- validator för Claude Projects införd
+- ordinarie CI bygger och validerar Claude Projects-ZIP
+- validatorn kräver canonical behavior-markers
+- validatorn förbjuder development-only state/scripts i distributionen
+- validatorn kräver att reduced parity och begränsningar för exekvering/GitHub/state är explicita
 
 ## Blockerare
 Inga.
 
 ## Nästa steg
-**SB-44 – Implementera Claude Projects-runtime.**
+**SB-45 – Implementera OpenCode-runtime.**
