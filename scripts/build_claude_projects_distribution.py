@@ -45,16 +45,19 @@ Compatibility target: **reduced parity**.
 
 ## Runtime limitations
 
-A plain Claude Project must not assume that it can:
+A plain Claude Project must not assume these runtime capabilities:
 
-- execute local shell commands or project scripts,
-- run deterministic build/test/lint/typecheck commands,
-- mutate a Git repository or GitHub pull request,
-- persist authoritative project state outside files supplied to the project.
+- **local command execution**
+- **deterministic project verification**
+- **workspace mutation**
+- **GitHub write actions**
+
+The runtime therefore has reduced parity, but it must preserve **canonical behavior**.
+The project/repository state file remains the **workspace-file authority** for resume.
 
 If a required capability is unavailable, the runtime must degrade honestly:
-produce the artifacts it can, mark unrun verification as unrun, and require the
-project/repository state files to remain the authority for resume.
+produce the artifacts it can and explicitly mark **unrun verification** as unrun.
+It must never convert missing execution capability into a false PASS.
 """
 
 def main() -> int:
