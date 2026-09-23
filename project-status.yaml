@@ -4,10 +4,10 @@ project:
   name: System Builder
 plan:
   path: docs/development-plan.md
-  total_steps: 50
+  total_steps: 54
 progress:
-  current_phase: release-candidate
-  current_step: 50
+  current_phase: small-model-robustness
+  current_step: 51
   last_completed_step: 50
   completed_steps:
   - 1
@@ -118,9 +118,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: release
-  title: Merge PR #3
-  reason: SB-50 är genomförd och full required CI har PASS för implementation revision 5e7956204c88aec19be13d4374d167a913ff5874. Completion-only transition återstår endast att verifieras av lightweight required check på denna statusändring.
+  recommended: SB-51
+  title: Verifiera handlingsorienterat work status
+  reason: SB-51 är implementerad men får inte markeras completed förrän required CI har PASS.
 resume:
   supported: true
   required_files:
