@@ -72,7 +72,8 @@ def main() -> int:
 
     instruction = root / "runtime" / "canonical-instructions.md"
     contract_path = root / "runtime" / "runtime-contract.json"
-    execution_rules = root / "runtime" / "execution-rules.md"\n    required = [instruction, execution_rules, contract_path] + [root / p for p in KNOWLEDGE_FILES]
+    execution_rules = root / "runtime" / "execution-rules.md"
+    required = [instruction, execution_rules, contract_path] + [root / p for p in KNOWLEDGE_FILES]
     missing = [str(p.relative_to(root)) for p in required if not p.is_file()]
     if missing:
         raise FileNotFoundError("missing Claude Projects source files: " + ", ".join(missing))
