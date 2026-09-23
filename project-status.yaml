@@ -7,7 +7,7 @@ plan:
   total_steps: 54
 progress:
   current_phase: small-model-robustness
-  current_step: 51
+  current_step: 52
   last_completed_step: 51
   completed_steps:
   - 1
@@ -121,8 +121,8 @@ state:
   warnings: []
 next_step:
   recommended: SB-52
-  title: Inför deterministic execution decision table
-  reason: SB-51 är verifierad och completed; SB-52 är nästa planerade robusthetssteg.
+  title: Verifiera deterministic execution decision table
+  reason: SB-52 är implementerad och väntar på required CI.
 resume:
   supported: true
   required_files:
