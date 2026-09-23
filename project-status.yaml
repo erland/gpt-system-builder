@@ -7,7 +7,7 @@ plan:
   total_steps: 54
 progress:
   current_phase: small-model-robustness
-  current_step: 53
+  current_step: 54
   last_completed_step: 53
   completed_steps:
   - 1
@@ -125,8 +125,8 @@ state:
   warnings: []
 next_step:
   recommended: SB-54
-  title: Lägg till adversarial small-model evals
-  reason: SB-53 är verifierad och completed; SB-54 är sista planerade robusthetssteget.
+  title: Verifiera adversarial small-model evals
+  reason: SB-54 är implementerad och väntar på required CI.
 resume:
   supported: true
   required_files:
