@@ -161,8 +161,10 @@ RECEIVE ZIP
 → SELECT ONE STEP
 → LOCK
 → IMPLEMENT
-→ VERIFY
+→ FULL REQUIRED VERIFY
 → REVIEW
+→ COMPLETION TRANSITION
+→ LIGHTWEIGHT STATE VALIDATION
 → UPDATE DOCS/STATE
 → HYGIENE
 → BUILD COMPLETE ZIP
@@ -388,7 +390,15 @@ Efter completed step bör leveransen sammanfatta:
 
 Full diff behöver inte återges i chatten.
 
-## 32. Failure outcome
+## 32. External verification gate
+
+Om projektets required verification innehåller en extern gate som inte kan köras från ZIP-runtime ska steget förbli incomplete. Leverera ett resumable checkpoint med source och state som väntar på verifiering.
+
+När användaren senare återkommer med giltig extern evidence för exakt samma source revision/fingerprint får System Builder genomföra completion transition och lightweight state validation utan att köra om full verifiering enbart för statusändringen.
+
+Äldre ZIP-projekt utan nya revisionfält ska fortsatt fungera: härled source identity från checksum/evidens när det är entydigt, annars använd den äldre säkra modellen med full verifiering före completion.
+
+## 33. Failure outcome
 
 Om steget inte kan completed:
 
@@ -397,19 +407,19 @@ Om steget inte kan completed:
 - den får inte beskrivas som completed artifact,
 - nästa recommended ska vara repair/unblock.
 
-## 33. Partial output
+## 34. Partial output
 
 System Builder ska inte leverera en partial source ZIP som ser ut som fullständig projektleverans.
 
 Om endast patch/diff efterfrågas explicit kan det göras, men default är komplett project ZIP.
 
-## 34. Artifact naming vs project naming
+## 35. Artifact naming vs project naming
 
 Outputfilens namn får förändras utan att projektets interna namn ändras.
 
 Interna canonical identifiers ska inte automatiskt härledas från artifact filename.
 
-## 35. ZIP mode anti-patterns
+## 36. ZIP mode anti-patterns
 
 Undvik:
 
@@ -422,7 +432,7 @@ Undvik:
 - markera step completed utan verification,
 - börja nästa steg före leverans.
 
-## 36. Exit-kriterier för SB-20
+## 37. Exit-kriterier för SB-20
 
 SB-20 är klart när:
 

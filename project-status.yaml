@@ -4,11 +4,11 @@ project:
   name: System Builder
 plan:
   path: docs/development-plan.md
-  total_steps: 49
+  total_steps: 50
 progress:
   current_phase: release-candidate
-  current_step: 49
-  last_completed_step: 49
+  current_step: 50
+  last_completed_step: 50
   completed_steps:
   - 1
   - 2
@@ -59,6 +59,7 @@ progress:
   - 47
   - 48
   - 49
+  - 50
   completed_step_ids:
   - SB-01
   - SB-02
@@ -109,6 +110,7 @@ progress:
   - SB-47
   - SB-48
   - SB-49
+  - SB-50
   skipped_steps: []
   inserted_steps: []
 state:
@@ -117,8 +119,8 @@ state:
   warnings: []
 next_step:
   recommended: release
-  title: Merge PR och publicera v1.0.0-rc.2
-  reason: SB-01–SB-49 är genomförda. Efter grön SB-49 CI kan PR #2 mergas och taggen v1.0.0-rc.2 användas för den registry-drivna GitHub Release-processen.
+  title: Merge PR #3
+  reason: SB-50 är genomförd och full required CI har PASS för implementation revision 5e7956204c88aec19be13d4374d167a913ff5874. Completion-only transition återstår endast att verifieras av lightweight required check på denna statusändring.
 resume:
   supported: true
   required_files:
@@ -167,6 +169,7 @@ resume:
   - docs/improve-mode.md
   - templates/improve-intake-template.md
   - docs/next-step-state-machine.md
+  - docs/completion-verification.md
   - templates/next-step-assessment-template.md
   - docs/zip-mode.md
   - templates/zip-run-assessment-template.md

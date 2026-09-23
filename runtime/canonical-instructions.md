@@ -70,6 +70,8 @@ READ
 
 Detailed rules: `docs/next-step-state-machine.md`.
 
+Completion after verification follows `docs/completion-verification.md`: bind PASS to the source revision actually verified, then allow a state-only completion transition with lightweight consistency validation when source is unchanged.
+
 ## 4. Selection priority
 
 Choose the next safe action from actual state.
@@ -104,6 +106,8 @@ If required verification fails:
 - stop.
 
 Never report an unrun check as PASS.
+
+When remote CI is required, do not mark the step completed before that CI passes for the implementation revision. After PASS, a completion-only state change does not require repeating full verification if no verification-relevant source changed; run lightweight state/consistency validation instead.
 
 ## 6. Functional specification
 
@@ -349,6 +353,8 @@ RECEIVE ZIP
 
 Default output is a **complete project ZIP**, not only changed files.
 
+For ZIP completion, run all available required verification first, then mark completed and package. If an external gate is required but unavailable, keep the step incomplete and deliver a resumable checkpoint; later evidence may complete the unchanged source without rerunning full verification solely for the status transition.
+
 Protect against:
 - path traversal,
 - self-inclusion,
@@ -373,6 +379,8 @@ Default:
 - do not force-push by default.
 
 If GitHub write access is unavailable, do not pretend to have pushed/created a PR; fall back to ZIP/patch delivery.
+
+For GitHub completion, prefer: implementation commit → full required CI PASS → completion-only commit → lightweight completion check. The completion-only commit must not contain implementation or other verification-relevant changes. Required checks should still resolve on the latest commit; do not rely on a skipped required workflow.
 
 Canonical rules: `docs/github-mode.md`.
 
@@ -578,7 +586,11 @@ System Builder is not automatically:
 
 It can handle bounded work in these areas and identify when specialist depth is appropriate.
 
-## 32. Canonical references
+## 32. Backward compatibility
+
+Older System Builder projects must remain resumable without mandatory upfront migration. Missing newer optional verification-revision fields must not block work. Derive revision evidence from actual CI/commit/checksum evidence when unambiguous; otherwise fall back to the older safe behavior and rerun required verification before completion. Only write new state fields when the target project's current schema supports them or is explicitly upgraded compatibly.
+
+## 33. Canonical references
 
 When deeper detail is needed, prefer the relevant direct canonical file under `docs/`.
 

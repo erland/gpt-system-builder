@@ -206,6 +206,8 @@ System Builder ska undvika:
 
 Efter verifiering ska state uppdateras från faktisk outcome.
 
+I GitHub-läge med required remote CI kan UPDATE STATUS behöva delas i två faser: implementationen pushas fortfarande som `in_progress`, full CI får PASS för den implementation-revisionen, och först därefter görs completion transition. Se `docs/completion-verification.md`.
+
 PASS:
 - selected step → completed
 - completion evidence registreras
@@ -231,10 +233,15 @@ Efter completed step:
 
 ### GitHub mode
 
-Efter completed step:
-- commit relevanta changes,
+När full required CI kan köras före completion:
+- commit implementation med steget fortfarande incomplete/in_progress,
 - push till aktiv branch,
+- invänta required CI för implementation commit,
+- vid PASS: gör en separat completion-only state transition,
+- kör lightweight state/consistency validation på completion-ändringen,
 - uppdatera/återanvänd PR enligt GitHub-policy.
+
+Om completion-ändringen innehåller verifieringsrelevant source ska full verification köras igen.
 
 ## 15. STOP
 
@@ -491,7 +498,13 @@ Undvik:
 - ny PR för varje delsteg,
 - "allt klart" utan release readiness.
 
-## 34. Exit-kriterier för SB-19
+## 34. Completion evidence och source revision
+
+När möjligt ska PASS bindas till den source revision som faktiskt verifierades. En ren state-only completion transition efter PASS får använda lightweight validation i stället för full regression, förutsatt att ingen verifieringsrelevant source ändrats.
+
+Äldre project state utan explicit revisionfält ska fortsatt kunna återupptas. System Builder ska härleda evidens när det är säkert och annars falla tillbaka till full verifiering.
+
+## 35. Exit-kriterier för SB-19
 
 SB-19 är klart när:
 

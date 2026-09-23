@@ -122,8 +122,10 @@ Skapa ny PR när:
 
 Normalregel:
 
-- ett completed DEV-step → en tydlig commit,
-- commit efter required verification,
+- ett implementerat DEV-step → en tydlig implementation commit,
+- lokal/tool verification körs före push när relevant,
+- om required remote CI är completion gate förblir steget incomplete tills CI har PASS för implementation commit,
+- därefter får en separat completion-only commit registrera `completed`, evidence och next state,
 - commit message refererar step-ID när relevant.
 
 Exempel:
@@ -136,7 +138,9 @@ Små mekaniska följdändringar inom samma steg hör i samma commit om repositor
 
 ## 10. Commit completion rule
 
-Ett steg ska normalt inte commit:as som completed om required verification misslyckas.
+Ett steg ska inte markeras completed innan all required verification, inklusive required remote CI när sådan gäller, har PASS för den implementation revision som steget avser.
+
+Efter PASS får en completion-only commit användas. Den får endast ändra uttryckligen tillåten completion metadata/state och ska verifieras med lightweight schema/transition/consistency checks. Om annan source ändras krävs full CI igen.
 
 Undantag:
 
@@ -243,6 +247,8 @@ Konfliktlösning är del av aktiv work series om den krävs för completion.
 
 CI är viktig verifiering men inte enda release evidence.
 
+När CI används som completion gate ska evidensen knytas till implementation commit SHA. Completion-only committen får hänvisa till denna verifierade SHA. Full CI behöver inte köras om enbart därför att state ändras, men senaste commit ska fortfarande få ett stabilt required check-resultat via lightweight completion validation.
+
 System Builder ska skilja:
 
 - local/tool verification,
@@ -283,7 +289,7 @@ System Builder ska inte ignorera review bara för att local tests är gröna.
 
 ## 22. One-step GitHub loop
 
-Normal körning:
+Normal körning när remote CI är required:
 
 ```text
 READ REPO/PR
@@ -291,15 +297,17 @@ READ REPO/PR
 → SELECT ONE STEP
 → LOCK IN STATE
 → IMPLEMENT
-→ VERIFY
-→ REVIEW
-→ UPDATE DOCS/STATE
-→ COMMIT
-→ PUSH
-→ CHECK/RECORD CI
+→ LOCAL VERIFY / REVIEW / DOCS
+→ IMPLEMENTATION COMMIT + PUSH
+→ REQUIRED FULL CI
+→ PASS FOR IMPLEMENTATION SHA
+→ COMPLETION-ONLY STATE COMMIT
+→ LIGHTWEIGHT COMPLETION CHECK
 → UPDATE PR
 → STOP
 ```
+
+Om required remote CI inte ingår i completion contract kan verifiering och completion ske före den enda normala committen.
 
 ## 23. CREATE on GitHub
 
@@ -513,7 +521,11 @@ Om flera öppna PRs verkar matcha samma work series:
 - välj inte godtyckligt,
 - om det inte går att avgöra säkert kan detta bli en genuin blockerande fråga.
 
-## 43. GitHub mode anti-patterns
+## 43. Backward compatibility
+
+Äldre System Builder-projekt kan sakna explicit `verified_source` eller motsvarande revisionmetadata. De ska ändå kunna fortsätta i GitHub-läge utan förhandsmigrering. System Builder ska i första hand härleda den verifierade revisionen från GitHub commit/CI-evidens. Om kopplingen är osäker ska full required verification köras enligt den äldre modellen. Nya state-fält skrivs endast om projektets befintliga schema stödjer dem eller uppgraderas explicit och bakåtkompatibelt.
+
+## 44. GitHub mode anti-patterns
 
 Undvik:
 
@@ -526,7 +538,7 @@ Undvik:
 - merge utan release/readiness när sådan krävs,
 - hålla aktiv PR endast i chat memory.
 
-## 44. Exit-kriterier för SB-21
+## 45. Exit-kriterier för SB-21
 
 SB-21 är klart när:
 

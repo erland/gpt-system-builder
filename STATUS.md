@@ -1,41 +1,29 @@
 # System Builder – Status
 
 ## Övergripande status
-**READY_WITH_WARNINGS – runtime migration complete**
+**READY_WITH_WARNINGS – SB-50 complete**
 
 ## Senast slutförda steg
-### SB-49 – Full regression och ny release candidate
+### SB-50 – Separera verifierad implementation från completion transition
 
-Migreringsplanen SB-42–SB-49 är genomförd. System Builder har nu fyra aktiverade runtime-distributioner från samma canonical kontrakt:
+SB-50 är genomförd.
 
-- Chat ZIP
-- Custom GPT
-- Claude Projects
-- OpenCode
+Full required CI PASS:ade för implementation revision `5e7956204c88aec19be13d4374d167a913ff5874`.
 
-OpenAI Plugin v1 är fortsatt explicit bedömd som reduced / not planned.
+Förändringen inför:
+
+- verifierad source revision som optional completion evidence,
+- GitHub-flödet implementation commit → full CI → completion-only state commit → lightweight completion check,
+- ZIP-flödet full verifiering → completion transition → lightweight state validation → package,
+- resumable checkpoint när ZIP-läge saknar en extern required gate,
+- fallback till full verifiering om revision/evidence inte kan härledas säkert,
+- bakåtkompatibilitet med projekt skapade av äldre System Builder-versioner utan obligatorisk förhandsmigrering,
+- completion-aware CI som behåller ett stabilt required check men använder lightweight validation för strikt state-only completion.
 
 ## Release candidate
 
-- Version: `1.0.0-rc.2`
-- Tagg: `v1.0.0-rc.2`
-- Release readiness: `READY_WITH_WARNINGS`
-- Blockerare: 0
-- Required gates: 19/19 PASS
-
-Varningen är oförändrad: live-verifiering mot en faktisk Coolify-miljö har inte körts och rapporteras därför inte som PASS.
-
-## Verifiering
-
-- SB-48 CI: PASS
-- fyra runtime-distributioner byggs färskt i CI
-- alla fyra valideras
-- instruction adherence passerar för alla fyra
-- runtime parity accepterad över behavior/capability/artifact/workspace_state/tool
-- CREATE/CHANGE/Docker-Coolify E2E ingår i full regression
-- runtime-aware repository hygiene ingår
-- release candidate-validering håller VERSION, tagg, registry, runtime compatibility och readiness synkade
+Nuvarande version är fortsatt `1.0.0-rc.2`.
 
 ## Nästa åtgärd
 
-Efter grön SB-49 CI kan PR #2 mergas. Därefter kan taggen `v1.0.0-rc.2` användas för att publicera den nya GitHub Release-kandidaten.
+Verifiera att denna completion-only commit går via lightweight completion validation. Vid PASS är PR #3 merge-klar.

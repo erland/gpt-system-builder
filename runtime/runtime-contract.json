@@ -11,7 +11,9 @@
       "actual current source and repository/project state",
       "Never report an unrun check as PASS",
       "ZIP is a first-class source/delivery mode",
-      "GitHub is a first-class source mode"
+      "GitHub is a first-class source mode",
+      "completion-only",
+      "Older System Builder projects"
     ]
   },
   "capabilities": {

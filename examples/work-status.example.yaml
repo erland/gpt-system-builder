@@ -19,6 +19,10 @@ verification:
   commands:
   - pytest
   notes: Example state.
+  verified_source:
+    type: git_commit
+    revision: abc123example
+    evidence: Required CI passed for this implementation revision.
 source_state:
   drift: none
   reference: sha256:example
