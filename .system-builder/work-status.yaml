@@ -3,7 +3,7 @@ active_work:
   mode: IMPROVE
   plan: docs/development-plan.md
   change_request: small-model-robustness
-  selected_step: SB-53
+  selected_step: null
 progress:
   completed:
   - SB-01
@@ -58,27 +58,28 @@ progress:
   - SB-50
   - SB-51
   - SB-52
-  in_progress: SB-53
+  - SB-53
+  in_progress: null
   next:
-    recommended: SB-53
-    reason: Critical invariants are implemented and awaiting required CI.
+    recommended: SB-54
+    reason: SB-53 is verified; adversarial small-model evals are next.
 blockers: []
 verification:
-  last_status: not_run
+  last_status: passed
   baseline: green
   commands:
   - python3 scripts/validate_state_contracts.py
-  notes: SB-53 implementation awaiting required CI.
+  notes: SB-53 full required CI passed for a1247128241bb9cf1671f3b44f758a3476063665.
 source_state:
   drift: none
   reference: main-after-pr-3
 execution:
-  next_action: verify
-  step: SB-53
-  operation: verification
-  reason: Critical invariants are now first in canonical and Custom GPT instructions.
+  next_action: implement
+  step: SB-54
+  operation: implementation
+  reason: SB-53 is complete and SB-54 is the final robustness step.
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: null
-  evidence_status: pending
+  implementation_revision: a1247128241bb9cf1671f3b44f758a3476063665
+  evidence_status: passed
