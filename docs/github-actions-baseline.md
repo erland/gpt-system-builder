@@ -103,11 +103,22 @@ Ladda upp artifacts endast när de behövs för felsökning eller release. Cover
 
 Concurrency kan avbryta stale runs när det är lämpligt. Jobs bör ha rimliga timeouts. `paths` filters används endast när det är säkert att förändringar verkligen inte påverkar checks.
 
+För System Builder completion-only commits bör required workflow normalt **inte** hoppas över med `paths-ignore`, eftersom senaste commit då kan sakna ett required check-resultat. Föredra ett stabilt required check som alltid startar och klassificerar ändringen internt som full verification eller lightweight completion validation.
+
 ## 24. Matrix och monorepo
 
 Matrix används endast för verkligt stödda runtime-/OS-/DB-varianter. Monorepo får använda affected-package-logik men cross-cutting checks får inte tappas bort.
 
-## 25. Stabil naming
+## 25. Completion-aware required CI
+
+När ett target repository använder required remote CI som completion gate bör pipeline kunna stödja två säkra vägar under samma stabila required check:
+
+1. **full** – alla required build/test/lint/e2e/container-kontroller som projektet kräver,
+2. **completion-only** – endast när senaste ändringen strikt består av tillåten System Builder completion metadata efter att full CI redan PASS:at för den refererade implementation revisionen.
+
+Completion-only-vägen ska minst verifiera file whitelist, state/schema consistency och kopplingen till verifierad revision. Om klassificeringen är osäker eller någon annan fil ändrats ska full-vägen användas.
+
+## 34. Stabil naming
 
 Workflow-, job- och checknamn ska vara stabila eftersom branch protection kan referera till dem.
 
