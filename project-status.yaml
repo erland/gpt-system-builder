@@ -4,10 +4,10 @@ project:
   name: System Builder
 plan:
   path: docs/development-plan.md
-  total_steps: 49
+  total_steps: 50
 progress:
-  current_phase: release-candidate
-  current_step: 49
+  current_phase: completion-transition
+  current_step: 50
   last_completed_step: 49
   completed_steps:
   - 1
@@ -116,9 +116,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: release
-  title: Merge PR och publicera v1.0.0-rc.2
-  reason: SB-01–SB-49 är genomförda. Efter grön SB-49 CI kan PR #2 mergas och taggen v1.0.0-rc.2 användas för den registry-drivna GitHub Release-processen.
+  recommended: SB-50
+  title: Verifiera completion transition
+  reason: SB-50 är implementerad på work branch men får inte markeras completed förrän full required CI har PASS för implementation revisionen.
 resume:
   supported: true
   required_files:
@@ -167,6 +167,7 @@ resume:
   - docs/improve-mode.md
   - templates/improve-intake-template.md
   - docs/next-step-state-machine.md
+  - docs/completion-verification.md
   - templates/next-step-assessment-template.md
   - docs/zip-mode.md
   - templates/zip-run-assessment-template.md
