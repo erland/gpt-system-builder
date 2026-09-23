@@ -14,9 +14,9 @@ Se `docs/development-plan.md`.
 
 ## Aktuellt läge
 
-SB-01–SB-49 är genomförda. Migreringen mot GPT Byggaren 1.4.0 är färdig och nästa release candidate är **1.0.0-rc.2**.
+SB-01–SB-49 är genomförda. **SB-50** implementerar en completion transition som undviker onödig full CI efter ren statusändring, med bakåtkompatibilitet för äldre System Builder-projekt. SB-50 väntar på full required CI innan steget får klarmarkeras.
 
-Efter grön final CI kan PR #2 mergas och taggen `v1.0.0-rc.2` publiceras.
+Nuvarande version är fortsatt **1.0.0-rc.2** tills nästa releasebeslut tas.
 
 ## Runtime-målbild
 
