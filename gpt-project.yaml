@@ -250,8 +250,8 @@ release:
   runtime_count: 4
   registry_driven: true
   status: release_candidate
-  candidate_version: 1.0.0-rc.2
-  candidate_tag: v1.0.0-rc.2
+  candidate_version: 1.2.1
+  candidate_tag: v1.2.1
 release_readiness:
   final_report: evals/final-release-readiness-report.md
   final_summary: evals/final-release-readiness.yaml
@@ -261,4 +261,4 @@ release_readiness:
   required_gates: 19
   blockers: 0
   warnings: 1
-version: 1.0.0-rc.2
+version: 1.2.1
