@@ -85,7 +85,8 @@ def main() -> int:
 
     with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED) as zf:
         zf.writestr("README.md", README)
-        zf.writestr("project-instructions.md", instruction.read_text(encoding="utf-8"))\n        zf.write(execution_rules, "runtime/execution-rules.md")
+        zf.writestr("project-instructions.md", instruction.read_text(encoding="utf-8"))
+        zf.write(execution_rules, "runtime/execution-rules.md")
         zf.writestr("runtime-contract.json", json.dumps(contract, indent=2) + "\n")
         zf.writestr("compatibility.md", COMPATIBILITY)
         for rel in KNOWLEDGE_FILES:
