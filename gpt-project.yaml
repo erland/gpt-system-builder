@@ -50,6 +50,7 @@ canonical:
   change_mode: docs/change-mode.md
   improve_mode: docs/improve-mode.md
   next_step_state_machine: docs/next-step-state-machine.md
+  completion_verification: docs/completion-verification.md
   zip_mode: docs/zip-mode.md
   github_mode: docs/github-mode.md
   repository_hygiene: docs/repository-hygiene.md
