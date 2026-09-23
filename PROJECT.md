@@ -110,6 +110,10 @@ Se `docs/improve-mode.md` för canonical beteendebevarande förbättringsflöde.
 
 Se `docs/next-step-state-machine.md` för canonical styrning av `Gör nästa steg`.
 
+## Completion och verifierad revision
+
+Se `docs/completion-verification.md` för canonical regler för verifierad source revision, completion transition, lightweight completion validation och bakåtkompatibilitet med äldre System Builder-state.
+
 ## ZIP-läge
 
 Se `docs/zip-mode.md` för canonical first-class ZIP source/delivery workflow.
