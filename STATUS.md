@@ -1,29 +1,27 @@
 # System Builder – Status
 
 ## Övergripande status
-**READY_WITH_WARNINGS – SB-50 complete**
+**SB-51 IN PROGRESS – small-model robustness**
 
-## Senast slutförda steg
-### SB-50 – Separera verifierad implementation från completion transition
+## Aktuellt steg
+### SB-51 – Gör work status handlingsorienterad
 
-SB-50 är genomförd.
+Första steget i small-model robustness-serien är implementerat och väntar på required CI.
 
-Full required CI PASS:ade för implementation revision `5e7956204c88aec19be13d4374d167a913ff5874`.
+Förändringen:
 
-Förändringen inför:
+- lägger till optional `execution`-hints med `next_action`, `step` och `operation`,
+- lägger till optional `completion`-hints med `allowed`, `waiting_for`, verifierad implementation revision och evidence status,
+- behåller schema version 1 och gör alla nya fält optional,
+- har en explicit legacy fixture som saknar de nya fälten och ändå måste validera,
+- synkroniserar projektets egen stale `.system-builder/work-status.yaml` från SB-06/SB-07 till faktisk SB-51-state.
 
-- verifierad source revision som optional completion evidence,
-- GitHub-flödet implementation commit → full CI → completion-only state commit → lightweight completion check,
-- ZIP-flödet full verifiering → completion transition → lightweight state validation → package,
-- resumable checkpoint när ZIP-läge saknar en extern required gate,
-- fallback till full verifiering om revision/evidence inte kan härledas säkert,
-- bakåtkompatibilitet med projekt skapade av äldre System Builder-versioner utan obligatorisk förhandsmigrering,
-- completion-aware CI som behåller ett stabilt required check men använder lightweight validation för strikt state-only completion.
+## Fortsättningsplan
 
-## Release candidate
-
-Nuvarande version är fortsatt `1.0.0-rc.2`.
+- SB-52: deterministic execution decision table
+- SB-53: kritiska invariants först i runtimeinstruktionen
+- SB-54: adversarial small-model evals
 
 ## Nästa åtgärd
 
-Verifiera att denna completion-only commit går via lightweight completion validation. Vid PASS är PR #3 merge-klar.
+Kör required CI för SB-51. Vid PASS kan steget klarmarkeras och nästa rekommenderade steg blir SB-52.
