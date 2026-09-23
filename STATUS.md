@@ -1,21 +1,24 @@
 # System Builder – Status
 
 ## Övergripande status
-**SB-52 COMPLETE – small-model robustness continues**
+**SB-53 IN PROGRESS – critical invariants first**
 
-## Senast slutförda steg
-### SB-52 – Inför deterministic execution decision table
+## Aktuellt steg
+### SB-53 – Lägg kritiska invariants först
 
-SB-52 är verifierad med full required CI och completed.
+SB-53 är implementerad och väntar på required CI.
 
-Resultat:
+Canonical runtime och Custom GPT börjar nu med sex korta guardrails:
 
-- kort first-hop decision procedure i `runtime/execution-rules.md`,
-- explicit prioritetsordning för blockerare, failed verification, drift, aktivt steg, pending verification, completion, dependencies och release,
-- tydliga GitHub- och ZIP-transitions,
-- legacy state utan action hints fortsätter fungera,
-- alla runtime-distributioner får motsvarande beteende.
+1. läs faktisk source/state först,
+2. gör exakt ett development step som default,
+3. blockerare och failed required verification går först,
+4. markera aldrig completed före required verification PASS,
+5. ändra aldrig implementation under completion-only,
+6. rapportera nästa rekommenderade action och stoppa.
+
+Custom GPT-instruktionen har samtidigt komprimerats till **7 641 tecken**, så invariants får plats med god marginal under 8 000-teckensgränsen.
 
 ## Nästa åtgärd
 
-**SB-53 – Lägg kritiska invariants först i runtimeinstruktionen.**
+Kör required CI. Vid PASS kan SB-53 completed-markeras och nästa rekommenderade steg blir SB-54.
