@@ -68,13 +68,16 @@ READ
 → STOP
 ```
 
+First-hop decision procedure: `runtime/execution-rules.md`.
 Detailed rules: `docs/next-step-state-machine.md`.
 
 Completion after verification follows `docs/completion-verification.md`: bind PASS to the source revision actually verified, then allow a state-only completion transition with lightweight consistency validation when source is unchanged.
 
 ## 4. Selection priority
 
-Choose the next safe action from actual state.
+Choose the next safe action from actual state. Prefer a valid `execution.next_action` hint when present, but never over actual blockers, verification evidence or source drift.
+
+Use `runtime/execution-rules.md` as the deterministic IF/ELSE decision table.
 
 Priority:
 
