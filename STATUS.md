@@ -1,20 +1,24 @@
 # System Builder – Status
 
 ## Övergripande status
-**SB-51 COMPLETE – small-model robustness continues**
+**SB-52 IN PROGRESS – deterministic execution rules**
 
-## Senast slutförda steg
-### SB-51 – Gör work status handlingsorienterad
+## Aktuellt steg
+### SB-52 – Inför deterministic execution decision table
 
-SB-51 är verifierad med full required CI och completed.
+SB-52 är implementerad och väntar på required CI.
 
-Resultat:
+Förändringen:
 
-- optional `execution`-hints med `next_action`, `step` och `operation`,
-- optional `completion`-hints,
-- legacy state utan de nya fälten validerar fortsatt,
-- projektets egen work-status är synkad till faktisk status.
+- lägger till `runtime/execution-rules.md` som kort first-hop decision procedure,
+- prioriterar blockerare, failed verification, drift, aktivt steg, pending verification, completion, dependencies och nästa plansteg i explicit ordning,
+- använder `execution.next_action` som stark hint när den inte motsäger faktisk evidens,
+- skiljer GitHub tydligt i IMPLEMENT / VERIFY-REPAIR / COMPLETE,
+- skiljer ZIP i implementation/completion/external-gate checkpoint,
+- behåller legacy state utan execution/completion hints,
+- paketerar decision rules i Chat ZIP, Claude Projects och OpenCode,
+- komprimerar Custom GPT:s motsvarande beslutsregel till exakt 8 000 tecken.
 
 ## Nästa åtgärd
 
-**SB-52 – Inför deterministic execution decision table.**
+Kör required CI. Vid PASS kan SB-52 completed-markeras och nästa rekommenderade steg blir SB-53.
