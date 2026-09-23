@@ -192,8 +192,8 @@ evals:
     static_runner: scripts/run_static_instruction_evals.py
     validator: scripts/validate_instruction_evals.py
     live_scorecard_template: evals/live-eval-scorecard-template.yaml
-    case_count: 18
-    critical_case_count: 10
+    case_count: 22
+    critical_case_count: 14
     chat_static_result: pass
     custom_gpt_static_result: pass
     claude_projects_static_result: pass
