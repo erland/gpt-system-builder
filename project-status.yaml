@@ -6,9 +6,9 @@ plan:
   path: docs/development-plan.md
   total_steps: 54
 progress:
-  current_phase: small-model-robustness
+  current_phase: release
   current_step: 54
-  last_completed_step: 53
+  last_completed_step: 54
   completed_steps:
   - 1
   - 2
@@ -63,6 +63,7 @@ progress:
   - 51
   - 52
   - 53
+  - 54
   completed_step_ids:
   - SB-01
   - SB-02
@@ -117,6 +118,7 @@ progress:
   - SB-51
   - SB-52
   - SB-53
+  - SB-54
   skipped_steps: []
   inserted_steps: []
 state:
@@ -124,9 +126,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: SB-54
-  title: Verifiera adversarial small-model evals
-  reason: SB-54 är implementerad och väntar på required CI.
+  recommended: release
+  title: Bygg release 1.2.1
+  reason: SB-54 är verifierad och completed; nästa steg är release 1.2.1.
 resume:
   supported: true
   required_files:

@@ -1,9 +1,9 @@
 schema_version: 2
-review: SB-49-runtime-migration-final-release-readiness
+review: SB-54-small-model-robustness-release-readiness
 decision: READY_WITH_WARNINGS
 release_candidate:
-  version: 1.0.0-rc.2
-  tag: v1.0.0-rc.2
+  version: 1.2.1
+  tag: v1.2.1
   reproducible_from_tag: true
 required_gates_passed: 19
 required_gates_total: 19
@@ -11,9 +11,8 @@ warnings:
   - Live Coolify target verification remains pending because no live Coolify environment was available; it is not reported as PASS.
 blockers: []
 note: >
-  SB-49 final readiness supersedes the SB-40 two-runtime review. Evidence is based on
-  the four-runtime migration state and the successful SB-48 CI run, with the SB-49
-  PR CI serving as the final regression gate before merge/tag.
+  SB-54 readiness includes the completed four-runtime migration and small-model robustness work.
+  Evidence is based on the current four-runtime project CI and release validation gates.
 runtime_targets:
   - chat_zip
   - custom_gpt
@@ -101,4 +100,4 @@ gates:
   - gate: release_candidate_version
     required: true
     result: pass
-    evidence: VERSION and release candidate metadata are 1.0.0-rc.2
+    evidence: VERSION and release candidate metadata are 1.2.1

@@ -18,8 +18,6 @@ def main() -> int:
     registry=yaml.safe_load((ROOT/"runtime/distribution-registry.yaml").read_text(encoding="utf-8"))
 
     candidate=readiness.get("release_candidate",{})
-    if version!="1.0.0-rc.2":
-        errors.append(f"VERSION must be 1.0.0-rc.2, got {version}")
     if candidate.get("version")!=version:
         errors.append("readiness release candidate version does not match VERSION")
     if candidate.get("tag")!=f"v{version}":
@@ -54,10 +52,21 @@ def main() -> int:
         errors.append("release readiness is not releasable")
 
     progress=status.get("progress",{})
-    if progress.get("last_completed_step")!=49:
-        errors.append("project status must complete SB-49")
-    if "SB-49" not in progress.get("completed_step_ids",[]):
-        errors.append("SB-49 missing from completed step ids")
+    total_steps=status.get("plan",{}).get("total_steps")
+    last_completed=progress.get("last_completed_step")
+    completed_steps=progress.get("completed_steps",[])
+    completed_ids=progress.get("completed_step_ids",[])
+    if not isinstance(total_steps,int) or total_steps < 1:
+        errors.append("project status total_steps must be a positive integer")
+    else:
+        expected_steps=list(range(1,total_steps+1))
+        expected_ids=[f"SB-{n:02d}" for n in expected_steps]
+        if last_completed!=total_steps:
+            errors.append(f"project status must complete latest planned step SB-{total_steps:02d}")
+        if completed_steps!=expected_steps:
+            errors.append("project completed_steps must contain every planned step in order")
+        if completed_ids!=expected_ids:
+            errors.append("project completed_step_ids must contain every planned SB step in order")
 
     if errors:
         print("FAIL")
