@@ -3,7 +3,7 @@ active_work:
   mode: IMPROVE
   plan: docs/development-plan.md
   change_request: small-model-robustness
-  selected_step: SB-51
+  selected_step: null
 progress:
   completed:
   - SB-01
@@ -56,27 +56,28 @@ progress:
   - SB-48
   - SB-49
   - SB-50
-  in_progress: SB-51
+  - SB-51
+  in_progress: null
   next:
-    recommended: SB-51
-    reason: Action-oriented work status is the first small-model robustness step.
+    recommended: SB-52
+    reason: SB-51 is verified; deterministic execution decision rules are next.
 blockers: []
 verification:
-  last_status: not_run
+  last_status: passed
   baseline: green
   commands:
   - python3 scripts/validate_state_contracts.py
-  notes: SB-51 implementation awaiting required CI.
+  notes: SB-51 full required CI passed for bf69359f32db0d31a89229aab5a32d5460dbeb23.
 source_state:
   drift: none
   reference: main-after-pr-3
 execution:
-  next_action: verify
-  step: SB-51
-  operation: verification
-  reason: Schema, example and legacy compatibility fixture are implemented.
+  next_action: implement
+  step: SB-52
+  operation: implementation
+  reason: SB-51 is complete and SB-52 is the next planned robustness step.
 completion:
   allowed: false
-  waiting_for: required_ci
-  implementation_revision: null
-  evidence_status: pending
+  waiting_for: null
+  implementation_revision: bf69359f32db0d31a89229aab5a32d5460dbeb23
+  evidence_status: passed
