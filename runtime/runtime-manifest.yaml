@@ -7,6 +7,7 @@ core_references:
 - docs/change-mode.md
 - docs/improve-mode.md
 - docs/next-step-state-machine.md
+- runtime/execution-rules.md
 - docs/completion-verification.md
 - docs/zip-mode.md
 - docs/github-mode.md
