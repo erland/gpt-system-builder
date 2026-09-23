@@ -118,38 +118,38 @@ När ett target repository använder required remote CI som completion gate bör
 
 Completion-only-vägen ska minst verifiera file whitelist, state/schema consistency och kopplingen till verifierad revision. Om klassificeringen är osäker eller någon annan fil ändrats ska full-vägen användas.
 
-## 34. Stabil naming
+## 26. Stabil naming
 
 Workflow-, job- och checknamn ska vara stabila eftersom branch protection kan referera till dem.
 
-## 26. Runners
+## 27. Runners
 
 GitHub-hosted runner är rimlig default när kraven tillåter det. Self-hosted används bara när intern åtkomst, specialhårdvara eller policy kräver det.
 
-## 27. Generated files
+## 28. Generated files
 
 Om generated files medvetet versioneras ska CI kunna verifiera att regeneration inte skapar diff. Annars ska generated output normalt inte commit:as.
 
-## 28. CREATE / CHANGE / IMPROVE
+## 29. CREATE / CHANGE / IMPROVE
 
 CREATE etablerar CI tidigt när skeleton och verifieringskommandon finns. CHANGE uppdaterar CI om nya runtime/test/migration targets introduceras. IMPROVE får förbättra CI men inte sänka required verification utan explicit beslut.
 
-## 29. Release separation
+## 30. Release separation
 
 Release workflow definieras separat. PR-CI ska normalt inte skapa GitHub Release, deploya production eller bumpa releaseversion.
 
-## 30. Baseline workflow
+## 31. Baseline workflow
 
 En generell baseline innehåller explicit trigger, `contents: read`, checkout, explicit runtime setup, canonical verify command och timeout.
 
-## 31. Workflow validation
+## 32. Workflow validation
 
 Efter att CI skapas ska System Builder minst verifiera YAML parse, triggers, least-privilege permissions, expected commands och paths. När GitHub finns tillgängligt används verkligt workflow-resultat också som evidens.
 
-## 32. Anti-patterns
+## 33. Anti-patterns
 
 Undvik `permissions: write-all`, secrets i workflow YAML, `curl | sh` utan starkt skäl, duplicerad testlogik, release side effects i PR-CI, matrix explosion, osäkra path filters, flytande runtimes utan policy och completion trots röd required CI.
 
-## 33. Exit-kriterier för SB-23
+## 34. Exit-kriterier för SB-23
 
 SB-23 är klart när trigger-policy, required/optional checks, runtime/lockfile/caching, permissions/secrets/fork-regler, CI/local parity, failure/blocker-regler, CREATE/CHANGE/IMPROVE-regler samt baseline workflow template och validator finns.
