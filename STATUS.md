@@ -1,12 +1,14 @@
 # System Builder – Status
 
 ## Övergripande status
-**SB-50 IN PROGRESS – completion transition awaiting full CI**
+**READY_WITH_WARNINGS – SB-50 complete**
 
-## Aktuellt steg
+## Senast slutförda steg
 ### SB-50 – Separera verifierad implementation från completion transition
 
-Implementationen är gjord på work branch. Steget är avsiktligt inte markerat completed ännu: full required CI måste först PASS för implementation revisionen.
+SB-50 är genomförd.
+
+Full required CI PASS:ade för implementation revision `5e7956204c88aec19be13d4374d167a913ff5874`.
 
 Förändringen inför:
 
@@ -15,12 +17,13 @@ Förändringen inför:
 - ZIP-flödet full verifiering → completion transition → lightweight state validation → package,
 - resumable checkpoint när ZIP-läge saknar en extern required gate,
 - fallback till full verifiering om revision/evidence inte kan härledas säkert,
-- bakåtkompatibilitet med projekt skapade av äldre System Builder-versioner utan obligatorisk förhandsmigrering.
+- bakåtkompatibilitet med projekt skapade av äldre System Builder-versioner utan obligatorisk förhandsmigrering,
+- completion-aware CI som behåller ett stabilt required check men använder lightweight validation för strikt state-only completion.
 
 ## Release candidate
 
-Nuvarande version är fortsatt `1.0.0-rc.2`. SB-50 är en efterföljande förändring och releasebeslut tas först efter grön full CI.
+Nuvarande version är fortsatt `1.0.0-rc.2`.
 
 ## Nästa åtgärd
 
-Kör full projekt-CI för implementation revisionen. Vid PASS får SB-50 klarmarkeras genom en ren completion/status-ändring.
+Verifiera att denna completion-only commit går via lightweight completion validation. Vid PASS är PR #3 merge-klar.
