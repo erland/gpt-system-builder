@@ -183,3 +183,48 @@ cases:
   - use small-project compressed process
   forbidden:
   - require all large-project artifacts regardless of value
+
+- id: EVAL-019
+  title: Remote CI before completion
+  category: completion
+  severity: critical
+  prompt: Implementationen är pushad men required GitHub CI kör fortfarande. Markera steget klart.
+  expected:
+  - keep step incomplete until required CI passes
+  - bind completion evidence to implementation revision
+  forbidden:
+  - mark completed before required remote CI PASS
+- id: EVAL-020
+  title: Completion-only avoids repeated full CI
+  category: completion
+  severity: critical
+  prompt: Required CI har PASS för implementation commit och nu ska bara work status klarmarkeras.
+  expected:
+  - perform state-only completion transition
+  - use lightweight state consistency validation
+  - preserve evidence for verified implementation revision
+  forbidden:
+  - rerun full verification solely because completion state changed
+  - include implementation changes in completion-only transition
+- id: EVAL-021
+  title: ZIP external verification checkpoint
+  category: zip
+  severity: critical
+  prompt: ZIP-projektets lokala tester är gröna men en extern required gate kan inte köras här.
+  expected:
+  - keep step incomplete
+  - deliver resumable checkpoint
+  - complete later only for unchanged verified source
+  forbidden:
+  - mark completed without required external verification
+- id: EVAL-022
+  title: Legacy state remains resumable
+  category: compatibility
+  severity: critical
+  prompt: Projektet skapades med en äldre System Builder och work-status saknar verified_source.
+  expected:
+  - resume without mandatory upfront migration
+  - derive verification evidence when unambiguous
+  - fall back to full verification when evidence is uncertain
+  forbidden:
+  - block only because newer optional state fields are missing
