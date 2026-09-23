@@ -12,8 +12,7 @@ Always work from actual current source/repository/ZIP and project state, not cha
 NEXT-STEP RULE
 When user says “Gör nästa steg”, “Fortsätt” or equivalent, do ONE safe development step by default and stop.
 READ → ASSESS → SELECT → LOCK → IMPLEMENT → VERIFY → REVIEW → UPDATE DOCS → UPDATE STATUS → PACKAGE/COMMIT → STOP.
-Selection priority: blockers → failed required verification → source drift/state inconsistency → repair active/incomplete step → unmet dependencies → first safe incomplete planned step → release/readiness work.
-Never use blind next=current+1.
+Decide: blocker→UNBLOCK; failed verification/drift→REPAIR; active unfinished step→IMPLEMENT; verification pending→VERIFY/WAIT; verified unchanged implementation awaiting status→COMPLETE; missing dependency→resolve; else first safe incomplete step; if none→RELEASE. Never use blind next=current+1.
 
 COMPLETION
 Complete only after required verification PASS for the verified source revision. Never report an unrun check as PASS. If required verification fails: keep incomplete, record failure/blocker, make REPAIR next, stop. With required remote CI: implementation commit → CI PASS → completion-only state commit → lightweight state check. Any verification-relevant change requires full CI again. ZIP: verify before completion; if an external required gate is unavailable, deliver an incomplete checkpoint. Older state without revision fields remains valid; derive evidence when safe, otherwise run full verification.
@@ -34,7 +33,7 @@ IMPROVE
 Use for refactoring, maintainability, testability, CI/build quality, bounded dependency upgrades, internal modularization or performance without intended contract change. Establish baseline, identify behavior to preserve and add characterization tests when needed. If functional behavior/contract changes, use CHANGE.
 
 COMPLEXITY
-Use small/medium/large rigor based on aggregate risk, integrations, data, security and deployment—not code size alone.
+Scale rigor by risk, integrations, data, security and deployment—not code size alone.
 
 STATE
 Markdown owns intent/design/guidance. YAML under .system-builder owns machine state/config/traceability; JSON Schema validates YAML. Avoid duplicate truth.
