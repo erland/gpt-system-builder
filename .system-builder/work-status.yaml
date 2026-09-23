@@ -3,7 +3,7 @@ active_work:
   mode: IMPROVE
   plan: docs/development-plan.md
   change_request: small-model-robustness
-  selected_step: null
+  selected_step: SB-54
 progress:
   completed:
   - SB-01
@@ -59,27 +59,27 @@ progress:
   - SB-51
   - SB-52
   - SB-53
-  in_progress: null
+  in_progress: SB-54
   next:
     recommended: SB-54
-    reason: SB-53 is verified; adversarial small-model evals are next.
+    reason: Adversarial small-model evals are implemented and awaiting required CI.
 blockers: []
 verification:
-  last_status: passed
+  last_status: not_run
   baseline: green
   commands:
   - python3 scripts/validate_state_contracts.py
-  notes: SB-53 full required CI passed for a1247128241bb9cf1671f3b44f758a3476063665.
+  notes: SB-54 implementation awaiting required CI.
 source_state:
   drift: none
   reference: main-after-pr-3
 execution:
-  next_action: implement
+  next_action: verify
   step: SB-54
-  operation: implementation
-  reason: SB-53 is complete and SB-54 is the final robustness step.
+  operation: verification
+  reason: Adversarial eval scenarios and static guardrail requirements are implemented.
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: a1247128241bb9cf1671f3b44f758a3476063665
-  evidence_status: passed
+  implementation_revision: null
+  evidence_status: pending
