@@ -1,24 +1,20 @@
 # System Builder – Status
 
 ## Övergripande status
-**SB-53 IN PROGRESS – critical invariants first**
+**SB-53 COMPLETE – small-model robustness continues**
 
-## Aktuellt steg
+## Senast slutförda steg
 ### SB-53 – Lägg kritiska invariants först
 
-SB-53 är implementerad och väntar på required CI.
+SB-53 är verifierad med full required CI och completed.
 
-Canonical runtime och Custom GPT börjar nu med sex korta guardrails:
+Resultat:
 
-1. läs faktisk source/state först,
-2. gör exakt ett development step som default,
-3. blockerare och failed required verification går först,
-4. markera aldrig completed före required verification PASS,
-5. ändra aldrig implementation under completion-only,
-6. rapportera nästa rekommenderade action och stoppa.
-
-Custom GPT-instruktionen har samtidigt komprimerats till **7 641 tecken**, så invariants får plats med god marginal under 8 000-teckensgränsen.
+- sex kritiska invariants ligger tidigt i canonical runtime,
+- samma guardrails finns tidigt i Custom GPT,
+- Custom GPT ligger väl under 8 000-teckensgränsen,
+- runtime-contract kräver explicit invariant-sektion.
 
 ## Nästa åtgärd
 
-Kör required CI. Vid PASS kan SB-53 completed-markeras och nästa rekommenderade steg blir SB-54.
+**SB-54 – Adversarial small-model evals.**
