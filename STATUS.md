@@ -1,25 +1,26 @@
 # System Builder – Status
 
 ## Övergripande status
-**SB-54 IN PROGRESS – adversarial small-model evals**
+**READY_WITH_WARNINGS – SB-54 complete, release fix in progress**
 
-## Aktuellt steg
+## Senast slutförda steg
 ### SB-54 – Adversarial small-model evals
 
-SB-54 är implementerad och väntar på required CI.
+SB-54 är verifierad med full required CI för revision `44f84e1721b60a16c2899e81078029cd1a0b2367` och är completed.
 
-Eval-sviten har utökats från 22 till 29 fall och innehåller nu explicit konkurrerande signaler som enklare modeller lätt kan prioritera fel:
+Small-model robustness-serien SB-51–SB-54 är därmed genomförd.
 
-- CI pending kontra nästa plansteg,
-- CI PASS kontra att börja nästa steg,
-- legacy state utan nya hints,
-- failed active step kontra numeriskt nästa steg,
-- stale state som pekar på redan mergad PR,
-- completion-only som samtidigt försöker ändra source,
-- aktiv blockerare trots att nästa plansteg ser redo ut.
+## Release-fix
 
-Alla sju nya fall är critical. Static adherence kräver dessutom att runtimeprojektionerna bevarar de nya small-model guardrails.
+Releasebygget för `v1.2.0` stoppades korrekt av en föråldrad validator som fortfarande krävde exakt SB-49 och av versionsmetadata som fortfarande pekade på `1.0.0-rc.2`.
+
+Fixen:
+
+- gör release-candidate-valideringen generell mot aktuell `plan.total_steps`,
+- kräver komplett ordnad step- och SB-ID-historik,
+- synkar release candidate till `1.2.1`,
+- undviker att flytta eller återanvända den redan skapade `v1.2.0`-taggen.
 
 ## Nästa åtgärd
 
-Kör required CI. Vid PASS kan SB-54 completed-markeras och small-model robustness-serien betraktas som genomförd.
+Verifiera full CI för release-fixen. Vid PASS kan PR:n mergas och därefter ska nästa release taggas som `v1.2.1`.
