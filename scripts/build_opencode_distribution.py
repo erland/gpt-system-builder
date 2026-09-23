@@ -163,7 +163,8 @@ def main() -> int:
 
     with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED) as zf:
         zf.writestr("README.md", README)
-        zf.writestr("AGENTS.md", instruction_path.read_text(encoding="utf-8"))\n        zf.write(execution_rules, "runtime/execution-rules.md")
+        zf.writestr("AGENTS.md", instruction_path.read_text(encoding="utf-8"))
+        zf.write(execution_rules, "runtime/execution-rules.md")
         zf.writestr("opencode.json", json.dumps(config, indent=2) + "\n")
         zf.writestr(".opencode/runtime-contract.json", json.dumps(snapshot, indent=2) + "\n")
         zf.writestr(".opencode/tool-mapping.json", json.dumps(tool_mapping, indent=2) + "\n")
