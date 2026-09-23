@@ -1298,3 +1298,38 @@ Genomför final hygiene, full regression och release readiness efter migreringen
 - inga blockers återstår,
 - en ny reproducerbar release candidate kan byggas och publiceras.
 
+
+
+---
+
+# Fortsättningsplan – effektiv completion efter verifiering
+
+## SB-50 – Separera verifierad implementation från completion transition
+
+### Mål
+
+Undvik onödig full CI efter att ett utvecklingssteg redan har verifierats, utan att markera steget completed innan required verification har PASS.
+
+### Omfattning
+
+- definiera source-revision-bunden verification evidence,
+- definiera state-only completion transition,
+- GitHub: implementation commit → required full CI → completion-only commit → lightweight completion check,
+- ZIP: full required verification → completion transition → lightweight state validation → package,
+- extern ZIP-verifiering ska ge resumable incomplete checkpoint,
+- completion-only får aldrig innehålla verifieringsrelevant source,
+- required GitHub check ska fortfarande kunna bli grön på senaste committen,
+- äldre System Builder-projekt ska fungera utan obligatorisk förhandsmigrering.
+
+### Bakåtkompatibilitet
+
+Nya verification-revision-fält är optional. Äldre state ska accepteras och evidens härledas när sambandet är entydigt; annars används den äldre säkra fullverifieringsmodellen.
+
+### Klart när
+
+- canonical runtimeregler och ZIP/GitHub-flöden är uppdaterade,
+- completion-aware CI-mönster är dokumenterat,
+- optional verified-source state stöds,
+- Chat/Custom/Claude/OpenCode projicerar kärnbeteendet,
+- evals täcker completion, ZIP external gate och legacy state,
+- full projekt-CI passerar.
