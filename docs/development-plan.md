@@ -1333,3 +1333,92 @@ Nya verification-revision-fält är optional. Äldre state ska accepteras och ev
 - Chat/Custom/Claude/OpenCode projicerar kärnbeteendet,
 - evals täcker completion, ZIP external gate och legacy state,
 - full projekt-CI passerar.
+
+
+---
+
+# Fortsättningsplan – robusthet för enklare LLM-modeller
+
+## SB-51 – Gör work status handlingsorienterad
+
+### Mål
+
+Minska modellens behov av att återkonstruera nästa exekveringsbeslut från flera separata state-fält.
+
+### Leverans
+
+Utöka work-status-kontraktet bakåtkompatibelt med optional execution/completion-hints:
+
+- `execution.next_action`
+- `execution.step`
+- `execution.operation`
+- `completion.allowed`
+- `completion.waiting_for`
+- `completion.implementation_revision`
+
+Äldre work-status utan dessa fält ska fortsatt validera och kunna återupptas.
+
+### Klart när
+
+- schema stöder nya optional fält,
+- nytt exempel använder dem,
+- explicit legacy fixture utan fälten fortfarande validerar,
+- self work-status är synkat till faktisk projektstatus,
+- full CI passerar.
+
+## SB-52 – Inför deterministic execution decision table
+
+### Mål
+
+Göra SELECT/CONTINUE/REPAIR/COMPLETE mer mekaniskt för modeller med svagare flerledsresonemang.
+
+### Klart när
+
+- kort runtime execution reference finns,
+- blocker/failure/drift/active-step/dependency/next-step-beslut är uttryckliga IF/ELSE-regler,
+- GitHub och ZIP har tydliga action transitions,
+- canonical runtime kan nå regeln i ett hopp.
+
+## SB-53 – Lägg kritiska invariants först
+
+### Mål
+
+Placera de viktigaste guardrails tidigt och kortfattat i runtimeinstruktionen utan att skapa en ny sanningskälla.
+
+### Minst
+
+1. read actual source/state first,
+2. exactly one development step,
+3. blockers/failed verification first,
+4. no completion before required verification PASS,
+5. no implementation during completion-only,
+6. stop after reporting next action.
+
+### Klart när
+
+- invariants finns tidigt i canonical instruktion,
+- Custom GPT ryms fortsatt inom plattformsgränsen,
+- alla runtime projections behåller samma kärnbeteende.
+
+## SB-54 – Adversarial small-model evals
+
+### Mål
+
+Testa situationer där en enklare modell lätt gör ett nästan korrekt men workflow-mässigt felaktigt val.
+
+### Scenarier
+
+- CI pending,
+- CI PASS → completion only,
+- legacy state utan nya hints,
+- failed previous step vs numeriskt nästa steg,
+- merged PR i stale state,
+- completion-only med sourceändring,
+- blocker plus till synes redo nästa steg.
+
+### Klart när
+
+- evals fångar felaktiga transitions,
+- kritiska fall är markerade critical,
+- fyra aktiverade runtimes passerar static adherence/parity,
+- full regression passerar.
