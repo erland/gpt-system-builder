@@ -8,7 +8,7 @@ plan:
 progress:
   current_phase: small-model-robustness
   current_step: 53
-  last_completed_step: 52
+  last_completed_step: 53
   completed_steps:
   - 1
   - 2
@@ -62,6 +62,7 @@ progress:
   - 50
   - 51
   - 52
+  - 53
   completed_step_ids:
   - SB-01
   - SB-02
@@ -115,6 +116,7 @@ progress:
   - SB-50
   - SB-51
   - SB-52
+  - SB-53
   skipped_steps: []
   inserted_steps: []
 state:
@@ -122,9 +124,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: SB-53
-  title: Verifiera kritiska invariants
-  reason: SB-53 är implementerad och väntar på required CI.
+  recommended: SB-54
+  title: Lägg till adversarial small-model evals
+  reason: SB-53 är verifierad och completed; SB-54 är sista planerade robusthetssteget.
 resume:
   supported: true
   required_files:
