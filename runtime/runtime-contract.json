@@ -7,6 +7,7 @@
     "critical_behavior_location": "canonical_instruction",
     "knowledge_may_not_be_required_for_core_behavior": true,
     "required_markers": [
+      "## 0. Critical invariants",
       "## 3. One-step rule",
       "actual current source and repository/project state",
       "Never report an unrun check as PASS",

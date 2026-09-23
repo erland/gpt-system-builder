@@ -1,29 +1,25 @@
 # System Builder – Status
 
 ## Övergripande status
-**READY_WITH_WARNINGS – SB-50 complete**
+**SB-54 IN PROGRESS – adversarial small-model evals**
 
-## Senast slutförda steg
-### SB-50 – Separera verifierad implementation från completion transition
+## Aktuellt steg
+### SB-54 – Adversarial small-model evals
 
-SB-50 är genomförd.
+SB-54 är implementerad och väntar på required CI.
 
-Full required CI PASS:ade för implementation revision `5e7956204c88aec19be13d4374d167a913ff5874`.
+Eval-sviten har utökats från 22 till 29 fall och innehåller nu explicit konkurrerande signaler som enklare modeller lätt kan prioritera fel:
 
-Förändringen inför:
+- CI pending kontra nästa plansteg,
+- CI PASS kontra att börja nästa steg,
+- legacy state utan nya hints,
+- failed active step kontra numeriskt nästa steg,
+- stale state som pekar på redan mergad PR,
+- completion-only som samtidigt försöker ändra source,
+- aktiv blockerare trots att nästa plansteg ser redo ut.
 
-- verifierad source revision som optional completion evidence,
-- GitHub-flödet implementation commit → full CI → completion-only state commit → lightweight completion check,
-- ZIP-flödet full verifiering → completion transition → lightweight state validation → package,
-- resumable checkpoint när ZIP-läge saknar en extern required gate,
-- fallback till full verifiering om revision/evidence inte kan härledas säkert,
-- bakåtkompatibilitet med projekt skapade av äldre System Builder-versioner utan obligatorisk förhandsmigrering,
-- completion-aware CI som behåller ett stabilt required check men använder lightweight validation för strikt state-only completion.
-
-## Release candidate
-
-Nuvarande version är fortsatt `1.0.0-rc.2`.
+Alla sju nya fall är critical. Static adherence kräver dessutom att runtimeprojektionerna bevarar de nya small-model guardrails.
 
 ## Nästa åtgärd
 
-Verifiera att denna completion-only commit går via lightweight completion validation. Vid PASS är PR #3 merge-klar.
+Kör required CI. Vid PASS kan SB-54 completed-markeras och small-model robustness-serien betraktas som genomförd.

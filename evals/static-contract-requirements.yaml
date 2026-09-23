@@ -80,3 +80,15 @@ requirements:
     - older state
   - - full verification
     - fall back
+
+- id: REQ-SMALL-MODEL-INVARIANTS
+  severity: critical
+  groups:
+  - - critical invariants
+    - always
+  - - blockers and failed required verification come first
+    - failed verification/drift→repair
+  - - never change implementation during a completion-only transition
+    - never change implementation during completion-only
+  - - report the next recommended action and stop
+    - next recommended action, then stop

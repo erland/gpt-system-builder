@@ -2,7 +2,7 @@
 from pathlib import Path
 import argparse, zipfile, yaml, sys
 FILES=[
-"runtime/canonical-instructions.md","runtime/runtime-manifest.yaml",
+"runtime/canonical-instructions.md","runtime/runtime-manifest.yaml","runtime/execution-rules.md",
 "docs/create-mode.md","docs/change-mode.md","docs/improve-mode.md","docs/next-step-state-machine.md","docs/completion-verification.md",
 "docs/zip-mode.md","docs/github-mode.md","docs/release-readiness-standard.md",
 "docs/functional-specification-standard.md","docs/architecture-standard.md","docs/decision-records-standard.md",

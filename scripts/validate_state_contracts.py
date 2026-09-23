@@ -5,6 +5,7 @@ ROOT=Path(__file__).resolve().parents[1]
 CASES=[
  ('schemas/project.schema.json','examples/project.example.yaml',0),
  ('schemas/work-status.schema.json','examples/work-status.example.yaml',0),
+ ('schemas/work-status.schema.json','tests/legacy-work-status-v1.yaml',0),
  ('schemas/project.schema.json','tests/invalid-project.yaml',1),
  ('schemas/work-status.schema.json','tests/invalid-work-status.yaml',1),
 ]

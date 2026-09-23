@@ -41,6 +41,8 @@ Normal körning ska sluta efter exakt ett completed development step.
 
 ## 3. Prioritetsregel
 
+För den korta first-hop decision procedure som särskilt ska minska flerledsresonemang, se `runtime/execution-rules.md`.
+
 Nästa åtgärd bestäms av faktisk projektstatus.
 
 Prioritetsordning:

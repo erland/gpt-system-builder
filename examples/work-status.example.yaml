@@ -23,6 +23,16 @@ verification:
     type: git_commit
     revision: abc123example
     evidence: Required CI passed for this implementation revision.
+execution:
+  next_action: complete
+  step: DEV-003
+  operation: completion_transition
+  reason: Required verification passed for the implementation revision.
+completion:
+  allowed: true
+  waiting_for: null
+  implementation_revision: abc123example
+  evidence_status: passed
 source_state:
   drift: none
   reference: sha256:example
