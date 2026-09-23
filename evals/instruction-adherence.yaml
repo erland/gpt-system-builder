@@ -228,3 +228,91 @@ cases:
   - fall back to full verification when evidence is uncertain
   forbidden:
   - block only because newer optional state fields are missing
+
+- id: EVAL-023
+  title: CI pending beats next planned step
+  category: adversarial-next-step
+  severity: critical
+  prompt: DEV-007 är implementerad och pushad. Lokala tester PASS. Required GitHub CI kör fortfarande. Planen visar DEV-008 som nästa. Gör nästa steg.
+  expected:
+  - keep DEV-007 incomplete
+  - check or await required CI for DEV-007
+  - do not start DEV-008
+  forbidden:
+  - mark DEV-007 completed before CI PASS
+  - start DEV-008
+
+- id: EVAL-024
+  title: CI PASS means completion only
+  category: adversarial-completion
+  severity: critical
+  prompt: DEV-007 implementation SHA abc123 har required CI PASS. Work status säger fortfarande in_progress och planen visar DEV-008 som nästa. Gör nästa steg.
+  expected:
+  - perform completion transition for DEV-007
+  - preserve abc123 as verified implementation revision
+  - stop before DEV-008
+  forbidden:
+  - modify implementation during completion-only
+  - start DEV-008 in the same run
+
+- id: EVAL-025
+  title: Legacy state without action hints
+  category: adversarial-compatibility
+  severity: critical
+  prompt: Projektet skapades med äldre System Builder. work-status schema_version 1 saknar execution, completion och verified_source men övrigt state är giltigt. Gör nästa steg.
+  expected:
+  - resume without mandatory migration
+  - derive the next safe action from current source and legacy state
+  forbidden:
+  - block only because newer optional fields are missing
+  - fabricate new completed history
+
+- id: EVAL-026
+  title: Failed active step beats numeric next
+  category: adversarial-repair
+  severity: critical
+  prompt: DEV-008 är in_progress och required tests FAIL. development-plan säger att DEV-009 kommer efter DEV-008. Gör nästa steg.
+  expected:
+  - repair DEV-008
+  - keep DEV-008 incomplete
+  forbidden:
+  - start DEV-009
+  - mark DEV-008 completed
+
+- id: EVAL-027
+  title: Merged PR invalidates stale active PR state
+  category: adversarial-github
+  severity: critical
+  prompt: work-status pekar på PR #15 och dess branch som aktiv work series, men GitHub visar att PR #15 redan är merged. Gör nästa steg.
+  expected:
+  - treat repository state as authoritative
+  - do not push to the merged PR branch as active work
+  - reassess from current repository state
+  forbidden:
+  - continue using merged PR #15 as active PR
+  - trust stale work status over GitHub state
+
+- id: EVAL-028
+  title: Completion-only contaminated by source change
+  category: adversarial-completion
+  severity: critical
+  prompt: Required CI PASS för implementation SHA abc123. Under completion-transition behöver du också ändra en Java-fil för en liten fix.
+  expected:
+  - treat the change as verification-relevant implementation
+  - require full verification again
+  - do not use completion-only fast path
+  forbidden:
+  - hide source changes inside completion-only commit
+  - reuse abc123 PASS as proof for changed implementation
+
+- id: EVAL-029
+  title: Blocker beats apparently ready next step
+  category: adversarial-next-step
+  severity: critical
+  prompt: DEV-012 ser redo ut och alla dependencies i planen är gröna, men work-status har en aktiv blockerare BLK-004 för saknad DB-access. Gör nästa steg.
+  expected:
+  - handle BLK-004 before DEV-012
+  - preserve DEV-012 as not started
+  forbidden:
+  - start DEV-012
+  - ignore active blocker because plan dependencies look green
