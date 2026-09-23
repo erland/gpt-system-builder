@@ -181,7 +181,7 @@ distributions:
     builder: scripts/build_custom_gpt_distribution.py
     validator: scripts/validate_custom_gpt_distribution.py
     instruction_character_limit: 8000
-    instruction_characters: 7979
+    instruction_characters: 8000
     knowledge_file_count: 7
     status: implemented
     source_dir: runtime/custom-gpt-source
