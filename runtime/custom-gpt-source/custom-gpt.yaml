@@ -4,7 +4,7 @@ description: Expert GPT for creating, changing, improving, testing, packaging, d
 distribution: custom_gpt
 version: 0.1.0-dev
 instructions_file: instructions.txt
-instruction_characters: 8000
+instruction_characters: 7641
 knowledge_files:
 - 01-modes-and-workflow.md
 - 02-spec-architecture-plan.md
