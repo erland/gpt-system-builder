@@ -63,3 +63,20 @@ requirements:
   - - create
   - - change
   - - improve
+
+- id: REQ-COMPLETION-TRANSITION
+  severity: critical
+  groups:
+  - - completion-only
+    - completion transition
+  - - lightweight
+  - - implementation commit
+    - source revision
+- id: REQ-LEGACY-STATE
+  severity: critical
+  groups:
+  - - older system builder
+    - older project
+    - older state
+  - - full verification
+    - fall back
