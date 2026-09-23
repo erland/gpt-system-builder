@@ -7,7 +7,7 @@ plan:
   total_steps: 54
 progress:
   current_phase: small-model-robustness
-  current_step: 52
+  current_step: 53
   last_completed_step: 52
   completed_steps:
   - 1
@@ -123,8 +123,8 @@ state:
   warnings: []
 next_step:
   recommended: SB-53
-  title: Lägg kritiska invariants först
-  reason: SB-52 är verifierad och completed; SB-53 är nästa planerade robusthetssteg.
+  title: Verifiera kritiska invariants
+  reason: SB-53 är implementerad och väntar på required CI.
 resume:
   supported: true
   required_files:
