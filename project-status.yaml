@@ -154,8 +154,8 @@ state:
   warnings: []
 next_step:
   recommended: release
-  title: Final reconciliation för README/version-serien
-  reason: SB-61–SB-63 är verifierade och completed; nästa åtgärd är final documentation reconciliation före release readiness.
+  title: Release readiness för README/version-serien
+  reason: Final documentation reconciliation är genomförd och verifierad utan kvarvarande mismatch; nästa åtgärd är release readiness.
 resume:
   supported: true
   required_files:
@@ -164,6 +164,7 @@ resume:
   - docs/development-plan.md
   - docs/changes/documentation-reconciliation-and-zip-verification/reconciliation.md
   - docs/changes/github-pages-static-pwa/reconciliation.md
+  - docs/changes/readme-release-version-contract/reconciliation.md
   - docs/canonical-scope.md
   - docs/end-to-end-process.md
   - docs/project-complexity.md
