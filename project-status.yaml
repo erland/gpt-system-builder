@@ -6,9 +6,9 @@ plan:
   path: docs/development-plan.md
   total_steps: 60
 progress:
-  current_phase: change
+  current_phase: release
   current_step: 60
-  last_completed_step: 59
+  last_completed_step: 60
   completed_steps:
   - 1
   - 2
@@ -69,6 +69,7 @@ progress:
   - 57
   - 58
   - 59
+  - 60
   completed_step_ids:
   - SB-01
   - SB-02
@@ -129,6 +130,7 @@ progress:
   - SB-57
   - SB-58
   - SB-59
+  - SB-60
   skipped_steps: []
   inserted_steps:
   - 55
@@ -142,9 +144,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: 60
-  title: GitHub Pages workflow och regression coverage
-  reason: SB-59 är verifierad och completed; nästa steg är Pages Actions-workflow och regressionsskydd.
+  recommended: release
+  title: Final reconciliation för GitHub Pages-serien
+  reason: SB-58–SB-60 är verifierade och completed; nästa åtgärd är final documentation reconciliation före release readiness.
 resume:
   supported: true
   required_files:
