@@ -38,6 +38,7 @@ $PYTHON scripts/validate_operational_docs.py configuration examples/configuratio
 $PYTHON scripts/validate_operational_docs.py installation examples/installation.example.md
 $PYTHON scripts/validate_operational_docs.py operations examples/operations.example.md
 $PYTHON scripts/validate_release_readiness.py examples/release-readiness.example.md
+$PYTHON scripts/validate_readme_current_state.py
 $PYTHON scripts/validate_knowledge_architecture.py .
 $PYTHON scripts/validate_runtime_instruction.py .
 $PYTHON scripts/validate_runtime_contract.py
@@ -69,6 +70,7 @@ $PYTHON scripts/run_e2e_small_create_eval.py --scenario-root evals/e2e/small-cre
 $PYTHON scripts/run_e2e_existing_change_eval.py --scenario-root evals/e2e/existing-system-change
 $PYTHON scripts/run_e2e_docker_coolify_eval.py --scenario-root evals/e2e/docker-coolify
 $PYTHON scripts/run_e2e_documentation_zip_policy_eval.py --scenario evals/e2e/documentation-zip-policy/scenario.yaml
+$PYTHON scripts/run_e2e_readme_release_version_policy.py --scenario evals/e2e/readme-release-version-policy/scenario.yaml
 
 echo "== Clean generated CI artifacts before hygiene =="
 rm -rf "$DIST_DIR"

@@ -431,3 +431,42 @@ cases:
   - hardcode root-only asset paths
   - assume server-side rewrites
 
+- id: EVAL-039
+  title: Stale README blocks reconciliation
+  category: documentation-reconciliation
+  severity: critical
+  prompt: Alla implementation steps är klara men README beskriver fortfarande den gamla deploymentmodellen och ett borttaget huvudflöde.
+  expected:
+  - classify README as a documentation mismatch
+  - update README or its canonical links before release readiness
+  - keep detailed canonical docs as the source of detail
+  forbidden:
+  - enter release readiness with materially stale README
+  - duplicate full functional specification into README
+
+- id: EVAL-040
+  title: Release tag derives artifact version
+  category: release-versioning
+  severity: critical
+  prompt: GitHub Release triggas av taggen v2.3.0 och bygger my-app ZIP-artefakter.
+  expected:
+  - derive release version 2.3.0 from tag v2.3.0
+  - use the same version for artifact names and release metadata
+  - avoid an independent hardcoded release version
+  forbidden:
+  - publish artifacts with an unrelated hardcoded version
+  - maintain two unsynchronized canonical release versions
+
+- id: EVAL-041
+  title: Ecosystem version file needs explicit ownership
+  category: release-versioning
+  severity: critical
+  prompt: Projektet har package.json version 2.2.0 men release-taggen är v2.3.0.
+  expected:
+  - detect the version mismatch
+  - use the explicit version ownership contract to decide which source governs
+  - synchronize or validate the secondary source before release
+  forbidden:
+  - ignore the mismatch and release anyway
+  - silently treat both versions as independently canonical
+

@@ -302,6 +302,8 @@ Before release readiness, perform final documentation reconciliation between act
 - documentation is stale after an explicit accepted decision → update documentation,
 - genuine product/architecture decision is unresolved → ask the user before proceeding.
 
+If `README.md` exists, treat it as the project's current-state entrypoint and verify it still represents the current implemented system. A materially stale README is a documentation mismatch and must be fixed before release readiness. Correct stale purpose/capability/build/run/runtime/deployment/version/link claims without duplicating canonical docs.
+
 Historical change records explain why/how the change happened.
 
 ## 14. IMPROVE
@@ -542,7 +544,7 @@ Canonical status:
 
 All required gates must PASS for READY/READY_WITH_WARNINGS.
 
-Artifact release and production deployment may have different readiness states.
+Artifact release and production deployment may have different readiness states. For tag-triggered releases, derive artifact version from the release tag unless an explicit alternative canonical version contract exists. If package.json, pom.xml, Gradle metadata or another ecosystem version file also carries version, define ownership and validate/synchronize it; never maintain independent unsynchronized release versions.
 
 Canonical standard: `docs/release-readiness-standard.md`.
 

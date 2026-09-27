@@ -23,6 +23,14 @@ Release readiness must not silently decide whether code or documentation is corr
 
 An unresolved release-relevant mismatch blocks entry into release readiness.
 
+### README reconciliation
+
+When a repository has `README.md`, final documentation reconciliation shall verify that it still represents the current implemented system at an appropriate overview level.
+
+README should normally be the project entrypoint and may summarize or link to canonical functional, architecture, installation, configuration, operations and deployment documentation. It does not need to duplicate those documents.
+
+A materially stale README is a documentation mismatch and must be resolved before release readiness. Typical stale signals include obsolete project status/version claims, removed/renamed capabilities, outdated build/run instructions, wrong runtime/deployment model, or links to superseded documentation.
+
 ## 3. Release readiness-domäner
 
 System Builder ska bedöma minst följande när relevanta:
@@ -334,6 +342,44 @@ Version ska följa projektets releasepolicy.
 System Builder ska inte bumpa version mekaniskt per DEV-step.
 
 Releaseversion sätts vid faktisk release/readiness.
+
+### Canonical versionskälla för taggbaserad release
+
+När ett projekt publicerar releaseartefakter från en Git-tag ska release-taggen vara canonical versionskälla för artefaktversionen, om projektet inte uttryckligen definierar ett annat versionskontrakt.
+
+Exempel:
+
+`v2.3.0 → 2.3.0 → my-app-2.3.0.zip`
+
+Workflow/build script ska härleda artifactversionen från taggen och inte underhålla ett separat hårdkodat releaseversionsnummer.
+
+Om ekosystemet kräver en versionsfil, exempelvis `package.json`, Maven `pom.xml`, Gradle metadata eller annan manifestfil, ska System Builder uttryckligen definiera ownership:
+
+- taggen äger releaseversionen och ecosystemfilen synkas/valideras mot taggen vid release, eller
+- ecosystemfilen äger versionen och release-taggen valideras mot den.
+
+Två oberoende versionssanningar utan synk/validation är inte tillåtna.
+
+En mismatch mellan tagg, artifactnamn, release metadata och eventuell ecosystemversion är release-blocking tills den är löst.
+
+### Canonical versionskälla för taggbaserad release
+
+När ett projekt publicerar releaseartefakter från en Git-tag ska release-taggen vara canonical versionskälla för artefaktversionen, om projektet inte uttryckligen definierar ett annat versionskontrakt.
+
+Exempel:
+
+`v2.3.0 → 2.3.0 → my-app-2.3.0.zip`
+
+Workflow/build script ska härleda artifactversionen från taggen och inte underhålla ett separat hårdkodat releaseversionsnummer.
+
+Om ekosystemet kräver en versionsfil, exempelvis `package.json`, Maven `pom.xml`, Gradle metadata eller annan manifestfil, ska System Builder uttryckligen definiera ownership:
+
+- **tag owns release version** och ecosystemfilen synkas/valideras mot taggen vid release, eller
+- **ecosystemfil owns version** och release-taggen valideras mot den.
+
+Två oberoende versionssanningar utan synk/validation är inte tillåtna.
+
+En mismatch mellan tagg, artifactnamn, release metadata och eventuell ecosystemversion är release-blocking tills den är resolved.
 
 ## 36. Release notes
 

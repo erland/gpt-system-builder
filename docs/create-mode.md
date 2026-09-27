@@ -476,3 +476,12 @@ CREATE är klart för aktuell release när:
 - installation/drift är dokumenterade,
 - releaseartefakt kan byggas reproducerbart,
 - nästa framtida change kan starta från repository state utan chat history.
+
+
+## README som entrypoint
+
+För repository-baserade system ska CREATE normalt skapa eller underhålla `README.md` som en kort current-state entrypoint.
+
+README ska på lämplig detaljnivå beskriva systemets syfte, hur det byggs/körs, viktiga prerequisites och länkar till relevant canonical dokumentation. Den ska inte duplicera hela functional specification, architecture eller operations documentation.
+
+Före release readiness ska README reconcileras mot faktisk implementation och övriga current-state-dokument.

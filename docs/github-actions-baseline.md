@@ -166,3 +166,18 @@ Undvik `permissions: write-all`, secrets i workflow YAML, `curl | sh` utan stark
 ## 34. Exit-kriterier för SB-23
 
 SB-23 är klart när trigger-policy, required/optional checks, runtime/lockfile/caching, permissions/secrets/fork-regler, CI/local parity, failure/blocker-regler, CREATE/CHANGE/IMPROVE-regler samt baseline workflow template och validator finns.
+
+
+## Tag-derived release version
+
+För GitHub-baserade release-workflows som triggas av release-tag ska workflowet normalt:
+
+1. läsa den faktiska taggen från GitHub eventet,
+2. validera taggformatet,
+3. härleda releaseversionen från taggen,
+4. använda samma version för artifactnamn, image tags och release metadata,
+5. validera eventuell ecosystem-version mot taggen när sådan finns.
+
+Workflowet ska inte ha ett separat hårdkodat releaseversionsnummer.
+
+Om projektet i stället har ett explicit canonical versionskontrakt där exempelvis `package.json` eller `pom.xml` äger versionen, ska release-taggen valideras mot den källan innan publicering.

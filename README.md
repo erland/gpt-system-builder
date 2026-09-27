@@ -1,39 +1,47 @@
 # System Builder
 
-System Builder är ett GPT-projekt för stegvis systemutveckling från behov eller förändringsönskemål till ett fungerande, verifierat, dokumenterat och paketerat system.
+System Builder är ett GPT-projekt för stegvis systemutveckling från behov eller förändringsönskemål till ett fungerande, verifierat, dokumenterat, paketerat och releaseklart system.
 
-Projektet stödjer nya system och vidareutveckling av befintliga system samt arbetar i ZIP- och GitHub-läge.
+Projektet stödjer CREATE, CHANGE och IMPROVE och arbetar i både ZIP- och GitHub-läge.
 
 ## Projektstatus
 
-Primär maskinläsbar status finns i `project-status.yaml`. Mänskligt läsbar status finns i `STATUS.md`.
+Maskinläsbar status finns i `project-status.yaml`. Mänskligt läsbar status finns i `STATUS.md`.
 
-## Utvecklingsplan
+Utvecklingsplan: `docs/development-plan.md`.
 
-Se `docs/development-plan.md`.
+## Runtime-distributioner
 
-## Aktuellt läge
+Fyra aktiva runtime-distributioner byggs från samma canonical kontrakt:
 
-SB-01–SB-49 är genomförda. **SB-50** implementerar en completion transition som undviker onödig full CI efter ren statusändring, med bakåtkompatibilitet för äldre System Builder-projekt. SB-50 väntar på full required CI innan steget får klarmarkeras.
+- **Chat ZIP**
+- **Custom GPT**
+- **Claude Projects** – explicit reduced parity
+- **OpenCode**
 
-Nuvarande version är fortsatt **1.0.0-rc.2** tills nästa releasebeslut tas.
+OpenAI Plugin v1 är bedömd men inte aktiverad eftersom kritiska workspace/state- och repository-flöden inte når tillräcklig parity.
 
-## Runtime-målbild
+## Centrala arbetssätt
 
-Fyra runtime-distributioner byggs från samma canonical kontrakt:
+System Builder:
 
-- **Chat ZIP** – full chat-distribution.
-- **Custom GPT** – motsvarande beteende inom Custom GPT-plattformens begränsningar.
-- **Claude Projects** – reduced parity; canonical behavior bevaras men lokal exekvering, workspace-mutation och GitHub-write kan inte antas.
-- **OpenCode** – peer runtime med root `AGENTS.md`, explicit `projectRoot`, runtime-contract snapshot och approval för muterande operationer.
+- använder faktisk source/state före chat memory,
+- genomför normalt ett verifierbart utvecklingssteg per körning,
+- skiljer governing intent från implementation progress,
+- gör final documentation reconciliation före release readiness,
+- verifierar tekniskt möjliga gates automatiskt även i ZIP-läge,
+- stödjer Docker, Coolify, generiska containerplattformar, Kubernetes och GitHub Pages för lämpliga statiska appar/PWA,
+- bygger och validerar alla aktiva runtime-distributioner från canonical source.
 
-OpenAI Plugin v1 är bedömd men inte aktiverad eftersom System Builders kritiska workspace/state- och repository-tool-flöden inte når tillräcklig parity i den modellen.
+## GitHub Pages
 
-Se `docs/gpt-builder-1.4-runtime-migration.md` för migrationsanalysen.
+För publika statiska browser-only appar utan backend/server-side secrets kan System Builder använda profilen `github-pages-static-pwa`.
+
+Profilen omfattar bland annat repository-subpath/public base, Vite/PWA paths, service-worker scope, routingstrategi samt separat Pages-deployment från vanlig PR-CI.
+
+Se `docs/github-pages-profile.md`.
 
 ## Build och verifiering
-
-`runtime/distribution-registry.yaml` är det gemensamma registret för aktiverade runtimes.
 
 Lokal full CI:
 
@@ -48,9 +56,23 @@ python3 scripts/build_all_distributions.py --output-dir dist --version dev
 python3 scripts/validate_all_distributions.py --manifest dist/distribution-build-manifest.json
 ```
 
+## Dokumentation
+
+README är projektets översikt. Detaljer finns i canonical dokumentation, bland annat:
+
+- `docs/canonical-scope.md`
+- `docs/architecture-standard.md`
+- `docs/functional-specification-standard.md`
+- `docs/deployment-packaging-patterns.md`
+- `docs/configuration-installation-operations-standard.md`
+- `docs/release-readiness-standard.md`
+- `docs/readme-current-state-standard.md`
+
 ## Release
 
-Git-taggen styr versionsnumret. Aktuell kandidat är `v1.0.0-rc.2`. Releasebygget kör full CI, bygger och validerar alla fyra runtime-distributionerna, kör instruction adherence och runtime parity och skapar checksummor samt release metadata.
+Git-taggen är canonical versionskälla för System Builders releaseartefakter. Exempelvis ger taggen `v1.3.0` artifactversion `1.3.0`.
+
+Release-workflowet kör full CI, bygger och validerar alla fyra runtime-distributionerna, kör instruction-adherence/runtime-parity och skapar checksummor samt release metadata.
 
 En release innehåller:
 
@@ -62,4 +84,4 @@ En release innehåller:
 - `release-metadata.yaml`
 - `distribution-build-manifest.json`
 
-Dessutom byggs en komplett projekt-ZIP efter genomförda utvecklingssteg när ZIP-leverans används.
+Aktuell canonical version finns i `VERSION`.

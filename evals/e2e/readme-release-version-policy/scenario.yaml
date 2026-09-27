@@ -1,0 +1,62 @@
+schema_version: 1
+suite: readme-release-version-policy
+cases:
+  - id: stale-readme
+    input:
+      readme_present: true
+      readme_matches_current_state: false
+      release_tag: v2.3.0
+      version_owner: tag
+      secondary_version: null
+    expected:
+      reconciliation: fail
+      action: update_readme
+      release_ready: false
+
+  - id: current-readme
+    input:
+      readme_present: true
+      readme_matches_current_state: true
+      release_tag: v2.3.0
+      version_owner: tag
+      secondary_version: null
+    expected:
+      reconciliation: pass
+      action: none
+      release_ready: true
+
+  - id: tag-owned-version
+    input:
+      readme_present: true
+      readme_matches_current_state: true
+      release_tag: v2.3.0
+      version_owner: tag
+      secondary_version: 2.3.0
+    expected:
+      artifact_version: 2.3.0
+      version_consistent: true
+      release_ready: true
+
+  - id: tag-owned-version-mismatch
+    input:
+      readme_present: true
+      readme_matches_current_state: true
+      release_tag: v2.3.0
+      version_owner: tag
+      secondary_version: 2.2.0
+    expected:
+      artifact_version: 2.3.0
+      version_consistent: false
+      release_ready: false
+
+  - id: ecosystem-owned-version
+    input:
+      readme_present: true
+      readme_matches_current_state: true
+      release_tag: v2.3.0
+      version_owner: ecosystem
+      secondary_version: 2.3.0
+    expected:
+      artifact_version: 2.3.0
+      version_consistent: true
+      release_ready: true
