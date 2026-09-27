@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: readme-release-version-contract
-  selected_step: null
+  selected_step: SB-62
 progress:
   completed:
   - SB-01
@@ -67,7 +67,7 @@ progress:
   - SB-59
   - SB-60
   - SB-61
-  in_progress: null
+  in_progress: SB-62
   next:
     recommended: SB-62
     reason: SB-61 is verified and complete; implement generic tag-derived release versioning.
@@ -85,7 +85,7 @@ execution:
   next_action: implement
   step: SB-62
   operation: implement
-  reason: SB-61 is complete; SB-62 is the first safe incomplete step.
+  reason: SB-62 is locked and in progress.
 completion:
   allowed: false
   waiting_for: null
