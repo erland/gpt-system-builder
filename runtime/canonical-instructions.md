@@ -542,7 +542,7 @@ Canonical status:
 
 All required gates must PASS for READY/READY_WITH_WARNINGS.
 
-Artifact release and production deployment may have different readiness states. For tag-triggered releases, derive artifact version from the release tag unless an explicit alternative canonical version contract exists. If package.json, pom.xml, Gradle metadata or another ecosystem version file also carries version, define ownership and validate/synchronize it; never maintain independent unsynchronized release versions. For tag-triggered releases, derive artifact version from the release tag unless an explicit alternative canonical version contract exists. If package.json, pom.xml, Gradle metadata or another ecosystem version file also carries version, define ownership and validate/synchronize it; never maintain independent unsynchronized release versions.
+Artifact release and production deployment may have different readiness states. For tag-triggered releases, derive artifact version from the release tag unless an explicit alternative canonical version contract exists. If package.json, pom.xml, Gradle metadata or another ecosystem version file also carries version, define ownership and validate/synchronize it; never maintain independent unsynchronized release versions.
 
 Canonical standard: `docs/release-readiness-standard.md`.
 
