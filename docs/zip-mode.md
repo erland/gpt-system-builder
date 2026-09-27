@@ -10,7 +10,7 @@ Målet är att varje levererad ZIP ska vara tillräckligt komplett för att arbe
 
 ## 2. Grundprincip
 
-> ZIP in → analysera faktisk source → genomför exakt ett säkert steg → verifiera → bygg komplett ny ZIP → stoppa.
+> ZIP in → analysera faktisk source → genomför exakt ett säkert steg → verifiera så långt runtime tekniskt kan → bygg komplett ny ZIP → stoppa.
 
 System Builder ska inte arbeta från gamla extraherade filer om användaren har laddat upp en nyare ZIP.
 
@@ -161,7 +161,7 @@ RECEIVE ZIP
 → SELECT ONE STEP
 → LOCK
 → IMPLEMENT
-→ FULL REQUIRED VERIFY
+→ BEST-EFFORT REQUIRED VERIFY
 → REVIEW
 → COMPLETION TRANSITION
 → LIGHTWEIGHT STATE VALIDATION
@@ -329,6 +329,39 @@ Vid CREATE kan första implementationsteget skapa hela projektstrukturen från c
 
 Efter första implementationsteget ska projektet levereras som komplett ZIP och därefter fortsätta som normalt ZIP-resume.
 
+## 25A. Best-effort automatic verification
+
+ZIP-läge ska vara självgående i verifieringen. System Builder ska först försöka utföra varje required verification gate med de verktyg och den runtime som faktiskt finns tillgängliga.
+
+Typiskt automatiserbart när miljön medger det:
+- build/compile,
+- lint/typecheck,
+- unit tests,
+- integration/API tests,
+- schema/contract validators,
+- packaging/artifact checks,
+- static analysis,
+- container build/startup/health när relevant tooling finns.
+
+GitHub Actions är inte i sig en unik verifieringsgate. Om CI endast orkestrerar canonical verifieringskommandon som kan köras lokalt i ZIP-runtime ska System Builder köra motsvarande kommandon och använda resultatet som verifieringsevidens.
+
+System Builder ska inte kräva manuell verifiering enbart därför att:
+- GitHub/CI inte är tillgängligt,
+- verifieringen normalt brukar köras i CI,
+- chatten arbetar från ZIP i stället för repository.
+
+Manuell eller extern verifiering får lämnas pending endast när kontrollen genuint kräver något som aktuell runtime inte kan ersätta, exempelvis:
+- otillgänglig extern miljö eller tjänst,
+- credentials/secrets som inte får eller kan användas,
+- fysisk hårdvara,
+- produktion/live-deployment som uttryckligen är required,
+- mänsklig acceptans/UX-bedömning som verkligen är en required gate.
+
+Verifieringsrapporten ska skilja tydligt mellan:
+- automatiskt verifierat PASS/FAIL,
+- ej tillämpligt,
+- genuint externt/manuellt pending.
+
 ## 26. Validation scripts
 
 När projektet innehåller scripts för:
@@ -392,7 +425,9 @@ Full diff behöver inte återges i chatten.
 
 ## 32. External verification gate
 
-Om projektets required verification innehåller en extern gate som inte kan köras från ZIP-runtime ska steget förbli incomplete. Leverera ett resumable checkpoint med source och state som väntar på verifiering.
+En gate får behandlas som extern först efter att System Builder bedömt att ingen tekniskt likvärdig kontroll kan köras i aktuell ZIP-runtime.
+
+Om en required gate därefter fortfarande genuint kräver en otillgänglig extern eller mänsklig kontroll ska steget förbli incomplete. Leverera ett resumable checkpoint med source och state som väntar på just den återstående verifieringen. Redovisa samtidigt vilka andra gates som faktiskt PASS/FAIL-verifierades automatiskt.
 
 När användaren senare återkommer med giltig extern evidence för exakt samma source revision/fingerprint får System Builder genomföra completion transition och lightweight state validation utan att köra om full verifiering enbart för statusändringen.
 
