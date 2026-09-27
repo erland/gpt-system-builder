@@ -56,6 +56,7 @@ canonical:
   repository_hygiene: docs/repository-hygiene.md
   github_actions_baseline: docs/github-actions-baseline.md
   deployment_packaging_patterns: docs/deployment-packaging-patterns.md
+  github_pages_profile: docs/github-pages-profile.md
   docker_baseline: docs/docker-baseline.md
   coolify_profile: docs/coolify-profile.md
   operational_documentation_standard: docs/configuration-installation-operations-standard.md
@@ -181,7 +182,7 @@ distributions:
     builder: scripts/build_custom_gpt_distribution.py
     validator: scripts/validate_custom_gpt_distribution.py
     instruction_character_limit: 8000
-    instruction_characters: 7947
+    instruction_characters: 8075
     knowledge_file_count: 7
     status: implemented
     source_dir: runtime/custom-gpt-source
