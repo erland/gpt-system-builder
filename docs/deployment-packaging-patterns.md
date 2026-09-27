@@ -12,6 +12,7 @@ System Builder ska välja den enklaste deployment- och packagingform som uppfyll
 4. **Coolify + external PostgreSQL** – app som Docker/OCI image, separat DB, Coolify äger normalt reverse proxy/TLS och environment/secrets.
 5. **generic container platform** – image, port, health, persistence och external services uttrycks plattformsneutralt.
 6. **basic Kubernetes** – Deployment, Service, config/secrets, readiness/liveness, resources och optional Ingress när Kubernetes faktiskt krävs.
+7. **GitHub Pages static PWA** – statisk publik webbapp/PWA utan backend eller server-side secrets, publicerad från GitHub.
 
 ## Packaging contract
 
@@ -67,6 +68,21 @@ För `coolify-external-postgresql` gäller:
 - secrets och runtime config sätts i plattformen,
 - health endpoint konfigureras,
 - persistent volume används bara vid verkligt filpersistensbehov.
+
+## GitHub Pages static PWA
+
+För `github-pages-static-pwa` gäller:
+
+- output är en statisk site bundle,
+- ingen backend/server-side runtime krävs,
+- inga secrets får behöva finnas i klientbundle,
+- publik exponering måste vara förenlig med informationsklassning,
+- public base path måste hanteras explicit,
+- SPA-routing får inte förutsätta server-side rewrites,
+- PWA manifest/service worker paths ska fungera under vald Pages-URL,
+- deployment sker separat från vanlig PR-CI.
+
+Detaljer: `docs/github-pages-profile.md`.
 
 ## Reverse proxy, TLS och domains
 
@@ -129,7 +145,8 @@ Minsta rollback kan vara previous image tag, config revert och DB restore vid de
 - Coolify target → `coolify-external-postgresql`
 - Okänd managed container platform → `generic-container-platform`
 - Explicit Kubernetesbehov → `kubernetes-basic`
+- Statisk publik PWA/webbapp utan backend på GitHub → `github-pages-static-pwa`
 
 ## Anti-patterns
 
-Undvik PostgreSQL i app image, secrets i image, implicit lokal containerpersistens, Kubernetes utan behov, endast `latest`, saknad health, deployment som motsäger architecture och artifacts som bara kan byggas på en specifik utvecklares maskin.
+Undvik PostgreSQL i app image, secrets i image eller frontend bundle, implicit lokal containerpersistens, Kubernetes utan behov, GitHub Pages för backendberoende/intern app, endast `latest`, saknad health där server finns, deployment som motsäger architecture och artifacts som bara kan byggas på en specifik utvecklares maskin.
