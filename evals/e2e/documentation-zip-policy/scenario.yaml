@@ -1,0 +1,56 @@
+schema_version: 1
+cases:
+  - id: documentation-divergence-no-decision
+    inputs:
+      implementation_matches_intent: false
+      explicit_direction_change: false
+      final_reconciliation: false
+    expected:
+      action: repair_implementation
+      update_governing_docs: false
+      release_readiness_allowed: false
+
+  - id: documentation-explicit-direction-change
+    inputs:
+      implementation_matches_intent: false
+      explicit_direction_change: true
+      final_reconciliation: false
+    expected:
+      action: update_governing_docs
+      update_governing_docs: true
+      release_readiness_allowed: false
+
+  - id: final-reconciliation-unresolved-decision
+    inputs:
+      implementation_matches_intent: false
+      explicit_direction_change: false
+      final_reconciliation: true
+      mismatch_kind: decision
+    expected:
+      action: ask_user
+      update_governing_docs: false
+      release_readiness_allowed: false
+
+  - id: zip-ci-unavailable-local-equivalent
+    inputs:
+      source_mode: zip
+      ci_available: false
+      equivalent_local_verification_available: true
+      local_verification_passes: true
+      genuine_external_gate_required: false
+    expected:
+      action: run_local_equivalent
+      manual_verification_required: false
+      completion_allowed: true
+
+  - id: zip-genuine-external-gate
+    inputs:
+      source_mode: zip
+      ci_available: false
+      equivalent_local_verification_available: false
+      genuine_external_gate_required: true
+      external_gate_available: false
+    expected:
+      action: checkpoint_pending_external
+      manual_verification_required: true
+      completion_allowed: false
