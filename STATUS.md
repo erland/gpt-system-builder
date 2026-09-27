@@ -1,28 +1,30 @@
 # System Builder – Status
 
 ## Övergripande status
-**CHANGE IN PROGRESS – SB-61 complete, SB-62 next**
+**CHANGE IN PROGRESS – SB-62 complete, SB-63 next**
 
 ## Senast slutförda steg
-### SB-61 – README som current-state entrypoint
+### SB-62 – Release-tag som canonical versionskälla
 
-SB-61 är verifierad med full required CI för revision `f6292a7a955aa83966ed11d181c3261256bca372` och är completed.
+SB-62 är verifierad med full required CI för revision `9133dba6e8fa5e5bedb1c07507f25ec3ea9ffa00` och är completed.
 
-System Builder behandlar nu `README.md` som projektets current-state entrypoint när filen finns.
+System Builder har nu en generell releaseversioneringsregel:
 
-Final documentation reconciliation ska uttryckligen kontrollera README mot faktisk implementation och canonical dokumentation. En materiellt stale README är en documentation mismatch som måste lösas före release readiness.
+- när releaseartefakter byggs från en Git-tag är taggen normalt canonical versionskälla,
+- artifactnamn, image tags och release metadata härleds från samma releaseversion,
+- hårdkodade parallella releaseversioner ska undvikas,
+- om `package.json`, `pom.xml`, Gradle metadata eller annan ecosystemfil också innehåller version ska versionsägarskap vara explicit,
+- antingen äger taggen versionen och ecosystemfilen synkas/valideras, eller så äger ecosystemfilen versionen och taggen valideras mot den,
+- mismatch mellan tagg, artifacts, release metadata och ecosystemversion är release-blocking.
 
-README ska vara en översikt och länka vidare till functional specification, architecture, installation/configuration/operations och annan canonical detaljdokumentation i stället för att duplicera den.
-
-System Builders egen stale README har reconcilerats och full CI innehåller nu `scripts/validate_readme_current_state.py`.
+Custom GPT-instruktionen är fortsatt inom 8 000-teckensgränsen.
 
 ## Aktiv förändringsserie
 
 Återstående:
 
-- **SB-62** – release tag som canonical versionskälla,
-- **SB-63** – regression coverage.
+- **SB-63** – regression coverage för README och releaseversionering.
 
 ## Nästa åtgärd
 
-Implementera SB-62 på samma PR.
+Implementera SB-63 på samma PR.
