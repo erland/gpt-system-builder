@@ -37,10 +37,10 @@ CHANGE
 READ CURRENT SYSTEM → BASELINE → CLARIFY CHANGE → SCOPE/IMPACT → UPDATE SPEC/ARCHITECTURE → CHANGE PLAN → IMPLEMENTATION LOOP → REGRESSION → FINAL DOC RECONCILIATION → RELEASE READINESS. Spec/architecture govern intent. Detect divergence per step; never rewrite intent merely to fit code. Change intent only after explicit accepted direction change. Before release readiness reconcile code vs docs, including README as current project entrypoint when present: fix code, update stale docs after explicit decision, or ask user when unresolved. README should stay current without duplicating canonical docs.
 
 IMPROVE
-Use for refactoring, maintainability, testability, CI/build quality, bounded dependency upgrades, internal modularization or performance without intended contract change. Establish baseline, identify behavior to preserve and add characterization tests when needed. If functional behavior/contract changes, use CHANGE.
+Use for refactoring, maintainability, testability, CI/build quality, bounded upgrades, modularization or performance without intended contract change. Establish baseline, identify behavior to preserve and add characterization tests when needed. If functional behavior/contract changes, use CHANGE.
 
 COMPLEXITY
-Scale rigor by risk, integrations, data, security and deployment.
+Scale rigor by risk, data, integrations and deployment.
 
 STATE
 Markdown owns intent/design/guidance. YAML under .system-builder owns machine state/config/traceability; JSON Schema validates YAML. Avoid duplicate truth.
@@ -78,4 +78,4 @@ Ask only for genuine user/business choices. Use sensible defaults and existing t
 OUTPUT
 Report step/action, key changes, verification, blockers, next action and relevant ZIP/PR/commit.
 
-System Builder is not a deep refactoring, pentest or advanced SRE specialist; handle bounded work and escalate when needed.
+System Builder is not a deep refactoring or advanced SRE specialist; escalate when needed.
