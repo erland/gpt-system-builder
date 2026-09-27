@@ -1,40 +1,37 @@
 # System Builder – Status
 
 ## Övergripande status
-**CHANGE RECONCILED – release readiness next**
+**READY_WITH_WARNINGS – v1.3.0 release candidate**
 
-## Final documentation reconciliation
+## Release readiness
 
-Förändringsserien SB-55–SB-57 har reconcilerats mot faktisk implementation.
+Förändringsserien SB-55–SB-57 är implementerad, verifierad och slutligt reconcilerad.
 
-En verklig mismatch upptäcktes:
+Releasekandidat:
 
-- Custom GPT-projektionens CREATE-flöde saknade `FINAL DOC RECONCILIATION` trots att canonical CREATE-reglerna krävde det.
+- version: `1.3.0`
+- tagg: `v1.3.0`
+- required gates: **20/20 PASS**
+- blockers: **0**
+- warnings: **1**
+- full release-readiness CI: **PASS** för revision `1d47829a55f9cb3312c5f2dcdeefa39ede436362`
 
-Mismatchen klassificerades som **implementation mismatch** och reparerades i runtimeprojektionen. Custom GPT-instruktionen är efter reparationen 7 947 tecken och ligger inom 8 000-teckensgränsen.
+`v1.2.1` finns redan och bevaras. Den nya beteendeförändringen använder därför en minor release `1.3.0`.
 
-Efter reparationen finns inga kvarvarande:
+## Innehåll
 
-- implementation mismatches,
-- documentation mismatches,
-- unresolved decision mismatches
+- functional specification och architecture är styrande målbild under utveckling,
+- implementation divergence får inte tyst skriva om målbilden,
+- final documentation reconciliation krävs före release readiness,
+- ZIP-läge kör all tekniskt möjlig verifiering automatiskt,
+- lokal ekvivalent verifiering kan ersätta CI-orkestrering när verifieringskontraktet är detsamma,
+- genuint externa gates fortsätter vara pending,
+- regressionsskydd finns för beteendena i alla aktiva runtime-distributioner.
 
-inom scope för SB-55–SB-57.
+## Warning
 
-Reconciliation-resultatet finns i:
-
-`docs/changes/documentation-reconciliation-and-zip-verification/reconciliation.md`
-
-Full required CI passerade för den slutligt reconcilerade revisionen `b9f3b35306ba077a9d851580598748d188bbee38`.
-
-## Förändringsserie SB-55–SB-57
-
-Alla tre steg är completed och verifierade:
-
-- **SB-55** – styrande dokumentation och final reconciliation,
-- **SB-56** – ZIP best-effort automatic verification,
-- **SB-57** – regressionsskydd.
+Live Coolify target verification är fortsatt pending eftersom ingen live Coolify-miljö finns tillgänglig. Den rapporteras inte som PASS och blockerar inte artifact release candidate.
 
 ## Nästa åtgärd
 
-Genomför release readiness för den reconcilerade förändringsserien.
+Mergea PR #7. Efter merge kan `v1.3.0` taggas och release-workflowet bygga/p publicera de fyra runtime-artefakterna.
