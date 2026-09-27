@@ -1,26 +1,27 @@
 # System Builder – Status
 
 ## Övergripande status
-**CHANGE IN PROGRESS – SB-55 complete, SB-56 next**
+**CHANGE IN PROGRESS – SB-56 complete, SB-57 next**
 
 ## Senast slutförda steg
-### SB-55 – Styrande dokumentation och slutlig reconciliation
+### SB-56 – ZIP best-effort automatic verification
 
-SB-55 är verifierad med full required CI för revision `e5ad7ef4961dd1cd948f186c95ecd058d47dd073` och är completed.
+SB-56 är verifierad med full required CI för revision `321233ffbfb77dd35925a4bebe9a14da9e193feb` och är completed.
 
-Functional specification och architecture är nu uttryckligen styrande current-intent-dokument under implementation. System Builder ska upptäcka divergence per steg utan att tyst skriva om målbilden för att passa koden.
+ZIP-läge ska nu själv köra all tekniskt möjlig required verification med tillgängliga verktyg och runtime. GitHub Actions behandlas inte som en unik extern gate när motsvarande canonical build/test/validation-kommandon kan köras lokalt med likvärdig evidens.
 
-När implementation scope är klart ska en final documentation reconciliation göras före release readiness. Mismatch klassificeras som implementation mismatch, documentation mismatch efter ett explicit accepterat riktningsbeslut, eller en genuin decision mismatch som kräver användarens val.
+Manuell eller extern verifiering lämnas endast pending när kontrollen genuint kräver något som aktuell runtime inte kan ersätta, exempelvis otillgänglig extern miljö eller tjänst, credentials, fysisk hårdvara, required live deployment eller verklig mänsklig acceptance.
 
-CREATE, CHANGE, next-step state machine, release-readiness-regler, canonical runtime och Custom GPT-projektionen är uppdaterade. Full regression inklusive fyra runtime-distributioner, instruction adherence, parity och E2E har passerat.
+ZIP-verifieringsrapporteringen ska skilja mellan faktiskt verifierat PASS/FAIL, ej tillämpligt och genuint extern/manuell pending.
+
+Canonical runtime, ZIP-mode, completion-verification, test-verification och Custom GPT-projektionen är uppdaterade. Custom GPT-instruktionen är fortsatt inom 8 000-teckensgränsen.
 
 ## Aktiv förändringsserie
 
 Återstående:
 
-- **SB-56** – ZIP best-effort automatic verification,
 - **SB-57** – regression coverage för dokumentationsreconciliation och ZIP-verifiering.
 
 ## Nästa åtgärd
 
-Implementera SB-56 på samma PR.
+Implementera SB-57 på samma PR.
