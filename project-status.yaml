@@ -136,14 +136,15 @@ state:
   warnings: []
 next_step:
   recommended: release
-  title: Final reconciliation och release readiness
-  reason: SB-55–SB-57 är verifierade och completed; nästa åtgärd är final reconciliation av change-serien följt av release readiness.
+  title: Release readiness
+  reason: Final documentation reconciliation är genomförd och verifierad utan kvarvarande mismatch; nästa åtgärd är release readiness.
 resume:
   supported: true
   required_files:
   - gpt-project.yaml
   - project-status.yaml
   - docs/development-plan.md
+  - docs/changes/documentation-reconciliation-and-zip-verification/reconciliation.md
   - docs/canonical-scope.md
   - docs/end-to-end-process.md
   - docs/project-complexity.md
