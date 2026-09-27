@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: readme-release-version-contract
-  selected_step: null
+  selected_step: SB-63
 progress:
   completed:
   - SB-01
@@ -68,7 +68,7 @@ progress:
   - SB-60
   - SB-61
   - SB-62
-  in_progress: null
+  in_progress: SB-63
   next:
     recommended: SB-63
     reason: SB-62 is verified and complete; add regression coverage for README reconciliation and release versioning.
@@ -86,7 +86,7 @@ execution:
   next_action: implement
   step: SB-63
   operation: implement
-  reason: SB-62 is complete; SB-63 is the first safe incomplete step.
+  reason: SB-63 is locked and in progress.
 completion:
   allowed: false
   waiting_for: null
