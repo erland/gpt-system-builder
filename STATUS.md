@@ -1,24 +1,28 @@
 # System Builder – Status
 
 ## Övergripande status
-**CHANGE IN PROGRESS – SB-61**
+**CHANGE IN PROGRESS – SB-61 complete, SB-62 next**
 
-## Ny förändringsserie
+## Senast slutförda steg
+### SB-61 – README som current-state entrypoint
 
-README reconciliation och releaseversionering:
+SB-61 är verifierad med full required CI för revision `f6292a7a955aa83966ed11d181c3261256bca372` och är completed.
 
-- **SB-61** – README som current-state entrypoint och final reconciliation gate,
+System Builder behandlar nu `README.md` som projektets current-state entrypoint när filen finns.
+
+Final documentation reconciliation ska uttryckligen kontrollera README mot faktisk implementation och canonical dokumentation. En materiellt stale README är en documentation mismatch som måste lösas före release readiness.
+
+README ska vara en översikt och länka vidare till functional specification, architecture, installation/configuration/operations och annan canonical detaljdokumentation i stället för att duplicera den.
+
+System Builders egen stale README har reconcilerats och full CI innehåller nu `scripts/validate_readme_current_state.py`.
+
+## Aktiv förändringsserie
+
+Återstående:
+
 - **SB-62** – release tag som canonical versionskälla,
 - **SB-63** – regression coverage.
 
-## Aktivt steg
-
-SB-61 gör README-kontrollen generell för projekt som System Builder skapar eller ändrar.
-
-En materiellt stale README ska räknas som documentation mismatch före release readiness. README ska vara en current-state entrypoint och länka vidare till canonical detaljdokumentation i stället för att duplicera den.
-
-System Builders egen README har samtidigt reconcilerats mot aktuell state och en validator har lagts till i full project CI.
-
 ## Nästa åtgärd
 
-Verifiera SB-61 med full required CI. Därefter är SB-62 nästa steg.
+Implementera SB-62 på samma PR.
