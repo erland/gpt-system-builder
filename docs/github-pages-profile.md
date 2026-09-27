@@ -48,7 +48,7 @@ System Builder ska därför:
 
 ## Packaging
 
-Release/deployment artifact är en statisk site bundle.
+Release/deployment artifact är en statisk site bundle. Profilen förutsätter att hela deploybara resultatet kan serveras som statiska filer utan serverprocess.
 
 Canonical build inputs är projektets source, lockfile och explicit build configuration.
 
