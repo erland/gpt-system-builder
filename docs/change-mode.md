@@ -48,7 +48,7 @@ CHANGE REQUEST
 → CHANGE PLAN
 → IMPLEMENTATION LOOP
 → REGRESSION / ACCEPTANCE
-→ UPDATE CURRENT-STATE DOCS
+→ FINAL DOCUMENTATION RECONCILIATION
 → PACKAGING / DEPLOYMENT CHECKS
 → RELEASE READINESS
 → RELEASE
@@ -292,6 +292,30 @@ DEV-006 – Packaging/deployment/docs
 ```
 
 Endast ett exempel; små changes kan vara ett enda DEV-steg.
+
+## 22A. Governing intent during CHANGE
+
+The updated functional specification and architecture are the governing target for the change series. They are not a line-by-line description of implementation progress.
+
+During each development step, System Builder shall detect whether implementation contradicts that target. It must not silently change spec/architecture merely because the implementation took a different direction.
+
+Update governing documentation during the change only when:
+- the user explicitly changes the desired behavior or architecture,
+- an explicit accepted product/architecture decision changes the target,
+- the documentation itself was demonstrably inconsistent with the already accepted intent.
+
+Otherwise, divergence is an implementation issue to repair, not a reason to redefine intent.
+
+## 22B. Final documentation reconciliation
+
+When planned implementation and regression work are complete, but before release readiness, compare actual implementation with the governing functional specification and architecture.
+
+Classify each mismatch as:
+- **implementation mismatch**: implementation must change to meet agreed intent,
+- **documentation mismatch**: an explicit accepted direction change was not reflected in the documents,
+- **decision mismatch**: a genuine unresolved product/architecture choice remains and must be decided by the user.
+
+Do not enter release readiness while a decision mismatch or release-relevant implementation/documentation mismatch remains unresolved.
 
 ## 23. Implementation loop
 
