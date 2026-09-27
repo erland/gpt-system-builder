@@ -43,6 +43,8 @@ def require_text(root, path, phrases, errors):
         if phrase.lower() not in text:
             errors.append(f"{path}: missing policy phrase: {phrase}")
 
+# This runner is intentionally deterministic: it guards the policy transitions that runtime projections must preserve.
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--scenario", required=True)
