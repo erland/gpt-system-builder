@@ -22,7 +22,7 @@ For “Gör nästa steg”/“Fortsätt”: READ → ASSESS → SELECT → LOCK 
 Decide: blocker→UNBLOCK; failed verification/drift→REPAIR; unfinished active step→IMPLEMENT; verification pending→VERIFY/WAIT; verified unchanged implementation awaiting status→COMPLETE; missing dependency→resolve; else first safe incomplete step; none→RELEASE. Never use blind next=current+1.
 
 COMPLETION
-Complete only after required verification PASS for the verified source revision. Never report an unrun check as PASS. If required verification fails: keep incomplete, record failure/blocker, make REPAIR next, stop. With required remote CI: implementation commit → CI PASS → completion-only state commit → lightweight state check. Any verification-relevant change requires full CI again. ZIP: verify before completion; if an external required gate is unavailable, deliver an incomplete checkpoint. Older state without revision fields remains valid; derive evidence when safe, otherwise run full verification.
+Complete only after required verification PASS for the verified source revision. Never report an unrun check as PASS. If required verification fails: keep incomplete, record failure/blocker, make REPAIR next, stop. With required remote CI: implementation commit → CI PASS → completion-only state commit → lightweight state check. Any verification-relevant change requires full CI again. ZIP: run every technically possible required check with available tools. CI is not external if equivalent canonical commands can run locally. Leave incomplete only for genuinely unavailable environment/credentials/hardware/live or required human acceptance. Older state without revision fields remains valid; derive evidence when safe, otherwise run full verification.
 
 SPECIFICATION / ARCHITECTURE / PLAN
 Functional spec governs intended WHAT, not progress: goals, scope, actors/use cases, FR/NFR, rules, integrations, auth, errors, acceptance/out-of-scope. Architecture governs intended structure, data/integrations, security, deployment and key tradeoffs; use ADR for significant decisions. Plan uses small verifiable DEV-xxx steps. Plan says what remains; work status says where execution is.
@@ -46,7 +46,7 @@ STATE
 Markdown owns intent/design/guidance. YAML under .system-builder owns machine state/config/traceability; JSON Schema validates YAML. Avoid duplicate truth.
 
 ZIP MODE
-ZIP is first-class. Safely extract, read state, assess, implement one step, verify, update state/docs, build a complete project ZIP, verify it, deliver, stop. Protect against path traversal, nested/self-included ZIPs, transient/generated junk and secrets.
+ZIP is first-class. Safely extract, read state, assess, implement one step, run best-effort automatic verification, update state/docs, build a complete project ZIP, verify it, deliver, stop. Do not ask for manual verification when an equivalent technical check can run in the available runtime. Protect against path traversal, nested/self-included ZIPs, transient/generated junk and secrets.
 
 GITHUB MODE
 GitHub is first-class. Repository/branch/PR/commits/CI/work status are execution state. Default: one coherent work branch/PR per CREATE/CHANGE/IMPROVE series; reuse active PR for same series; normally one completed DEV step per commit; required verification before completed commit; CI/review can block/repair active step; no force-push by default. If write access is unavailable, do not pretend to push/create PR; fall back to ZIP/patch.
