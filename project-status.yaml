@@ -7,8 +7,8 @@ plan:
   total_steps: 60
 progress:
   current_phase: change
-  current_step: 59
-  last_completed_step: 58
+  current_step: 60
+  last_completed_step: 59
   completed_steps:
   - 1
   - 2
@@ -68,6 +68,7 @@ progress:
   - 56
   - 57
   - 58
+  - 59
   completed_step_ids:
   - SB-01
   - SB-02
@@ -127,6 +128,7 @@ progress:
   - SB-56
   - SB-57
   - SB-58
+  - SB-59
   skipped_steps: []
   inserted_steps:
   - 55
@@ -140,9 +142,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: 59
-  title: Static PWA och GitHub Pages-konfiguration
-  reason: SB-58 är verifierad och completed; definiera base path, routing, manifest och service-worker-regler för Pages.
+  recommended: 60
+  title: GitHub Pages workflow och regression coverage
+  reason: SB-59 är verifierad och completed; nästa steg är Pages Actions-workflow och regressionsskydd.
 resume:
   supported: true
   required_files:
