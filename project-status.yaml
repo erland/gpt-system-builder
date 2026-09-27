@@ -4,10 +4,10 @@ project:
   name: System Builder
 plan:
   path: docs/development-plan.md
-  total_steps: 57
+  total_steps: 60
 progress:
-  current_phase: release
-  current_step: 57
+  current_phase: change
+  current_step: 58
   last_completed_step: 57
   completed_steps:
   - 1
@@ -130,14 +130,17 @@ progress:
   - 55
   - 56
   - 57
+  - 58
+  - 59
+  - 60
 state:
   overall: pass
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: merge
-  title: Merge PR #7
-  reason: Release readiness är READY_WITH_WARNINGS för v1.3.0; mergea den verifierade change-serien innan tagg och GitHub Release skapas.
+  recommended: 58
+  title: GitHub Pages deployment profile
+  reason: Ny CHANGE-serie SB-58–SB-60 är aktiv; implementera canonical GitHub Pages-profil för publika statiska appar utan backend.
 resume:
   supported: true
   required_files:
@@ -204,6 +207,7 @@ resume:
   - scripts/ci.sh
   - scripts/validate_github_actions.py
   - docs/deployment-packaging-patterns.md
+  - docs/github-pages-profile.md
   - templates/deployment-packaging-plan-template.md
   - scripts/validate_deployment_packaging_plan.py
   - docs/docker-baseline.md
