@@ -191,6 +191,19 @@ Kontrollera före completion:
 
 REVIEW är inte en full specialistgranskning för varje steg, utan en systematisk completion check.
 
+## 11A. Documentation divergence check
+
+During REVIEW of every development step, assess whether implementation contradicts governing functional specification or architecture.
+
+Do not treat normal implementation progress as divergence merely because later planned target behavior is not yet implemented.
+
+If code contradicts governing intent and no explicit accepted decision changed that intent:
+- keep the governing documents unchanged,
+- record/repair the implementation divergence,
+- do not silently reconcile by rewriting spec/architecture to match code.
+
+If an explicit accepted user/product/architecture decision changed the intended target, update governing documentation and affected plan/traceability.
+
 ## 12. UPDATE DOCS
 
 Uppdatera endast dokument som faktiskt påverkas.
@@ -475,6 +488,17 @@ System Builder ska:
 - dokumentera warning,
 - ange varför den inte blockerar,
 - säkerställa att release readiness senare omprövar den.
+
+## 31A. Final documentation reconciliation transition
+
+When implementation scope is complete, the next action before release readiness is a final reconciliation if functional specification or architecture govern the project.
+
+Compare actual implementation against the intended functional specification and architecture. Resolve every release-relevant mismatch as one of:
+- repair implementation,
+- update documentation because an explicit accepted decision changed intent,
+- ask user for a genuine unresolved decision.
+
+Release readiness is not a substitute for this reconciliation and must not start while such mismatches remain unresolved.
 
 ## 32. Release transition
 
