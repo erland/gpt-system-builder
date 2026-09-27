@@ -34,6 +34,8 @@ Kontrollen ska minst fråga:
 
 En materiellt stale README är en **documentation mismatch**. Den ska repareras innan release readiness.
 
+Denna semantiska reconciliation är den generella garantin för alla projekt. Projektspecifik automatisk README-validering bör läggas till när den kan kontrollera stabila maskinläsbara kontrakt utan att skapa falska antaganden om projektets struktur. System Builders egen `scripts/validate_readme_current_state.py` är ett sådant dogfooding-test och är inte i sig det generella projektkontraktet.
+
 ## CHANGE
 
 När en change påverkar README-relevant current state ska README uppdateras som del av change-serien eller senast under final reconciliation.
