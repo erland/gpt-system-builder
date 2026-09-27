@@ -1,29 +1,34 @@
 # System Builder – Status
 
 ## Övergripande status
-**CHANGE IN PROGRESS – SB-59 complete, SB-60 next**
+**CHANGE IMPLEMENTATION COMPLETE – final reconciliation next**
 
 ## Senast slutförda steg
-### SB-59 – Static PWA och GitHub Pages-konfiguration
+### SB-60 – GitHub Pages workflow och regression coverage
 
-SB-59 är verifierad med full required CI för revision `afead57651bf98a1a344608a8f9cc7a84fb09640` och är completed.
+SB-60 är verifierad med full required CI för revision `1d8546ba8a56384b8f2c6a058f1c38b9aad79c9b` och är completed.
 
-GitHub Pages-profilen hanterar nu:
+GitHub Pages-stödet innehåller nu:
 
-- repository-subpath som public base för project sites,
-- Vite/stack-specific public base,
-- PWA `start_url` och `scope`,
-- service-worker scope och built asset paths,
-- hash routing som säker default,
-- history routing endast med verifierad statisk fallback,
-- artifact-verifiering för root-path-, manifest-, service-worker- och routingproblem.
+- canonical workflowtemplate för build → upload Pages artifact → deploy Pages,
+- least-privilege permissions med `contents: read`, `pages: write` och `id-token: write`,
+- separat deployment från vanlig pull request-CI,
+- `github-pages` environment och publicerad page URL,
+- validator för Pages-profil/workflow,
+- instruction-adherence-fall för korrekt profilval, säkerhetsgränser och project-site paths,
+- statiskt runtime-kontrakt för GitHub Pages-stödet,
+- hygiene-scanner som inte feltolkar den exakta ofarliga OIDC-permission-strängen som en secret.
 
-## Aktiv förändringsserie
+Full System Builder project CI passerar med 38 instruction-adherence-fall, 30 critical.
 
-Återstående:
+## Förändringsserie SB-58–SB-60
 
-- **SB-60** – GitHub Pages Actions workflow och regression coverage.
+Alla planerade steg är completed:
+
+- **SB-58** – GitHub Pages deployment profile,
+- **SB-59** – static PWA/base-path/routing/service-worker configuration,
+- **SB-60** – GitHub Pages workflow och regression coverage.
 
 ## Nästa åtgärd
 
-Implementera SB-60 på samma PR.
+Genomför final documentation reconciliation för GitHub Pages-serien före release readiness.
