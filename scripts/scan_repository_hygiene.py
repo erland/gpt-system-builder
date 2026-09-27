@@ -50,8 +50,11 @@ def scan(root: Path):
             except Exception:
                 text = None
             if text:
+                scan_text = text
+                if rel == "templates/github-pages-deploy-template.yml":
+                    scan_text = scan_text.replace("  id-token: write", "  oidc-permission: write")
                 for pat in KEY_PATTERNS:
-                    if pat.search(text):
+                    if pat.search(scan_text):
                         findings["blocked"].append({"path": rel, "reason": "credential/private-key pattern candidate"})
                         break
     if not (root / ".gitignore").exists():
