@@ -293,7 +293,15 @@ DEV-006 – Packaging/deployment/docs
 
 Endast ett exempel; små changes kan vara ett enda DEV-steg.
 
-## 22A. Governing intent during CHANGE
+## 22A. README current-state entrypoint
+
+När repositoryt har `README.md` ska CHANGE behandla den som projektets current-state entrypoint. När change-serien påverkar sådant en ny läsare rimligen möter i README — exempelvis syfte, huvudfunktioner, build/run, runtime, deployment eller länkar till installation/operations — ska README uppdateras eller länka vidare korrekt.
+
+README ska inte duplicera detaljer som redan ägs av functional specification, architecture eller operations docs.
+
+Final documentation reconciliation ska kontrollera README uttryckligen. En materiellt stale README klassificeras som documentation mismatch.
+
+## 22B. Governing intent during CHANGE
 
 The updated functional specification and architecture are the governing target for the change series. They are not a line-by-line description of implementation progress.
 
