@@ -6,9 +6,9 @@ plan:
   path: docs/development-plan.md
   total_steps: 63
 progress:
-  current_phase: change
+  current_phase: release
   current_step: 63
-  last_completed_step: 62
+  last_completed_step: 63
   completed_steps:
   - 1
   - 2
@@ -72,6 +72,7 @@ progress:
   - 60
   - 61
   - 62
+  - 63
   completed_step_ids:
   - SB-01
   - SB-02
@@ -135,6 +136,7 @@ progress:
   - SB-60
   - SB-61
   - SB-62
+  - SB-63
   skipped_steps: []
   inserted_steps:
   - 55
@@ -151,9 +153,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: 63
-  title: Regression coverage för README och releaseversionering
-  reason: SB-62 är verifierad och completed; lägg regressionsskydd för README-reconciliation och versionskontrakt.
+  recommended: release
+  title: Final reconciliation för README/version-serien
+  reason: SB-61–SB-63 är verifierade och completed; nästa åtgärd är final documentation reconciliation före release readiness.
 resume:
   supported: true
   required_files:
