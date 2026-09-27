@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: github-pages-static-pwa
-  selected_step: SB-60
+  selected_step: null
 progress:
   completed:
   - SB-01
@@ -65,27 +65,28 @@ progress:
   - SB-57
   - SB-58
   - SB-59
-  in_progress: SB-60
+  - SB-60
+  in_progress: null
   next:
-    recommended: SB-60
-    reason: SB-59 is verified and complete; implement GitHub Pages workflow and regression coverage.
+    recommended: null
+    reason: SB-58 through SB-60 are complete; perform final documentation reconciliation before release readiness.
 blockers: []
 verification:
   last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-59 full required CI passed for afead57651bf98a1a344608a8f9cc7a84fb09640.
+  notes: SB-60 full required CI passed for 1d8546ba8a56384b8f2c6a058f1c38b9aad79c9b.
 source_state:
   drift: none
   reference: change/github-pages-static-pwa
 execution:
-  next_action: implement
-  step: SB-60
-  operation: implement
-  reason: SB-60 is locked and in progress.
+  next_action: release
+  step: null
+  operation: release
+  reason: GitHub Pages change implementation is complete; perform final reconciliation before release readiness.
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: afead57651bf98a1a344608a8f9cc7a84fb09640
+  implementation_revision: 1d8546ba8a56384b8f2c6a058f1c38b9aad79c9b
   evidence_status: passed
