@@ -1,18 +1,19 @@
 schema_version: 2
-review: SB-54-small-model-robustness-release-readiness
+review: SB-55-SB-57-documentation-zip-verification-release-readiness
 decision: READY_WITH_WARNINGS
 release_candidate:
-  version: 1.2.1
-  tag: v1.2.1
+  version: 1.3.0
+  tag: v1.3.0
   reproducible_from_tag: true
-required_gates_passed: 19
-required_gates_total: 19
+required_gates_passed: 20
+required_gates_total: 20
 warnings:
   - Live Coolify target verification remains pending because no live Coolify environment was available; it is not reported as PASS.
 blockers: []
 note: >
-  SB-54 readiness includes the completed four-runtime migration and small-model robustness work.
-  Evidence is based on the current four-runtime project CI and release validation gates.
+  Readiness covers the reconciled SB-55 through SB-57 change series: governing documentation intent,
+  final documentation reconciliation, ZIP best-effort automatic verification and regression coverage.
+  Evidence is based on current four-runtime project CI, reconciliation evidence and release validation gates.
 runtime_targets:
   - chat_zip
   - custom_gpt
@@ -36,7 +37,7 @@ gates:
   - gate: project_ci_workflow
     required: true
     result: pass
-    evidence: SB-48 CI run 13 completed successfully
+    evidence: current PR full System Builder project CI
   - gate: release_workflow
     required: true
     result: pass
@@ -56,7 +57,7 @@ gates:
   - gate: instruction_adherence_all_runtimes
     required: true
     result: pass
-    evidence: static instruction adherence passed for all four runtimes
+    evidence: static instruction adherence passed for all four runtimes including SB-55/SB-56 contracts
   - gate: runtime_parity
     required: true
     result: pass
@@ -73,6 +74,14 @@ gates:
     required: true
     result: pass
     evidence: evals/e2e/docker-coolify/evaluation-report.md
+  - gate: documentation_zip_policy
+    required: true
+    result: pass
+    evidence: deterministic documentation/ZIP policy regression is part of project CI
+  - gate: final_documentation_reconciliation
+    required: true
+    result: pass
+    evidence: docs/changes/documentation-reconciliation-and-zip-verification/reconciliation.md
   - gate: repository_hygiene
     required: true
     result: pass
@@ -84,11 +93,7 @@ gates:
   - gate: custom_instruction_limit
     required: true
     result: pass
-    evidence: Custom GPT instructions remain within configured 8000 character limit
-  - gate: openai_plugin_decision
-    required: true
-    result: pass
-    evidence: OpenAI Plugin v1 remains explicit not_planned/reduced in runtime compatibility
+    evidence: Custom GPT instructions are 7947 characters, below configured 8000 limit
   - gate: four_runtime_release_assets
     required: true
     result: pass
@@ -100,4 +105,4 @@ gates:
   - gate: release_candidate_version
     required: true
     result: pass
-    evidence: VERSION and release candidate metadata are 1.2.1
+    evidence: VERSION and release candidate metadata are 1.3.0 and tag v1.3.0 is unused
