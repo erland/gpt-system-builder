@@ -79,7 +79,7 @@ verification:
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-62 full required CI passed for 9133dba6e8fa5e5bedb1c07507f25ec3ea9ffa00.
+  notes: SB-63 full required CI passed for ff2ba297cf849923b7aa76a428a6495f91a7f60c.
 source_state:
   drift: none
   reference: change/readme-release-version-contract
@@ -91,5 +91,5 @@ execution:
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: 9133dba6e8fa5e5bedb1c07507f25ec3ea9ffa00
+  implementation_revision: ff2ba297cf849923b7aa76a428a6495f91a7f60c
   evidence_status: passed
