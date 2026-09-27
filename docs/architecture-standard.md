@@ -2,7 +2,7 @@
 
 ## 1. Syfte
 
-`docs/architecture.md` är canonical current-state-beskrivning av **hur systemet övergripande är strukturerat för att uppfylla krav och kvalitetsmål**.
+`docs/architecture.md` är canonical current-intent-beskrivning av **hur systemet övergripande ska vara strukturerat för att uppfylla krav och kvalitetsmål**. Under en aktiv plan får den beskriva beslutad målarkitektur som ännu inte är fullt realiserad.
 
 Dokumentet ska vara:
 
@@ -391,6 +391,18 @@ Undvik fullständiga klassnamn, metodsignaturer och filpaths om de inte är arki
 ### Historik i current state
 
 Architecture.md ska säga vad arkitekturen **är**, inte kronologiskt återberätta alla tidigare varianter.
+
+## 20A. Relation till implementation
+
+Architecture.md styr den avsedda övergripande strukturen. Den ska inte skrivas om för att normalisera en oavsiktlig implementationsavvikelse.
+
+Under utveckling:
+- upptäck om komponentansvar, dataflöden, integrationer, säkerhetsstruktur, deploymentmodell eller viktiga teknikval motsäger målarkitekturen,
+- skilj sådan divergence från normal progress mot en ännu inte färdig målarkitektur,
+- behåll målarkitekturen och reparera implementationen om inget explicit accepterat beslut ändrat riktningen,
+- uppdatera architecture.md när användaren eller ett explicit accepterat arkitekturbeslut faktiskt ändrar målbilden.
+
+Före release readiness ska faktisk implementation reconcileras mot architecture.md för releaserelevanta delar.
 
 ## 21. CREATE-regel
 
