@@ -82,6 +82,19 @@ Resolution:
 
 Status: **resolved**
 
+### REC-README-005 – Duplicate versioning guidance in deployment packaging standard
+
+Classification: **documentation mismatch**
+
+Release-readiness review found the tag-derived versioning paragraph duplicated in `docs/deployment-packaging-patterns.md`.
+
+Resolution:
+
+- removed the duplicate paragraph,
+- retained one canonical statement of tag-derived version source and ecosystem-version ownership/synchronization.
+
+Status: **resolved**
+
 ### README current-state behavior
 
 Runtime behavior now requires README, when present, to be checked during final documentation reconciliation as the project entrypoint.
