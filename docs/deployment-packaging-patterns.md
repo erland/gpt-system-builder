@@ -27,6 +27,10 @@ Packaging ska ange:
 
 Exempel är OCI image, executable JAR, static frontend bundle, Python wheel och source ZIP.
 
+När artifacts publiceras från Git-tag ska `version source` normalt vara taggen. Artifactnamn, image tags och release metadata ska härledas från samma releaseversion.
+
+Om `package.json`, `pom.xml`, Gradle metadata eller annan versionsfil också används ska planen ange vilken källa som äger versionen och hur den andra synkas/valideras. Undvik parallella osynkroniserade versionsnummer.
+
 ## Reproducibility
 
 Artefakten ska så långt möjligt kunna byggas från source, lockfiles, explicita runtime/tool versions och dokumenterade commands. Lokala caches eller manuellt ändrade generated files får inte vara nödvändiga.
