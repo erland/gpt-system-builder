@@ -286,6 +286,8 @@ resume:
   - scripts/run_e2e_docker_coolify_eval.py
   - evals/e2e/documentation-zip-policy/scenario.yaml
   - scripts/run_e2e_documentation_zip_policy_eval.py
+  - evals/e2e/readme-release-version-policy/scenario.yaml
+  - scripts/run_e2e_readme_release_version_policy.py
   - PROJECT.md
   human_readable_status: STATUS.md
 validation:
