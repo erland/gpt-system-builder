@@ -1,24 +1,35 @@
 # System Builder – Status
 
 ## Övergripande status
-**CHANGE IMPLEMENTATION COMPLETE – final reconciliation next**
+**CHANGE RECONCILED – release readiness next**
 
-## Senast slutförda steg
-### SB-57 – Regression coverage för documentation reconciliation och ZIP verification
+## Final documentation reconciliation
 
-SB-57 är verifierad med full required CI för revision `7d191c6be4fd7d4bec8b1ec36311183e4db7cd88` och är completed.
+Förändringsserien SB-55–SB-57 har reconcilerats mot faktisk implementation.
 
-Regressionsskyddet innehåller nu:
+En verklig mismatch upptäcktes:
 
-- sex nya kritiska instruction-adherence-fall för governing documentation intent, final reconciliation och ZIP best-effort verification,
-- två nya statiska runtime-kontrakt som måste finnas i alla aktiva distributioner,
-- ett deterministiskt policy-E2E med fem scenarier för implementationsdivergence, explicit riktningsändring, unresolved decision mismatch, lokal CI-ekvivalent ZIP-verifiering och genuint extern verifieringsgate.
+- Custom GPT-projektionens CREATE-flöde saknade `FINAL DOC RECONCILIATION` trots att canonical CREATE-reglerna krävde det.
 
-Full System Builder project CI kördes på implementationen och passerade. Det inkluderar färska builds/validering av alla fyra runtime-distributioner, static instruction adherence, runtime parity och samtliga E2E-regressioner.
+Mismatchen klassificerades som **implementation mismatch** och reparerades i runtimeprojektionen. Custom GPT-instruktionen är efter reparationen 7 947 tecken och ligger inom 8 000-teckensgränsen.
+
+Efter reparationen finns inga kvarvarande:
+
+- implementation mismatches,
+- documentation mismatches,
+- unresolved decision mismatches
+
+inom scope för SB-55–SB-57.
+
+Reconciliation-resultatet finns i:
+
+`docs/changes/documentation-reconciliation-and-zip-verification/reconciliation.md`
+
+Full required CI passerade för den slutligt reconcilerade revisionen `b9f3b35306ba077a9d851580598748d188bbee38`.
 
 ## Förändringsserie SB-55–SB-57
 
-Alla tre planerade steg är nu completed:
+Alla tre steg är completed och verifierade:
 
 - **SB-55** – styrande dokumentation och final reconciliation,
 - **SB-56** – ZIP best-effort automatic verification,
@@ -26,4 +37,4 @@ Alla tre planerade steg är nu completed:
 
 ## Nästa åtgärd
 
-Genomför final reconciliation för change-serien och därefter release readiness.
+Genomför release readiness för den reconcilerade förändringsserien.
