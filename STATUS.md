@@ -1,26 +1,26 @@
 # System Builder – Status
 
 ## Övergripande status
-**CHANGE PLANNED – SB-55–SB-57**
+**CHANGE IN PROGRESS – SB-55 complete, SB-56 next**
 
 ## Senast slutförda steg
-### SB-54 – Adversarial small-model evals
+### SB-55 – Styrande dokumentation och slutlig reconciliation
 
-SB-54 är verifierad och completed. Small-model robustness-serien SB-51–SB-54 är genomförd.
+SB-55 är verifierad med full required CI för revision `e5ad7ef4961dd1cd948f186c95ecd058d47dd073` och är completed.
+
+Functional specification och architecture är nu uttryckligen styrande current-intent-dokument under implementation. System Builder ska upptäcka divergence per steg utan att tyst skriva om målbilden för att passa koden.
+
+När implementation scope är klart ska en final documentation reconciliation göras före release readiness. Mismatch klassificeras som implementation mismatch, documentation mismatch efter ett explicit accepterat riktningsbeslut, eller en genuin decision mismatch som kräver användarens val.
+
+CREATE, CHANGE, next-step state machine, release-readiness-regler, canonical runtime och Custom GPT-projektionen är uppdaterade. Full regression inklusive fyra runtime-distributioner, instruction adherence, parity och E2E har passerat.
 
 ## Aktiv förändringsserie
 
-En ny CHANGE-serie är planerad för två beteendeförbättringar:
+Återstående:
 
-1. functional specification och architecture ska vara styrande current-intent-dokument under utvecklingen, med final reconciliation mot faktisk implementation före release readiness,
-2. ZIP-läge ska själv köra all tekniskt möjlig verifiering och endast kräva extern/manuell verifiering när kontrollen genuint inte kan utföras i aktuell runtime.
-
-Planerade steg:
-
-- **SB-55** – styrande dokumentation och slutlig reconciliation,
 - **SB-56** – ZIP best-effort automatic verification,
-- **SB-57** – regression coverage för båda förändringarna.
+- **SB-57** – regression coverage för dokumentationsreconciliation och ZIP-verifiering.
 
 ## Nästa åtgärd
 
-Implementera SB-55 och verifiera den innan SB-56 påbörjas.
+Implementera SB-56 på samma PR.
