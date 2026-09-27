@@ -7,8 +7,8 @@ plan:
   total_steps: 63
 progress:
   current_phase: change
-  current_step: 62
-  last_completed_step: 61
+  current_step: 63
+  last_completed_step: 62
   completed_steps:
   - 1
   - 2
@@ -71,6 +71,7 @@ progress:
   - 59
   - 60
   - 61
+  - 62
   completed_step_ids:
   - SB-01
   - SB-02
@@ -133,6 +134,7 @@ progress:
   - SB-59
   - SB-60
   - SB-61
+  - SB-62
   skipped_steps: []
   inserted_steps:
   - 55
@@ -149,9 +151,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: 62
-  title: Release-tag som canonical versionskälla
-  reason: SB-61 är verifierad och completed; definiera generell tag-derived releaseversionering.
+  recommended: 63
+  title: Regression coverage för README och releaseversionering
+  reason: SB-62 är verifierad och completed; lägg regressionsskydd för README-reconciliation och versionskontrakt.
 resume:
   supported: true
   required_files:
