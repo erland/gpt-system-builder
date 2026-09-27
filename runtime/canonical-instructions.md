@@ -302,6 +302,8 @@ Before release readiness, perform final documentation reconciliation between act
 - documentation is stale after an explicit accepted decision → update documentation,
 - genuine product/architecture decision is unresolved → ask the user before proceeding.
 
+If `README.md` exists, treat it as the project's current-state entrypoint and verify it still represents the current implemented system. A materially stale README is a documentation mismatch and must be fixed before release readiness. Correct stale purpose/capability/build/run/runtime/deployment/version/link claims without duplicating canonical docs.
+
 Historical change records explain why/how the change happened.
 
 ## 14. IMPROVE
