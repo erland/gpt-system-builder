@@ -92,3 +92,30 @@ requirements:
     - never change implementation during completion-only
   - - report the next recommended action and stop
     - next recommended action, then stop
+
+- id: REQ-GOVERNING-DOC-INTENT
+  severity: critical
+  groups:
+  - - governing intent
+    - govern intent
+    - governing current-intent
+  - - do not silently rewrite
+    - never rewrite intent merely to fit code
+    - do not rewrite intent merely to fit code
+  - - final documentation reconciliation
+    - final doc reconciliation
+    - reconcile code vs docs
+
+- id: REQ-ZIP-BEST-EFFORT-VERIFY
+  severity: critical
+  groups:
+  - - every required verification gate that is technically possible
+    - every feasible required check
+    - verify automatically as far as
+  - - ci is not inherently an external gate
+    - ci is not external if equivalent canonical commands
+    - ci is not external if equivalent
+  - - external/manual verification only
+    - leave incomplete only for
+    - genuinely requires
+
