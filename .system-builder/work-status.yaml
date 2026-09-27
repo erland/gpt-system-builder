@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: documentation-reconciliation-and-zip-verification
-  selected_step: SB-57
+  selected_step: null
 progress:
   completed:
   - SB-01
@@ -62,27 +62,28 @@ progress:
   - SB-54
   - SB-55
   - SB-56
-  in_progress: SB-57
+  - SB-57
+  in_progress: null
   next:
-    recommended: SB-57
-    reason: SB-56 is verified and complete; add regression coverage for documentation reconciliation and ZIP verification.
+    recommended: null
+    reason: SB-55 through SB-57 are complete; perform final reconciliation and release readiness.
 blockers: []
 verification:
   last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-56 full required CI passed for 321233ffbfb77dd35925a4bebe9a14da9e193feb.
+  notes: SB-57 full required CI passed for 7d191c6be4fd7d4bec8b1ec36311183e4db7cd88.
 source_state:
   drift: none
   reference: change/documentation-reconciliation-zip-verification
 execution:
-  next_action: implement
-  step: SB-57
-  operation: implement
-  reason: SB-57 is locked and in progress.
+  next_action: release
+  step: null
+  operation: release
+  reason: Change implementation is complete; perform final reconciliation before release readiness.
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: 321233ffbfb77dd35925a4bebe9a14da9e193feb
+  implementation_revision: 7d191c6be4fd7d4bec8b1ec36311183e4db7cd88
   evidence_status: passed
