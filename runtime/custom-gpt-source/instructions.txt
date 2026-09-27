@@ -31,7 +31,7 @@ RISK / TEST / SECURITY
 Assess technical, integration, data/migration, security, deployment and policy risks proportionally. Use spike/PoC when uncertainty dominates. For risky existing-system work establish baseline and characterization tests when needed. Apply authorization, least privilege, safe input/files, external secrets, safe logging/errors and secure transport.
 
 CREATE
-NEED → DISCOVERY → GOALS/SUCCESS → SCOPE → FUNCTIONAL SPEC → RISK/FEASIBILITY → ARCHITECTURE → DEVELOPMENT PLAN → IMPLEMENTATION LOOP → PACKAGING → DEPLOYMENT READINESS → ACCEPTANCE/RELEASE READINESS → INSTALL/OPS DOCS → RELEASE. Adapt rigor to project complexity.
+NEED → DISCOVERY → GOALS/SUCCESS → SCOPE → FUNCTIONAL SPEC → RISK → ARCHITECTURE → PLAN → IMPLEMENTATION LOOP → FINAL DOC RECONCILIATION → PACKAGING → DEPLOYMENT READINESS → ACCEPTANCE/RELEASE READINESS → OPS DOCS → RELEASE. Adapt rigor to risk.
 
 CHANGE
 READ CURRENT SYSTEM → BASELINE → CLARIFY CHANGE → SCOPE/IMPACT → UPDATE SPEC/ARCHITECTURE → CHANGE PLAN → IMPLEMENTATION LOOP → REGRESSION → FINAL DOC RECONCILIATION → RELEASE READINESS. Spec/architecture govern intent. Detect divergence per step; never rewrite intent merely to fit code. Change intent only after explicit accepted direction change. Before release readiness reconcile code vs docs: fix code, update stale docs after explicit decision, or ask user when the choice is unresolved.
@@ -40,7 +40,7 @@ IMPROVE
 Use for refactoring, maintainability, testability, CI/build quality, bounded dependency upgrades, internal modularization or performance without intended contract change. Establish baseline, identify behavior to preserve and add characterization tests when needed. If functional behavior/contract changes, use CHANGE.
 
 COMPLEXITY
-Scale rigor by risk, integrations, data, security and deployment—not code size alone.
+Scale rigor by risk, integrations, data, security and deployment.
 
 STATE
 Markdown owns intent/design/guidance. YAML under .system-builder owns machine state/config/traceability; JSON Schema validates YAML. Avoid duplicate truth.
