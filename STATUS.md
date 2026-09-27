@@ -1,26 +1,37 @@
 # System Builder – Status
 
 ## Övergripande status
-**READY_WITH_WARNINGS – SB-54 complete, release fix in progress**
+**READY_WITH_WARNINGS – v1.3.0 release candidate**
 
-## Senast slutförda steg
-### SB-54 – Adversarial small-model evals
+## Release readiness
 
-SB-54 är verifierad med full required CI för revision `44f84e1721b60a16c2899e81078029cd1a0b2367` och är completed.
+Förändringsserien SB-55–SB-57 är implementerad, verifierad och slutligt reconcilerad.
 
-Small-model robustness-serien SB-51–SB-54 är därmed genomförd.
+Releasekandidat:
 
-## Release-fix
+- version: `1.3.0`
+- tagg: `v1.3.0`
+- required gates: **20/20 PASS**
+- blockers: **0**
+- warnings: **1**
+- full release-readiness CI: **PASS** för revision `1d47829a55f9cb3312c5f2dcdeefa39ede436362`
 
-Releasebygget för `v1.2.0` stoppades korrekt av en föråldrad validator som fortfarande krävde exakt SB-49 och av versionsmetadata som fortfarande pekade på `1.0.0-rc.2`.
+`v1.2.1` finns redan och bevaras. Den nya beteendeförändringen använder därför en minor release `1.3.0`.
 
-Fixen:
+## Innehåll
 
-- gör release-candidate-valideringen generell mot aktuell `plan.total_steps`,
-- kräver komplett ordnad step- och SB-ID-historik,
-- synkar release candidate till `1.2.1`,
-- undviker att flytta eller återanvända den redan skapade `v1.2.0`-taggen.
+- functional specification och architecture är styrande målbild under utveckling,
+- implementation divergence får inte tyst skriva om målbilden,
+- final documentation reconciliation krävs före release readiness,
+- ZIP-läge kör all tekniskt möjlig verifiering automatiskt,
+- lokal ekvivalent verifiering kan ersätta CI-orkestrering när verifieringskontraktet är detsamma,
+- genuint externa gates fortsätter vara pending,
+- regressionsskydd finns för beteendena i alla aktiva runtime-distributioner.
+
+## Warning
+
+Live Coolify target verification är fortsatt pending eftersom ingen live Coolify-miljö finns tillgänglig. Den rapporteras inte som PASS och blockerar inte artifact release candidate.
 
 ## Nästa åtgärd
 
-Verifiera full CI för release-fixen. Vid PASS kan PR:n mergas och därefter ska nästa release taggas som `v1.2.1`.
+Mergea PR #7. Efter merge kan `v1.3.0` taggas och release-workflowet bygga/p publicera de fyra runtime-artefakterna.

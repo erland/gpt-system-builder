@@ -1,8 +1,8 @@
 schema_version: 1
 active_work:
-  mode: IMPROVE
+  mode: CHANGE
   plan: docs/development-plan.md
-  change_request: small-model-robustness
+  change_request: documentation-reconciliation-and-zip-verification
   selected_step: null
 progress:
   completed:
@@ -60,27 +60,30 @@ progress:
   - SB-52
   - SB-53
   - SB-54
+  - SB-55
+  - SB-56
+  - SB-57
   in_progress: null
   next:
     recommended: null
-    reason: Small-model robustness through SB-54 is complete; next action is release readiness.
+    reason: Release readiness passed with one documented warning; merge PR #7 before tagging v1.3.0.
 blockers: []
 verification:
   last_status: passed
   baseline: green
   commands:
-  - python3 scripts/validate_state_contracts.py
-  notes: SB-54 full required CI passed for 44f84e1721b60a16c2899e81078029cd1a0b2367.
+  - bash scripts/ci-project.sh
+  notes: v1.3.0 release-readiness full required CI passed for 1d47829a55f9cb3312c5f2dcdeefa39ede436362; decision READY_WITH_WARNINGS.
 source_state:
   drift: none
-  reference: main-after-pr-3
+  reference: change/documentation-reconciliation-zip-verification
 execution:
-  next_action: release
+  next_action: merge
   step: null
-  operation: release
-  reason: SB-54 is complete; prepare the next tagged release.
+  operation: merge
+  reason: Release readiness is READY_WITH_WARNINGS; merge PR #7 before creating tag v1.3.0.
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: 44f84e1721b60a16c2899e81078029cd1a0b2367
+  implementation_revision: 1d47829a55f9cb3312c5f2dcdeefa39ede436362
   evidence_status: passed

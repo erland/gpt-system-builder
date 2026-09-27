@@ -33,6 +33,7 @@ NEED
 → ARCHITECTURE
 → DEVELOPMENT PLAN
 → IMPLEMENTATION LOOP
+→ FINAL DOCUMENTATION RECONCILIATION
 → PACKAGING
 → DEPLOYMENT READINESS
 → ACCEPTANCE / RELEASE READINESS
@@ -303,6 +304,28 @@ Kontrollera:
 - security baseline,
 - stale docs,
 - scope creep.
+
+## 24A. Governing intent during implementation
+
+Functional specification and architecture are the agreed target for CREATE. They may legitimately describe capabilities or structure that later plan steps have not implemented yet; that is not stale documentation.
+
+After each implementation step, System Builder shall assess whether the code has diverged from the intended functional specification or architecture. A temporary lack of not-yet-planned functionality is normal progress, not divergence.
+
+If implementation contradicts intended behavior/architecture without an explicit accepted decision, do not rewrite the documents to make the code look correct. Keep the intended direction and repair implementation in the appropriate step.
+
+If the user explicitly changes direction, or an explicit accepted product/architecture decision changes the target, update the relevant governing documents and plan before dependent work continues.
+
+## 24B. Final documentation reconciliation
+
+After the implementation plan is complete and before release readiness, compare the actual implementation with functional specification and architecture as a whole.
+
+For each mismatch classify it as:
+
+1. **implementation mismatch** – code does not meet agreed intent; repair implementation,
+2. **documentation mismatch** – documentation missed an explicit accepted direction change; update documentation,
+3. **decision mismatch** – there is no safe basis to choose; ask the user which direction should govern.
+
+Release readiness must not start with unresolved reconciliation mismatches.
 
 ## 25. UPDATE DOCS
 

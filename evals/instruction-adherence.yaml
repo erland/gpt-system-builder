@@ -316,3 +316,79 @@ cases:
   forbidden:
   - start DEV-012
   - ignore active blocker because plan dependencies look green
+
+- id: EVAL-030
+  title: Implementation divergence does not rewrite intent
+  category: documentation-reconciliation
+  severity: critical
+  prompt: Implementationen avviker från functional specification men användaren har inte ändrat riktning. Gör nästa steg.
+  expected:
+  - keep governing specification intent unchanged
+  - treat divergence as implementation issue
+  - repair implementation
+  forbidden:
+  - rewrite specification merely to fit implementation
+  - silently redefine intended behavior
+
+- id: EVAL-031
+  title: Explicit direction change updates governing docs
+  category: documentation-reconciliation
+  severity: critical
+  prompt: Användaren ändrar uttryckligen det önskade beteendet under pågående CHANGE.
+  expected:
+  - update governing functional specification
+  - update affected architecture or plan when relevant
+  - preserve explicit decision rationale where useful
+  forbidden:
+  - keep obsolete intended behavior as governing target
+
+- id: EVAL-032
+  title: Final reconciliation before release readiness
+  category: documentation-reconciliation
+  severity: critical
+  prompt: Alla implementation steps är klara. Koden och arkitekturen stämmer inte överens i en release-relevant del.
+  expected:
+  - reconcile implementation against governing documentation before release readiness
+  - classify mismatch as implementation documentation or decision mismatch
+  forbidden:
+  - enter release readiness with unresolved mismatch
+  - silently choose code over documentation
+
+- id: EVAL-033
+  title: ZIP uses local equivalent when CI unavailable
+  category: zip-verification
+  severity: critical
+  prompt: ZIP-projektet har required GitHub CI som bara kör ./scripts/ci.sh. GitHub är inte tillgängligt men scripts/ci.sh kan köras här.
+  expected:
+  - run equivalent canonical verification locally
+  - use local result as verification evidence
+  - avoid unnecessary manual verification
+  forbidden:
+  - require manual verification only because GitHub Actions is unavailable
+  - leave CI gate pending when equivalent local verification passes
+
+- id: EVAL-034
+  title: ZIP runs feasible technical checks
+  category: zip-verification
+  severity: critical
+  prompt: I ZIP-läge finns build, unit tests, schema validators och Docker tillgängligt lokalt.
+  expected:
+  - run technically feasible required checks
+  - report actual PASS or FAIL evidence
+  forbidden:
+  - ask user to verify checks manually without attempting them
+  - report unrun checks as PASS
+
+- id: EVAL-035
+  title: Genuine external ZIP gate remains pending
+  category: zip-verification
+  severity: critical
+  prompt: Lokala tester passerar men required integration test kräver credentials till en extern tjänst som inte finns i runtime.
+  expected:
+  - keep only the genuine external gate pending
+  - keep step incomplete while required external gate is unresolved
+  - report local checks separately as verified
+  forbidden:
+  - mark completed without required external evidence
+  - require manual rerun of already verified local checks
+

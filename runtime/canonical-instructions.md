@@ -13,7 +13,8 @@ Apply these before detailed workflow rules:
 3. **Blockers and failed required verification come first.** Repair/unblock before later planned work.
 4. **Never mark completed before required verification PASS.**
 5. **Never change implementation during a completion-only transition.** Any verification-relevant change requires full verification again.
-6. **After the action, report the next recommended action and stop.** Do not automatically start it.
+6. **Treat functional specification and architecture as governing intent.** Do not silently rewrite them to fit accidental implementation drift.
+7. **After the action, report the next recommended action and stop.** Do not automatically start it.
 
 ## 1. Operating modes
 
@@ -125,7 +126,7 @@ When remote CI is required, do not mark the step completed before that CI passes
 
 ## 6. Functional specification
 
-Functional specification describes **what the system must do**, not how it is implemented.
+Functional specification describes **what the system is intended to do**, not how it is implemented. During implementation it is a governing current-intent document, not a progress log.
 
 Use stable identifiers when useful:
 
@@ -153,7 +154,7 @@ Canonical standard: `docs/functional-specification-standard.md`.
 
 ## 7. Architecture
 
-Architecture describes current intended structure and significant technical choices.
+Architecture describes the **intended** current structure and significant technical choices. During implementation it governs the target structure even when the implementation has not reached that target yet.
 
 Cover proportionally:
 
@@ -258,6 +259,7 @@ NEED
 → ARCHITECTURE
 → DEVELOPMENT PLAN
 → IMPLEMENTATION LOOP
+→ FINAL DOCUMENTATION RECONCILIATION
 → PACKAGING
 → DEPLOYMENT READINESS
 → ACCEPTANCE / RELEASE READINESS
@@ -286,12 +288,20 @@ CHANGE REQUEST
 → CHANGE PLAN
 → IMPLEMENTATION LOOP
 → REGRESSION / ACCEPTANCE
-→ UPDATE CURRENT-STATE DOCS
+→ FINAL DOCUMENTATION RECONCILIATION
 → PACKAGING / DEPLOYMENT CHECKS
 → RELEASE READINESS
 ```
 
-Current-state docs must describe the new current system.
+Functional specification and architecture are governing current-intent documents during CHANGE. Do not change their direction merely because implementation diverges. Update them when the user or another explicit accepted decision changes intended behavior/architecture.
+
+During each development step, detect divergence between implementation and governing intent. Do not silently reconcile by rewriting intent to match code.
+
+Before release readiness, perform final documentation reconciliation between actual implementation and governing functional specification/architecture. Classify any mismatch as:
+- implementation does not meet intended documentation → change implementation,
+- documentation is stale after an explicit accepted decision → update documentation,
+- genuine product/architecture decision is unresolved → ask the user before proceeding.
+
 Historical change records explain why/how the change happened.
 
 ## 14. IMPROVE
@@ -367,7 +377,7 @@ RECEIVE ZIP
 
 Default output is a **complete project ZIP**, not only changed files.
 
-For ZIP completion, run all available required verification first, then mark completed and package. If an external gate is required but unavailable, keep the step incomplete and deliver a resumable checkpoint; later evidence may complete the unchanged source without rerunning full verification solely for the status transition.
+For ZIP completion, proactively run every required verification gate that is technically possible with available tools/runtime. CI is not inherently an external gate when equivalent canonical build/test/validation commands can run locally. Require external/manual verification only when no technically equivalent check is possible because of unavailable environment, credentials/service, physical resource, live deployment, or genuinely human acceptance. Keep incomplete only for such remaining required gates, and distinguish verified PASS/FAIL from external pending.
 
 Protect against:
 - path traversal,
@@ -552,7 +562,11 @@ Markdown owns intent/design/guidance.
 YAML owns machine state/config/traceability.
 JSON Schema validates YAML.
 
-Current-state docs describe current intended system.
+Functional specification and architecture describe the current **intended** system, including target behavior/structure not yet implemented during an active plan.
+Implementation progress belongs in work status/traceability, not by weakening the intended documentation.
+
+Per development step, check for divergence but do not silently rewrite governing intent to match implementation. Before release readiness, reconcile implemented reality against intended documentation and resolve mismatches explicitly.
+
 Historical docs preserve rationale/history.
 Do not duplicate status into multiple canonical files.
 

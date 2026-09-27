@@ -1422,3 +1422,87 @@ Testa situationer där en enklare modell lätt gör ett nästan korrekt men work
 - kritiska fall är markerade critical,
 - fyra aktiverade runtimes passerar static adherence/parity,
 - full regression passerar.
+
+## SB-55 – Styrande dokumentation och slutlig reconciliation
+
+### Mål
+
+Gör functional specification och architecture till tydligt styrande current-intent-dokument under utvecklingen och inför en obligatorisk slutlig reconciliation innan release readiness.
+
+### Omfattning
+
+Definiera att:
+
+- functional specification beskriver avsett funktionellt mål,
+- architecture beskriver avsedd övergripande systemstruktur och viktiga teknikval,
+- implementation ska följa dessa dokument om inte användaren uttryckligen ändrar riktning,
+- System Builder under varje steg ska upptäcka avvikelser men inte tyst skriva om målbilden för att passa implementationen,
+- uttryckliga användarbeslut som ändrar målbilden ska uppdatera relevanta current-intent-dokument,
+- efter planens implementationssteg ska faktisk implementation jämföras systematiskt mot functional specification och architecture innan release readiness.
+
+Vid mismatch ska System Builder klassificera avvikelsen som:
+
+1. implementationen avviker från beslutad målbild,
+2. dokumentationen är stale efter ett uttryckligt beslut,
+3. konflikten kräver ett verkligt användarbeslut.
+
+### Klart när
+
+- canonical runtime-regler beskriver styrande current-intent-dokument,
+- CREATE och CHANGE skiljer målbild från implementation progress,
+- per-step review upptäcker dokumentations-/implementation divergence utan silent reconciliation,
+- final reconciliation ligger före release readiness,
+- genuina konflikter leder till explicit val mellan att ändra systemet eller dokumentationen.
+
+---
+
+## SB-56 – ZIP best-effort automatic verification
+
+### Mål
+
+Gör ZIP-läget självgående i verifiering och undvik onödiga krav på manuell verifiering.
+
+### Omfattning
+
+System Builder ska:
+
+- köra all required verification som tekniskt kan utföras med tillgängliga verktyg och aktuell runtime,
+- behandla build, lint, typecheck, unit/integration tests, validators, schema checks och paketkontroller som automatiserbara när miljön medger det,
+- inte kräva GitHub Actions som extern gate om motsvarande canonical verifieringskommandon kan köras lokalt,
+- endast lämna manuell/extern verifiering pending när kontrollen genuint kräver en otillgänglig miljö, credential, extern tjänst, fysisk resurs eller mänsklig acceptansbedömning,
+- tydligt skilja verifierat resultat från kvarvarande externa gates.
+
+### Klart när
+
+- ZIP mode och completion verification har explicit best-effort-princip,
+- lokal ekvivalent verifiering accepteras när CI bara orkestrerar samma canonical commands,
+- onödig manual verification inte blockerar completion,
+- genuint externa required gates fortsätter blockera completion ärligt.
+
+---
+
+## SB-57 – Regression coverage för documentation reconciliation och ZIP verification
+
+### Mål
+
+Skydda SB-55 och SB-56 med behavioral/static/E2E regression.
+
+### Scenarier
+
+Minst:
+
+- implementation avviker från functional specification utan användarbeslut och dokumentationen skrivs inte om tyst,
+- användaren ändrar riktning och relevant current-intent-dokumentation uppdateras,
+- final reconciliation upptäcker kvarvarande mismatch före release readiness,
+- mismatch klassificeras som implementation-, dokumentations- eller decision-fråga,
+- ZIP-runtime kan köra lokal build/test och kräver då inte manuell verifiering,
+- CI är otillgängligt men canonical lokala verifieringskommandon kan köras,
+- genuint extern verifiering saknas och completion förblir pending.
+
+### Klart när
+
+- static instruction adherence täcker kritiska regler,
+- relevanta E2E-scenarier täcker de nya flödena,
+- alla aktiverade runtime-distributioner behåller avsett beteende,
+- full regression och runtime parity passerar.
+

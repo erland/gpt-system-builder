@@ -2,7 +2,7 @@
 
 ## 1. Syfte
 
-`docs/functional-specification.md` är canonical current-state-beskrivning av **vad systemet ska göra**.
+`docs/functional-specification.md` är canonical current-intent-beskrivning av **vad systemet ska göra**. Under en aktiv utvecklingsplan får den beskriva beslutad målbild som ännu inte är fullt implementerad.
 
 Dokumentet ska vara:
 
@@ -375,6 +375,18 @@ Samma krav ska inte finnas i flera avsnitt med olika formulering.
 > "Tidigare gjorde systemet X men från version 2 gör det Y."
 
 Detta hör i change history/decision record om historiken behöver bevaras. Current spec ska beskriva Y.
+
+## 20A. Relation till implementation
+
+Functional specification är styrande för avsett funktionellt beteende. Implementationsstatus ska inte skrivas in i specen för att få dokumentet att följa kodens aktuella mellanläge.
+
+Under utveckling:
+- kontrollera om implementationen motsäger specen,
+- betrakta ännu ej genomförda plansteg som normal progress, inte stale spec,
+- ändra inte specens riktning enbart därför att implementationen avvikit,
+- uppdatera specen när användaren eller ett explicit accepterat produktbeslut ändrar avsett beteende.
+
+Före release readiness ska implementation och functional specification reconcileras som helhet.
 
 ## 21. CREATE-regel
 

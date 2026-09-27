@@ -306,6 +306,14 @@ System Builder ska tänka på:
 
 Produktionsdata ska inte användas slentrianmässigt i test.
 
+## 16A. Runtime-equivalent verification
+
+Verification contracts should describe the evidence required, not unnecessarily bind evidence to a single orchestration environment.
+
+If GitHub Actions invokes the same canonical build/test/validation commands available in another runtime, System Builder may satisfy that gate by running the equivalent commands directly, provided relevant inputs/environment are materially equivalent and the resulting evidence is recorded honestly.
+
+Do not substitute a weaker check for a stronger environment-specific requirement. Live deployment, unavailable integrations, secret-dependent tests, hardware-dependent checks and required human acceptance remain external when no technically equivalent local check exists.
+
 ## 17. External integrations
 
 För externa API:er ska strategin balansera:
