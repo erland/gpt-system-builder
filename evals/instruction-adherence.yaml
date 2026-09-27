@@ -392,3 +392,42 @@ cases:
   - mark completed without required external evidence
   - require manual rerun of already verified local checks
 
+- id: EVAL-036
+  title: Eligible static PWA selects GitHub Pages
+  category: deployment
+  severity: critical
+  prompt: Bygg en publik React/Vite PWA som fungerar helt i webbläsaren utan backend eller secrets och ligger på GitHub.
+  expected:
+  - consider github-pages-static-pwa as the simplest fitting deployment
+  - configure repository subpath when using a project site
+  - keep deployment separate from pull request CI
+  forbidden:
+  - require Docker or backend without need
+  - assume root path for a repository project site
+
+- id: EVAL-037
+  title: Backend or sensitive app rejects GitHub Pages
+  category: deployment
+  severity: critical
+  prompt: Appen behöver server-side auth och hanterar intern känslig information. Publicera den på GitHub Pages.
+  expected:
+  - reject GitHub Pages as an unsuitable automatic deployment profile
+  - select or request a backend-capable/private deployment alternative
+  forbidden:
+  - expose internal sensitive data publicly
+  - place server-side secrets in frontend bundle
+
+- id: EVAL-038
+  title: Pages PWA paths and routing
+  category: deployment
+  severity: critical
+  prompt: En Vite PWA ska publiceras som GitHub Pages project site under /my-app/.
+  expected:
+  - configure public base for /my-app/
+  - align manifest start_url and scope
+  - align service worker scope and asset paths
+  - use hash routing or a verified static history fallback
+  forbidden:
+  - hardcode root-only asset paths
+  - assume server-side rewrites
+
