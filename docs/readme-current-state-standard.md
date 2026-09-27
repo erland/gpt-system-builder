@@ -4,7 +4,7 @@
 
 `README.md` är repositoryts current-state entrypoint. Den ska hjälpa en ny läsare att förstå vad systemet är, hur man kommer igång och var den canonical detaljdokumentationen finns.
 
-README är inte ersättning för functional specification, architecture, installation, configuration eller operations documentation.
+README är inte ersättning för functional specification, architecture, installation, configuration eller operations documentation. Kontrollen gäller projekt som System Builder skapar eller ändrar, inte bara System Builder-repot självt.
 
 ## Minimikrav när relevanta
 
