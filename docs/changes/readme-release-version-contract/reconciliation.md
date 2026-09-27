@@ -67,6 +67,21 @@ Resolution:
 
 Status: **resolved**
 
+### REC-README-004 – Custom GPT wording was too weak for static contract
+
+Classification: **runtime projection mismatch**
+
+Custom GPT contained the intended README and release-version behavior, but the wording did not explicitly satisfy the static runtime contracts for `stale README = documentation mismatch` and `release tag` as the version source.
+
+Resolution:
+
+- made stale README → documentation mismatch explicit,
+- made release-tag-derived artifact versioning explicit,
+- retained the version ownership/synchronization rule,
+- kept the Custom GPT instruction below the 8,000-character platform limit.
+
+Status: **resolved**
+
 ### README current-state behavior
 
 Runtime behavior now requires README, when present, to be checked during final documentation reconciliation as the project entrypoint.
