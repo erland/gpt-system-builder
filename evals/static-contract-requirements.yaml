@@ -134,3 +134,15 @@ requirements:
     - sensitive data
     - server-side secrets
 
+- id: REQ-README-RECONCILIATION
+  severity: critical
+  groups:
+  - - README
+    - README.md
+  - - current project entrypoint
+    - project entrypoint
+    - current-state entrypoint
+  - - stale README
+    - materially stale
+    - documentation mismatch
+
