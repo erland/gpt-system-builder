@@ -12,6 +12,17 @@ Ett grönt buildjobb är nödvändigt i många projekt men aldrig tillräckligt 
 
 > Release = uppfylld avsikt + verifierad kvalitet + driftbar leverans + inga blockerare.
 
+## 2A. Required precondition: final documentation reconciliation
+
+Before release readiness begins, System Builder shall have reconciled the actual implementation against the governing functional specification and architecture when those documents apply.
+
+Release readiness must not silently decide whether code or documentation is correct. Any mismatch shall already be classified and resolved as:
+- implementation change required,
+- documentation update justified by an explicit accepted direction change,
+- genuine unresolved decision requiring the user.
+
+An unresolved release-relevant mismatch blocks entry into release readiness.
+
 ## 3. Release readiness-domäner
 
 System Builder ska bedöma minst följande när relevanta:
