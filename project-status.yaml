@@ -7,8 +7,8 @@ plan:
   total_steps: 57
 progress:
   current_phase: change
-  current_step: 55
-  last_completed_step: 54
+  current_step: 56
+  last_completed_step: 55
   completed_steps:
   - 1
   - 2
@@ -64,6 +64,7 @@ progress:
   - 52
   - 53
   - 54
+  - 55
   completed_step_ids:
   - SB-01
   - SB-02
@@ -119,6 +120,7 @@ progress:
   - SB-52
   - SB-53
   - SB-54
+  - SB-55
   skipped_steps: []
   inserted_steps:
   - 55
@@ -129,9 +131,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: 55
-  title: Styrande dokumentation och slutlig reconciliation
-  reason: Ny CHANGE-serie SB-55–SB-57 är planerad; börja med dokumentationsstyrning och final reconciliation.
+  recommended: 56
+  title: ZIP best-effort automatic verification
+  reason: SB-55 är verifierad och completed; nästa steg är att göra ZIP-verifiering självgående där runtime kan verifiera tekniskt.
 resume:
   supported: true
   required_files:
