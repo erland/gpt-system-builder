@@ -1,47 +1,50 @@
 # System Builder – Status
 
 ## Övergripande status
-**CHANGE RECONCILED – release readiness next**
+**READY_WITH_WARNINGS – v1.3.0 release candidate**
 
-## Final documentation reconciliation
+## Release readiness
 
-Förändringsserien SB-61–SB-63 har reconcilerats mot faktisk implementation.
+Release readiness är klar för den samlade ännu opublicerade förändringsmängden SB-55–SB-63.
 
-Reconciliationen hittade och löste fyra avvikelser:
+- Version: `1.3.0`
+- Tag: `v1.3.0`
+- Required gates: **22/22 PASS**
+- Blockers: **0**
+- Warnings: **1**
+- Full kandidat-CI: PASS för `fdfbf03383553a678178c133836737f283b5d34c`
 
-- duplicate release-version rule i canonical runtime,
-- otydlig scope för den System Builder-specifika README-validatorn,
-- saknad generell README-reconciliation i canonical runtime,
-- för svag formulering i Custom GPT för statiska README/version-kontrakt.
+`v1.2.1` finns och bevaras. `v1.3.0` är ännu inte använd.
 
-Efter reparationen gäller generellt för projekt som System Builder skapar eller ändrar:
+## Inkluderade förändringar
 
-- `README.md` är current-state entrypoint när den finns,
-- en materiellt stale README är en documentation mismatch,
-- stale README ska repareras före release readiness,
-- README ska sammanfatta och länka vidare, inte duplicera canonical detaljdokumentation,
-- vid taggtriggad release härleds artifactversionen normalt från release-taggen,
-- alternativa versionskällor kräver explicit ownership och synk/validation,
-- osynkroniserade parallella releaseversioner accepteras inte.
+Releasen omfattar bland annat:
+
+- governing documentation intent och final documentation reconciliation,
+- ZIP best-effort automatic verification,
+- GitHub Pages-profil för lämpliga statiska PWA/webbappar,
+- repository-subpath/PWA/service-worker/routing-regler,
+- separat GitHub Pages deployment-workflow,
+- README som current-state entrypoint,
+- stale README som documentation mismatch före release readiness,
+- tag-derived artifactversionering,
+- explicit ownership/synk för ecosystem-versioner,
+- regressionsskydd över alla fyra aktiva runtimes.
+
+Instruction-adherence omfattar **41 fall, 33 critical**.
 
 Custom GPT-instruktionen är **7 936 tecken**, under 8 000-gränsen.
 
-Reconciliation-resultatet finns i:
+## Warning
 
-`docs/changes/readme-release-version-contract/reconciliation.md`
+Live Coolify target verification är fortsatt pending eftersom ingen faktisk Coolify-miljö varit tillgänglig. Den rapporteras inte som PASS och blockerar inte artifact release.
 
-Full required CI passerade för den slutligt reconcilerade revisionen `be9273fc1cb53c9d4ecca9dfc84f305ec26d6e4f`.
+## Releaseversionering
 
-Det finns inga kvarvarande implementation-, documentation- eller decision-mismatchar inom SB-61–SB-63.
+Release-workflowet använder Git-taggen som canonical versionskälla.
 
-## Förändringsserie SB-61–SB-63
-
-Alla tre steg är completed och verifierade:
-
-- **SB-61** – README som current-state entrypoint,
-- **SB-62** – release-tag som canonical versionskälla,
-- **SB-63** – regression coverage.
+När `v1.3.0` skapas härleds artifactversionen `1.3.0`, som används för runtime-ZIP-filer och release metadata.
 
 ## Nästa åtgärd
 
-Genomför release readiness för den reconcilerade README/version-serien.
+Mergea PR #9. Efter merge kan `v1.3.0` taggas och release-workflowet publicera de fyra runtime-distributionerna.
