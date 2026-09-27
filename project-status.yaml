@@ -4,10 +4,10 @@ project:
   name: System Builder
 plan:
   path: docs/development-plan.md
-  total_steps: 60
+  total_steps: 63
 progress:
-  current_phase: release
-  current_step: 60
+  current_phase: change
+  current_step: 61
   last_completed_step: 60
   completed_steps:
   - 1
@@ -139,14 +139,17 @@ progress:
   - 58
   - 59
   - 60
+  - 61
+  - 62
+  - 63
 state:
   overall: pass
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: release
-  title: Release readiness för GitHub Pages-serien
-  reason: Final documentation reconciliation är genomförd och verifierad utan kvarvarande mismatch; nästa åtgärd är release readiness.
+  recommended: 61
+  title: README som current-state entrypoint
+  reason: Ny CHANGE-serie SB-61–SB-63 är aktiv; gör README reconciliation explicit och verifierbar.
 resume:
   supported: true
   required_files:
@@ -232,6 +235,8 @@ resume:
   - templates/operations-template.md
   - scripts/validate_operational_docs.py
   - docs/release-readiness-standard.md
+  - docs/readme-current-state-standard.md
+  - scripts/validate_readme_current_state.py
   - templates/release-readiness-template.md
   - scripts/validate_release_readiness.py
   - docs/knowledge-architecture.md
