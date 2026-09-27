@@ -207,6 +207,8 @@ resume:
   - scripts/scan_repository_hygiene.py
   - docs/github-actions-baseline.md
   - templates/github-actions-ci-template.yml
+  - templates/github-pages-deploy-template.yml
+  - scripts/validate_github_pages_profile.py
   - .github/workflows/ci.yml
   - scripts/ci.sh
   - scripts/validate_github_actions.py
