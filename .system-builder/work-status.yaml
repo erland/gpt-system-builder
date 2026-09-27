@@ -84,10 +84,10 @@ source_state:
   drift: none
   reference: change/readme-release-version-contract
 execution:
-  next_action: implement
-  step: SB-63
-  operation: implement
-  reason: SB-63 is locked and in progress.
+  next_action: release
+  step: null
+  operation: release
+  reason: README/version change implementation is complete; perform final reconciliation before release readiness.
 completion:
   allowed: false
   waiting_for: null
