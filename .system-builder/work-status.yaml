@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: github-pages-static-pwa
-  selected_step: null
+  selected_step: SB-60
 progress:
   completed:
   - SB-01
@@ -65,7 +65,7 @@ progress:
   - SB-57
   - SB-58
   - SB-59
-  in_progress: null
+  in_progress: SB-60
   next:
     recommended: SB-60
     reason: SB-59 is verified and complete; implement GitHub Pages workflow and regression coverage.
@@ -83,7 +83,7 @@ execution:
   next_action: implement
   step: SB-60
   operation: implement
-  reason: SB-59 is complete; SB-60 is the first safe incomplete step.
+  reason: SB-60 is locked and in progress.
 completion:
   allowed: false
   waiting_for: null
