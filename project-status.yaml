@@ -6,9 +6,9 @@ plan:
   path: docs/development-plan.md
   total_steps: 57
 progress:
-  current_phase: change
+  current_phase: release
   current_step: 57
-  last_completed_step: 56
+  last_completed_step: 57
   completed_steps:
   - 1
   - 2
@@ -66,6 +66,7 @@ progress:
   - 54
   - 55
   - 56
+  - 57
   completed_step_ids:
   - SB-01
   - SB-02
@@ -123,6 +124,7 @@ progress:
   - SB-54
   - SB-55
   - SB-56
+  - SB-57
   skipped_steps: []
   inserted_steps:
   - 55
@@ -133,9 +135,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: 57
-  title: Regression coverage för reconciliation och ZIP verification
-  reason: SB-56 är verifierad och completed; nästa steg är att lägga explicit regressionsskydd för SB-55 och SB-56.
+  recommended: release
+  title: Final reconciliation och release readiness
+  reason: SB-55–SB-57 är verifierade och completed; nästa åtgärd är final reconciliation av change-serien följt av release readiness.
 resume:
   supported: true
   required_files:
