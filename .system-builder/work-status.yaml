@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: readme-release-version-contract
-  selected_step: SB-63
+  selected_step: null
 progress:
   completed:
   - SB-01
@@ -68,7 +68,8 @@ progress:
   - SB-60
   - SB-61
   - SB-62
-  in_progress: SB-63
+  - SB-63
+  in_progress: null
   next:
     recommended: SB-63
     reason: SB-62 is verified and complete; add regression coverage for README reconciliation and release versioning.
