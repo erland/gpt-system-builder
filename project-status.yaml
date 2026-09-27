@@ -135,9 +135,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: release
-  title: Release readiness
-  reason: Final documentation reconciliation är genomförd och verifierad utan kvarvarande mismatch; nästa åtgärd är release readiness.
+  recommended: merge
+  title: Merge PR #7
+  reason: Release readiness är READY_WITH_WARNINGS för v1.3.0; mergea den verifierade change-serien innan tagg och GitHub Release skapas.
 resume:
   supported: true
   required_files:
