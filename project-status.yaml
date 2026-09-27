@@ -7,8 +7,8 @@ plan:
   total_steps: 60
 progress:
   current_phase: change
-  current_step: 58
-  last_completed_step: 57
+  current_step: 59
+  last_completed_step: 58
   completed_steps:
   - 1
   - 2
@@ -67,6 +67,7 @@ progress:
   - 55
   - 56
   - 57
+  - 58
   completed_step_ids:
   - SB-01
   - SB-02
@@ -125,6 +126,7 @@ progress:
   - SB-55
   - SB-56
   - SB-57
+  - SB-58
   skipped_steps: []
   inserted_steps:
   - 55
@@ -138,9 +140,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: 58
-  title: GitHub Pages deployment profile
-  reason: Ny CHANGE-serie SB-58–SB-60 är aktiv; implementera canonical GitHub Pages-profil för publika statiska appar utan backend.
+  recommended: 59
+  title: Static PWA och GitHub Pages-konfiguration
+  reason: SB-58 är verifierad och completed; definiera base path, routing, manifest och service-worker-regler för Pages.
 resume:
   supported: true
   required_files:
