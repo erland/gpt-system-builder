@@ -69,14 +69,14 @@ progress:
   in_progress: null
   next:
     recommended: null
-    reason: SB-58 through SB-60 are complete; perform final documentation reconciliation before release readiness.
+    reason: Final documentation reconciliation passed; proceed to release readiness.
 blockers: []
 verification:
   last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-60 full required CI passed for 1d8546ba8a56384b8f2c6a058f1c38b9aad79c9b.
+  notes: Final GitHub Pages reconciliation full required CI passed for 2bec15a030e73e5d38065c2e07585250ee691d9d.
 source_state:
   drift: none
   reference: change/github-pages-static-pwa
@@ -84,9 +84,9 @@ execution:
   next_action: release
   step: null
   operation: release
-  reason: GitHub Pages change implementation is complete; perform final reconciliation before release readiness.
+  reason: Final reconciliation is complete and verified; perform release readiness.
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: 1d8546ba8a56384b8f2c6a058f1c38b9aad79c9b
+  implementation_revision: 2bec15a030e73e5d38065c2e07585250ee691d9d
   evidence_status: passed
