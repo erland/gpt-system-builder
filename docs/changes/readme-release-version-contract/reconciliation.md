@@ -52,6 +52,21 @@ Resolution:
 
 Status: **resolved**
 
+### REC-README-003 – Canonical runtime omitted README reconciliation rule
+
+Classification: **implementation/runtime mismatch**
+
+The Custom GPT projection contained the generic README reconciliation behavior, but canonical runtime did not. This meant generated peer runtimes could miss the rule even though documentation described it.
+
+Resolution:
+
+- added README as a current-state entrypoint directly to canonical runtime,
+- made materially stale README an explicit documentation mismatch,
+- required repair before release readiness,
+- retained the rule against duplicating canonical detail documentation in README.
+
+Status: **resolved**
+
 ### README current-state behavior
 
 Runtime behavior now requires README, when present, to be checked during final documentation reconciliation as the project entrypoint.
