@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: documentation-reconciliation-and-zip-verification
-  selected_step: null
+  selected_step: SB-57
 progress:
   completed:
   - SB-01
@@ -62,7 +62,7 @@ progress:
   - SB-54
   - SB-55
   - SB-56
-  in_progress: null
+  in_progress: SB-57
   next:
     recommended: SB-57
     reason: SB-56 is verified and complete; add regression coverage for documentation reconciliation and ZIP verification.
@@ -80,7 +80,7 @@ execution:
   next_action: implement
   step: SB-57
   operation: implement
-  reason: SB-56 is complete; SB-57 is the first safe incomplete step.
+  reason: SB-57 is locked and in progress.
 completion:
   allowed: false
   waiting_for: null
