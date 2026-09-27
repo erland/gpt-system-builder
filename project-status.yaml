@@ -4,10 +4,10 @@ project:
   name: System Builder
 plan:
   path: docs/development-plan.md
-  total_steps: 54
+  total_steps: 57
 progress:
-  current_phase: release
-  current_step: 54
+  current_phase: change
+  current_step: 55
   last_completed_step: 54
   completed_steps:
   - 1
@@ -120,15 +120,18 @@ progress:
   - SB-53
   - SB-54
   skipped_steps: []
-  inserted_steps: []
+  inserted_steps:
+  - 55
+  - 56
+  - 57
 state:
   overall: pass
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: release
-  title: Bygg release 1.2.1
-  reason: SB-54 är verifierad och completed; nästa steg är release 1.2.1.
+  recommended: 55
+  title: Styrande dokumentation och slutlig reconciliation
+  reason: Ny CHANGE-serie SB-55–SB-57 är planerad; börja med dokumentationsstyrning och final reconciliation.
 resume:
   supported: true
   required_files:
