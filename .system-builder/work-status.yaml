@@ -72,24 +72,24 @@ progress:
   in_progress: null
   next:
     recommended: null
-    reason: Final documentation reconciliation passed; proceed to release readiness.
+    reason: Release readiness passed with one documented warning; merge PR #9 before tagging v1.3.0.
 blockers: []
 verification:
   last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: Final README/version reconciliation full required CI passed for be9273fc1cb53c9d4ecca9dfc84f305ec26d6e4f.
+  notes: v1.3.0 release-readiness full required CI passed for fdfbf03383553a678178c133836737f283b5d34c.
 source_state:
   drift: none
   reference: change/readme-release-version-contract
 execution:
-  next_action: release
+  next_action: merge
   step: null
-  operation: release
-  reason: Final reconciliation is complete and verified; perform release readiness.
+  operation: merge
+  reason: Release readiness is READY_WITH_WARNINGS; merge PR #9 before creating tag v1.3.0.
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: be9273fc1cb53c9d4ecca9dfc84f305ec26d6e4f
+  implementation_revision: fdfbf03383553a678178c133836737f283b5d34c
   evidence_status: passed
