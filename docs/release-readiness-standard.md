@@ -23,6 +23,14 @@ Release readiness must not silently decide whether code or documentation is corr
 
 An unresolved release-relevant mismatch blocks entry into release readiness.
 
+### README reconciliation
+
+When a repository has `README.md`, final documentation reconciliation shall verify that it still represents the current implemented system at an appropriate overview level.
+
+README should normally be the project entrypoint and may summarize or link to canonical functional, architecture, installation, configuration, operations and deployment documentation. It does not need to duplicate those documents.
+
+A materially stale README is a documentation mismatch and must be resolved before release readiness. Typical stale signals include obsolete project status/version claims, removed/renamed capabilities, outdated build/run instructions, wrong runtime/deployment model, or links to superseded documentation.
+
 ## 3. Release readiness-domäner
 
 System Builder ska bedöma minst följande när relevanta:
