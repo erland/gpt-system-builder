@@ -56,6 +56,7 @@ canonical:
   repository_hygiene: docs/repository-hygiene.md
   github_actions_baseline: docs/github-actions-baseline.md
   deployment_packaging_patterns: docs/deployment-packaging-patterns.md
+  github_pages_profile: docs/github-pages-profile.md
   docker_baseline: docs/docker-baseline.md
   coolify_profile: docs/coolify-profile.md
   operational_documentation_standard: docs/configuration-installation-operations-standard.md
@@ -116,6 +117,7 @@ templates:
   gitignore_baseline: templates/gitignore-baseline.txt
   dockerignore_baseline: templates/dockerignore-baseline.txt
   github_actions_ci: templates/github-actions-ci-template.yml
+  github_pages_deploy: templates/github-pages-deploy-template.yml
   deployment_packaging_plan: templates/deployment-packaging-plan-template.md
   dockerfile: templates/Dockerfile.template
   dockerignore_application: templates/dockerignore-application-baseline.txt
@@ -181,7 +183,7 @@ distributions:
     builder: scripts/build_custom_gpt_distribution.py
     validator: scripts/validate_custom_gpt_distribution.py
     instruction_character_limit: 8000
-    instruction_characters: 7947
+    instruction_characters: 7694
     knowledge_file_count: 7
     status: implemented
     source_dir: runtime/custom-gpt-source
@@ -192,8 +194,8 @@ evals:
     static_runner: scripts/run_static_instruction_evals.py
     validator: scripts/validate_instruction_evals.py
     live_scorecard_template: evals/live-eval-scorecard-template.yaml
-    case_count: 35
-    critical_case_count: 27
+    case_count: 38
+    critical_case_count: 30
     chat_static_result: pass
     custom_gpt_static_result: pass
     claude_projects_static_result: pass

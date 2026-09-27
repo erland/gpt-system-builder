@@ -138,6 +138,19 @@ CREATE etablerar CI tidigt när skeleton och verifieringskommandon finns. CHANGE
 
 Release workflow definieras separat. PR-CI ska normalt inte skapa GitHub Release, deploya production eller bumpa releaseversion.
 
+### GitHub Pages deployment
+
+För `github-pages-static-pwa` ska deployment ligga i separat Pages-workflow från vanlig PR-CI. Workflowet ska normalt använda:
+
+- `contents: read`,
+- `pages: write`,
+- `id-token: write`,
+- build/upload före deploy,
+- `github-pages` environment,
+- GitHub Pages official configure/upload/deploy actions.
+
+Vanlig PR-CI ska verifiera källkod och production build men inte publicera sajten.
+
 ## 31. Baseline workflow
 
 En generell baseline innehåller explicit trigger, `contents: read`, checkout, explicit runtime setup, canonical verify command och timeout.

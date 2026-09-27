@@ -1,37 +1,43 @@
 # System Builder – Status
 
 ## Övergripande status
-**READY_WITH_WARNINGS – v1.3.0 release candidate**
+**CHANGE RECONCILED – release readiness next**
 
-## Release readiness
+## Final documentation reconciliation
 
-Förändringsserien SB-55–SB-57 är implementerad, verifierad och slutligt reconcilerad.
+Förändringsserien SB-58–SB-60 har reconcilerats mot faktisk implementation.
 
-Releasekandidat:
+En verklig mismatch upptäcktes:
 
-- version: `1.3.0`
-- tagg: `v1.3.0`
-- required gates: **20/20 PASS**
-- blockers: **0**
-- warnings: **1**
-- full release-readiness CI: **PASS** för revision `1d47829a55f9cb3312c5f2dcdeefa39ede436362`
+- Custom GPT-projektionen hade profilvalet för GitHub Pages men saknade SB-59/SB-60-detaljer för repository-subpath/PWA-konfiguration och separat Pages-deployment från PR-CI.
 
-`v1.2.1` finns redan och bevaras. Den nya beteendeförändringen använder därför en minor release `1.3.0`.
+Mismatchen klassificerades som **implementation mismatch** och reparerades i Custom GPT-instruktionen samt deployment-Knowledge.
 
-## Innehåll
+Efter reparationen innehåller Custom GPT-runtime:
 
-- functional specification och architecture är styrande målbild under utveckling,
-- implementation divergence får inte tyst skriva om målbilden,
-- final documentation reconciliation krävs före release readiness,
-- ZIP-läge kör all tekniskt möjlig verifiering automatiskt,
-- lokal ekvivalent verifiering kan ersätta CI-orkestrering när verifieringskontraktet är detsamma,
-- genuint externa gates fortsätter vara pending,
-- regressionsskydd finns för beteendena i alla aktiva runtime-distributioner.
+- repository-subpath som base för Pages project sites,
+- Vite/public-base, PWA `start_url`/`scope`, service-worker scope/assets och routing,
+- hash routing som default om ingen verifierad statisk history fallback finns,
+- separat Pages deployment från vanlig PR-CI.
 
-## Warning
+Custom GPT-instruktionen är **7 694 tecken**, under 8 000-gränsen.
 
-Live Coolify target verification är fortsatt pending eftersom ingen live Coolify-miljö finns tillgänglig. Den rapporteras inte som PASS och blockerar inte artifact release candidate.
+Reconciliation-resultatet finns i:
+
+`docs/changes/github-pages-static-pwa/reconciliation.md`
+
+Full required CI passerade för den slutligt reconcilerade revisionen `2bec15a030e73e5d38065c2e07585250ee691d9d`.
+
+Det finns inga kvarvarande implementation-, dokumentations- eller decision-mismatchar inom SB-58–SB-60.
+
+## Förändringsserie SB-58–SB-60
+
+Alla tre steg är completed och verifierade:
+
+- **SB-58** – GitHub Pages deployment profile,
+- **SB-59** – static PWA/base-path/routing/service-worker configuration,
+- **SB-60** – GitHub Pages workflow och regression coverage.
 
 ## Nästa åtgärd
 
-Mergea PR #7. Efter merge kan `v1.3.0` taggas och release-workflowet bygga/p publicera de fyra runtime-artefakterna.
+Genomför release readiness för den reconcilerade GitHub Pages-serien.

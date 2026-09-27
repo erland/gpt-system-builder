@@ -4,11 +4,11 @@ project:
   name: System Builder
 plan:
   path: docs/development-plan.md
-  total_steps: 57
+  total_steps: 60
 progress:
   current_phase: release
-  current_step: 57
-  last_completed_step: 57
+  current_step: 60
+  last_completed_step: 60
   completed_steps:
   - 1
   - 2
@@ -67,6 +67,9 @@ progress:
   - 55
   - 56
   - 57
+  - 58
+  - 59
+  - 60
   completed_step_ids:
   - SB-01
   - SB-02
@@ -125,19 +128,25 @@ progress:
   - SB-55
   - SB-56
   - SB-57
+  - SB-58
+  - SB-59
+  - SB-60
   skipped_steps: []
   inserted_steps:
   - 55
   - 56
   - 57
+  - 58
+  - 59
+  - 60
 state:
   overall: pass
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: merge
-  title: Merge PR #7
-  reason: Release readiness är READY_WITH_WARNINGS för v1.3.0; mergea den verifierade change-serien innan tagg och GitHub Release skapas.
+  recommended: release
+  title: Release readiness för GitHub Pages-serien
+  reason: Final documentation reconciliation är genomförd och verifierad utan kvarvarande mismatch; nästa åtgärd är release readiness.
 resume:
   supported: true
   required_files:
@@ -145,6 +154,7 @@ resume:
   - project-status.yaml
   - docs/development-plan.md
   - docs/changes/documentation-reconciliation-and-zip-verification/reconciliation.md
+  - docs/changes/github-pages-static-pwa/reconciliation.md
   - docs/canonical-scope.md
   - docs/end-to-end-process.md
   - docs/project-complexity.md
@@ -200,10 +210,13 @@ resume:
   - scripts/scan_repository_hygiene.py
   - docs/github-actions-baseline.md
   - templates/github-actions-ci-template.yml
+  - templates/github-pages-deploy-template.yml
+  - scripts/validate_github_pages_profile.py
   - .github/workflows/ci.yml
   - scripts/ci.sh
   - scripts/validate_github_actions.py
   - docs/deployment-packaging-patterns.md
+  - docs/github-pages-profile.md
   - templates/deployment-packaging-plan-template.md
   - scripts/validate_deployment_packaging_plan.py
   - docs/docker-baseline.md

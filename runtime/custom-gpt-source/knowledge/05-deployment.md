@@ -713,3 +713,17 @@ SB-26 är klart när:
 - troubleshooting för domain/404 finns,
 - live-vs-static verification är tydlig,
 - profile template/example/validator finns.
+
+
+## GitHub Pages static PWA
+
+Use `github-pages-static-pwa` for public static browser-only apps that need no backend or server-side secrets.
+
+For project sites:
+- use repository subpath as public base,
+- align Vite/stack base, PWA `start_url`/`scope`, service-worker scope and asset paths,
+- prefer hash routing unless a static history fallback is implemented and verified.
+
+Do not use Pages automatically for internal/sensitive data, backend-dependent behavior or server-side auth/secrets.
+
+Deployment belongs in a separate Pages workflow, not ordinary pull-request CI. The canonical pattern is build → configure Pages → upload Pages artifact → deploy Pages with least-privilege `contents: read`, `pages: write` and OIDC permission.

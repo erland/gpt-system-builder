@@ -2,7 +2,7 @@ schema_version: 1
 active_work:
   mode: CHANGE
   plan: docs/development-plan.md
-  change_request: documentation-reconciliation-and-zip-verification
+  change_request: github-pages-static-pwa
   selected_step: null
 progress:
   completed:
@@ -63,27 +63,30 @@ progress:
   - SB-55
   - SB-56
   - SB-57
+  - SB-58
+  - SB-59
+  - SB-60
   in_progress: null
   next:
     recommended: null
-    reason: Release readiness passed with one documented warning; merge PR #7 before tagging v1.3.0.
+    reason: Final documentation reconciliation passed; proceed to release readiness.
 blockers: []
 verification:
   last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: v1.3.0 release-readiness full required CI passed for 1d47829a55f9cb3312c5f2dcdeefa39ede436362; decision READY_WITH_WARNINGS.
+  notes: Final GitHub Pages reconciliation full required CI passed for 2bec15a030e73e5d38065c2e07585250ee691d9d.
 source_state:
   drift: none
-  reference: change/documentation-reconciliation-zip-verification
+  reference: change/github-pages-static-pwa
 execution:
-  next_action: merge
+  next_action: release
   step: null
-  operation: merge
-  reason: Release readiness is READY_WITH_WARNINGS; merge PR #7 before creating tag v1.3.0.
+  operation: release
+  reason: Final reconciliation is complete and verified; perform release readiness.
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: 1d47829a55f9cb3312c5f2dcdeefa39ede436362
+  implementation_revision: 2bec15a030e73e5d38065c2e07585250ee691d9d
   evidence_status: passed

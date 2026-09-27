@@ -1506,3 +1506,82 @@ Minst:
 - alla aktiverade runtime-distributioner behåller avsett beteende,
 - full regression och runtime parity passerar.
 
+---
+
+# Fortsättningsplan – GitHub Pages för statiska PWA-applikationer
+
+## SB-58 – GitHub Pages deployment profile
+
+### Mål
+
+Inför en canonical deploymentprofil för statiska webbapplikationer/PWA som kan köras utan backend och därför kan publiceras via GitHub Pages.
+
+### Omfattning
+
+System Builder ska kunna härleda profilen `github-pages-static-pwa` när:
+
+- applikationen kan byggas till statiska filer,
+- ingen server-side runtime eller backend krävs,
+- ingen server-side session/auth krävs,
+- runtime-secrets inte behöver finnas i klienten,
+- publik exponering är förenlig med användarens krav.
+
+Profilen ska inte väljas automatiskt för intern/känslig information eller när backend/server-side funktionalitet krävs.
+
+### Klart när
+
+- canonical deploymentmönster innehåller GitHub Pages-profilen,
+- profilen har tydliga selection/anti-selection-regler,
+- CREATE/runtime kan härleda profilen utan onödig fråga,
+- publikhets- och secrets-risker hanteras explicit,
+- nästa steg kan bygga PWA/base-path-konfiguration ovanpå profilen.
+
+## SB-59 – Static PWA och GitHub Pages-konfiguration
+
+### Mål
+
+Definiera hur System Builder konfigurerar statiska PWA-applikationer för GitHub Pages.
+
+### Omfattning
+
+Minst:
+
+- repository/project-site base path,
+- Vite `base` eller stackmotsvarighet,
+- manifest `start_url`/scope/icons/asset paths,
+- service worker precache/navigation behavior,
+- SPA/deep-link-strategi,
+- offline behavior där appen stödjer det,
+- custom domain som explicit option.
+
+### Klart när
+
+- typiska React/Vite PWA kan publiceras från repo-subpath,
+- asset/service-worker paths fungerar under Pages,
+- routing-fallback är medvetet vald och dokumenterad,
+- verifieringsregler finns för built artifact.
+
+## SB-60 – GitHub Pages workflow och regression coverage
+
+### Mål
+
+Inför deploymentworkflow och regressionsskydd för GitHub Pages-profilen.
+
+### Omfattning
+
+Minst:
+
+- GitHub Actions-mönster med Pages permissions/environment,
+- build → upload-pages-artifact → deploy-pages,
+- deployment separerad från vanlig PR-CI,
+- least privilege,
+- artifact/path validation,
+- instruction/static/E2E regression för profilval och säkerhetsgränser.
+
+### Klart när
+
+- System Builder kan generera korrekt Pages-workflow för statisk PWA,
+- profilen skyddas mot backend/secrets/internal-data misuse,
+- aktiva runtime-distributioner behåller reglerna,
+- full regression passerar.
+

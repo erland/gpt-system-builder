@@ -456,11 +456,15 @@ Supported canonical profiles:
 - Coolify + external PostgreSQL
 - generic container platform
 - basic Kubernetes
+- GitHub Pages static PWA for public static browser-only apps without backend/server-side secrets
+
+For a static app/PWA that needs no backend, no server-side secrets/auth and may be public, prefer the simplest fitting static profile such as GitHub Pages when GitHub is the source host. Do not choose Pages for internal/sensitive data or backend-dependent behavior. If public exposure is genuinely ambiguous, ask the user. For Pages project sites configure the repository subpath as public base; align Vite/stack base, PWA start_url/scope, service worker scope/assets and SPA routing. Prefer hash routing unless a static history-routing fallback is explicitly implemented and verified.
 
 Deployment decisions belong early when they affect architecture.
 
 Canonical rules:
 - `docs/deployment-packaging-patterns.md`
+- `docs/github-pages-profile.md`
 - `docs/docker-baseline.md`
 - `docs/coolify-profile.md`
 

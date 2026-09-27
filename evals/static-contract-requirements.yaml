@@ -119,3 +119,18 @@ requirements:
     - leave incomplete only for
     - genuinely requires
 
+- id: REQ-GITHUB-PAGES-STATIC
+  severity: critical
+  groups:
+  - - GitHub Pages
+    - github-pages-static-pwa
+  - - public static
+    - static browser-only
+    - static app
+  - - without backend
+    - no backend
+    - backend-dependent
+  - - internal/sensitive
+    - sensitive data
+    - server-side secrets
+
