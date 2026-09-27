@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: documentation-reconciliation-and-zip-verification
-  selected_step: null
+  selected_step: SB-56
 progress:
   completed:
   - SB-01
@@ -61,7 +61,7 @@ progress:
   - SB-53
   - SB-54
   - SB-55
-  in_progress: null
+  in_progress: SB-56
   next:
     recommended: SB-56
     reason: SB-55 is verified and complete; implement ZIP best-effort automatic verification.
@@ -79,7 +79,7 @@ execution:
   next_action: implement
   step: SB-56
   operation: implement
-  reason: SB-55 is complete; SB-56 is the first safe incomplete step.
+  reason: SB-56 is locked and in progress.
 completion:
   allowed: false
   waiting_for: null
