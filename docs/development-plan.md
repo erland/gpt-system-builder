@@ -1585,3 +1585,77 @@ Minst:
 - aktiva runtime-distributioner behåller reglerna,
 - full regression passerar.
 
+---
+
+# Fortsättningsplan – README reconciliation och releaseversionering
+
+## SB-61 – README som current-state entrypoint
+
+### Mål
+
+Säkerställ att System Builder behandlar projektets `README.md` som en current-state entrypoint som måste stämma med faktisk implementation och övrig canonical dokumentation före release readiness.
+
+### Omfattning
+
+README ska när relevant beskriva eller länka till:
+
+- systemets syfte och huvudsakliga funktion,
+- hur projektet byggs/körs,
+- huvudkomponenter/runtime/deployment på rätt abstraktionsnivå,
+- prerequisites,
+- installation/configuration/operations-dokumentation,
+- aktuella begränsningar eller viktiga användningsförutsättningar.
+
+README ska inte duplicera functional specification, architecture eller operations-dokumentation i onödan.
+
+Final documentation reconciliation ska uttryckligen kontrollera README. En materiellt stale README är en documentation mismatch och måste åtgärdas före release readiness.
+
+### Klart när
+
+- CREATE/CHANGE/release rules behandlar README som current-state entrypoint,
+- final reconciliation kräver README-kontroll,
+- System Builders egen README är reconcilerad mot aktuell state,
+- en validator kan upptäcka uppenbart stale README-state.
+
+## SB-62 – Release-tag som canonical versionskälla
+
+### Mål
+
+Inför generell releaseversioneringsregel för projekt som System Builder skapar eller ändrar.
+
+### Omfattning
+
+När release artefacts byggs från en Git-tag ska artifactversionen härledas från taggen om projektet inte har ett uttryckligt annat canonical versioning contract.
+
+Om ecosystemmetadata som `package.json`, Maven/Gradle metadata eller annan versionsfil också måste bära version ska ownership/synkning vara explicit och validerad.
+
+Undvik oberoende hårdkodade versionssanningar.
+
+### Klart när
+
+- runtime/release guidance definierar tag-derived versioning,
+- workflows/templates använder eller rekommenderar release tag som versionskälla,
+- alternativa versioning contracts kräver explicit synkning/validation.
+
+## SB-63 – Regression coverage för README och releaseversionering
+
+### Mål
+
+Skydda README-reconciliation och tag-derived releaseversionering mot regression.
+
+### Omfattning
+
+Minst:
+
+- stale README blockerar final reconciliation/release readiness,
+- README behöver inte duplicera canonical docs,
+- release tag `vX.Y.Z` ger artifactversion `X.Y.Z`,
+- hardcoded oberoende releaseversion avvisas när taggen är canonical,
+- explicit ecosystem version file får användas bara med definierad synkning/validation.
+
+### Klart när
+
+- instruction/static/e2e regression täcker beteendet,
+- alla aktiva runtime-distributioner behåller reglerna,
+- full regression passerar.
+
