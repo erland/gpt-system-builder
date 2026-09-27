@@ -2,8 +2,8 @@ schema_version: 1
 active_work:
   mode: CHANGE
   plan: docs/development-plan.md
-  change_request: github-pages-static-pwa
-  selected_step: null
+  change_request: readme-release-version-contract
+  selected_step: SB-61
 progress:
   completed:
   - SB-01
@@ -66,10 +66,10 @@ progress:
   - SB-58
   - SB-59
   - SB-60
-  in_progress: null
+  in_progress: SB-61
   next:
-    recommended: null
-    reason: Final documentation reconciliation passed; proceed to release readiness.
+    recommended: SB-61
+    reason: Implement README current-state reconciliation before release tag versioning and regression coverage.
 blockers: []
 verification:
   last_status: passed
@@ -79,12 +79,12 @@ verification:
   notes: Final GitHub Pages reconciliation full required CI passed for 2bec15a030e73e5d38065c2e07585250ee691d9d.
 source_state:
   drift: none
-  reference: change/github-pages-static-pwa
+  reference: change/readme-release-version-contract
 execution:
-  next_action: release
-  step: null
-  operation: release
-  reason: Final reconciliation is complete and verified; perform release readiness.
+  next_action: implement
+  step: SB-61
+  operation: implement
+  reason: SB-61 is locked and in progress.
 completion:
   allowed: false
   waiting_for: null
