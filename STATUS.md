@@ -1,31 +1,29 @@
 # System Builder – Status
 
 ## Övergripande status
-**CHANGE IN PROGRESS – SB-58 complete, SB-59 next**
+**CHANGE IN PROGRESS – SB-59 complete, SB-60 next**
 
 ## Senast slutförda steg
-### SB-58 – GitHub Pages deployment profile
+### SB-59 – Static PWA och GitHub Pages-konfiguration
 
-SB-58 är verifierad med full required CI för revision `8173a90224ced69e44763261cd1d81fcaf69ae15` och är completed.
+SB-59 är verifierad med full required CI för revision `afead57651bf98a1a344608a8f9cc7a84fb09640` och är completed.
 
-System Builder har nu canonical deploymentprofilen `github-pages-static-pwa` för publika statiska browser-only appar som:
+GitHub Pages-profilen hanterar nu:
 
-- byggs till statiska filer,
-- inte kräver backend/server-side runtime,
-- inte kräver server-side secrets/auth,
-- får exponeras publikt.
-
-Profilen ska inte väljas för intern/känslig information, backendberoende funktionalitet eller klientbundlade secrets. Om publik exponering är ett verkligt verksamhets-/säkerhetsval ska användaren tillfrågas.
-
-Canonical deployment rules, CREATE-routing och runtimeprojektioner är uppdaterade. Custom GPT-instruktionen är fortsatt inom 8 000-teckensgränsen.
+- repository-subpath som public base för project sites,
+- Vite/stack-specific public base,
+- PWA `start_url` och `scope`,
+- service-worker scope och built asset paths,
+- hash routing som säker default,
+- history routing endast med verifierad statisk fallback,
+- artifact-verifiering för root-path-, manifest-, service-worker- och routingproblem.
 
 ## Aktiv förändringsserie
 
 Återstående:
 
-- **SB-59** – static PWA/base-path/routing/service-worker configuration,
-- **SB-60** – GitHub Pages workflow och regression coverage.
+- **SB-60** – GitHub Pages Actions workflow och regression coverage.
 
 ## Nästa åtgärd
 
-Implementera SB-59 på samma PR.
+Implementera SB-60 på samma PR.
