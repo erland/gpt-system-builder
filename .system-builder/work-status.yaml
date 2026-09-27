@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: documentation-reconciliation-and-zip-verification
-  selected_step: SB-55
+  selected_step: null
 progress:
   completed:
   - SB-01
@@ -60,27 +60,28 @@ progress:
   - SB-52
   - SB-53
   - SB-54
-  in_progress: SB-55
+  - SB-55
+  in_progress: null
   next:
-    recommended: SB-55
-    reason: Start documentation intent and final reconciliation before ZIP verification changes.
+    recommended: SB-56
+    reason: SB-55 is verified and complete; implement ZIP best-effort automatic verification.
 blockers: []
 verification:
   last_status: passed
   baseline: green
   commands:
-  - python3 scripts/validate_state_contracts.py
-  notes: SB-54 full required CI passed for 44f84e1721b60a16c2899e81078029cd1a0b2367.
+  - bash scripts/ci-project.sh
+  notes: SB-55 full required CI passed for e5ad7ef4961dd1cd948f186c95ecd058d47dd073.
 source_state:
   drift: none
   reference: change/documentation-reconciliation-zip-verification
 execution:
   next_action: implement
-  step: SB-55
+  step: SB-56
   operation: implement
-  reason: SB-55 is locked and in progress.
+  reason: SB-55 is complete; SB-56 is the first safe incomplete step.
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: 44f84e1721b60a16c2899e81078029cd1a0b2367
+  implementation_revision: e5ad7ef4961dd1cd948f186c95ecd058d47dd073
   evidence_status: passed
