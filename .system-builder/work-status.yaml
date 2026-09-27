@@ -2,8 +2,8 @@ schema_version: 1
 active_work:
   mode: CHANGE
   plan: docs/development-plan.md
-  change_request: documentation-reconciliation-and-zip-verification
-  selected_step: null
+  change_request: github-pages-static-pwa
+  selected_step: SB-58
 progress:
   completed:
   - SB-01
@@ -63,10 +63,10 @@ progress:
   - SB-55
   - SB-56
   - SB-57
-  in_progress: null
+  in_progress: SB-58
   next:
-    recommended: null
-    reason: Release readiness passed with one documented warning; merge PR #7 before tagging v1.3.0.
+    recommended: SB-58
+    reason: Implement canonical GitHub Pages deployment profile before PWA configuration and workflow coverage.
 blockers: []
 verification:
   last_status: passed
@@ -76,12 +76,12 @@ verification:
   notes: v1.3.0 release-readiness full required CI passed for 1d47829a55f9cb3312c5f2dcdeefa39ede436362; decision READY_WITH_WARNINGS.
 source_state:
   drift: none
-  reference: change/documentation-reconciliation-zip-verification
+  reference: change/github-pages-static-pwa
 execution:
-  next_action: merge
-  step: null
-  operation: merge
-  reason: Release readiness is READY_WITH_WARNINGS; merge PR #7 before creating tag v1.3.0.
+  next_action: implement
+  step: SB-58
+  operation: implement
+  reason: SB-58 is locked and in progress.
 completion:
   allowed: false
   waiting_for: null
