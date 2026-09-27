@@ -72,14 +72,14 @@ progress:
   in_progress: null
   next:
     recommended: null
-    reason: SB-61 through SB-63 are complete; perform final documentation reconciliation before release readiness.
+    reason: Final documentation reconciliation passed; proceed to release readiness.
 blockers: []
 verification:
   last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-63 full required CI passed for ff2ba297cf849923b7aa76a428a6495f91a7f60c.
+  notes: Final README/version reconciliation full required CI passed for be9273fc1cb53c9d4ecca9dfc84f305ec26d6e4f.
 source_state:
   drift: none
   reference: change/readme-release-version-contract
@@ -87,9 +87,9 @@ execution:
   next_action: release
   step: null
   operation: release
-  reason: README/version change implementation is complete; perform final reconciliation before release readiness.
+  reason: Final reconciliation is complete and verified; perform release readiness.
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: ff2ba297cf849923b7aa76a428a6495f91a7f60c
+  implementation_revision: be9273fc1cb53c9d4ecca9dfc84f305ec26d6e4f
   evidence_status: passed
