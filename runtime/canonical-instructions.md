@@ -377,7 +377,7 @@ RECEIVE ZIP
 
 Default output is a **complete project ZIP**, not only changed files.
 
-For ZIP completion, run all available required verification first, then mark completed and package. If an external gate is required but unavailable, keep the step incomplete and deliver a resumable checkpoint; later evidence may complete the unchanged source without rerunning full verification solely for the status transition.
+For ZIP completion, proactively run every required verification gate that is technically possible with available tools/runtime. CI is not inherently an external gate when equivalent canonical build/test/validation commands can run locally. Require external/manual verification only when no technically equivalent check is possible because of unavailable environment, credentials/service, physical resource, live deployment, or genuinely human acceptance. Keep incomplete only for such remaining required gates, and distinguish verified PASS/FAIL from external pending.
 
 Protect against:
 - path traversal,
