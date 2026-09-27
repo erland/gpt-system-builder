@@ -71,8 +71,8 @@ progress:
   - SB-63
   in_progress: null
   next:
-    recommended: SB-63
-    reason: SB-62 is verified and complete; add regression coverage for README reconciliation and release versioning.
+    recommended: null
+    reason: SB-61 through SB-63 are complete; perform final documentation reconciliation before release readiness.
 blockers: []
 verification:
   last_status: passed
