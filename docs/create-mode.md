@@ -187,11 +187,14 @@ Undvik:
 Om systemet ska köras som tjänst ska deploymentprofil normalt etableras tidigt.
 
 Exempel:
+- GitHub Pages för publik statisk PWA/webbapp utan backend,
 - Docker,
 - Docker + external PostgreSQL,
 - Coolify + external PostgreSQL,
 - generic container platform,
 - Kubernetes.
+
+När appen är rent statisk, saknar backend/server-side secrets och får vara publik ska System Builder överväga `github-pages-static-pwa` som enklaste profil utan att fråga om ett rutinmässigt teknikval. Om publik exponering är ett verkligt verksamhets- eller informationssäkerhetsval ska användaren däremot tillfrågas.
 
 Deploymentval ska påverka arkitekturen innan implementation när det är relevant.
 
