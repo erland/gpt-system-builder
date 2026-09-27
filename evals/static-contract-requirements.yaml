@@ -146,3 +146,15 @@ requirements:
     - materially stale
     - documentation mismatch
 
+- id: REQ-RELEASE-VERSION-SOURCE
+  severity: critical
+  groups:
+  - - release tag
+    - tag-derived
+  - - artifact version
+    - release version
+  - - version ownership
+    - canonical version contract
+  - - validate
+    - synchronize
+
