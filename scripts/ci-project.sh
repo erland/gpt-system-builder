@@ -38,6 +38,7 @@ $PYTHON scripts/validate_operational_docs.py configuration examples/configuratio
 $PYTHON scripts/validate_operational_docs.py installation examples/installation.example.md
 $PYTHON scripts/validate_operational_docs.py operations examples/operations.example.md
 $PYTHON scripts/validate_release_readiness.py examples/release-readiness.example.md
+$PYTHON scripts/validate_readme_current_state.py
 $PYTHON scripts/validate_knowledge_architecture.py .
 $PYTHON scripts/validate_runtime_instruction.py .
 $PYTHON scripts/validate_runtime_contract.py
