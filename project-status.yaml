@@ -145,8 +145,8 @@ state:
   warnings: []
 next_step:
   recommended: release
-  title: Final reconciliation för GitHub Pages-serien
-  reason: SB-58–SB-60 är verifierade och completed; nästa åtgärd är final documentation reconciliation före release readiness.
+  title: Release readiness för GitHub Pages-serien
+  reason: Final documentation reconciliation är genomförd och verifierad utan kvarvarande mismatch; nästa åtgärd är release readiness.
 resume:
   supported: true
   required_files:
@@ -154,6 +154,7 @@ resume:
   - project-status.yaml
   - docs/development-plan.md
   - docs/changes/documentation-reconciliation-and-zip-verification/reconciliation.md
+  - docs/changes/github-pages-static-pwa/reconciliation.md
   - docs/canonical-scope.md
   - docs/end-to-end-process.md
   - docs/project-complexity.md
