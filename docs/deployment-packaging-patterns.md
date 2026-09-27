@@ -80,6 +80,9 @@ För `github-pages-static-pwa` gäller:
 - public base path måste hanteras explicit,
 - SPA-routing får inte förutsätta server-side rewrites,
 - PWA manifest/service worker paths ska fungera under vald Pages-URL,
+- project-site base path ska härledas från repositorynamnet,
+- Vite/stack public-base configuration ska matcha deployment-URL,
+- SPA routing ska välja hash routing eller verifierad statisk fallback,
 - deployment sker separat från vanlig PR-CI.
 
 Detaljer: `docs/github-pages-profile.md`.
