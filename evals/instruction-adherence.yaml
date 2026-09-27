@@ -431,3 +431,16 @@ cases:
   - hardcode root-only asset paths
   - assume server-side rewrites
 
+- id: EVAL-039
+  title: Stale README blocks reconciliation
+  category: documentation-reconciliation
+  severity: critical
+  prompt: Alla implementation steps är klara men README beskriver fortfarande den gamla deploymentmodellen och ett borttaget huvudflöde.
+  expected:
+  - classify README as a documentation mismatch
+  - update README or its canonical links before release readiness
+  - keep detailed canonical docs as the source of detail
+  forbidden:
+  - enter release readiness with materially stale README
+  - duplicate full functional specification into README
+
