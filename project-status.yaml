@@ -7,8 +7,8 @@ plan:
   total_steps: 57
 progress:
   current_phase: change
-  current_step: 56
-  last_completed_step: 55
+  current_step: 57
+  last_completed_step: 56
   completed_steps:
   - 1
   - 2
@@ -65,6 +65,7 @@ progress:
   - 53
   - 54
   - 55
+  - 56
   completed_step_ids:
   - SB-01
   - SB-02
@@ -121,6 +122,7 @@ progress:
   - SB-53
   - SB-54
   - SB-55
+  - SB-56
   skipped_steps: []
   inserted_steps:
   - 55
@@ -131,9 +133,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: 56
-  title: ZIP best-effort automatic verification
-  reason: SB-55 är verifierad och completed; nästa steg är att göra ZIP-verifiering självgående där runtime kan verifiera tekniskt.
+  recommended: 57
+  title: Regression coverage för reconciliation och ZIP verification
+  reason: SB-56 är verifierad och completed; nästa steg är att lägga explicit regressionsskydd för SB-55 och SB-56.
 resume:
   supported: true
   required_files:
