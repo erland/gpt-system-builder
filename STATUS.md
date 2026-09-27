@@ -1,30 +1,32 @@
 # System Builder – Status
 
 ## Övergripande status
-**CHANGE IN PROGRESS – SB-62 complete, SB-63 next**
+**CHANGE IMPLEMENTATION COMPLETE – final reconciliation next**
 
 ## Senast slutförda steg
-### SB-62 – Release-tag som canonical versionskälla
+### SB-63 – Regression coverage för README och releaseversionering
 
-SB-62 är verifierad med full required CI för revision `9133dba6e8fa5e5bedb1c07507f25ec3ea9ffa00` och är completed.
+SB-63 är verifierad med full required CI för revision `ff2ba297cf849923b7aa76a428a6495f91a7f60c` och är completed.
 
-System Builder har nu en generell releaseversioneringsregel:
+Regressionsskyddet innehåller nu:
 
-- när releaseartefakter byggs från en Git-tag är taggen normalt canonical versionskälla,
-- artifactnamn, image tags och release metadata härleds från samma releaseversion,
-- hårdkodade parallella releaseversioner ska undvikas,
-- om `package.json`, `pom.xml`, Gradle metadata eller annan ecosystemfil också innehåller version ska versionsägarskap vara explicit,
-- antingen äger taggen versionen och ecosystemfilen synkas/valideras, eller så äger ecosystemfilen versionen och taggen valideras mot den,
-- mismatch mellan tagg, artifacts, release metadata och ecosystemversion är release-blocking.
+- kritiskt evalfall där stale README blockerar final reconciliation/release readiness,
+- kritiskt evalfall där release-taggen härleder artifactversion,
+- kritiskt evalfall för mismatch mellan release tag och ecosystem-version,
+- statiskt runtime-kontrakt för README reconciliation,
+- statiskt runtime-kontrakt för release version source/ownership,
+- deterministiskt policy-E2E för current/stale README, tag-owned versioning, mismatch och ecosystem-owned versioning.
 
-Custom GPT-instruktionen är fortsatt inom 8 000-teckensgränsen.
+Full System Builder project CI passerar med 41 instruction-adherence-fall, varav 33 critical.
 
-## Aktiv förändringsserie
+## Förändringsserie SB-61–SB-63
 
-Återstående:
+Alla planerade steg är completed:
 
-- **SB-63** – regression coverage för README och releaseversionering.
+- **SB-61** – README som current-state entrypoint,
+- **SB-62** – release-tag som canonical versionskälla,
+- **SB-63** – regression coverage.
 
 ## Nästa åtgärd
 
-Implementera SB-63 på samma PR.
+Genomför final documentation reconciliation för README/version-serien före release readiness.
