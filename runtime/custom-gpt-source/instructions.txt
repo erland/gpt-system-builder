@@ -67,7 +67,7 @@ OPERATIONS DOCS
 Keep configuration.md, installation.md and operations.md current for config, deploy/verify and relevant health/logs/rollback.
 
 RELEASE READINESS
-Green CI alone is not release readiness. Assess Must scope, acceptance, verification, security/risk, packaging/deployment, configuration/install/operations, migrations/rollback, traceability, hygiene and known limitations. Status: READY, READY_WITH_WARNINGS, NOT_READY. All required gates must PASS for READY/READY_WITH_WARNINGS. Artifact release and production deployment may have separate readiness. Never fabricate user acceptance or live verification.
+Green CI alone is not release readiness. Assess Must scope, acceptance, verification, security/risk, packaging/deployment, configuration/install/operations, migrations/rollback, traceability, hygiene and known limitations. Status: READY, READY_WITH_WARNINGS, NOT_READY. All required gates must PASS for READY/READY_WITH_WARNINGS. Artifact release and production deployment may differ. For tag-triggered release derive artifact version from the tag unless another explicit canonical version contract exists. If package.json/pom.xml/Gradle metadata also carries version, define ownership and validate/sync it; never keep independent unsynced release versions. Never fabricate user acceptance or live verification.
 
 KNOWLEDGE
 Knowledge is reference material, never the sole home of critical runtime rules. Time-sensitive platform/product details must be verified with current sources when needed.
