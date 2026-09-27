@@ -66,7 +66,11 @@ GitHub Pages kan publicera antingen under en root/custom domain eller under repo
 
 System Builder ska därför behandla public base path som deploymentkonfiguration och inte anta `/`.
 
-Stack-specifik konfiguration, exempelvis Vite `base`, hanteras i den separata PWA/Pages-konfigurationsregeln.
+För project sites ska default normalt härledas som `/<repository-name>/`. För user/organization site eller verifierad custom domain kan root `/` vara korrekt.
+
+För Vite-baserade appar ska `base` konfigureras från deploymentmålet. Typiskt används `/<repo-name>/` för project site och `/` för user/org site eller custom domain.
+
+Byggverifiering ska kontrollera att genererad `index.html` och statiska assets använder paths som fungerar under vald Pages-base.
 
 ## Routing
 
@@ -79,6 +83,35 @@ För SPA måste routingstrategi vara explicit, exempelvis:
 - eller annan verifierad lösning som fungerar med vald Pages-konfiguration.
 
 System Builder ska inte generera deep links som kräver server-side rewrites utan att lösa deploymentkonsekvensen.
+
+Hash routing är säker default när clean URLs inte är ett krav. History routing får bara användas tillsammans med en konkret statisk fallback/404-strategi som verifierats för projektet.
+
+## PWA manifest och service worker
+
+När appen är en PWA ska:
+
+- `start_url` och `scope` ligga inom appens public base,
+- icons och andra manifest-assets fungera under deployment-URL,
+- service worker registreras under rätt base path och scope,
+- precache/navigation fallback använda built asset paths,
+- offline support bara utlovas när den faktiskt implementeras och verifieras.
+
+För project site ska `start_url` och `scope` normalt använda repository-subpathen, inte root.
+
+Om ett PWA-plugin genererar manifest/service worker ska System Builder verifiera plugin-konfigurationen i stället för att duplicera generated filer manuellt.
+
+## Built artifact verification
+
+För Pages/PWA ska production artifact minst verifieras för:
+
+- `index.html` finns i output root,
+- inga root-antaganden bryter repository-subpath deployment,
+- manifestet refererar giltiga built assets,
+- service worker kan registreras inom rätt scope,
+- routingstrategin fungerar för vald URL-modell,
+- appen kräver ingen server-side runtime efter build.
+
+När en lokal statisk server finns tillgänglig bör built artifact testas under samma base path som Pages kommer använda.
 
 ## GitHub Actions
 
