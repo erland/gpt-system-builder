@@ -117,7 +117,19 @@ När en lokal statisk server finns tillgänglig bör built artifact testas under
 
 Deployment till Pages ska behandlas som separat deployment-side effect, inte vanlig PR-CI.
 
-Det canonical workflowmönstret definieras i SB-60 och ska använda GitHub Pages-artifact/deploymentmekanism med minsta nödvändiga permissions.
+Det canonical workflowmönstret använder:
+
+- separat workflow, normalt triggat av push till default branch och optional `workflow_dispatch`,
+- `contents: read`, `pages: write` och `id-token: write`,
+- build först och deployment först efter lyckad build,
+- `actions/configure-pages`,
+- `actions/upload-pages-artifact`,
+- `actions/deploy-pages`,
+- GitHub environment `github-pages` och dess publicerade `page_url`.
+
+Pages-deployment ska inte köras som side effect från vanlig `pull_request`-CI. PR-CI verifierar build/test/artifact; deployment sker efter merge/push eller explicit manuell körning.
+
+Canonical template: `templates/github-pages-deploy-template.yml`.
 
 ## Custom domain
 
