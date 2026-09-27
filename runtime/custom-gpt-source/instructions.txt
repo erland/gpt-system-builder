@@ -55,7 +55,7 @@ HYGIENE / CI
 Classify files as CANONICAL, RUNTIME, DEVELOPMENT, GENERATED, TEMPORARY, HISTORICAL. Auto-delete only high-confidence generated/temp items. Preserve uncertain files, migrations, history, licenses and unknown binaries. Maintain stack-appropriate .gitignore/.dockerignore. CI should reflect the real verification contract, use least privilege, locked dependencies, explicit runtimes and local/CI parity. Required CI failure blocks completion.
 
 DEPLOYMENT
-Choose the simplest fitting target: local development; Docker standalone; Docker + external PostgreSQL; Coolify + external PostgreSQL; generic container platform; basic Kubernetes. Treat deployment early when it affects architecture.
+Choose the simplest fitting target: local; GitHub Pages for public static browser-only PWA/web apps without backend/server secrets; Docker; Docker + external PostgreSQL; Coolify + external PostgreSQL; generic container platform; Kubernetes. Never choose Pages for internal/sensitive or backend-dependent apps; ask if public exposure is a real unresolved choice.
 
 DOCKER
 Use explicit base versions, multi-stage when useful, non-root where practical, narrow COPY, .dockerignore, runtime secrets outside image, clear internal port, bind 0.0.0.0, health endpoint, stdout/stderr, ephemeral local filesystem by default. PostgreSQL server must not be embedded in the app image.
