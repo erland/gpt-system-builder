@@ -1,29 +1,38 @@
 # System Builder – Status
 
 ## Övergripande status
-**CHANGE IMPLEMENTATION COMPLETE – final reconciliation next**
+**CHANGE RECONCILED – release readiness next**
 
-## Senast slutförda steg
-### SB-60 – GitHub Pages workflow och regression coverage
+## Final documentation reconciliation
 
-SB-60 är verifierad med full required CI för revision `1d8546ba8a56384b8f2c6a058f1c38b9aad79c9b` och är completed.
+Förändringsserien SB-58–SB-60 har reconcilerats mot faktisk implementation.
 
-GitHub Pages-stödet innehåller nu:
+En verklig mismatch upptäcktes:
 
-- canonical workflowtemplate för build → upload Pages artifact → deploy Pages,
-- least-privilege permissions med `contents: read`, `pages: write` och `id-token: write`,
-- separat deployment från vanlig pull request-CI,
-- `github-pages` environment och publicerad page URL,
-- validator för Pages-profil/workflow,
-- instruction-adherence-fall för korrekt profilval, säkerhetsgränser och project-site paths,
-- statiskt runtime-kontrakt för GitHub Pages-stödet,
-- hygiene-scanner som inte feltolkar den exakta ofarliga OIDC-permission-strängen som en secret.
+- Custom GPT-projektionen hade profilvalet för GitHub Pages men saknade SB-59/SB-60-detaljer för repository-subpath/PWA-konfiguration och separat Pages-deployment från PR-CI.
 
-Full System Builder project CI passerar med 38 instruction-adherence-fall, 30 critical.
+Mismatchen klassificerades som **implementation mismatch** och reparerades i Custom GPT-instruktionen samt deployment-Knowledge.
+
+Efter reparationen innehåller Custom GPT-runtime:
+
+- repository-subpath som base för Pages project sites,
+- Vite/public-base, PWA `start_url`/`scope`, service-worker scope/assets och routing,
+- hash routing som default om ingen verifierad statisk history fallback finns,
+- separat Pages deployment från vanlig PR-CI.
+
+Custom GPT-instruktionen är **7 694 tecken**, under 8 000-gränsen.
+
+Reconciliation-resultatet finns i:
+
+`docs/changes/github-pages-static-pwa/reconciliation.md`
+
+Full required CI passerade för den slutligt reconcilerade revisionen `2bec15a030e73e5d38065c2e07585250ee691d9d`.
+
+Det finns inga kvarvarande implementation-, dokumentations- eller decision-mismatchar inom SB-58–SB-60.
 
 ## Förändringsserie SB-58–SB-60
 
-Alla planerade steg är completed:
+Alla tre steg är completed och verifierade:
 
 - **SB-58** – GitHub Pages deployment profile,
 - **SB-59** – static PWA/base-path/routing/service-worker configuration,
@@ -31,4 +40,4 @@ Alla planerade steg är completed:
 
 ## Nästa åtgärd
 
-Genomför final documentation reconciliation för GitHub Pages-serien före release readiness.
+Genomför release readiness för den reconcilerade GitHub Pages-serien.
