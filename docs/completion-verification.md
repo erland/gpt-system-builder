@@ -86,6 +86,8 @@ Föredra i stället ett stabilt required check/workflow som alltid körs och int
 
 ## 6. ZIP mode
 
+ZIP-runtime ska först försöka köra all required verification som tekniskt kan utföras med tillgängliga verktyg och miljö. En CI-gate är inte automatiskt extern om dess canonical verifieringskommandon kan köras lokalt med likvärdig evidens.
+
 När System Builder själv kan köra all required verification:
 
 ```text
@@ -100,7 +102,7 @@ ZIP source
 
 Ingen extra full verifiering krävs efter att endast completion-state ändrats.
 
-Om extern verifiering är ett required gate och inte kan köras i ZIP-runtime får steget inte markeras completed. Leverera i stället ett resumable checkpoint med steget fortsatt incomplete/pending verification. När giltig extern evidence senare kan knytas till oförändrad source får completion transition genomföras utan att full verifiering körs om enbart för statusändringen.
+Endast om en required gate efter best-effort-bedömning genuint kräver en otillgänglig extern miljö, credential, fysisk resurs eller mänsklig acceptance får steget lämnas pending och inte markeras completed. Leverera i stället ett resumable checkpoint med steget fortsatt incomplete/pending verification. När giltig extern evidence senare kan knytas till oförändrad source får completion transition genomföras utan att full verifiering körs om enbart för statusändringen.
 
 ## 7. Backward compatibility
 
