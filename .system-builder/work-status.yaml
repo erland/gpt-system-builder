@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: readme-release-version-contract
-  selected_step: SB-61
+  selected_step: null
 progress:
   completed:
   - SB-01
@@ -66,27 +66,28 @@ progress:
   - SB-58
   - SB-59
   - SB-60
-  in_progress: SB-61
+  - SB-61
+  in_progress: null
   next:
-    recommended: SB-61
-    reason: Implement README current-state reconciliation before release tag versioning and regression coverage.
+    recommended: SB-62
+    reason: SB-61 is verified and complete; implement generic tag-derived release versioning.
 blockers: []
 verification:
   last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: Final GitHub Pages reconciliation full required CI passed for 2bec15a030e73e5d38065c2e07585250ee691d9d.
+  notes: SB-61 full required CI passed for f6292a7a955aa83966ed11d181c3261256bca372.
 source_state:
   drift: none
   reference: change/readme-release-version-contract
 execution:
   next_action: implement
-  step: SB-61
+  step: SB-62
   operation: implement
-  reason: SB-61 is locked and in progress.
+  reason: SB-61 is complete; SB-62 is the first safe incomplete step.
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: 2bec15a030e73e5d38065c2e07585250ee691d9d
+  implementation_revision: f6292a7a955aa83966ed11d181c3261256bca372
   evidence_status: passed
