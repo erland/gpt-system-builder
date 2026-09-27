@@ -7,8 +7,8 @@ plan:
   total_steps: 63
 progress:
   current_phase: change
-  current_step: 61
-  last_completed_step: 60
+  current_step: 62
+  last_completed_step: 61
   completed_steps:
   - 1
   - 2
@@ -70,6 +70,7 @@ progress:
   - 58
   - 59
   - 60
+  - 61
   completed_step_ids:
   - SB-01
   - SB-02
@@ -131,6 +132,7 @@ progress:
   - SB-58
   - SB-59
   - SB-60
+  - SB-61
   skipped_steps: []
   inserted_steps:
   - 55
@@ -147,9 +149,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: 61
-  title: README som current-state entrypoint
-  reason: Ny CHANGE-serie SB-61–SB-63 är aktiv; gör README reconciliation explicit och verifierbar.
+  recommended: 62
+  title: Release-tag som canonical versionskälla
+  reason: SB-61 är verifierad och completed; definiera generell tag-derived releaseversionering.
 resume:
   supported: true
   required_files:
