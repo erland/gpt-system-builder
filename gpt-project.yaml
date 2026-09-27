@@ -61,6 +61,7 @@ canonical:
   coolify_profile: docs/coolify-profile.md
   operational_documentation_standard: docs/configuration-installation-operations-standard.md
   release_readiness_standard: docs/release-readiness-standard.md
+  readme_current_state_standard: docs/readme-current-state-standard.md
   knowledge_architecture: docs/knowledge-architecture.md
   runtime_contract: runtime/runtime-contract.json
 status:
