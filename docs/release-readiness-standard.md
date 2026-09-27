@@ -355,6 +355,25 @@ Workflow/build script ska härleda artifactversionen från taggen och inte under
 
 Om ekosystemet kräver en versionsfil, exempelvis `package.json`, Maven `pom.xml`, Gradle metadata eller annan manifestfil, ska System Builder uttryckligen definiera ownership:
 
+- taggen äger releaseversionen och ecosystemfilen synkas/valideras mot taggen vid release, eller
+- ecosystemfilen äger versionen och release-taggen valideras mot den.
+
+Två oberoende versionssanningar utan synk/validation är inte tillåtna.
+
+En mismatch mellan tagg, artifactnamn, release metadata och eventuell ecosystemversion är release-blocking tills den är löst.
+
+### Canonical versionskälla för taggbaserad release
+
+När ett projekt publicerar releaseartefakter från en Git-tag ska release-taggen vara canonical versionskälla för artefaktversionen, om projektet inte uttryckligen definierar ett annat versionskontrakt.
+
+Exempel:
+
+`v2.3.0 → 2.3.0 → my-app-2.3.0.zip`
+
+Workflow/build script ska härleda artifactversionen från taggen och inte underhålla ett separat hårdkodat releaseversionsnummer.
+
+Om ekosystemet kräver en versionsfil, exempelvis `package.json`, Maven `pom.xml`, Gradle metadata eller annan manifestfil, ska System Builder uttryckligen definiera ownership:
+
 - **tag owns release version** och ecosystemfilen synkas/valideras mot taggen vid release, eller
 - **ecosystemfil owns version** och release-taggen valideras mot den.
 
