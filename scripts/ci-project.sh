@@ -71,6 +71,7 @@ $PYTHON scripts/run_e2e_existing_change_eval.py --scenario-root evals/e2e/existi
 $PYTHON scripts/run_e2e_docker_coolify_eval.py --scenario-root evals/e2e/docker-coolify
 $PYTHON scripts/run_e2e_documentation_zip_policy_eval.py --scenario evals/e2e/documentation-zip-policy/scenario.yaml
 $PYTHON scripts/run_e2e_readme_release_version_policy.py --scenario evals/e2e/readme-release-version-policy/scenario.yaml
+$PYTHON scripts/run_e2e_deferred_verification_planning_handoff.py --scenario evals/e2e/deferred-verification-planning-handoff/scenario.yaml
 
 echo "== Clean generated CI artifacts before hygiene =="
 rm -rf "$DIST_DIR"
