@@ -6,9 +6,9 @@ plan:
   path: docs/development-plan.md
   total_steps: 66
 progress:
-  current_phase: change
+  current_phase: release
   current_step: 66
-  last_completed_step: 65
+  last_completed_step: 66
   completed_steps:
   - 1
   - 2
@@ -75,6 +75,7 @@ progress:
   - 63
   - 64
   - 65
+  - 66
   completed_step_ids:
   - SB-01
   - SB-02
@@ -141,6 +142,7 @@ progress:
   - SB-63
   - SB-64
   - SB-65
+  - SB-66
   skipped_steps: []
   inserted_steps:
   - 55
@@ -160,9 +162,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: 66
-  title: Regression coverage för deferred verification och planning handoff
-  reason: SB-65 är verifierad och completed; lägg regressionsskydd över alla aktiva runtimes.
+  recommended: release
+  title: Final reconciliation för deferred verification/planning handoff-serien
+  reason: SB-64–SB-66 är verifierade och completed; nästa åtgärd är final documentation reconciliation före release readiness.
 resume:
   supported: true
   required_files:
