@@ -1,0 +1,83 @@
+schema_version: 1
+suite: deferred-verification-planning-handoff
+cases:
+  - id: registry-timeout-deferred
+    input:
+      phase: execute
+      implementation_step: DEV-001
+      verification_attempted: true
+      project_failure_observed: false
+      environment_limited: true
+      completion_blocking_risk: false
+      planning_complete: false
+      handoff_zip_present: false
+    expected:
+      outcome: passed_with_deferred
+      allow_next_step: true
+      false_pass: false
+
+  - id: actual-test-failure
+    input:
+      phase: execute
+      implementation_step: DEV-004
+      verification_attempted: true
+      project_failure_observed: true
+      environment_limited: false
+      completion_blocking_risk: false
+      planning_complete: false
+      handoff_zip_present: false
+    expected:
+      outcome: failed
+      allow_next_step: false
+      false_pass: false
+
+  - id: migration-gate-blocks
+    input:
+      phase: execute
+      implementation_step: DEV-007
+      verification_attempted: true
+      project_failure_observed: false
+      environment_limited: true
+      completion_blocking_risk: true
+      planning_complete: false
+      handoff_zip_present: false
+    expected:
+      outcome: blocked
+      allow_next_step: false
+      false_pass: false
+
+  - id: planning-handoff-before-dev001
+    input:
+      phase: plan
+      implementation_step: DEV-001
+      verification_attempted: false
+      project_failure_observed: false
+      environment_limited: false
+      completion_blocking_risk: false
+      planning_complete: true
+      handoff_zip_present: false
+    expected:
+      outcome: planning_handoff
+      allow_next_step: false
+      selected_step: null
+      in_progress: null
+      next_recommended: DEV-001
+      dev001_implemented: false
+
+  - id: resume-handoff-starts-dev001
+    input:
+      phase: execute
+      implementation_step: DEV-001
+      verification_attempted: false
+      project_failure_observed: false
+      environment_limited: false
+      completion_blocking_risk: false
+      planning_complete: true
+      handoff_zip_present: true
+    expected:
+      outcome: select_dev001
+      allow_next_step: true
+      selected_step: DEV-001
+      in_progress: DEV-001
+      next_recommended: DEV-001
+      dev001_implemented: false
