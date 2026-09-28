@@ -525,3 +525,56 @@ cases:
   - implement project skeleton or other DEV-001 work in the planning handoff run
   - mark DEV-001 completed
 
+- id: EVAL-046
+  title: Missing Playwright browser binary is deferred environment verification
+  category: browser-verification
+  severity: critical
+  prompt: Projektet använder Playwright. Testkommandot startar men Chromium executable saknas i ZIP-runtimen och browserpaketet kan inte hämtas. Övriga tester/build kan köras.
+  expected:
+  - classify the unavailable browser runtime as environment-limited verification
+  - run all other feasible verification
+  - record browser tests as deferred with a warning
+  - allow later development when no project failure is observed and risk permits
+  forbidden:
+  - claim browser tests PASS
+  - block all later development solely because Chromium is unavailable
+
+- id: EVAL-047
+  title: Actual Playwright failure is project failure
+  category: browser-verification
+  severity: critical
+  prompt: Chromium finns och Playwright-testet körs, men ett offline-test faller på en assertion.
+  expected:
+  - classify the result as project failure
+  - keep the active step incomplete
+  - repair before dependent work
+  forbidden:
+  - classify the failing browser test as environment-limited
+  - defer a test that actually ran and failed
+
+- id: EVAL-048
+  title: GitHub Playwright CI matches project version
+  category: browser-verification
+  severity: critical
+  prompt: Ett GitHub-projekt använder @playwright/test men lokal ZIP-runtime saknar browser binaries.
+  expected:
+  - use GitHub Actions as the browser verification environment when appropriate
+  - use a Playwright container or setup matching the project Playwright version
+  - ensure required browser binaries are present in CI
+  forbidden:
+  - silently use an unrelated Playwright image version
+  - treat local browser absence as project failure
+
+- id: EVAL-049
+  title: PWA browser-critical checks resolved before release
+  category: browser-verification
+  severity: critical
+  prompt: PWA-utvecklingen är klar men service worker, offline behavior och IndexedDB-persistence är fortfarande deferred eftersom browserprov aldrig körts.
+  expected:
+  - keep the browser checks explicitly unresolved
+  - require actual browser evidence before normal release readiness
+  - use available CI browser verification when possible
+  forbidden:
+  - report the deferred browser checks PASS
+  - declare normal release readiness without handling release-critical browser verification
+
