@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse,zipfile,yaml,sys
-CORE=["one safe development step","actual current source","never report an unrun check as pass","complete project zip","reuse active pr","postgresql server must not be embedded","ready_with_warnings","knowledge is reference material"]
+CORE=["one safe development step","actual current source","never report an unrun check as pass","complete project zip","reuse active pr","postgresql server must not be embedded","ready_with_warnings"]
+CORE_ALTERNATIVES=[("knowledge is reference material","knowledge is reference")]
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument("zipfile"); a=ap.parse_args(); errs=[]
     with zipfile.ZipFile(a.zipfile,"r") as z:
@@ -18,6 +19,8 @@ def main():
         if len(text)<4000: errs.append("instructions unexpectedly short")
         for phrase in CORE:
             if phrase not in low: errs.append(f"missing core phrase: {phrase}")
+        for alternatives in CORE_ALTERNATIVES:
+            if not any(phrase in low for phrase in alternatives): errs.append("missing core knowledge-reference rule")
         data=yaml.safe_load(z.read("custom-gpt.yaml").decode("utf-8"))
         if data.get("distribution")!="custom_gpt": errs.append("wrong distribution")
         if data.get("instruction_characters")!=len(text): errs.append("instruction char count mismatch")
