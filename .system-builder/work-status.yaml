@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: environment-verification-planning-handoff
-  selected_step: SB-64
+  selected_step: null
 progress:
   completed:
   - SB-01
@@ -69,27 +69,28 @@ progress:
   - SB-61
   - SB-62
   - SB-63
-  in_progress: SB-64
+  - SB-64
+  in_progress: null
   next:
-    recommended: SB-64
-    reason: Implement deferred environment verification before planning handoff ZIP and regression coverage.
+    recommended: SB-65
+    reason: SB-64 is verified and complete; implement planning handoff ZIP before DEV-001.
 blockers: []
 verification:
   last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: v1.3.0 release-readiness full required CI passed for fdfbf03383553a678178c133836737f283b5d34c.
+  notes: SB-64 full required CI passed for e80d7548574f408bdf723556d8e641cfc5c8de47.
 source_state:
   drift: none
   reference: change/environment-verification-planning-handoff
 execution:
   next_action: implement
-  step: SB-64
+  step: SB-65
   operation: implement
-  reason: SB-64 is locked and in progress.
+  reason: SB-64 is complete; SB-65 is the first safe incomplete step.
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: fdfbf03383553a678178c133836737f283b5d34c
+  implementation_revision: e80d7548574f408bdf723556d8e641cfc5c8de47
   evidence_status: passed
