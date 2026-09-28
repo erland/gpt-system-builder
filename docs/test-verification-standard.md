@@ -372,6 +372,22 @@ Ett AC kan verifieras av:
 
 Release readiness ska kunna visa vilka must-AC som är verifierade.
 
+## 21A. Playwright/browser-E2E i begränsad runtime
+
+När projektet använder Playwright eller motsvarande browser-E2E ska System Builder skilja på **saknad browsermiljö** och **faktiskt testfel**.
+
+Om Playwright-konfigurationen finns men Chromium/WebKit/browser binaries saknas och inte kan installeras i aktuell ZIP/Chat-runtime:
+
+- klassificera utfallet som environment-limited verification, inte project failure,
+- kör lint, typecheck, unit/integration tests, build och statiska PWA-kontroller som fortfarande är möjliga,
+- registrera browserproven som deferred med orsak, evidens och retry condition,
+- tillåt fortsatt utveckling när ingen faktisk project failure observerats och kontrollen inte är riskmässigt completion-blocking,
+- rapportera aldrig browserproven som PASS om de inte faktiskt körts.
+
+Om browserproven startar och en assertion, navigation, service worker-kontroll eller annan kontroll faller är det en faktisk project failure och ska repareras.
+
+För PWA är browserprov för service worker, offline behavior, routing/installability och browser storage normalt release-relevanta. De får defereras under utvecklingen men ska normalt ha faktisk browser-evidens före release readiness.
+
 ## 22. Failed verification
 
 Om required verification misslyckas:
