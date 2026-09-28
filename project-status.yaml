@@ -162,9 +162,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: release
-  title: Release readiness för v1.3.1
-  reason: Final documentation reconciliation är verifierad med full CI; bygg färsk release-readiness-evidens för v1.3.1.
+  recommended: merge
+  title: Merge PR #10
+  reason: Release readiness är READY_WITH_WARNINGS för v1.3.1 med 23/23 required gates PASS; mergea change-serien före tagg och GitHub Release.
 resume:
   supported: true
   required_files:
