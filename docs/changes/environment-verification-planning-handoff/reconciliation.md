@@ -104,4 +104,4 @@ Status: **consistent**
 
 No unresolved implementation, documentation or decision mismatch remains in SB-64–SB-66.
 
-After required CI PASS, proceed to release readiness for `v1.3.1`.
+During reconciliation the project remains in CHANGE phase so stale prior release-readiness evidence is not treated as current. After required CI PASS, transition to release phase and build fresh release-readiness evidence for `v1.3.1`.
