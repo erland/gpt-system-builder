@@ -7,8 +7,8 @@ plan:
   total_steps: 66
 progress:
   current_phase: change
-  current_step: 65
-  last_completed_step: 64
+  current_step: 66
+  last_completed_step: 65
   completed_steps:
   - 1
   - 2
@@ -74,6 +74,7 @@ progress:
   - 62
   - 63
   - 64
+  - 65
   completed_step_ids:
   - SB-01
   - SB-02
@@ -139,6 +140,7 @@ progress:
   - SB-62
   - SB-63
   - SB-64
+  - SB-65
   skipped_steps: []
   inserted_steps:
   - 55
@@ -158,9 +160,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: 65
-  title: Planning handoff ZIP före DEV-001
-  reason: SB-64 är verifierad och completed; skapa handoff-checkpoint mellan planering och första implementation.
+  recommended: 66
+  title: Regression coverage för deferred verification och planning handoff
+  reason: SB-65 är verifierad och completed; lägg regressionsskydd över alla aktiva runtimes.
 resume:
   supported: true
   required_files:
