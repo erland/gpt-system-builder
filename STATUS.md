@@ -1,7 +1,7 @@
 # System Builder – Status
 
 ## Övergripande status
-**CHANGE RECONCILIATION IN PROGRESS – full CI next**
+**CHANGE RECONCILED – v1.3.1 release readiness next**
 
 ## Senast slutförda steg
 ### SB-66 – Regression coverage
@@ -44,4 +44,4 @@ Alla planerade steg är completed:
 
 ## Nästa åtgärd
 
-Final documentation reconciliation är genomförd. Kör full required CI på slutrevisionen och gå därefter till release readiness för v1.3.1.
+Final documentation reconciliation är genomförd och verifierad med full required CI. Nästa steg är release readiness för v1.3.1.
