@@ -75,14 +75,14 @@ progress:
   in_progress: null
   next:
     recommended: null
-    reason: SB-64 through SB-66 are complete; perform final documentation reconciliation before release readiness.
+    reason: Final documentation reconciliation passed; proceed to release readiness for v1.3.1.
 blockers: []
 verification:
   last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-66 full required CI passed for 88925c7453a00ea6201d6c79ba9c5b58ed848531.
+  notes: Final SB-64–SB-66 reconciliation full required CI passed for e8556a8a616d74cff34ef6639178062c4874b58e.
 source_state:
   drift: none
   reference: change/environment-verification-planning-handoff
@@ -90,9 +90,9 @@ execution:
   next_action: release
   step: null
   operation: release
-  reason: Deferred verification/planning handoff change implementation is complete; perform final reconciliation before release readiness.
+  reason: Final reconciliation is complete and verified; perform release readiness for v1.3.1.
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: 88925c7453a00ea6201d6c79ba9c5b58ed848531
+  implementation_revision: e8556a8a616d74cff34ef6639178062c4874b58e
   evidence_status: passed
