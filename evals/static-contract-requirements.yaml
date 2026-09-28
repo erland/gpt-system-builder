@@ -86,7 +86,9 @@ requirements:
   groups:
   - - critical invariants
     - always
-  - - blockers and failed required verification come first
+  - - actual project failures and true blockers come first
+    - actual project fail
+    - project failure
     - failed verification/drift→repair
   - - never change implementation during a completion-only transition
     - never change implementation during completion-only
