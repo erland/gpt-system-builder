@@ -4,10 +4,10 @@ project:
   name: System Builder
 plan:
   path: docs/development-plan.md
-  total_steps: 66
+  total_steps: 68
 progress:
-  current_phase: release
-  current_step: 66
+  current_phase: change
+  current_step: 67
   last_completed_step: 66
   completed_steps:
   - 1
@@ -157,14 +157,16 @@ progress:
   - 64
   - 65
   - 66
+  - 67
+  - 68
 state:
   overall: pass
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: merge
-  title: Merge PR #10
-  reason: Release readiness är READY_WITH_WARNINGS för v1.3.1 med 23/23 required gates PASS; mergea change-serien före tagg och GitHub Release.
+  recommended: 67
+  title: Playwright browser-test fallback för PWA/ZIP
+  reason: Ny CHANGE-serie SB-67–SB-68 är aktiv; gör browser-verifiering miljötolerant utan falskt PASS.
 resume:
   supported: true
   required_files:
