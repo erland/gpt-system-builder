@@ -181,3 +181,19 @@ För GitHub-baserade release-workflows som triggas av release-tag ska workflowet
 Workflowet ska inte ha ett separat hårdkodat releaseversionsnummer.
 
 Om projektet i stället har ett explicit canonical versionskontrakt där exempelvis `package.json` eller `pom.xml` äger versionen, ska release-taggen valideras mot den källan innan publicering.
+
+
+## Playwright browser tests
+
+När projektet har Playwright/browser-E2E och lokal/ZIP-runtime inte säkert kan installera browser binaries ska GitHub Actions användas som reproducerbar verifieringsmiljö.
+
+Rekommenderat mönster:
+
+- lås `@playwright/test` till projektets dependency-version,
+- använd en Playwright-container eller motsvarande setup vars Playwright-version matchar projektet,
+- säkerställ att Chromium/WebKit/browser binaries finns i CI-miljön,
+- kör browserproven separat eller efter build beroende på projektets behov,
+- behandla faktisk testfailure som blockerande project failure,
+- behandla lokal avsaknad av browser binary som deferred environment verification, inte som testfailure.
+
+Version mismatch mellan projektets Playwright-paket och CI-image ska betraktas som konfigurationsfel och repareras.
