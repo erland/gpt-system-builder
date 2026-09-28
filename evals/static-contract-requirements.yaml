@@ -160,3 +160,33 @@ requirements:
   - - validate
     - synchronize
 
+- id: REQ-DEFERRED-ENVIRONMENT-VERIFICATION
+  severity: critical
+  groups:
+  - - environment-limited
+    - environment-only verification
+    - passed_with_deferred
+  - - best effort
+    - best-effort
+  - - never call it PASS
+    - never report an unrun check as pass
+  - - project failure
+    - actual project failure
+    - actual project fail
+
+- id: REQ-PLANNING-HANDOFF-ZIP
+  severity: critical
+  groups:
+  - - planning handoff ZIP
+    - handoff ZIP
+  - - DEV-001
+  - - selected_step
+    - selected
+  - - in_progress
+    - in progress
+  - - next recommended
+    - next.recommended
+  - - do not implement DEV-001
+    - before DEV-001
+    - stop before implementing DEV-001
+
