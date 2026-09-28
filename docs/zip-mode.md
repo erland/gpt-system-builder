@@ -325,9 +325,21 @@ Vid IMPROVE:
 
 ## 25. ZIP + CREATE
 
-Vid CREATE kan första implementationsteget skapa hela projektstrukturen från canonical plan.
+När CREATE-planeringen är klar ska System Builder skapa en **planning handoff ZIP innan första implementationsteget startar**.
 
-Efter första implementationsteget ska projektet levereras som komplett ZIP och därefter fortsätta som normalt ZIP-resume.
+Planning handoff ZIP ska minst innehålla:
+
+- project metadata och minimal machine state,
+- development plan med stabila DEV-ID,
+- functional specification och architecture när de krävs av projektets nivå,
+- risk/deployment/decision docs som redan är en del av planeringen,
+- README eller annan project entrypoint när sådan har skapats under planeringen.
+
+State ska peka på första development step som `next.recommended`, men `selected_step` och `in_progress` ska vara null. Handoff ZIP får inte implementera DEV-001 i förtid.
+
+ZIP:en ska vara komplett, integritetsverifierad och resumable. När den öppnas i en annan runtime och arbetet fortsätter ska nästa state-machine action välja och låsa DEV-001.
+
+Efter DEV-001 fortsätter projektet enligt normalt ZIP-resume.
 
 ## 25A. Best-effort automatic verification
 
