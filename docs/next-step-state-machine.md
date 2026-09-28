@@ -334,6 +334,17 @@ System Builder ska prioritera faktisk evidens.
 
 Maskinstate ska repareras från source + verifiering, inte tvärtom.
 
+## 19A. Environment-limited verification
+
+VERIFY ska klassificera ett misslyckat försök innan nästa action väljs:
+
+- **project failure** → REPAIR och steget förblir incomplete,
+- **environment-limited** → gör best effort med återstående tekniskt möjliga kontroller.
+
+Environment-limited får bli `passed_with_deferred` och completion tillåtas när ingen faktisk project failure observerats och den uteblivna kontrollen inte är completion-blocking på grund av risk, migration, säkerhet, data, deployment eller explicit planregel.
+
+Deferred checks registreras och följer projektet till senare retry/release readiness. De får aldrig beskrivas som PASS.
+
 ## 20. Repair mode
 
 Repair används när ett tidigare steg inte är komplett trots att användaren vill fortsätta.
