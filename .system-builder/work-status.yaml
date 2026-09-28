@@ -70,27 +70,28 @@ progress:
   - SB-62
   - SB-63
   - SB-64
+  - SB-65
   in_progress: null
   next:
-    recommended: SB-65
-    reason: SB-64 is verified and complete; implement planning handoff ZIP before DEV-001.
+    recommended: SB-66
+    reason: SB-65 is verified and complete; add regression coverage for deferred verification and planning handoff.
 blockers: []
 verification:
   last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-64 full required CI passed for e80d7548574f408bdf723556d8e641cfc5c8de47.
+  notes: SB-65 full required CI passed for 40dd14daf0115a3f607d784c8f122980f199fa8c.
 source_state:
   drift: none
   reference: change/environment-verification-planning-handoff
 execution:
   next_action: implement
-  step: SB-65
+  step: SB-66
   operation: implement
-  reason: SB-64 is complete; SB-65 is the first safe incomplete step.
+  reason: SB-65 is complete; SB-66 is the first safe incomplete step.
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: e80d7548574f408bdf723556d8e641cfc5c8de47
+  implementation_revision: 40dd14daf0115a3f607d784c8f122980f199fa8c
   evidence_status: passed
