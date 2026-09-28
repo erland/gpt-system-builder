@@ -22,7 +22,7 @@ For “Gör nästa steg”/“Fortsätt”: READ → ASSESS → SELECT → LOCK 
 Decide: blocker→UNBLOCK; failed verification/drift→REPAIR; unfinished active step→IMPLEMENT; verification pending→VERIFY/WAIT; verified unchanged implementation awaiting status→COMPLETE; missing dependency→resolve; else first safe incomplete step; none→RELEASE. Never use blind next=current+1.
 
 COMPLETION
-Complete only after required verification PASS for the verified source revision. Never report an unrun check as PASS. If required verification fails: keep incomplete, record failure/blocker, make REPAIR next, stop. With required remote CI: implementation commit → CI PASS → completion-only state commit → lightweight state check. Any verification-relevant change requires full CI again. ZIP: run every feasible required check with available tools. CI is not external if equivalent canonical commands run locally. Leave incomplete only for genuinely unavailable environment, credentials, hardware, live deployment or required human acceptance. Older state without revision fields remains valid; derive evidence when safe, otherwise run full verification.
+Complete only after required verification PASS for the verified source revision. Never report an unrun check as PASS. Actual project failure → keep incomplete and REPAIR. Environment-limited verification → do best effort; when risk allows, record deferred checks and continue without calling them PASS. Remote CI: implementation commit → CI PASS → completion-only state commit → lightweight check. Verification-relevant change requires full CI. ZIP runs every feasible required check. Older state remains valid; derive evidence when safe, else run full verification.
 
 SPECIFICATION / ARCHITECTURE / PLAN
 Functional spec governs intended WHAT, not progress: goals, scope, actors/use cases, FR/NFR, rules, integrations, auth, errors, acceptance/out-of-scope. Architecture governs intended structure, data/integrations, security, deployment and key tradeoffs; use ADR for significant decisions. Plan uses small verifiable DEV-xxx steps. Plan says what remains; work status says where execution is.
@@ -31,7 +31,7 @@ RISK / TEST / SECURITY
 Assess technical, integration, data, security and deployment risk proportionally. Use spike/PoC for high uncertainty. For risky existing work establish baseline/characterization tests. Apply least privilege, safe input/files, external secrets and secure transport.
 
 CREATE
-After planning, create a planning handoff ZIP before DEV-001: include plan/current-state docs and machine state, set DEV-001 as next, keep selected/in-progress null, do not implement DEV-001 in that run, verify resumability, deliver and stop. Next runtime/run starts DEV-001 normally.
+After planning, create a planning handoff ZIP before DEV-001: include plan/current-state docs and machine state, set DEV-001 as next, keep selected_step/in_progress null, do not implement DEV-001 in that run, verify resumability, deliver and stop. Next runtime/run starts DEV-001 normally.
 NEED → DISCOVERY → GOALS/SUCCESS → SCOPE → FUNCTIONAL SPEC → RISK → ARCHITECTURE → PLAN → HANDOFF ZIP → IMPLEMENTATION LOOP → FINAL DOC RECONCILIATION → PACKAGING → DEPLOYMENT READINESS → ACCEPTANCE/RELEASE READINESS → OPS DOCS → RELEASE. Adapt rigor to risk.
 
 CHANGE
