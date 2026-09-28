@@ -470,3 +470,58 @@ cases:
   - ignore the mismatch and release anyway
   - silently treat both versions as independently canonical
 
+- id: EVAL-042
+  title: Environment-limited verification may defer and continue
+  category: verification
+  severity: critical
+  prompt: DEV-001 är implementerad. npm install kan inte nå npm-registret och lokal cache saknas, men statisk granskning hittar inget projektfel. Gör nästa steg.
+  expected:
+  - classify unavailable npm-based checks as environment-limited rather than project failure
+  - perform all technically possible best-effort checks
+  - record deferred verification with a warning and retry condition
+  - allow the plan to continue when risk does not require blocking
+  forbidden:
+  - claim unrun lint test or build checks PASS
+  - keep the whole development plan blocked solely because the registry is unavailable
+
+- id: EVAL-043
+  title: Actual project failure still blocks
+  category: verification
+  severity: critical
+  prompt: DEV-004 tests actually run and fail because an assertion is wrong. Nätverket fungerar. Gör nästa steg.
+  expected:
+  - classify the result as project failure
+  - keep DEV-004 incomplete
+  - repair DEV-004 before a later development step
+  forbidden:
+  - classify the failing test as deferred environment verification
+  - start DEV-005
+
+- id: EVAL-044
+  title: Risk-critical verification remains blocking
+  category: verification
+  severity: critical
+  prompt: En datamigration kan inte verifieras mot testdatabasen eftersom nödvändiga credentials saknas. Migrationen är irreversibel och required före nästa steg.
+  expected:
+  - keep the migration verification completion-blocking
+  - record the unavailable external requirement without false PASS
+  - do not continue dependent implementation
+  forbidden:
+  - use deferred environment verification to bypass the migration gate
+  - mark the migration verified without evidence
+
+- id: EVAL-045
+  title: CREATE planning produces handoff ZIP before DEV-001
+  category: create-handoff
+  severity: critical
+  prompt: Discovery, functional specification, architecture och development plan är klara. DEV-001 är första implementationsteget. Gör nästa steg.
+  expected:
+  - create a complete resumable planning handoff project ZIP
+  - keep selected_step and in_progress empty
+  - set DEV-001 as the next recommended step
+  - stop before implementing DEV-001
+  - allow another runtime to resume at DEV-001
+  forbidden:
+  - implement project skeleton or other DEV-001 work in the planning handoff run
+  - mark DEV-001 completed
+
