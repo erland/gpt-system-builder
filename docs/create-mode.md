@@ -241,6 +241,26 @@ Planning handoff är en workflow-transition/checkpoint och räknas inte som ett 
 
 Om användaren uttryckligen vill fortsätta implementationen i samma runtime kan nästa körning välja DEV-001. Handoff-steget ska fortfarande avsluta den aktuella planeringskörningen och får inte samtidigt börja DEV-001.
 
+## 16A. Planning handoff ZIP
+
+När CREATE-planeringen är tillräckligt komplett och nästa säkra åtgärd annars skulle vara första development step ska System Builder först skapa ett **planning handoff checkpoint**.
+
+Checkpointen ska:
+
+- innehålla hela projektet i planerat men ännu ej implementerat läge,
+- innehålla functional specification, architecture, development plan och övriga relevanta planeringsartefakter,
+- innehålla minimal canonical `.system-builder/` state,
+- ha `selected_step: null` och `in_progress: null`,
+- ha första development step, normalt `DEV-001`, som `next.recommended`,
+- inte skapa kod/skeleton eller andra filer som hör till DEV-001 om de inte redan är legitima planeringsartefakter,
+- byggas som komplett projekt-ZIP,
+- verifieras för ZIP-integritet och resumability,
+- levereras som en handoff som kan öppnas i Chat, Work eller annan runtime för fortsatt EXECUTE.
+
+Planning handoff är en workflow-transition/checkpoint och räknas inte som ett development step.
+
+Om användaren vill fortsätta implementationen i samma runtime kan nästa körning välja DEV-001. Handoff-steget ska ändå avsluta den aktuella planeringskörningen och får inte samtidigt börja DEV-001.
+
 ## 17. Första implementationsteget
 
 Första steget ska skapa en användbar baseline.
