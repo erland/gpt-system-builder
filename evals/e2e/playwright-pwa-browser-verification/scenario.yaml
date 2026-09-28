@@ -1,0 +1,75 @@
+schema_version: 1
+suite: playwright-pwa-browser-verification
+cases:
+  - id: missing-browser-binary
+    input:
+      playwright_config_present: true
+      browser_binary_available: false
+      browser_install_possible: false
+      browser_test_ran: false
+      browser_test_failed: false
+      github_available: true
+      pwa_release_critical: false
+      ci_version_matches_project: true
+    expected:
+      classification: environment_limited
+      deferred: true
+      project_failure: false
+      allow_development: true
+      browser_pass: false
+      ci_fallback: true
+
+  - id: browser-test-actual-failure
+    input:
+      playwright_config_present: true
+      browser_binary_available: true
+      browser_install_possible: true
+      browser_test_ran: true
+      browser_test_failed: true
+      github_available: true
+      pwa_release_critical: false
+      ci_version_matches_project: true
+    expected:
+      classification: project_failure
+      deferred: false
+      project_failure: true
+      allow_development: false
+      browser_pass: false
+      ci_fallback: false
+
+  - id: ci-version-mismatch
+    input:
+      playwright_config_present: true
+      browser_binary_available: false
+      browser_install_possible: false
+      browser_test_ran: false
+      browser_test_failed: false
+      github_available: true
+      pwa_release_critical: false
+      ci_version_matches_project: false
+    expected:
+      classification: ci_configuration_error
+      deferred: true
+      project_failure: false
+      allow_development: true
+      browser_pass: false
+      ci_fallback: false
+
+  - id: pwa-release-critical-still-deferred
+    input:
+      playwright_config_present: true
+      browser_binary_available: false
+      browser_install_possible: false
+      browser_test_ran: false
+      browser_test_failed: false
+      github_available: true
+      pwa_release_critical: true
+      ci_version_matches_project: true
+    expected:
+      classification: release_blocked_browser_evidence
+      deferred: true
+      project_failure: false
+      allow_development: true
+      browser_pass: false
+      ci_fallback: true
+      release_ready: false
