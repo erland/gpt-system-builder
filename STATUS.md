@@ -1,36 +1,37 @@
 # System Builder – Status
 
 ## Övergripande status
-**CHANGE RECONCILIATION IN PROGRESS – v1.3.2**
+**READY_WITH_WARNINGS – v1.3.2 release candidate**
 
-## Förändringsserie SB-67–SB-68
+## Release readiness
 
-- **SB-67** – Playwright browser-test fallback för PWA/ZIP
-- **SB-68** – regression coverage
+Release readiness är klar för SB-67–SB-68.
 
-Båda stegen är implementerade och verifierade med full CI på implementationsrevision `d6f07e81c0db660651310eef77ef4ade522182f3`.
+- Version: `1.3.2`
+- Tag: `v1.3.2`
+- Required gates: **24/24 PASS**
+- Blockers: **0**
+- Warnings: **1**
+- Full kandidat-CI: PASS för `c7822cda56b47ccf05bab309bd92992784994c98`
 
-## Reconciliation
+`v1.3.1` finns och bevaras. `v1.3.2` är ännu inte använd.
 
-Final reconciliation finns i:
+## Inkluderade förändringar
 
-`docs/changes/playwright-pwa-browser-verification/reconciliation.md`
+- saknad Chromium/WebKit/browser binary i ZIP/Chat-runtime behandlas som environment-limited verification,
+- övrig möjlig verifiering körs ändå,
+- browserprov defereras med varning och rapporteras aldrig som PASS utan faktisk körning,
+- faktiskt Playwright-testfel är fortsatt project failure,
+- GitHub-projekt använder normalt en Playwright CI-miljö som matchar projektets Playwright-version,
+- PWA-kritiska browserkontroller ska normalt ha faktisk browser-evidens före release readiness,
+- regressionsskyddet omfattar **49 instruction-adherence-fall, 41 critical**.
 
-Två avvikelser hittades och reparerades:
+Custom GPT-instruktionen är **7 960 tecken**.
 
-- Playwright/browser-E2E-regeln saknades i `docs/test-verification-standard.md`,
-- `v1.3.1` var redan publicerad och kandidatversionen har därför flyttats till `1.3.2`.
+## Warning
 
-Aktuell kandidattagg är `v1.3.2`, som ännu inte är använd.
-
-## Regressionsskydd
-
-- 49 instruction-adherence-fall,
-- 41 critical,
-- statiskt Playwright/PWA-runtimekontrakt,
-- deterministiskt browser-verification-E2E,
-- Custom GPT-instruktion: 7 960 tecken.
+Live Coolify target verification är fortsatt pending eftersom ingen faktisk Coolify-miljö varit tillgänglig. Den rapporteras inte som PASS och blockerar inte artifact release.
 
 ## Nästa åtgärd
 
-Kör full required CI på den slutliga reconciliation-revisionen. Därefter går serien till release readiness för v1.3.2.
+Mergea PR #11. Efter merge kan `v1.3.2` taggas och release-workflowet publicera runtime-distributionerna.
