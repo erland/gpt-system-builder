@@ -6,7 +6,9 @@ Detta dokument definierar hur ett utvecklingssteg går från `in_progress` till 
 
 Grundprincip:
 
-> Ett steg får markeras `completed` först när all required verification för den source revision som steget avser har PASS.
+> Ett steg får normalt markeras `completed` först när required verification för den source revision som steget avser har PASS.
+
+Undantag: en kontroll som inte kan köras färdigt enbart på grund av aktuell runtime/miljö får klassificeras som **deferred environment verification** när reglerna nedan är uppfyllda. Då kan steget markeras completed med `passed_with_deferred`, utan att kontrollen rapporteras som PASS.
 
 Completion är därefter en state transition. Om completion endast ändrar tillåtet machine state behöver den inte utlösa samma fulla verifiering en gång till.
 
@@ -130,14 +132,58 @@ Full verification måste köras igen om exempelvis något av följande ändras e
 
 Ren completion metadata gör inte tidigare evidence stale.
 
+## 8A. Deferred environment verification
+
+Skilj på faktisk projektfailure och miljöbegränsning.
+
+### Project failure
+
+Om en verifiering faktiskt körs och visar exempelvis:
+
+- compile/build error,
+- lint/typecheck error,
+- failing test,
+- schema/contract violation,
+- runtime crash som kan härledas till projektet,
+
+är utfallet FAIL och steget ska repareras innan senare beroende steg.
+
+### Environment-limited verification
+
+En kontroll kan defereras om:
+
+1. System Builder försökte köra kontrollen eller en tekniskt likvärdig kontroll.
+2. Evidensen pekar på miljön, exempelvis registry/network timeout, saknad package cache, otillgänglig extern toolchain eller liknande runtimebegränsning.
+3. Ingen körd kontroll visar ett projektfel.
+4. Kontrollens riskklass kräver inte completion-blocking verifiering.
+5. Den defererade kontrollen registreras i machine state med check, reason, evidence/retry condition och om den blockerar release.
+
+Typiskt exempel: `npm install` kan inte nå npm-registret och lokal cache saknas. Statisk granskning och andra möjliga kontroller genomförs, steget kan completed med varning, och lint/test/build läggs i deferred-listan.
+
+### Får inte defereras för att fortsätta
+
+Verifiering ska fortsatt blockera completion när den behövs för att säkert gå vidare, exempelvis vid:
+
+- verifierad eller misstänkt data-/migrationsrisk,
+- säkerhetskritisk kontroll,
+- destruktiv/irreversibel operation,
+- deployment/production gate som uttryckligen är required före nästa steg,
+- en planregel som explicit markerar kontrollen completion-blocking.
+
+### Senare hantering
+
+Deferred checks ska återförsökas opportunistiskt när miljön senare medger det. Release readiness får inte kalla dem PASS. En release-relevant deferred check måste antingen lösas eller uttryckligen hanteras av releasepolicyn som warning/non-blocking.
+
 ## 9. Failure
 
-Om full required verification FAIL/BLOCKED:
+Om required verification visar faktisk project FAIL:
 
 - steget förblir incomplete,
 - completion transition får inte göras,
 - failure/blocker registreras,
 - nästa säkra åtgärd är repair/unblock.
+
+Om kontrollen endast är environment-limited ska 8A användas i stället för att mekaniskt blockera planen.
 
 ## 10. Anti-patterns
 

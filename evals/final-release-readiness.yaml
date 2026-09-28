@@ -1,20 +1,20 @@
 schema_version: 2
-review: SB-55-SB-63-v1.3.0-release-readiness
+review: SB-64-SB-66-v1.3.1-release-readiness
 decision: READY_WITH_WARNINGS
 release_candidate:
-  version: 1.3.0
-  tag: v1.3.0
+  version: 1.3.1
+  tag: v1.3.1
   reproducible_from_tag: true
-required_gates_passed: 22
-required_gates_total: 22
+required_gates_passed: 23
+required_gates_total: 23
 warnings:
   - Live Coolify target verification remains pending because no live Coolify environment was available; it is not reported as PASS.
 blockers: []
 note: >
-  Readiness covers the unreleased SB-55 through SB-63 changes after v1.2.1:
-  governing documentation and ZIP verification, GitHub Pages static-PWA deployment,
-  README current-state reconciliation, tag-derived release versioning and regression coverage.
-  Evidence is based on current four-runtime project CI, final reconciliation evidence and release validation gates.
+  Readiness covers the v1.3.1 patch changes after v1.3.0:
+  deferred environment verification, planning handoff ZIP before DEV-001
+  and their regression coverage. Evidence is based on current four-runtime
+  project CI, final reconciliation evidence and release validation gates.
 runtime_targets:
   - chat_zip
   - custom_gpt
@@ -38,7 +38,7 @@ gates:
   - gate: project_ci_workflow
     required: true
     result: pass
-    evidence: full System Builder project CI passed on the final reconciled branch revision
+    evidence: full System Builder project CI passed on final reconciled SB-64–SB-66 revision
   - gate: release_workflow
     required: true
     result: pass
@@ -58,7 +58,7 @@ gates:
   - gate: instruction_adherence_all_runtimes
     required: true
     result: pass
-    evidence: 41 instruction-adherence cases, 33 critical; static contracts pass for all four runtimes
+    evidence: 45 instruction-adherence cases, 37 critical; static contracts pass for all four runtimes
   - gate: runtime_parity
     required: true
     result: pass
@@ -87,10 +87,14 @@ gates:
     required: true
     result: pass
     evidence: deterministic README/release-version policy E2E plus EVAL-039 through EVAL-041
+  - gate: deferred_verification_planning_handoff_policy
+    required: true
+    result: pass
+    evidence: deterministic five-case deferred-verification/planning-handoff E2E plus EVAL-042 through EVAL-045
   - gate: final_documentation_reconciliation
     required: true
     result: pass
-    evidence: docs/changes/documentation-reconciliation-and-zip-verification/reconciliation.md; docs/changes/github-pages-static-pwa/reconciliation.md; docs/changes/readme-release-version-contract/reconciliation.md
+    evidence: docs/changes/environment-verification-planning-handoff/reconciliation.md
   - gate: repository_hygiene
     required: true
     result: pass
@@ -102,7 +106,7 @@ gates:
   - gate: custom_instruction_limit
     required: true
     result: pass
-    evidence: Custom GPT instructions are 7936 characters, below configured 8000 limit
+    evidence: Custom GPT instructions are 7983 characters, below configured 8000 limit
   - gate: four_runtime_release_assets
     required: true
     result: pass
@@ -114,4 +118,4 @@ gates:
   - gate: release_candidate_version
     required: true
     result: pass
-    evidence: VERSION and release candidate metadata are 1.3.0; existing v1.2.1 is preserved and v1.3.0 is unused
+    evidence: VERSION and release candidate metadata are 1.3.1; v1.3.0 exists and v1.3.1 is unused

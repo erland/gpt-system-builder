@@ -1,62 +1,56 @@
-# Final Release Readiness Report – v1.3.0
+# Final Release Readiness Report – v1.3.1
 
 ## Decision
 
 **READY_WITH_WARNINGS**
 
-Required gates: **22/22 PASS**
+Required gates: **23/23 PASS**
 
-This release candidate covers the unreleased SB-55–SB-63 change series after `v1.2.1`.
+This patch release covers SB-64–SB-66 after `v1.3.0`.
 
 ## Release candidate
 
-- Version: `1.3.0`
-- Tag to publish: `v1.3.0`
+- Version: `1.3.1`
+- Tag to publish: `v1.3.1`
 - Version source for release artifacts: Git tag
 - Release build: registry-driven and reproducible from the tag
-- Existing `v1.2.1` is preserved; it is not moved or reused
-- `v1.3.0` is currently unused
+- Existing `v1.3.0` is preserved
+- `v1.3.1` is currently unused
 
 ## Included behavior changes
 
-### Documentation and ZIP verification
+### Deferred environment verification
 
-- functional specification and architecture remain governing intent during development,
-- implementation divergence does not silently rewrite intended behavior,
-- final documentation reconciliation is required before release readiness,
-- ZIP mode runs technically feasible required verification automatically,
-- CI orchestration is not treated as an external gate when equivalent canonical commands can run locally,
-- genuinely external/manual gates remain pending when no equivalent technical verification exists.
+- actual project failures still block completion and route to repair,
+- environment-limited verification performs best effort,
+- deferred checks are never reported as PASS,
+- a step may complete with `passed_with_deferred` when no project failure is observed and risk does not require blocking,
+- deferred checks carry reason, evidence/retry condition and release-blocking status,
+- security-, migration-, destructive- and deployment-critical verification may remain completion-blocking,
+- release-relevant deferred checks must be retried or explicitly handled by release policy.
 
-### GitHub Pages
+### Planning handoff ZIP
 
-- `github-pages-static-pwa` is available for eligible public static browser-only apps,
-- backend-dependent or sensitive/internal apps are excluded from automatic Pages selection,
-- project-site repository subpath/public base is handled explicitly,
-- Vite/PWA manifest/service-worker paths and routing are aligned with Pages deployment,
-- Pages deployment is separate from ordinary pull-request CI,
-- canonical build → upload Pages artifact → deploy Pages workflow pattern is included.
-
-### README and release versioning
-
-- `README.md`, when present, is treated as the current-state project entrypoint,
-- a materially stale README is a documentation mismatch and blocks release readiness until resolved,
-- README summarizes and links to canonical detailed documentation rather than duplicating it,
-- tag-triggered release artifacts derive their version from the release tag by default,
-- alternative ecosystem version sources require explicit ownership and synchronization/validation,
-- unsynchronized parallel release versions are not accepted.
+- after CREATE planning completes, System Builder produces a complete resumable project ZIP before DEV-001,
+- the checkpoint contains planning/current-state artifacts and canonical machine state,
+- `selected_step` and `in_progress` remain null,
+- the first development step is stored as `next.recommended`,
+- DEV-001 is not implemented or completed in the handoff run,
+- ZIP integrity/resumability is verified,
+- a later Chat/Work/runtime execution selects and locks DEV-001 normally.
 
 ## Reconciliation
 
-Three final reconciliation records cover the unreleased behavior:
+Final reconciliation:
 
-- `docs/changes/documentation-reconciliation-and-zip-verification/reconciliation.md`
-- `docs/changes/github-pages-static-pwa/reconciliation.md`
-- `docs/changes/readme-release-version-contract/reconciliation.md`
+- `docs/changes/environment-verification-planning-handoff/reconciliation.md`
 
-The latest README/version reconciliation found and repaired runtime/documentation projection mismatches, including a stale omission of the README rule in canonical runtime and a duplicate versioning paragraph found during readiness review.
+It found and resolved:
 
-No unresolved implementation, documentation or decision mismatch remains for SB-55–SB-63.
+- a duplicate Planning handoff ZIP section in CREATE documentation,
+- stale release-candidate metadata still pointing to v1.3.0 after that release already existed.
+
+No unresolved implementation, documentation or decision mismatch remains for SB-64–SB-66.
 
 ## Runtime summary
 
@@ -75,11 +69,11 @@ Claude Projects' reduced parity remains intentional and documented.
 Full project CI covers:
 
 - canonical/schema validators,
-- README current-state validator for System Builder dogfooding,
 - distribution registry synchronization,
 - fresh builds and validation for all four active runtimes,
-- **41 instruction-adherence cases, 33 critical**,
-- static README, release-version, GitHub Pages, governing-document and ZIP-verification contracts across active runtimes,
+- **45 instruction-adherence cases, 37 critical**,
+- static deferred-verification and planning-handoff contracts across active runtimes,
+- deterministic five-case deferred-verification/planning-handoff E2E,
 - runtime parity,
 - CREATE/CHANGE/Docker-Coolify E2E regression,
 - documentation/ZIP policy regression,
@@ -87,25 +81,25 @@ Full project CI covers:
 - GitHub Pages profile/workflow validation,
 - repository hygiene.
 
-Custom GPT instructions are **7,936 characters**, below the configured 8,000-character limit.
+Custom GPT instructions are **7,983 characters**, below the configured 8,000-character limit.
 
 ## Release assets
 
-A `v1.3.0` release build is expected to produce:
+A `v1.3.1` release build is expected to produce:
 
-- `system-builder-chat-1.3.0.zip`
-- `system-builder-custom-gpt-1.3.0.zip`
-- `system-builder-claude-projects-1.3.0.zip`
-- `system-builder-opencode-1.3.0.zip`
+- `system-builder-chat-1.3.1.zip`
+- `system-builder-custom-gpt-1.3.1.zip`
+- `system-builder-claude-projects-1.3.1.zip`
+- `system-builder-opencode-1.3.1.zip`
 - `SHA256SUMS.txt`
 - `release-metadata.yaml`
 - `distribution-build-manifest.json`
 
-The release workflow derives `1.3.0` from tag `v1.3.0`; no separate hardcoded artifact version is used.
+The release workflow derives `1.3.1` from tag `v1.3.1`; no separate hardcoded artifact version is used.
 
 ## Warning
 
-Live Coolify target verification remains pending because no live Coolify environment is available. It is not reported as PASS and does not block the artifact release candidate.
+Live Coolify target verification remains pending because no live Coolify environment is available. It is not reported as PASS and does not block this artifact release candidate.
 
 ## Blockers
 

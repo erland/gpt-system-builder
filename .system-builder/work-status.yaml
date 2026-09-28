@@ -2,7 +2,7 @@ schema_version: 1
 active_work:
   mode: CHANGE
   plan: docs/development-plan.md
-  change_request: readme-release-version-contract
+  change_request: environment-verification-planning-handoff
   selected_step: null
 progress:
   completed:
@@ -69,27 +69,30 @@ progress:
   - SB-61
   - SB-62
   - SB-63
+  - SB-64
+  - SB-65
+  - SB-66
   in_progress: null
   next:
     recommended: null
-    reason: Release readiness passed with one documented warning; merge PR #9 before tagging v1.3.0.
+    reason: Release readiness passed with one documented warning; merge PR #10 before tagging v1.3.1.
 blockers: []
 verification:
   last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: v1.3.0 release-readiness full required CI passed for fdfbf03383553a678178c133836737f283b5d34c.
+  notes: v1.3.1 release-readiness full required CI passed for 743194c50028ea4ac954796fdb20dfe7e51356a4.
 source_state:
   drift: none
-  reference: change/readme-release-version-contract
+  reference: change/environment-verification-planning-handoff
 execution:
   next_action: merge
   step: null
   operation: merge
-  reason: Release readiness is READY_WITH_WARNINGS; merge PR #9 before creating tag v1.3.0.
+  reason: Release readiness is READY_WITH_WARNINGS; merge PR #10 before creating tag v1.3.1.
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: fdfbf03383553a678178c133836737f283b5d34c
+  implementation_revision: 743194c50028ea4ac954796fdb20dfe7e51356a4
   evidence_status: passed

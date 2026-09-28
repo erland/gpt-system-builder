@@ -1,39 +1,32 @@
 # System Builder – Status
 
 ## Övergripande status
-**READY_WITH_WARNINGS – v1.3.0 release candidate**
+**READY_WITH_WARNINGS – v1.3.1 release candidate**
 
 ## Release readiness
 
-Release readiness är klar för den samlade ännu opublicerade förändringsmängden SB-55–SB-63.
+Release readiness är klar för patchserien SB-64–SB-66.
 
-- Version: `1.3.0`
-- Tag: `v1.3.0`
-- Required gates: **22/22 PASS**
+- Version: `1.3.1`
+- Tag: `v1.3.1`
+- Required gates: **23/23 PASS**
 - Blockers: **0**
 - Warnings: **1**
-- Full kandidat-CI: PASS för `fdfbf03383553a678178c133836737f283b5d34c`
+- Full kandidat-CI: PASS för `743194c50028ea4ac954796fdb20dfe7e51356a4`
 
-`v1.2.1` finns och bevaras. `v1.3.0` är ännu inte använd.
+`v1.3.0` finns och bevaras. `v1.3.1` är ännu inte använd.
 
 ## Inkluderade förändringar
 
-Releasen omfattar bland annat:
+- environment-limited verification kan defereras med best effort och utan falskt PASS,
+- faktiska projektfel blockerar fortfarande och kräver repair,
+- riskkritiska verifieringar kan fortsatt vara completion-blocking,
+- planning handoff ZIP skapas efter planering men före DEV-001,
+- handoff-state är resumable mellan Chat, Work och andra runtimes,
+- DEV-001 implementeras inte i handoff-körningen,
+- regressionsskyddet omfattar 45 instruction-adherence-fall, varav 37 critical.
 
-- governing documentation intent och final documentation reconciliation,
-- ZIP best-effort automatic verification,
-- GitHub Pages-profil för lämpliga statiska PWA/webbappar,
-- repository-subpath/PWA/service-worker/routing-regler,
-- separat GitHub Pages deployment-workflow,
-- README som current-state entrypoint,
-- stale README som documentation mismatch före release readiness,
-- tag-derived artifactversionering,
-- explicit ownership/synk för ecosystem-versioner,
-- regressionsskydd över alla fyra aktiva runtimes.
-
-Instruction-adherence omfattar **41 fall, 33 critical**.
-
-Custom GPT-instruktionen är **7 936 tecken**, under 8 000-gränsen.
+Custom GPT-instruktionen är **7 983 tecken**.
 
 ## Warning
 
@@ -43,8 +36,8 @@ Live Coolify target verification är fortsatt pending eftersom ingen faktisk Coo
 
 Release-workflowet använder Git-taggen som canonical versionskälla.
 
-När `v1.3.0` skapas härleds artifactversionen `1.3.0`, som används för runtime-ZIP-filer och release metadata.
+När `v1.3.1` skapas härleds artifactversionen `1.3.1` och används för de fyra runtime-ZIP-filerna och release metadata.
 
 ## Nästa åtgärd
 
-Mergea PR #9. Efter merge kan `v1.3.0` taggas och release-workflowet publicera de fyra runtime-distributionerna.
+Mergea PR #10. Efter merge kan `v1.3.1` taggas och release-workflowet publicera runtime-distributionerna.

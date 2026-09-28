@@ -86,7 +86,9 @@ requirements:
   groups:
   - - critical invariants
     - always
-  - - blockers and failed required verification come first
+  - - actual project failures and true blockers come first
+    - actual project fail
+    - project failure
     - failed verification/drift→repair
   - - never change implementation during a completion-only transition
     - never change implementation during completion-only
@@ -157,4 +159,34 @@ requirements:
     - canonical version contract
   - - validate
     - synchronize
+
+- id: REQ-DEFERRED-ENVIRONMENT-VERIFICATION
+  severity: critical
+  groups:
+  - - environment-limited
+    - environment-only verification
+    - passed_with_deferred
+  - - best effort
+    - best-effort
+  - - never call it PASS
+    - never report an unrun check as pass
+  - - project failure
+    - actual project failure
+    - actual project fail
+
+- id: REQ-PLANNING-HANDOFF-ZIP
+  severity: critical
+  groups:
+  - - planning handoff ZIP
+    - handoff ZIP
+  - - DEV-001
+  - - selected_step
+    - selected
+  - - in_progress
+    - in progress
+  - - next recommended
+    - next.recommended
+  - - do not implement DEV-001
+    - before DEV-001
+    - stop before implementing DEV-001
 

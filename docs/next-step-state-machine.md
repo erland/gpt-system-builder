@@ -39,6 +39,29 @@ STOP
 
 Normal körning ska sluta efter exakt ett completed development step.
 
+## 2A. Planning handoff transition
+
+I CREATE finns en särskild övergång mellan PLAN och första EXECUTE-steget:
+
+```text
+PLAN COMPLETE
+→ WRITE/VALIDATE CANONICAL STATE
+→ BUILD COMPLETE PROJECT ZIP
+→ VERIFY ZIP/RESUME CONTRACT
+→ SET next.recommended = DEV-001
+→ STOP
+```
+
+Under denna transition gäller:
+
+- inget development step väljs,
+- `selected_step` och `in_progress` förblir null,
+- DEV-001 markeras inte completed och implementeras inte,
+- ZIP-checkpointen är source of truth för fortsatt arbete i annan runtime,
+- nästa `Gör nästa steg` eller Work-exekvering går genom normal SELECT/LOCK och börjar DEV-001.
+
+Planning handoff är inte ett DEV-steg och bryter därför inte regeln om ett completed development step per normal implementation-körning.
+
 ## 3. Prioritetsregel
 
 För den korta first-hop decision procedure som särskilt ska minska flerledsresonemang, se `runtime/execution-rules.md`.
@@ -333,6 +356,17 @@ Exempel:
 System Builder ska prioritera faktisk evidens.
 
 Maskinstate ska repareras från source + verifiering, inte tvärtom.
+
+## 19A. Environment-limited verification
+
+VERIFY ska klassificera ett misslyckat försök innan nästa action väljs:
+
+- **project failure** → REPAIR och steget förblir incomplete,
+- **environment-limited** → gör best effort med återstående tekniskt möjliga kontroller.
+
+Environment-limited får bli `passed_with_deferred` och completion tillåtas när ingen faktisk project failure observerats och den uteblivna kontrollen inte är completion-blocking på grund av risk, migration, säkerhet, data, deployment eller explicit planregel.
+
+Deferred checks registreras och följer projektet till senare retry/release readiness. De får aldrig beskrivas som PASS.
 
 ## 20. Repair mode
 
