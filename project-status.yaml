@@ -6,7 +6,7 @@ plan:
   path: docs/development-plan.md
   total_steps: 68
 progress:
-  current_phase: change
+  current_phase: release
   current_step: 68
   last_completed_step: 68
   completed_steps:
@@ -167,8 +167,8 @@ state:
   warnings: []
 next_step:
   recommended: release
-  title: Final reconciliation för Playwright/PWA browser verification
-  reason: SB-67–SB-68 är verifierade; slutför reconciliation och full CI innan release readiness för v1.3.2.
+  title: Release readiness för v1.3.2
+  reason: Final reconciliation är verifierad; validera den färska v1.3.2 releasekandidaten.
 resume:
   supported: true
   required_files:
