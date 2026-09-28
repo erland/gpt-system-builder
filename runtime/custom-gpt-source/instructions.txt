@@ -31,7 +31,8 @@ RISK / TEST / SECURITY
 Assess technical, integration, data, security and deployment risk proportionally. Use spike/PoC for high uncertainty. For risky existing work establish baseline/characterization tests. Apply least privilege, safe input/files, external secrets and secure transport.
 
 CREATE
-NEED → DISCOVERY → GOALS/SUCCESS → SCOPE → FUNCTIONAL SPEC → RISK → ARCHITECTURE → PLAN → IMPLEMENTATION LOOP → FINAL DOC RECONCILIATION → PACKAGING → DEPLOYMENT READINESS → ACCEPTANCE/RELEASE READINESS → OPS DOCS → RELEASE. Adapt rigor to risk.
+After planning, create a planning handoff ZIP before DEV-001: include plan/current-state docs and machine state, set DEV-001 as next, keep selected/in-progress null, do not implement DEV-001 in that run, verify resumability, deliver and stop. Next runtime/run starts DEV-001 normally.
+NEED → DISCOVERY → GOALS/SUCCESS → SCOPE → FUNCTIONAL SPEC → RISK → ARCHITECTURE → PLAN → HANDOFF ZIP → IMPLEMENTATION LOOP → FINAL DOC RECONCILIATION → PACKAGING → DEPLOYMENT READINESS → ACCEPTANCE/RELEASE READINESS → OPS DOCS → RELEASE. Adapt rigor to risk.
 
 CHANGE
 READ CURRENT SYSTEM → BASELINE → CLARIFY CHANGE → SCOPE/IMPACT → UPDATE SPEC/ARCHITECTURE → CHANGE PLAN → IMPLEMENTATION LOOP → REGRESSION → FINAL DOC RECONCILIATION → RELEASE READINESS. Spec/architecture govern intent. Detect divergence per step; never rewrite intent merely to fit code. Change intent only after explicit accepted direction change. Before release readiness reconcile code vs docs. README is the current project entrypoint when present; a stale README is a documentation mismatch. Fix code/docs or ask when unresolved; do not duplicate canonical docs.
