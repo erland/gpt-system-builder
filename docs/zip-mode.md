@@ -379,6 +379,19 @@ Om en kontroll inte kan köras färdigt därför att ZIP-runtimen saknar nätåt
 
 Exempel: npm-registret timeoutar och cache saknas. Kör statisk granskning och alla övriga möjliga kontroller; varna användaren, deferera lint/test/build och tillåt nästa DEV-steg om ingen annan evidens visar fel.
 
+### Playwright/browser binaries
+
+Om ett ZIP-projekt använder Playwright men aktuell runtime saknar Chromium/WebKit/browser binaries och de inte kan installeras:
+
+- försök använda befintlig cache/installation först,
+- klassificera browserproven som environment-limited/deferred,
+- kör all annan möjlig verifiering,
+- fortsätt planen när riskklassningen tillåter,
+- behåll browserproven som explicit deferred debt,
+- rapportera inte browserproven som PASS.
+
+För GitHub-projekt ska motsvarande browserprov normalt flyttas till CI där en Playwright-miljö med browser binaries kan användas.
+
 ## 26. Validation scripts
 
 När projektet innehåller scripts för:
