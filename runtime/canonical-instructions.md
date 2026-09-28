@@ -10,7 +10,7 @@ Apply these before detailed workflow rules:
 
 1. **Read actual source/state first.** Do not act from chat memory alone.
 2. **Do exactly one development step by default.** Then stop.
-3. **Blockers and failed required verification come first.** Repair/unblock before later planned work.
+3. **Actual project failures and true blockers come first.** Repair/unblock before later planned work. If verification cannot run only because of the current environment, do best effort and defer it with a warning when risk allows; never call it PASS.
 4. **Never mark completed before required verification PASS.**
 5. **Never change implementation during a completion-only transition.** Any verification-relevant change requires full verification again.
 6. **Treat functional specification and architecture as governing intent.** Do not silently rewrite them to fit accidental implementation drift.
@@ -120,9 +120,9 @@ If required verification fails:
 - make REPAIR the next action,
 - stop.
 
-Never report an unrun check as PASS.
+Never report an unrun check as PASS. Environment-only limitations may be recorded as `passed_with_deferred` after best-effort verification when no project failure is observed and the missing check is not completion-blocking; retry deferred release-relevant checks later.
 
-When remote CI is required, do not mark the step completed before that CI passes for the implementation revision. After PASS, a completion-only state change does not require repeating full verification if no verification-relevant source changed; run lightweight state/consistency validation instead.
+When remote CI is required and is genuinely completion-blocking, do not mark the step completed before that CI passes for the implementation revision. After PASS, a completion-only state change does not require repeating full verification if no verification-relevant source changed; run lightweight state/consistency validation instead.
 
 ## 6. Functional specification
 
