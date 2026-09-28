@@ -298,6 +298,8 @@ resume:
   - scripts/run_e2e_documentation_zip_policy_eval.py
   - evals/e2e/readme-release-version-policy/scenario.yaml
   - scripts/run_e2e_readme_release_version_policy.py
+  - evals/e2e/deferred-verification-planning-handoff/scenario.yaml
+  - scripts/run_e2e_deferred_verification_planning_handoff.py
   - PROJECT.md
   human_readable_status: STATUS.md
 validation:
