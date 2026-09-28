@@ -1,7 +1,7 @@
 # System Builder – Status
 
 ## Övergripande status
-**CHANGE IMPLEMENTATION COMPLETE – final reconciliation next**
+**CHANGE RECONCILIATION IN PROGRESS – full CI next**
 
 ## Senast slutförda steg
 ### SB-66 – Regression coverage
@@ -23,6 +23,17 @@ Instruction-adherence-sviten omfattar nu **45 fall, 37 critical**.
 
 Custom GPT-instruktionen är **7 983 tecken**, under 8 000-gränsen.
 
+## Reconciliation
+
+Final reconciliation finns i `docs/changes/environment-verification-planning-handoff/reconciliation.md`.
+
+Två avvikelser hittades och reparerades:
+
+- dubblerat Planning handoff ZIP-avsnitt i CREATE-dokumentationen,
+- stale releasekandidat `1.3.0` trots att taggen `v1.3.0` redan finns.
+
+Nästa kandidat är `1.3.1` / `v1.3.1`; taggen `v1.3.1` är ännu inte använd.
+
 ## Förändringsserie SB-64–SB-66
 
 Alla planerade steg är completed:
@@ -33,4 +44,4 @@ Alla planerade steg är completed:
 
 ## Nästa åtgärd
 
-Genomför final documentation reconciliation för SB-64–SB-66 före ny release readiness för v1.3.0.
+Final documentation reconciliation är genomförd. Kör full required CI på slutrevisionen och gå därefter till release readiness för v1.3.1.
