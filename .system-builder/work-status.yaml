@@ -2,7 +2,7 @@ schema_version: 1
 active_work:
   mode: CHANGE
   plan: docs/development-plan.md
-  change_request: environment-verification-planning-handoff
+  change_request: playwright-pwa-browser-verification
   selected_step: null
 progress:
   completed:
@@ -72,27 +72,29 @@ progress:
   - SB-64
   - SB-65
   - SB-66
+  - SB-67
+  - SB-68
   in_progress: null
   next:
     recommended: null
-    reason: Release readiness passed with one documented warning; merge PR #10 before tagging v1.3.1.
+    reason: Release readiness passed with one documented warning; merge PR #11 before tagging v1.3.2.
 blockers: []
 verification:
   last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: v1.3.1 release-readiness full required CI passed for 743194c50028ea4ac954796fdb20dfe7e51356a4.
+  notes: v1.3.2 release-readiness full required CI passed for c7822cda56b47ccf05bab309bd92992784994c98.
 source_state:
   drift: none
-  reference: change/environment-verification-planning-handoff
+  reference: change/playwright-pwa-browser-verification
 execution:
   next_action: merge
   step: null
   operation: merge
-  reason: Release readiness is READY_WITH_WARNINGS; merge PR #10 before creating tag v1.3.1.
+  reason: Release readiness is READY_WITH_WARNINGS; merge PR #11 before creating tag v1.3.2.
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: 743194c50028ea4ac954796fdb20dfe7e51356a4
+  implementation_revision: c7822cda56b47ccf05bab309bd92992784994c98
   evidence_status: passed

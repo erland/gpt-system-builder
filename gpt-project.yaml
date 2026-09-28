@@ -184,7 +184,7 @@ distributions:
     builder: scripts/build_custom_gpt_distribution.py
     validator: scripts/validate_custom_gpt_distribution.py
     instruction_character_limit: 8000
-    instruction_characters: 7983
+    instruction_characters: 7960
     knowledge_file_count: 7
     status: implemented
     source_dir: runtime/custom-gpt-source
@@ -195,8 +195,8 @@ evals:
     static_runner: scripts/run_static_instruction_evals.py
     validator: scripts/validate_instruction_evals.py
     live_scorecard_template: evals/live-eval-scorecard-template.yaml
-    case_count: 45
-    critical_case_count: 37
+    case_count: 49
+    critical_case_count: 41
     chat_static_result: pass
     custom_gpt_static_result: pass
     claude_projects_static_result: pass
@@ -253,15 +253,15 @@ release:
   runtime_count: 4
   registry_driven: true
   status: release_candidate
-  candidate_version: 1.3.1
-  candidate_tag: v1.3.1
+  candidate_version: 1.3.2
+  candidate_tag: v1.3.2
 release_readiness:
   final_report: evals/final-release-readiness-report.md
   final_summary: evals/final-release-readiness.yaml
   validator: scripts/validate_final_release_readiness.py
   release_candidate_validator: scripts/validate_release_candidate.py
   decision: READY_WITH_WARNINGS
-  required_gates: 23
+  required_gates: 24
   blockers: 0
   warnings: 1
-version: 1.3.1
+version: 1.3.2

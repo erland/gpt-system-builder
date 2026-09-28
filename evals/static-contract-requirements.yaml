@@ -190,3 +190,23 @@ requirements:
     - before DEV-001
     - stop before implementing DEV-001
 
+- id: REQ-PLAYWRIGHT-PWA-BROWSER-FALLBACK
+  severity: critical
+  groups:
+  - - Playwright
+  - - browser binaries
+    - Chromium
+    - WebKit
+  - - environment-limited
+    - deferred browser tests
+    - defer browser tests
+  - - never call them PASS
+    - never report browser tests PASS
+    - never report an unrun check as pass
+  - - matching the project
+    - match the project Playwright version
+    - matches the project's @playwright/test
+  - - actual browser PASS evidence
+    - browser evidence before release
+    - before release readiness
+

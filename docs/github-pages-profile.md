@@ -172,3 +172,20 @@ Undvik:
 - service worker/manifest paths som bara fungerar lokalt,
 - SPA-routing som förutsätter server rewrites,
 - deployment från PR-CI med onödiga write permissions.
+
+
+## Browser verification för PWA
+
+För PWA-projekt ska browserbaserad verifiering användas där beteendet beror på faktisk browser-runtime.
+
+Särskilt relevanta områden:
+
+- service worker registration/update,
+- offline behavior,
+- routing under repository subpath,
+- installability/manifest behavior,
+- IndexedDB/localStorage/browser persistence när relevant.
+
+Om Playwright/browser binaries saknas i aktuell ZIP/Chat-runtime får dessa kontroller defereras enligt environment-limited verification och utvecklingen får fortsätta när risk tillåter.
+
+Före release readiness ska release-relevanta PWA-browserkontroller normalt ha faktisk PASS-evidens, exempelvis från GitHub Actions med matchande Playwright/browser-miljö. Saknad lokal browser binary är inte i sig project failure, men kvarvarande releasekritisk browser-verifiering får inte döljas som PASS.

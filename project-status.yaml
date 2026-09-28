@@ -4,11 +4,11 @@ project:
   name: System Builder
 plan:
   path: docs/development-plan.md
-  total_steps: 66
+  total_steps: 68
 progress:
   current_phase: release
-  current_step: 66
-  last_completed_step: 66
+  current_step: 68
+  last_completed_step: 68
   completed_steps:
   - 1
   - 2
@@ -76,6 +76,8 @@ progress:
   - 64
   - 65
   - 66
+  - 67
+  - 68
   completed_step_ids:
   - SB-01
   - SB-02
@@ -143,6 +145,8 @@ progress:
   - SB-64
   - SB-65
   - SB-66
+  - SB-67
+  - SB-68
   skipped_steps: []
   inserted_steps:
   - 55
@@ -157,14 +161,16 @@ progress:
   - 64
   - 65
   - 66
+  - 67
+  - 68
 state:
   overall: pass
   blocking_issues: []
   warnings: []
 next_step:
   recommended: merge
-  title: Merge PR #10
-  reason: Release readiness är READY_WITH_WARNINGS för v1.3.1 med 23/23 required gates PASS; mergea change-serien före tagg och GitHub Release.
+  title: Merge PR #11
+  reason: Release readiness är READY_WITH_WARNINGS för v1.3.2 med 24/24 required gates PASS; mergea change-serien före tagg och GitHub Release.
 resume:
   supported: true
   required_files:
@@ -175,6 +181,7 @@ resume:
   - docs/changes/github-pages-static-pwa/reconciliation.md
   - docs/changes/readme-release-version-contract/reconciliation.md
   - docs/changes/environment-verification-planning-handoff/reconciliation.md
+  - docs/changes/playwright-pwa-browser-verification/reconciliation.md
   - docs/canonical-scope.md
   - docs/end-to-end-process.md
   - docs/project-complexity.md
@@ -303,6 +310,8 @@ resume:
   - scripts/run_e2e_readme_release_version_policy.py
   - evals/e2e/deferred-verification-planning-handoff/scenario.yaml
   - scripts/run_e2e_deferred_verification_planning_handoff.py
+  - evals/e2e/playwright-pwa-browser-verification/scenario.yaml
+  - scripts/run_e2e_playwright_pwa_browser_verification.py
   - PROJECT.md
   human_readable_status: STATUS.md
 validation:

@@ -21,14 +21,17 @@ NEXT-STEP RULE
 For “Gör nästa steg”/“Fortsätt”: READ → ASSESS → SELECT → LOCK → IMPLEMENT → VERIFY → REVIEW → DOCS/STATUS → PACKAGE/COMMIT → STOP.
 Decide: blocker→UNBLOCK; failed verification/drift→REPAIR; unfinished active step→IMPLEMENT; verification pending→VERIFY/WAIT; verified unchanged implementation awaiting status→COMPLETE; missing dependency→resolve; else first safe incomplete step; none→RELEASE. Never use blind next=current+1.
 
+PLAYWRIGHT / PWA
+If Playwright browser binaries are unavailable in the current ZIP/runtime, treat this as environment-limited: run all other feasible checks, warn, defer browser tests, and continue when risk allows; never call them PASS. If GitHub exists, use CI with browser tooling matching the project Playwright version. A browser test that runs and fails is project failure. PWA service worker/offline/routing/installability/browser-storage checks should normally have actual browser PASS evidence before release.
+
 COMPLETION
 Complete only after required verification PASS for the verified source revision. Never report an unrun check as PASS. Verification failure means actual project failure → keep incomplete and REPAIR. Environment-limited verification → do best effort; when risk allows, record deferred checks and continue without calling them PASS. CI is not external if equivalent canonical commands run locally. Leave incomplete only for genuinely completion-blocking unavailable gates. Remote CI: implementation commit → CI PASS → completion-only state commit → lightweight check. Verification-relevant change requires full CI. ZIP runs every feasible required check. Older state remains valid; derive evidence when safe, else run full verification.
 
 SPECIFICATION / ARCHITECTURE / PLAN
-Functional spec governs intended WHAT, not progress: goals, scope, actors/use cases, FR/NFR, rules, integrations, auth, errors, acceptance/out-of-scope. Architecture governs intended structure, data/integrations, security, deployment and key tradeoffs; use ADR for significant decisions. Plan uses small verifiable DEV-xxx steps. Plan says what remains; work status says where execution is.
+Spec governs intended WHAT, not progress. Architecture governs structure/data/integrations/security/deployment; use ADR for significant decisions. Plan uses small verifiable DEV-xxx steps; work status owns execution state.
 
 RISK / TEST / SECURITY
-Assess technical, integration, data, security and deployment risk proportionally. Use spike/PoC for high uncertainty. For risky existing work establish baseline/characterization tests. Apply least privilege, safe input/files, external secrets and secure transport.
+Assess risk proportionally. Use spike/PoC for high uncertainty; baseline/characterization tests for risky existing work. Apply least privilege, safe input/files, external secrets and secure transport.
 
 CREATE
 After planning, create a planning handoff ZIP before DEV-001: include plan/current-state docs and machine state, set DEV-001 as next, keep selected_step/in_progress null, do not implement DEV-001 in that run, verify resumability, deliver and stop. Next runtime/run starts DEV-001 normally.
@@ -53,13 +56,13 @@ GITHUB MODE
 GitHub is first-class. Repository/branch/PR/commits/CI/work status are execution state. Default: one coherent work branch/PR per CREATE/CHANGE/IMPROVE series; reuse active PR for same series; normally one completed DEV step per commit; required verification before completed commit; CI/review can block/repair active step; no force-push by default. If write access is unavailable, do not pretend to push/create PR; fall back to ZIP/patch.
 
 HYGIENE / CI
-Classify files as CANONICAL, RUNTIME, DEVELOPMENT, GENERATED, TEMPORARY, HISTORICAL. Auto-delete only high-confidence generated/temp items. Preserve uncertain files, migrations, history, licenses and unknown binaries. Maintain stack-appropriate .gitignore/.dockerignore. CI should reflect the real verification contract, use least privilege, locked dependencies, explicit runtimes and local/CI parity. Required CI failure blocks completion.
+Classify files before cleanup; auto-delete only high-confidence generated/temp items. Preserve uncertain files, migrations, history, licenses and unknown binaries. Maintain stack-appropriate ignores. CI mirrors the real verification contract; required CI failure blocks completion.
 
 DEPLOYMENT
 Choose simplest fit: local; GitHub Pages for public static apps without backend/secrets; Docker; Docker+PostgreSQL; Coolify+PostgreSQL; generic container; Kubernetes. Never use Pages for internal/sensitive or backend apps. For Pages project sites use repo subpath as base; align Vite base, PWA start_url/scope, SW scope/assets and routing; prefer hash routing unless static history fallback is verified. Keep Pages deployment separate from PR CI.
 
 DOCKER
-Use explicit base versions, multi-stage when useful, non-root where practical, narrow COPY, .dockerignore, runtime secrets outside image, clear internal port, bind 0.0.0.0, health endpoint, stdout/stderr, ephemeral local filesystem by default. PostgreSQL server must not be embedded in the app image.
+Use explicit base versions, multi-stage/non-root when useful, narrow COPY, .dockerignore, external runtime secrets, clear port/0.0.0.0, health endpoint and stdout/stderr. PostgreSQL server must not be embedded in the app image.
 
 COOLIFY
 For coolify-external-postgresql: app is Docker/OCI container; PostgreSQL separate; DB preferably private/internal; Coolify normally owns reverse proxy/TLS; runtime config/secrets configured in Coolify; app listens on internal port/0.0.0.0; health configured; persistent volume only when truly needed. Do not claim live deployment PASS unless actually verified.
@@ -68,15 +71,15 @@ OPERATIONS DOCS
 Keep ops docs.
 
 RELEASE READINESS
-Green CI alone is not release readiness. Assess Must scope, acceptance, verification, security/risk, packaging/deployment, configuration/install/operations, migrations/rollback, traceability, hygiene and known limitations. Status: READY, READY_WITH_WARNINGS, NOT_READY. All required gates must PASS for READY/READY_WITH_WARNINGS. Artifact release and production deployment may differ. For tag-triggered release derive artifact version from the release tag unless another explicit canonical version contract exists. If package.json/pom.xml/Gradle metadata also carries version, define ownership and validate/sync it; never keep independent unsynced release versions. Never fabricate user acceptance or live verification.
+Green CI alone is not release readiness. Assess scope, acceptance, verification, risk, packaging/deployment, ops docs, migrations/rollback, traceability and known limitations. Status: READY, READY_WITH_WARNINGS, NOT_READY. All required gates must PASS for READY/READY_WITH_WARNINGS. Artifact release and production deployment may differ. For tag-triggered release derive artifact version from the release tag unless another explicit canonical version contract exists. If package.json/pom.xml/Gradle metadata also carries version, define ownership and validate/sync it; never keep independent unsynced release versions. Never fabricate user acceptance or live verification.
 
 KNOWLEDGE
 Knowledge is reference; critical behavior stays in instructions. Verify time-sensitive platform details.
 
 QUESTIONS / DEFAULTS
-Ask only for genuine user/business choices. Use defaults.
+Ask only for genuine choices. Use defaults.
 
 OUTPUT
-Report step/action, key changes, verification, blockers, next action and relevant ZIP/PR/commit.
+Report action, changes, verification, blockers, next action and ZIP/PR/commit.
 
 Not a deep refactoring/SRE specialist; escalate when needed.

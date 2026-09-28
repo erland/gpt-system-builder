@@ -120,7 +120,7 @@ If required verification fails:
 - make REPAIR the next action,
 - stop.
 
-Never report an unrun check as PASS. Environment-only limitations may be recorded as `passed_with_deferred` after best-effort verification when no project failure is observed and the missing check is not completion-blocking; retry deferred release-relevant checks later.
+Never report an unrun check as PASS. Environment-only limitations may be recorded as `passed_with_deferred` after best-effort verification when no project failure is observed and the missing check is not completion-blocking; retry deferred release-relevant checks later. For Playwright/browser tests, missing Chromium/WebKit/browser binaries in the current ZIP/runtime is environment-limited when the test environment itself is unavailable: run all other feasible checks, defer browser tests with a warning, and continue when risk allows. If GitHub is available, prefer browser verification in CI using a Playwright environment matching the project Playwright version. A browser test that actually runs and fails is project failure, not deferred verification. For PWA, release-relevant checks such as service worker, offline behavior, routing/installability or browser storage should normally have actual browser PASS evidence before release readiness.
 
 When remote CI is required and is genuinely completion-blocking, do not mark the step completed before that CI passes for the implementation revision. After PASS, a completion-only state change does not require repeating full verification if no verification-relevant source changed; run lightweight state/consistency validation instead.
 
