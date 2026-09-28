@@ -2,8 +2,8 @@ schema_version: 1
 active_work:
   mode: CHANGE
   plan: docs/development-plan.md
-  change_request: environment-verification-planning-handoff
-  selected_step: null
+  change_request: playwright-pwa-browser-verification
+  selected_step: SB-67
 progress:
   completed:
   - SB-01
@@ -72,10 +72,10 @@ progress:
   - SB-64
   - SB-65
   - SB-66
-  in_progress: null
+  in_progress: SB-67
   next:
-    recommended: null
-    reason: Release readiness passed with one documented warning; merge PR #10 before tagging v1.3.1.
+    recommended: SB-67
+    reason: Implement Playwright/PWA browser verification fallback before regression coverage.
 blockers: []
 verification:
   last_status: passed
@@ -85,12 +85,12 @@ verification:
   notes: v1.3.1 release-readiness full required CI passed for 743194c50028ea4ac954796fdb20dfe7e51356a4.
 source_state:
   drift: none
-  reference: change/environment-verification-planning-handoff
+  reference: change/playwright-pwa-browser-verification
 execution:
-  next_action: merge
-  step: null
-  operation: merge
-  reason: Release readiness is READY_WITH_WARNINGS; merge PR #10 before creating tag v1.3.1.
+  next_action: implement
+  step: SB-67
+  operation: implement
+  reason: SB-67 is locked and in progress.
 completion:
   allowed: false
   waiting_for: null
