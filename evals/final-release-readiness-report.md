@@ -87,4 +87,4 @@ Live Coolify target verification remains pending because no live Coolify environ
 
 None.
 
-Candidate validation target: `v1.3.2`.
+Candidate validation target: `v1.3.2`. Project step state is complete through SB-68.
