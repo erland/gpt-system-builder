@@ -1,43 +1,27 @@
 # System Builder – Status
 
 ## Övergripande status
-**READY_WITH_WARNINGS – v1.3.1 release candidate**
+**CHANGE IN PROGRESS – SB-67**
 
-## Release readiness
+## Ny förändringsserie
 
-Release readiness är klar för patchserien SB-64–SB-66.
+- **SB-67** – Playwright browser-test fallback för PWA/ZIP,
+- **SB-68** – regression coverage.
 
-- Version: `1.3.1`
-- Tag: `v1.3.1`
-- Required gates: **23/23 PASS**
-- Blockers: **0**
-- Warnings: **1**
-- Full kandidat-CI: PASS för `743194c50028ea4ac954796fdb20dfe7e51356a4`
+## Aktivt steg
 
-`v1.3.0` finns och bevaras. `v1.3.1` är ännu inte använd.
+SB-67 gör browser-verifiering miljötolerant:
 
-## Inkluderade förändringar
+- saknad Chromium/WebKit/browser binary i aktuell ZIP/Chat-runtime klassificeras som environment-limited verification,
+- all övrig möjlig verifiering körs,
+- browserprov registreras som deferred och rapporteras aldrig som PASS utan faktisk körning,
+- planen får fortsätta när ingen project failure observerats och riskklassningen tillåter det,
+- GitHub-projekt använder normalt en Playwright CI-miljö vars version matchar projektets `@playwright/test`,
+- browserprov som faktiskt körs och faller är fortsatt project failure,
+- PWA-kritiska browserkontroller ska normalt ha faktisk PASS-evidens före release readiness.
 
-- environment-limited verification kan defereras med best effort och utan falskt PASS,
-- faktiska projektfel blockerar fortfarande och kräver repair,
-- riskkritiska verifieringar kan fortsatt vara completion-blocking,
-- planning handoff ZIP skapas efter planering men före DEV-001,
-- handoff-state är resumable mellan Chat, Work och andra runtimes,
-- DEV-001 implementeras inte i handoff-körningen,
-- regressionsskyddet omfattar 45 instruction-adherence-fall, varav 37 critical.
-
-Custom GPT-instruktionen är **7 983 tecken**.
-
-## Warning
-
-Live Coolify target verification är fortsatt pending eftersom ingen faktisk Coolify-miljö varit tillgänglig. Den rapporteras inte som PASS och blockerar inte artifact release.
-
-## Releaseversionering
-
-Release-workflowet använder Git-taggen som canonical versionskälla.
-
-När `v1.3.1` skapas härleds artifactversionen `1.3.1` och används för de fyra runtime-ZIP-filerna och release metadata.
+Custom GPT-instruktionen är **7 968 tecken**.
 
 ## Nästa åtgärd
 
-Mergea PR #10. Efter merge kan `v1.3.1` taggas och release-workflowet publicera runtime-distributionerna.
+Verifiera SB-67 med full required CI.
