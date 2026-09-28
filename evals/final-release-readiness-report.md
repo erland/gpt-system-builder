@@ -86,3 +86,5 @@ Live Coolify target verification remains pending because no live Coolify environ
 ## Blockers
 
 None.
+
+Candidate validation target: `v1.3.2`.
