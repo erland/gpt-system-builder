@@ -7,8 +7,8 @@ plan:
   total_steps: 66
 progress:
   current_phase: change
-  current_step: 64
-  last_completed_step: 63
+  current_step: 65
+  last_completed_step: 64
   completed_steps:
   - 1
   - 2
@@ -73,6 +73,7 @@ progress:
   - 61
   - 62
   - 63
+  - 64
   completed_step_ids:
   - SB-01
   - SB-02
@@ -137,6 +138,7 @@ progress:
   - SB-61
   - SB-62
   - SB-63
+  - SB-64
   skipped_steps: []
   inserted_steps:
   - 55
@@ -156,9 +158,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: 64
-  title: Deferred environment verification
-  reason: Ny CHANGE-serie SB-64–SB-66 är aktiv; skilj miljöbegränsad verifiering från faktiska projektfel.
+  recommended: 65
+  title: Planning handoff ZIP före DEV-001
+  reason: SB-64 är verifierad och completed; skapa handoff-checkpoint mellan planering och första implementation.
 resume:
   supported: true
   required_files:
