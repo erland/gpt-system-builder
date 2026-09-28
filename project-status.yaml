@@ -6,7 +6,7 @@ plan:
   path: docs/development-plan.md
   total_steps: 66
 progress:
-  current_phase: change
+  current_phase: release
   current_step: 66
   last_completed_step: 66
   completed_steps:
@@ -163,8 +163,8 @@ state:
   warnings: []
 next_step:
   recommended: release
-  title: Final reconciliation verification för v1.3.1
-  reason: Reconciliation är innehållsmässigt klar; full required CI ska passera innan projektet går in i release readiness för v1.3.1.
+  title: Release readiness för v1.3.1
+  reason: Final documentation reconciliation är verifierad med full CI; bygg färsk release-readiness-evidens för v1.3.1.
 resume:
   supported: true
   required_files:
