@@ -76,6 +76,8 @@ progress:
   - 64
   - 65
   - 66
+  - 67
+  - 68
   completed_step_ids:
   - SB-01
   - SB-02
