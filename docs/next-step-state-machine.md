@@ -39,6 +39,29 @@ STOP
 
 Normal körning ska sluta efter exakt ett completed development step.
 
+## 2A. Planning handoff transition
+
+I CREATE finns en särskild övergång mellan PLAN och första EXECUTE-steget:
+
+```text
+PLAN COMPLETE
+→ WRITE/VALIDATE CANONICAL STATE
+→ BUILD COMPLETE PROJECT ZIP
+→ VERIFY ZIP/RESUME CONTRACT
+→ SET next.recommended = DEV-001
+→ STOP
+```
+
+Under denna transition gäller:
+
+- inget development step väljs,
+- `selected_step` och `in_progress` förblir null,
+- DEV-001 markeras inte completed och implementeras inte,
+- ZIP-checkpointen är source of truth för fortsatt arbete i annan runtime,
+- nästa `Gör nästa steg` eller Work-exekvering går genom normal SELECT/LOCK och börjar DEV-001.
+
+Planning handoff är inte ett DEV-steg och bryter därför inte regeln om ett completed development step per normal implementation-körning.
+
 ## 3. Prioritetsregel
 
 För den korta first-hop decision procedure som särskilt ska minska flerledsresonemang, se `runtime/execution-rules.md`.
