@@ -360,7 +360,12 @@ Manuell eller extern verifiering får lämnas pending endast när kontrollen gen
 Verifieringsrapporten ska skilja tydligt mellan:
 - automatiskt verifierat PASS/FAIL,
 - ej tillämpligt,
+- **deferred environment verification**,
 - genuint externt/manuellt pending.
+
+Om en kontroll inte kan köras färdigt därför att ZIP-runtimen saknar nätåtkomst, registry-access, package cache eller annan nödvändig tooling ska System Builder först göra best effort med tillgängliga kontroller. Om ingen faktisk project failure observeras och kontrollen inte är completion-blocking av risk/säkerhet/data/deployment-skäl får steget completed med `passed_with_deferred` och planen fortsätta. Kontrollens kommando, miljöorsak, evidens, retry-villkor och release-blocking-status ska sparas i state.
+
+Exempel: npm-registret timeoutar och cache saknas. Kör statisk granskning och alla övriga möjliga kontroller; varna användaren, deferera lint/test/build och tillåt nästa DEV-steg om ingen annan evidens visar fel.
 
 ## 26. Validation scripts
 
@@ -427,7 +432,7 @@ Full diff behöver inte återges i chatten.
 
 En gate får behandlas som extern först efter att System Builder bedömt att ingen tekniskt likvärdig kontroll kan köras i aktuell ZIP-runtime.
 
-Om en required gate därefter fortfarande genuint kräver en otillgänglig extern eller mänsklig kontroll ska steget förbli incomplete. Leverera ett resumable checkpoint med source och state som väntar på just den återstående verifieringen. Redovisa samtidigt vilka andra gates som faktiskt PASS/FAIL-verifierades automatiskt.
+Om en required gate därefter genuint kräver en otillgänglig extern eller mänsklig kontroll **och kontrollen är completion-blocking** ska steget förbli incomplete. Leverera ett resumable checkpoint med source och state som väntar på just den återstående verifieringen. Redovisa samtidigt vilka andra gates som faktiskt PASS/FAIL-verifierades automatiskt.
 
 När användaren senare återkommer med giltig extern evidence för exakt samma source revision/fingerprint får System Builder genomföra completion transition och lightweight state validation utan att köra om full verifiering enbart för statusändringen.
 
