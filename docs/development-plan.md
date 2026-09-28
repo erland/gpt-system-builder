@@ -1659,3 +1659,88 @@ Minst:
 - alla aktiva runtime-distributioner behåller reglerna,
 - full regression passerar.
 
+---
+
+# Fortsättningsplan – miljöbegränsad verifiering och planning handoff
+
+## SB-64 – Deferred environment verification
+
+### Mål
+
+Låt System Builder fortsätta utvecklingsplanen när verifiering inte kan köras enbart på grund av aktuell körmiljö, utan att felaktigt rapportera verifieringen som PASS.
+
+### Regler
+
+Skilj mellan:
+
+- **project failure** – build/test/lint körs och visar ett faktiskt projektfel; blockerar completion och nästa steg,
+- **environment-limited verification** – kontrollen kan inte köras färdigt på grund av exempelvis otillgängligt package registry, saknad lokal cache/tooling eller annan runtimebegränsning; kan defereras när riskreglerna tillåter.
+
+Environment-limited verification får endast defereras när:
+
+- System Builder har försökt köra relevant kontroll eller tekniskt likvärdig kontroll,
+- evidensen pekar på miljön snarare än projektet,
+- ingen verifiering som faktiskt körts visar projektfel,
+- kontrollen inte är explicit completion-blocking för risk, migration, säkerhet, data eller deployment,
+- defererad kontroll registreras tydligt och återförs till senare verifiering/release readiness.
+
+Ett steg kan då markeras completed med varning/deferred verification och nästa DEV-steg får fortsätta.
+
+### Klart när
+
+- state kan uttrycka deferred environment verification,
+- completion/state machine skiljer miljöbegränsning från project failure,
+- deferred checks återstår som skuld och får inte rapporteras PASS,
+- release readiness kan kräva att release-relevanta deferred checks löses,
+- runtimeprojektionerna har samma kritiska regel.
+
+## SB-65 – Planning handoff ZIP före DEV-001
+
+### Mål
+
+Skapa en komplett projekt-ZIP efter planeringsfasen men innan första implementationsteget startar.
+
+### Syfte
+
+Användaren ska kunna göra discovery/spec/arkitektur/plan interaktivt i Chat-läge och sedan använda ZIP-checkpointen som ingång till Work eller annan runtime för exekvering.
+
+### Beteende
+
+Vid CREATE, när planeringen är tillräckligt komplett och nästa action annars skulle vara DEV-001:
+
+- skapa/update minimal canonical project state,
+- paketera hela planeringsresultatet som komplett project ZIP,
+- verifiera ZIP-integritet,
+- sätt next recommended till DEV-001 men implementera inte DEV-001 i samma handoff,
+- informera att ZIP:en kan användas för att fortsätta implementationen i annan runtime.
+
+Planning handoff är en workflow-transition/checkpoint, inte ett DEV-steg.
+
+### Klart när
+
+- CREATE/ZIP/state-machine definierar handoffen,
+- ZIP innehåller plan, spec/architecture när relevanta, state och övriga planeringsartefakter,
+- DEV-001 förblir ej startat,
+- resume från handoff ZIP väljer DEV-001.
+
+## SB-66 – Regression coverage
+
+### Mål
+
+Skydda SB-64 och SB-65 över alla aktiva runtimes.
+
+### Minst
+
+- npm/package registry otillgängligt → best effort + deferred warning + tillåt nästa steg,
+- faktisk lint/test/build failure → blocker/repair, inte defer,
+- security/migration/deployment-critical verifiering kan vara completion-blocking,
+- planning complete → handoff ZIP före DEV-001,
+- handoff ZIP → resume börjar vid DEV-001,
+- planning checkpoint implementerar inte DEV-001 i förtid.
+
+### Klart när
+
+- instruction/static/E2E regression täcker beteendet,
+- alla runtimeprojektioner behåller reglerna,
+- full regression passerar.
+
