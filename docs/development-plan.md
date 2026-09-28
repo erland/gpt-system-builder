@@ -1744,3 +1744,56 @@ Skydda SB-64 och SB-65 över alla aktiva runtimes.
 - alla runtimeprojektioner behåller reglerna,
 - full regression passerar.
 
+---
+
+# Fortsättningsplan – Playwright/PWA browser verification
+
+## SB-67 – Playwright browser-test fallback för PWA/ZIP
+
+### Mål
+
+Gör browser-testverifiering robust i ZIP/Chat-miljöer där Playwright finns men Chromium/WebKit/browser binaries saknas eller inte kan installeras.
+
+### Regler
+
+När ett projekt använder Playwright eller motsvarande browser-E2E:
+
+- försök köra browserproven i aktuell miljö,
+- använd befintlig browserinstallation/cache om den finns,
+- om browser binary saknas och inte kan installeras på grund av miljö/network/runtime ska detta klassificeras som **environment-limited verification**, inte project failure,
+- kör all övrig tekniskt möjlig verifiering såsom lint, typecheck, unit tests, build och statiska PWA-kontroller,
+- registrera browserproven som deferred med tydlig orsak/retry condition,
+- tillåt nästa development step när ingen faktisk project failure observerats och riskklassningen tillåter det,
+- rapportera aldrig browserproven som PASS om de inte körts.
+
+För GitHub-projekt ska System Builder normalt konfigurera browserprov i GitHub Actions med en Playwright-container eller runner-setup som innehåller browser binaries och matchar projektets `@playwright/test`-version.
+
+För PWA ska browserprov som verifierar exempelvis service worker, offline behavior, routing/installability eller browser storage normalt lösas före release readiness även om utvecklingssteg tilläts fortsätta med deferred verification.
+
+### Klart när
+
+- ZIP/test/GitHub Actions/PWA-reglerna är dokumenterade,
+- canonical runtime och Custom GPT innehåller den kritiska fallback-regeln,
+- lokal browserbrist blockerar inte planen mekaniskt,
+- CI-fallback och releasekrav är tydliga.
+
+## SB-68 – Regression coverage för Playwright/PWA fallback
+
+### Mål
+
+Skydda Playwright/PWA-regeln över alla aktiva runtimes.
+
+### Minst
+
+- Playwright finns men Chromium saknas → deferred warning + fortsätt,
+- faktisk browser-test failure → project failure/repair,
+- GitHub-projekt → rekommendera/configurera matchande Playwright CI-miljö,
+- PWA browserkritiska deferred checks kvarstår till release readiness,
+- browserprov får aldrig rapporteras PASS om de inte körts.
+
+### Klart när
+
+- instruction/static/E2E regression täcker beteendet,
+- alla aktiva runtime-distributioner behåller reglerna,
+- full regression passerar.
+
