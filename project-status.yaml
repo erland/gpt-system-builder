@@ -305,6 +305,8 @@ resume:
   - scripts/run_e2e_readme_release_version_policy.py
   - evals/e2e/deferred-verification-planning-handoff/scenario.yaml
   - scripts/run_e2e_deferred_verification_planning_handoff.py
+  - evals/e2e/playwright-pwa-browser-verification/scenario.yaml
+  - scripts/run_e2e_playwright_pwa_browser_verification.py
   - PROJECT.md
   human_readable_status: STATUS.md
 validation:
