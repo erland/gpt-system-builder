@@ -1,47 +1,43 @@
 # System Builder – Status
 
 ## Övergripande status
-**CHANGE RECONCILED – v1.3.1 release readiness next**
+**READY_WITH_WARNINGS – v1.3.1 release candidate**
 
-## Senast slutförda steg
-### SB-66 – Regression coverage
+## Release readiness
 
-SB-66 är verifierad med full required CI för revision `88925c7453a00ea6201d6c79ba9c5b58ed848531` och är completed.
+Release readiness är klar för patchserien SB-64–SB-66.
 
-Regressionsskyddet omfattar nu:
+- Version: `1.3.1`
+- Tag: `v1.3.1`
+- Required gates: **23/23 PASS**
+- Blockers: **0**
+- Warnings: **1**
+- Full kandidat-CI: PASS för `743194c50028ea4ac954796fdb20dfe7e51356a4`
 
-- environment-limited verification som kan defereras med varning och utan falskt PASS,
-- faktisk project failure som fortfarande blockerar och kräver repair,
-- risk-/migrationskritisk verifiering som inte får bypassas med deferred-status,
-- planning handoff ZIP före DEV-001,
-- handoff-state med tomma `selected_step`/`in_progress`,
-- resume från handoff till DEV-001 i nästa runtime/körning,
-- deterministiskt E2E över fem scenarier,
-- statiska runtime-kontrakt över alla fyra aktiva distributioner.
+`v1.3.0` finns och bevaras. `v1.3.1` är ännu inte använd.
 
-Instruction-adherence-sviten omfattar nu **45 fall, 37 critical**.
+## Inkluderade förändringar
 
-Custom GPT-instruktionen är **7 983 tecken**, under 8 000-gränsen.
+- environment-limited verification kan defereras med best effort och utan falskt PASS,
+- faktiska projektfel blockerar fortfarande och kräver repair,
+- riskkritiska verifieringar kan fortsatt vara completion-blocking,
+- planning handoff ZIP skapas efter planering men före DEV-001,
+- handoff-state är resumable mellan Chat, Work och andra runtimes,
+- DEV-001 implementeras inte i handoff-körningen,
+- regressionsskyddet omfattar 45 instruction-adherence-fall, varav 37 critical.
 
-## Reconciliation
+Custom GPT-instruktionen är **7 983 tecken**.
 
-Final reconciliation finns i `docs/changes/environment-verification-planning-handoff/reconciliation.md`.
+## Warning
 
-Två avvikelser hittades och reparerades:
+Live Coolify target verification är fortsatt pending eftersom ingen faktisk Coolify-miljö varit tillgänglig. Den rapporteras inte som PASS och blockerar inte artifact release.
 
-- dubblerat Planning handoff ZIP-avsnitt i CREATE-dokumentationen,
-- stale releasekandidat `1.3.0` trots att taggen `v1.3.0` redan finns.
+## Releaseversionering
 
-Nästa kandidat är `1.3.1` / `v1.3.1`; taggen `v1.3.1` är ännu inte använd.
+Release-workflowet använder Git-taggen som canonical versionskälla.
 
-## Förändringsserie SB-64–SB-66
-
-Alla planerade steg är completed:
-
-- **SB-64** – deferred environment verification,
-- **SB-65** – planning handoff ZIP före DEV-001,
-- **SB-66** – regression coverage.
+När `v1.3.1` skapas härleds artifactversionen `1.3.1` och används för de fyra runtime-ZIP-filerna och release metadata.
 
 ## Nästa åtgärd
 
-Final documentation reconciliation är genomförd och verifierad med full required CI. Nästa steg är release readiness för v1.3.1.
+Mergea PR #10. Efter merge kan `v1.3.1` taggas och release-workflowet publicera runtime-distributionerna.
