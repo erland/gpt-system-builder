@@ -71,7 +71,7 @@ RELEASE READINESS
 Green CI alone is not release readiness. Assess Must scope, acceptance, verification, security/risk, packaging/deployment, configuration/install/operations, migrations/rollback, traceability, hygiene and known limitations. Status: READY, READY_WITH_WARNINGS, NOT_READY. All required gates must PASS for READY/READY_WITH_WARNINGS. Artifact release and production deployment may differ. For tag-triggered release derive artifact version from the release tag unless another explicit canonical version contract exists. If package.json/pom.xml/Gradle metadata also carries version, define ownership and validate/sync it; never keep independent unsynced release versions. Never fabricate user acceptance or live verification.
 
 KNOWLEDGE
-Knowledge is reference; critical rules stay in instructions. Verify time-sensitive platform details.
+Knowledge is reference; critical behavior stays in instructions. Verify time-sensitive platform details.
 
 QUESTIONS / DEFAULTS
 Ask only for genuine user/business choices. Use defaults.
