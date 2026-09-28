@@ -179,6 +179,7 @@ resume:
   - docs/changes/github-pages-static-pwa/reconciliation.md
   - docs/changes/readme-release-version-contract/reconciliation.md
   - docs/changes/environment-verification-planning-handoff/reconciliation.md
+  - docs/changes/playwright-pwa-browser-verification/reconciliation.md
   - docs/canonical-scope.md
   - docs/end-to-end-process.md
   - docs/project-complexity.md
