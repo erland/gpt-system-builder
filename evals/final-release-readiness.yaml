@@ -1,20 +1,18 @@
 schema_version: 2
-review: SB-64-SB-66-v1.3.1-release-readiness
+review: SB-67-SB-68-v1.3.2-release-readiness
 decision: READY_WITH_WARNINGS
 release_candidate:
-  version: 1.3.1
-  tag: v1.3.1
+  version: 1.3.2
+  tag: v1.3.2
   reproducible_from_tag: true
-required_gates_passed: 23
-required_gates_total: 23
+required_gates_passed: 24
+required_gates_total: 24
 warnings:
   - Live Coolify target verification remains pending because no live Coolify environment was available; it is not reported as PASS.
 blockers: []
 note: >
-  Readiness covers the v1.3.1 patch changes after v1.3.0:
-  deferred environment verification, planning handoff ZIP before DEV-001
-  and their regression coverage. Evidence is based on current four-runtime
-  project CI, final reconciliation evidence and release validation gates.
+  Readiness covers the v1.3.2 patch changes after v1.3.1:
+  Playwright/PWA browser verification fallback and regression coverage.
 runtime_targets:
   - chat_zip
   - custom_gpt
@@ -38,7 +36,7 @@ gates:
   - gate: project_ci_workflow
     required: true
     result: pass
-    evidence: full System Builder project CI passed on final reconciled SB-64–SB-66 revision
+    evidence: full System Builder project CI passed on final reconciled SB-67–SB-68 revision
   - gate: release_workflow
     required: true
     result: pass
@@ -58,7 +56,7 @@ gates:
   - gate: instruction_adherence_all_runtimes
     required: true
     result: pass
-    evidence: 45 instruction-adherence cases, 37 critical; static contracts pass for all four runtimes
+    evidence: 49 instruction-adherence cases, 41 critical; static contracts pass for all four runtimes
   - gate: runtime_parity
     required: true
     result: pass
@@ -90,11 +88,15 @@ gates:
   - gate: deferred_verification_planning_handoff_policy
     required: true
     result: pass
-    evidence: deterministic five-case deferred-verification/planning-handoff E2E plus EVAL-042 through EVAL-045
+    evidence: deterministic deferred-verification/planning-handoff E2E plus EVAL-042 through EVAL-045
+  - gate: playwright_pwa_browser_verification
+    required: true
+    result: pass
+    evidence: deterministic Playwright/PWA browser E2E plus EVAL-046 through EVAL-049
   - gate: final_documentation_reconciliation
     required: true
     result: pass
-    evidence: docs/changes/environment-verification-planning-handoff/reconciliation.md
+    evidence: docs/changes/playwright-pwa-browser-verification/reconciliation.md
   - gate: repository_hygiene
     required: true
     result: pass
@@ -106,7 +108,7 @@ gates:
   - gate: custom_instruction_limit
     required: true
     result: pass
-    evidence: Custom GPT instructions are 7983 characters, below configured 8000 limit
+    evidence: Custom GPT instructions are 7960 characters, below configured 8000 limit
   - gate: four_runtime_release_assets
     required: true
     result: pass
@@ -118,4 +120,4 @@ gates:
   - gate: release_candidate_version
     required: true
     result: pass
-    evidence: VERSION and release candidate metadata are 1.3.1; v1.3.0 exists and v1.3.1 is unused
+    evidence: VERSION and release candidate metadata are 1.3.2; v1.3.1 exists and v1.3.2 is unused
