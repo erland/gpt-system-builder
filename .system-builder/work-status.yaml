@@ -77,24 +77,24 @@ progress:
   in_progress: null
   next:
     recommended: null
-    reason: SB-67 and SB-68 are complete; perform final documentation reconciliation before release readiness.
+    reason: Release readiness passed with one documented warning; merge PR #11 before tagging v1.3.2.
 blockers: []
 verification:
   last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-67/SB-68 full required CI passed for d6f07e81c0db660651310eef77ef4ade522182f3.
+  notes: v1.3.2 release-readiness full required CI passed for c7822cda56b47ccf05bab309bd92992784994c98.
 source_state:
   drift: none
   reference: change/playwright-pwa-browser-verification
 execution:
-  next_action: release
+  next_action: merge
   step: null
-  operation: release
-  reason: Playwright/PWA verification change implementation is complete; perform final reconciliation.
+  operation: merge
+  reason: Release readiness is READY_WITH_WARNINGS; merge PR #11 before creating tag v1.3.2.
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: d6f07e81c0db660651310eef77ef4ade522182f3
+  implementation_revision: c7822cda56b47ccf05bab309bd92992784994c98
   evidence_status: passed
