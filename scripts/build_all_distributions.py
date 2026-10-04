@@ -7,8 +7,8 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "runtime" / "distribution-registry.yaml"
 
-def render(parts, output):
-    values={"{python}":sys.executable,"{output}":str(output)}
+def render(parts, output, version):
+    values={"{python}":sys.executable,"{output}":str(output),"{version}":version}
     return [values.get(part, part) for part in parts]
 
 def main() -> int:
@@ -23,7 +23,7 @@ def main() -> int:
         cfg=registry["targets"][runtime]
         artifact=out/cfg["artifact_pattern"].format(version=a.version)
         print(f"== build {runtime}: {artifact} ==")
-        subprocess.run(render(cfg["builder"],artifact),cwd=ROOT,check=True)
+        subprocess.run(render(cfg["builder"],artifact,a.version),cwd=ROOT,check=True)
         if not artifact.is_file():
             raise SystemExit(f"FAIL: builder did not create {artifact}")
         artifacts[runtime]=artifact.as_posix()
