@@ -7,6 +7,7 @@ ENTRYPOINTS = {
     "custom_gpt": "instructions.txt",
     "claude_projects": "project-instructions.md",
     "opencode": "AGENTS.md",
+    "openai_plugin": "skills/system-builder/SKILL.md",
 }
 
 def load_text(path, dist):
