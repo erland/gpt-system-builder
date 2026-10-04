@@ -55,9 +55,9 @@ Compatibility target: **reduced / host-dependent parity**.
 
 ## Preserved
 
-- canonical System Builder behavior and operating modes
+- canonical behavior and System Builder operating modes
 - one safe development step by default
-- source/project state over conversation memory
+- workspace-file authority: source/project state over conversation memory
 - no false PASS for unrun verification
 - specification, architecture, planning, risk, security and release-readiness workflows
 - ZIP and GitHub source-mode semantics when the host exposes the required capabilities
