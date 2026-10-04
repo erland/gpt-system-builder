@@ -39,13 +39,15 @@ CHAT_ZIP="$ARTIFACT_DIR/system-builder-chat-$VERSION.zip"
 CUSTOM_ZIP="$ARTIFACT_DIR/system-builder-custom-gpt-$VERSION.zip"
 CLAUDE_ZIP="$ARTIFACT_DIR/system-builder-claude-projects-$VERSION.zip"
 OPENCODE_ZIP="$ARTIFACT_DIR/system-builder-opencode-$VERSION.zip"
+PLUGIN_ZIP="$ARTIFACT_DIR/system-builder-plugin-$VERSION.zip"
 
 echo "== Runtime adherence and parity =="
 $PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution chat_zip --artifact "$CHAT_ZIP"
 $PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution custom_gpt --artifact "$CUSTOM_ZIP"
 $PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution claude_projects --artifact "$CLAUDE_ZIP"
 $PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution opencode --artifact "$OPENCODE_ZIP"
-$PYTHON scripts/validate_runtime_parity.py --contract evals/runtime-parity-contract.yaml --chat "$CHAT_ZIP" --custom "$CUSTOM_ZIP" --claude "$CLAUDE_ZIP" --opencode "$OPENCODE_ZIP"
+$PYTHON scripts/run_static_instruction_evals.py --requirements evals/static-contract-requirements.yaml --distribution openai_plugin --artifact "$PLUGIN_ZIP"
+$PYTHON scripts/validate_runtime_parity.py --contract evals/runtime-parity-contract.yaml --chat "$CHAT_ZIP" --custom "$CUSTOM_ZIP" --claude "$CLAUDE_ZIP" --opencode "$OPENCODE_ZIP" --plugin "$PLUGIN_ZIP"
 
 echo "== Write checksums and metadata =="
 $PYTHON - "$BUILD_MANIFEST" "$CHECKSUMS" "$METADATA" "$TAG" "$VERSION" <<'PY'
