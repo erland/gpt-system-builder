@@ -13,6 +13,7 @@ ENTRYPOINTS = {
     "custom_gpt": "instructions.txt",
     "claude_projects": "project-instructions.md",
     "opencode": "AGENTS.md",
+    "openai_plugin": "skills/system-builder/SKILL.md",
 }
 
 def read_json(zf, name):
@@ -34,6 +35,11 @@ def load_runtime(path: Path, runtime: str):
             data["contract"] = snap["canonical_contract"]
             data["tool_mapping"] = read_json(zf, ".opencode/tool-mapping.json")
             data["config"] = read_json(zf, "opencode.json")
+        elif runtime == "openai_plugin":
+            snap = read_json(zf, "runtime-contract.json")
+            data["contract"] = snap["canonical_contract"]
+            data["runtime_requirements"] = snap["runtime_requirements"]
+            data["compatibility"] = zf.read("compatibility.md").decode("utf-8").lower()
         return data
 
 def text_ok(text, requirement):
@@ -53,6 +59,7 @@ def main():
     ap.add_argument("--custom",required=True)
     ap.add_argument("--claude",required=True)
     ap.add_argument("--opencode",required=True)
+    ap.add_argument("--plugin",required=True)
     ap.add_argument("--json",action="store_true")
     a=ap.parse_args()
 
@@ -62,6 +69,7 @@ def main():
         "custom_gpt":Path(a.custom),
         "claude_projects":Path(a.claude),
         "opencode":Path(a.opencode),
+        "openai_plugin":Path(a.plugin),
     }
     runtimes={name:load_runtime(path,name) for name,path in artifacts.items()}
     errors=[]; rows=[]
@@ -82,6 +90,7 @@ def main():
         "custom_gpt":"equivalent_with_platform_constraints",
         "claude_projects":"reduced",
         "opencode":"equivalent",
+        "openai_plugin":"reduced",
     }
     for runtime,expected in contract["dimensions"]["capability"]["runtime_expectations"].items():
         actual=cap_actual[runtime]
@@ -142,6 +151,22 @@ def main():
     for phrase in ["unrun verification","workspace-file authority","canonical behavior"]:
         if phrase not in compat:
             errors.append(f"Claude reduced parity preservation not explicit: {phrase}")
+
+    plugin=runtimes["openai_plugin"]
+    plugin_compat=plugin["compatibility"]
+    for phrase in contract["runtime_policy"]["reduced_runtime_requirements"]["openai_plugin"]["must_document_limitations"]:
+        if phrase.lower() not in plugin_compat:
+            errors.append(f"Plugin reduced parity limitation not documented: {phrase}")
+    for phrase in ["canonical behavior","workspace-file authority","no false pass"]:
+        if phrase not in plugin_compat:
+            errors.append(f"Plugin reduced parity preservation not explicit: {phrase}")
+    plugin_req=plugin["runtime_requirements"]
+    if plugin_req.get("filesystem",{}).get("write")!="required":
+        errors.append("Plugin filesystem write requirement must be required")
+    if plugin_req.get("code_execution",{}).get("level")!="required":
+        errors.append("Plugin code execution requirement must be required")
+    if plugin_req.get("persistent_state",{}).get("level")!="required":
+        errors.append("Plugin persistent state requirement must be required")
 
     mapping=runtimes["opencode"]["tool_mapping"].get("tools",{})
     if set(mapping)!=declared:
