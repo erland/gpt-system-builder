@@ -59,7 +59,7 @@ def main() -> int:
     else:
         raise SystemExit('FAIL: invalid capability contract was not rejected')
     active = {name for name, cfg in contract['runtime_compatibility'].items() if cfg['status'] in {'implemented', 'planned'}}
-    expected = {'chat_zip', 'custom_gpt', 'claude_projects', 'opencode'}
+    expected = {'chat_zip', 'custom_gpt', 'claude_projects', 'opencode', 'openai_plugin'}
     if active != expected:
         raise SystemExit(f'FAIL: unexpected active runtime set: {sorted(active)}')
     print('PASS: platform-neutral runtime contract is valid')

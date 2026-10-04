@@ -47,6 +47,7 @@ dimensions:
       custom_gpt: equivalent_with_platform_constraints
       claude_projects: reduced
       opencode: equivalent
+      openai_plugin: reduced
   artifact:
     severity: high
     required_outputs:
@@ -61,6 +62,7 @@ dimensions:
       custom_gpt: equivalent_with_platform_constraints
       claude_projects: reduced
       opencode: equivalent
+      openai_plugin: reduced
   workspace_state:
     severity: critical
     authority: workspace_file
@@ -71,6 +73,7 @@ dimensions:
       custom_gpt: equivalent_with_platform_constraints
       claude_projects: reduced
       opencode: equivalent
+      openai_plugin: reduced
   tool:
     severity: critical
     declared_tools:
@@ -88,12 +91,14 @@ dimensions:
       custom_gpt: equivalent_with_platform_constraints
       claude_projects: reduced
       opencode: equivalent
+      openai_plugin: reduced
 runtime_policy:
   active:
     - chat_zip
     - custom_gpt
     - claude_projects
     - opencode
+    - openai_plugin
   reduced_runtime_requirements:
     claude_projects:
       must_document_limitations:
@@ -101,6 +106,16 @@ runtime_policy:
         - deterministic project verification
         - workspace mutation
         - GitHub write actions
+      must_preserve:
+        - canonical behavior
+        - workspace-file authority
+        - no false PASS for unrun verification
+    openai_plugin:
+      must_document_limitations:
+        - filesystem read/write
+        - code execution
+        - persistent workspace/state
+        - GitHub
       must_preserve:
         - canonical behavior
         - workspace-file authority

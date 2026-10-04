@@ -5,6 +5,7 @@ active_targets:
   - custom_gpt
   - claude_projects
   - opencode
+  - openai_plugin
 targets:
   chat_zip:
     artifact_pattern: system-builder-chat-{version}.zip
@@ -22,6 +23,10 @@ targets:
     artifact_pattern: system-builder-opencode-{version}.zip
     builder: ["{python}", scripts/build_opencode_distribution.py, --project-root, ., --output, "{output}"]
     validator: ["{python}", scripts/validate_opencode_distribution.py, "{artifact}"]
+  openai_plugin:
+    artifact_pattern: system-builder-plugin-{version}.zip
+    builder: ["{python}", scripts/build_plugin_distribution.py, --project-root, ., --output, "{output}", --version, "{version}"]
+    validator: ["{python}", scripts/validate_plugin_distribution.py, "{artifact}"]
 hygiene:
   generated_roots: [dist, dist-ci, release-artifacts]
   forbidden_runtime_projection_paths:

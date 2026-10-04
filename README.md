@@ -12,14 +12,15 @@ Utvecklingsplan: `docs/development-plan.md`.
 
 ## Runtime-distributioner
 
-Fyra aktiva runtime-distributioner byggs från samma canonical kontrakt:
+Fem aktiva runtime-distributioner byggs från samma canonical kontrakt:
 
 - **Chat ZIP**
 - **Custom GPT**
 - **Claude Projects** – explicit reduced parity
 - **OpenCode**
+- **OpenAI Plugin** – skills-first och host-dependent/reduced parity
 
-OpenAI Plugin v1 är bedömd men inte aktiverad eftersom kritiska workspace/state- och repository-flöden inte når tillräcklig parity.
+Plugin-distributionen bevarar canonical System Builder-beteende men förutsätter att hosten tillhandahåller nödvändiga capabilities, bland annat filesystem read/write, code execution, persistent workspace/state och GitHub/repository-stöd när GitHub source mode används. Saknas en required capability ska operationen blockeras eller degraderas ärligt; verifiering får aldrig simuleras.
 
 ## Centrala arbetssätt
 
@@ -72,7 +73,7 @@ README är projektets översikt. Detaljer finns i canonical dokumentation, bland
 
 Git-taggen är canonical versionskälla för System Builders releaseartefakter. Exempelvis ger taggen `v1.3.0` artifactversion `1.3.0`.
 
-Release-workflowet kör full CI, bygger och validerar alla fyra runtime-distributionerna, kör instruction-adherence/runtime-parity och skapar checksummor samt release metadata.
+Release-workflowet kör full CI, bygger och validerar alla fem runtime-distributionerna, kör instruction-adherence/runtime-parity och skapar checksummor samt release metadata.
 
 En release innehåller:
 
@@ -80,6 +81,7 @@ En release innehåller:
 - `system-builder-custom-gpt-<version>.zip`
 - `system-builder-claude-projects-<version>.zip`
 - `system-builder-opencode-<version>.zip`
+- `system-builder-plugin-<version>.zip`
 - `SHA256SUMS.txt`
 - `release-metadata.yaml`
 - `distribution-build-manifest.json`

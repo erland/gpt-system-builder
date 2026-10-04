@@ -233,8 +233,9 @@
       "target": "equivalent"
     },
     "openai_plugin": {
-      "status": "not_planned",
-      "target": "reduced"
+      "status": "implemented",
+      "target": "reduced",
+      "host_dependency": "filesystem/code-execution/persistent-state and repository capability when source mode requires it"
     }
   }
 }
