@@ -30,10 +30,10 @@ def main() -> int:
         errors.append("gpt-project release candidate_version mismatch")
     if release.get("candidate_tag")!=f"v{version}":
         errors.append("gpt-project release candidate_tag mismatch")
-    if release.get("runtime_count")!=4:
-        errors.append("release runtime_count must be 4")
+    if release.get("runtime_count")!=5:
+        errors.append("release runtime_count must be 5")
 
-    expected=["chat_zip","custom_gpt","claude_projects","opencode"]
+    expected=["chat_zip","custom_gpt","claude_projects","opencode","openai_plugin"]
     if registry.get("active_targets")!=expected:
         errors.append("distribution registry active targets mismatch")
     compat=runtime.get("runtime_compatibility",{})
@@ -41,8 +41,8 @@ def main() -> int:
         if compat.get(target,{}).get("status")!="implemented":
             errors.append(f"{target} is not implemented")
     plugin=compat.get("openai_plugin",{})
-    if plugin.get("status")!="not_planned" or plugin.get("target")!="reduced":
-        errors.append("OpenAI Plugin decision must remain explicit not_planned/reduced")
+    if plugin.get("status")!="implemented" or plugin.get("target")!="reduced":
+        errors.append("OpenAI Plugin must be implemented with reduced parity")
 
     if readiness.get("blockers"):
         errors.append("release readiness blockers present")
@@ -75,7 +75,7 @@ def main() -> int:
         print("FAIL")
         for error in errors: print("-",error)
         return 1
-    print(f"PASS: release candidate v{version} is internally consistent across four runtimes")
+    print(f"PASS: release candidate v{version} is internally consistent across five runtimes")
     return 0
 
 if __name__=="__main__":
