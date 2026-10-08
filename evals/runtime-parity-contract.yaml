@@ -136,8 +136,7 @@ capability_aware_execution:
         - [unknown, unavailable]
     - id: CAP-PAR-002
       groups:
-        - [optional]
-        - [does not block, do not block, non-blocking]
+        - [missing optional capabilities must not block, optional capabilities must not block, missing optional capability does not block]
     - id: CAP-PAR-003
       groups:
         - [required capability, required capabilities]
