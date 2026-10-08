@@ -17,7 +17,8 @@
       "Older System Builder projects",
       "## 2A. Capability discovery",
       "## 2B. Execution profile routing",
-      "## 2C. Agent Workspace"
+      "## 2C. Agent Workspace",
+      "## 2D. PWA Preview"
     ]
   },
   "capabilities": {
@@ -122,6 +123,27 @@
         "build_only_when_artifact_needed": true,
         "signed_download_link_for_external_handoff_when_available": true
       }
+    },
+    "pwa_preview": {
+      "canonical_reference": "docs/pwa-preview-integration.md",
+      "evidence_schema": "schemas/pwa-preview-evidence.schema.json",
+      "requirement": "optional",
+      "source_transport": "https_archive_url",
+      "accepted_archives": [
+        "zip",
+        "tar.gz"
+      ],
+      "lifecycle": [
+        "create_or_update",
+        "get_if_needed",
+        "extend_only_if_needed",
+        "delete_or_expire"
+      ],
+      "preview_is_functional_verification": false,
+      "preview_is_production_deployment": false,
+      "agent_workspace_policy": "do_not_start_only_for_preview_when_cheaper_source_exists",
+      "github_policy": "keep_github_actions_for_build_and_test_when_sufficient",
+      "reuse_policy": "prefer_update_for_same_work_series_when_stable_url_is_useful"
     }
   },
   "artifacts": {
