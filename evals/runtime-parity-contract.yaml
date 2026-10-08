@@ -161,11 +161,10 @@ capability_aware_execution:
   reduced_runtime_requirements:
     custom_gpt:
       rationale: Instruction budget is constrained; preserve core safety/fallback invariants without duplicating companion-specific routing details.
-      must_preserve:
-        - actual source/state over memory
-        - optional missing capabilities must not cause false PASS
-        - required unavailable verification must remain pending/deferred or blocked
-        - no false PASS for unrun verification
+      invariant_groups:
+        - [actual current source, actual source]
+        - [environment-limited, verification pending, pending, deferred]
+        - [never report an unrun check as pass, never call them pass]
       companion_details_required: false
     claude_projects:
       companion_details_required: false
