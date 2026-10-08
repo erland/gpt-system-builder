@@ -67,6 +67,7 @@ canonical:
   capability_discovery: docs/capability-discovery.md
   execution_profiles: docs/execution-profiles.md
   agent_workspace_integration: docs/agent-workspace-integration.md
+  pwa_preview_integration: docs/pwa-preview-integration.md
 status:
   machine_readable: project-status.yaml
   human_readable: STATUS.md
@@ -97,6 +98,7 @@ schemas:
   capability_discovery: schemas/capability-discovery.schema.json
   execution_profile: schemas/execution-profile.schema.json
   agent_workspace_evidence: schemas/agent-workspace-evidence.schema.json
+  pwa_preview_evidence: schemas/pwa-preview-evidence.schema.json
   artifact_contract: schemas/artifact-contract.schema.json
   workspace_state_contract: schemas/workspace-state-contract.schema.json
   tool_contract: schemas/tool-contract.schema.json
