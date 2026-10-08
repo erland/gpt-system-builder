@@ -187,6 +187,64 @@
         }
       },
       "additionalProperties": false
+    },
+    "agent_workspace": {
+      "type": "object",
+      "required": [
+        "canonical_reference",
+        "evidence_schema",
+        "requirement",
+        "github_policy",
+        "redundant_execution_forbidden",
+        "use_when",
+        "lifecycle",
+        "cleanup",
+        "repository_authority_in_github_mode"
+      ],
+      "properties": {
+        "canonical_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requirement": {
+          "const": "optional"
+        },
+        "github_policy": {
+          "const": "prefer_github_actions_when_sufficient"
+        },
+        "redundant_execution_forbidden": {
+          "const": true
+        },
+        "use_when": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "lifecycle": {
+          "const": [
+            "create",
+            "upload",
+            "verify_or_build",
+            "collect_if_needed",
+            "destroy"
+          ]
+        },
+        "cleanup": {
+          "const": "best_effort_required"
+        },
+        "repository_authority_in_github_mode": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false,
