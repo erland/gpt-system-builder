@@ -296,6 +296,68 @@
         }
       },
       "additionalProperties": false
+    },
+    "pwa_preview": {
+      "type": "object",
+      "required": [
+        "canonical_reference",
+        "evidence_schema",
+        "requirement",
+        "source_transport",
+        "accepted_archives",
+        "lifecycle",
+        "preview_is_functional_verification",
+        "preview_is_production_deployment",
+        "agent_workspace_policy",
+        "github_policy",
+        "reuse_policy"
+      ],
+      "properties": {
+        "canonical_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requirement": {
+          "const": "optional"
+        },
+        "source_transport": {
+          "const": "https_archive_url"
+        },
+        "accepted_archives": {
+          "const": [
+            "zip",
+            "tar.gz"
+          ]
+        },
+        "lifecycle": {
+          "const": [
+            "create_or_update",
+            "get_if_needed",
+            "extend_only_if_needed",
+            "delete_or_expire"
+          ]
+        },
+        "preview_is_functional_verification": {
+          "const": false
+        },
+        "preview_is_production_deployment": {
+          "const": false
+        },
+        "agent_workspace_policy": {
+          "const": "do_not_start_only_for_preview_when_cheaper_source_exists"
+        },
+        "github_policy": {
+          "const": "keep_github_actions_for_build_and_test_when_sufficient"
+        },
+        "reuse_policy": {
+          "const": "prefer_update_for_same_work_series_when_stable_url_is_useful"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false,
