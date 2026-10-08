@@ -5,7 +5,7 @@ import argparse
 from pathlib import Path
 import zipfile
 
-EXCLUDED_DIRS = {"dist", ".git", "__pycache__", ".pytest_cache"}
+EXCLUDED_DIRS = {"dist", "dist-ci", "release-artifacts", ".git", "__pycache__", ".pytest_cache"}
 EXCLUDED_FILES = {".DS_Store"}
 
 
