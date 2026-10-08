@@ -18,7 +18,8 @@
       "## 2A. Capability discovery",
       "## 2B. Execution profile routing",
       "## 2C. Agent Workspace",
-      "## 2D. PWA Preview"
+      "## 2D. PWA Preview",
+      "## 2E. Browser Screenshot"
     ]
   },
   "capabilities": {
@@ -144,6 +145,23 @@
       "agent_workspace_policy": "do_not_start_only_for_preview_when_cheaper_source_exists",
       "github_policy": "keep_github_actions_for_build_and_test_when_sufficient",
       "reuse_policy": "prefer_update_for_same_work_series_when_stable_url_is_useful"
+    },
+    "browser_screenshot": {
+      "canonical_reference": "docs/browser-screenshot-integration.md",
+      "evidence_schema": "schemas/browser-screenshot-evidence.schema.json",
+      "requirement": "optional",
+      "public_http_url_required": true,
+      "default_preset": "desktop",
+      "supported_presets": [
+        "desktop",
+        "tablet",
+        "mobile"
+      ],
+      "custom_viewport_supported": true,
+      "full_page_supported": true,
+      "screenshot_is_functional_verification": false,
+      "extra_viewports_policy": "only_when_requirement_risk_or_user_justifies",
+      "preview_policy": "use_existing_public_url_before_creating_new_preview"
     }
   },
   "artifacts": {
