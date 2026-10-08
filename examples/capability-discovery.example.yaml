@@ -1,0 +1,83 @@
+schema_version: 1
+captured_for:
+  source_mode: github
+  operation: implement_step
+capabilities:
+  - id: repository.read
+    availability: available
+    requirement: required
+    outcome: satisfied
+    evidence: GitHub repository read actions are callable in the current host.
+    fallback: null
+    probe: host_declared
+  - id: repository.write
+    availability: available
+    requirement: required
+    outcome: satisfied
+    evidence: GitHub branch/file/PR write actions are callable in the current host.
+    fallback: null
+    probe: host_declared
+  - id: filesystem.read
+    availability: available
+    requirement: required
+    outcome: satisfied
+    evidence: Active project source can be read.
+    fallback: null
+    probe: observed
+  - id: filesystem.write
+    availability: available
+    requirement: required
+    outcome: satisfied
+    evidence: Active project source can be updated through repository writes.
+    fallback: null
+    probe: observed
+  - id: code_execution
+    availability: unavailable
+    requirement: recommended
+    outcome: degraded
+    evidence: No local execution capability is exposed in this host context.
+    fallback: Use repository CI or an optional execution backend when available.
+    probe: host_declared
+  - id: persistent_state
+    availability: available
+    requirement: required
+    outcome: satisfied
+    evidence: .system-builder/work-status.yaml is persisted in the repository.
+    fallback: null
+    probe: observed
+  - id: project_packaging
+    availability: not_applicable
+    requirement: not_required
+    outcome: ignored
+    evidence: Current source mode is GitHub and no ZIP delivery is requested.
+    fallback: null
+    probe: not_probed
+  - id: companion.agent_workspace
+    availability: available
+    requirement: optional
+    outcome: satisfied
+    evidence: Agent Workspace tools are callable in the current host.
+    fallback: Existing GitHub or ZIP verification flow.
+    probe: host_declared
+  - id: companion.pwa_preview
+    availability: unavailable
+    requirement: optional
+    outcome: degraded
+    evidence: PWA Preview is not exposed in the current host.
+    fallback: Continue without temporary preview unless a later operation requires it.
+    probe: host_declared
+  - id: companion.browser_screenshot
+    availability: unavailable
+    requirement: optional
+    outcome: degraded
+    evidence: Browser Screenshot is not exposed in the current host.
+    fallback: Continue without visual screenshot evidence unless a later operation requires it.
+    probe: host_declared
+summary:
+  blocked: false
+  degraded: true
+  blocking_capabilities: []
+  degraded_capabilities:
+    - code_execution
+    - companion.pwa_preview
+    - companion.browser_screenshot
