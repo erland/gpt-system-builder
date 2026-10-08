@@ -16,6 +16,7 @@ core_references:
 - docs/execution-profiles.md
 - docs/agent-workspace-integration.md
 - docs/pwa-preview-integration.md
+- docs/browser-screenshot-integration.md
 standards:
 - docs/functional-specification-standard.md
 - docs/architecture-standard.md
