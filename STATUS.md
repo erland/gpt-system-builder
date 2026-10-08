@@ -26,7 +26,7 @@ Planerade steg:
 
 **SB-72 – Agent Workspace integration**
 
-SB-71 är verifierad av full PR-CI och completed. SB-72 ska implementera Agent Workspace som optional execution backend för build/test/verification utan att göra den till project-state authority.
+SB-71 är verifierad och completed. SB-72 är implementerad: GitHub Actions är förstahandsval i GitHub source mode när CI räcker; Agent Workspace används endast för saknad required capability eller ett explicit workflowbehov som motiverar extra execution-kostnad.
 
 ## Release state
 
@@ -34,8 +34,8 @@ SB-71 är verifierad av full PR-CI och completed. SB-72 ska implementera Agent W
 
 ## Verifiering
 
-SB-71 verifierades av System Builder CI run `37723907980` på commit `f63624f91ab392271aceb87296765f4d320068be`.
+SB-71 verifierades av System Builder CI run `37723907980`. SB-72 full PR-CI är pending.
 
 ## Nästa åtgärd
 
-Implementera SB-72 Agent Workspace-integration på samma PR #14.
+Kör full projekt-CI för SB-72. Vid PASS blir SB-73 PWA Preview-integration nästa steg på samma PR #14.
