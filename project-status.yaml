@@ -7,8 +7,8 @@ plan:
   total_steps: 75
 progress:
   current_phase: change
-  current_step: 73
-  last_completed_step: 72
+  current_step: 74
+  last_completed_step: 73
   completed_steps:
   - 1
   - 2
@@ -87,6 +87,8 @@ progress:
 
 
   - 72
+
+  - 73
   completed_step_ids:
   - SB-01
   - SB-02
@@ -165,6 +167,8 @@ progress:
 
 
   - SB-72
+
+  - SB-73
   skipped_steps: []
   inserted_steps:
   - 55
@@ -193,9 +197,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: verify
-  title: Verify SB-73 PWA Preview integration
-  reason: SB-73 is implemented against the live PWA Preview contract and awaits full project CI before completion.
+  recommended: implement
+  title: Implement SB-74 Browser Screenshot integration
+  reason: SB-73 passed full System Builder CI run 37725422318; next safe step is optional Browser Screenshot integration.
 resume:
   supported: true
   required_files:
