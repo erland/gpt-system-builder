@@ -7,8 +7,8 @@ plan:
   total_steps: 75
 progress:
   current_phase: change
-  current_step: 73
-  last_completed_step: 72
+  current_step: 72
+  last_completed_step: 71
   completed_steps:
   - 1
   - 2
@@ -85,7 +85,6 @@ progress:
 
   - 71
 
-  - 72
   completed_step_ids:
   - SB-01
   - SB-02
@@ -162,7 +161,6 @@ progress:
 
   - SB-71
 
-  - SB-72
   skipped_steps: []
   inserted_steps:
   - 55
@@ -191,9 +189,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: implement
-  title: Implement SB-73 PWA Preview integration
-  reason: SB-72 verifierades av full System Builder CI run 37724643707; nästa säkra steg är optional PWA Preview integration.
+  recommended: verify
+  title: Re-verify SB-72 Agent Workspace integration
+  reason: Live Agent Workspace capabilities required a verification-relevant SB-72 contract reconciliation; full project CI must pass again before completion.
 resume:
   supported: true
   required_files:
