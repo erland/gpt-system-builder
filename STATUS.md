@@ -26,7 +26,7 @@ Planerade steg:
 
 **SB-75 – capability-aware degradation och regression coverage**
 
-SB-75 är implementerad och verifierad. Regression-suiten täcker åtta capability/degradation-scenarier och runtime parity över de fem aktiva distributionerna.
+SB-75 är implementerad och genomgår slutlig re-verifiering efter parity-reparationen. Custom GPT deklarerar nu explicit reducerat capability-aware stöd i metadata, utan ändring av instruktionstexten.
 
 ## Release state
 
@@ -34,8 +34,8 @@ SB-75 är implementerad och verifierad. Regression-suiten täcker åtta capabili
 
 ## Verifiering
 
-SB-75 verifierades av full System Builder CI run `37726151547` på commit `b476c494499920b90ec9848bdd5458208c37b1b2`. Den nya regression-suiten rapporterade `PASS: capability-aware degradation scenarios (8 scenarios)`.
+Tidigare SB-75 PASS är superseded av slutlig parity-reparation. Ny full PR-CI är pending.
 
 ## Nästa åtgärd
 
-Gör completion-transition för SB-75 och därefter mergebedömning för PR #14.
+Kör full projekt-CI efter parity-reparationen. Vid PASS görs completion-transition och slutlig mergebedömning för PR #14.
