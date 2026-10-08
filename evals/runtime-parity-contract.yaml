@@ -122,14 +122,55 @@ runtime_policy:
         - no false PASS for unrun verification
 
 capability_aware_execution:
+  severity: critical
+  runtime_expectations:
+    chat_zip: equivalent
+    custom_gpt: reduced
+    claude_projects: reduced
+    opencode: equivalent
+    openai_plugin: reduced
   required_invariants:
-    - capability discovery uses actual host/tool availability
-    - optional companion capability absence does not block base functionality
-    - required capability absence blocks or uses an explicit safe fallback
-    - GitHub Actions are preferred over redundant Agent Workspace execution
-    - PWA Preview READY is not functional verification
-    - Browser Screenshot capture is not functional verification
-    - unrun verification is never reported as PASS
+    - id: CAP-PAR-001
+      groups:
+        - [actual host, actual current host, actual host/tool availability]
+        - [unknown, unavailable]
+    - id: CAP-PAR-002
+      groups:
+        - [optional]
+        - [does not block, do not block, non-blocking]
+    - id: CAP-PAR-003
+      groups:
+        - [required capability, required capabilities]
+        - [block, blocked, safe fallback]
+    - id: CAP-PAR-004
+      groups:
+        - [unrun check as pass, false pass, no false pass]
+  full_runtime_invariants:
+    - id: CAP-FULL-001
+      groups:
+        - [github actions]
+        - [agent workspace]
+    - id: CAP-FULL-002
+      groups:
+        - [pwa preview]
+        - [functional verification, functional browser]
+    - id: CAP-FULL-003
+      groups:
+        - [browser screenshot]
+        - [functional verification, playwright, e2e]
+  reduced_runtime_requirements:
+    custom_gpt:
+      rationale: Instruction budget is constrained; preserve core safety/fallback invariants without duplicating companion-specific routing details.
+      must_preserve:
+        - actual source/state over memory
+        - optional missing capabilities must not cause false PASS
+        - required unavailable verification must remain pending/deferred or blocked
+        - no false PASS for unrun verification
+      companion_details_required: false
+    claude_projects:
+      companion_details_required: false
+    openai_plugin:
+      companion_details_required: false
   scenarios:
     - github_with_agent_workspace
     - github_without_agent_workspace
