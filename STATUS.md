@@ -26,7 +26,7 @@ Planerade steg:
 
 **SB-75 – capability-aware degradation och regression coverage**
 
-SB-74 är verifierad och completed. Browser Screenshot är nu optional visual-evidence backend med desktop som default, demand-driven extra viewports och tydlig separation från funktionell browser-verifiering. SB-75 är sista planerade steget i change-serien.
+SB-75 är implementerad och verifierad. Regression-suiten täcker åtta capability/degradation-scenarier och runtime parity över de fem aktiva distributionerna.
 
 ## Release state
 
@@ -34,8 +34,8 @@ SB-74 är verifierad och completed. Browser Screenshot är nu optional visual-ev
 
 ## Verifiering
 
-SB-74 verifierades av full System Builder CI run `37725850680` på commit `807b26741881581585ca3be1d875b90c7bc50607`.
+SB-75 verifierades av full System Builder CI run `37726151547` på commit `b476c494499920b90ec9848bdd5458208c37b1b2`. Den nya regression-suiten rapporterade `PASS: capability-aware degradation scenarios (8 scenarios)`.
 
 ## Nästa åtgärd
 
-Implementera SB-75 capability-aware degradation och regression coverage på samma PR #14. Efter PASS bör PR #14 vara redo för mergebedömning.
+Gör completion-transition för SB-75 och därefter mergebedömning för PR #14.
