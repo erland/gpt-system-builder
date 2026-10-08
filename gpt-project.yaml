@@ -65,6 +65,7 @@ canonical:
   knowledge_architecture: docs/knowledge-architecture.md
   runtime_contract: runtime/runtime-contract.json
   capability_discovery: docs/capability-discovery.md
+  execution_profiles: docs/execution-profiles.md
 status:
   machine_readable: project-status.yaml
   human_readable: STATUS.md
@@ -93,6 +94,7 @@ schemas:
   behavior_contract: schemas/behavior-contract.schema.json
   capability_contract: schemas/capability-contract.schema.json
   capability_discovery: schemas/capability-discovery.schema.json
+  execution_profile: schemas/execution-profile.schema.json
   artifact_contract: schemas/artifact-contract.schema.json
   workspace_state_contract: schemas/workspace-state-contract.schema.json
   tool_contract: schemas/tool-contract.schema.json
