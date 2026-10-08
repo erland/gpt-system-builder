@@ -4,7 +4,7 @@ import argparse, zipfile, yaml, sys
 FILES=[
 "runtime/canonical-instructions.md","runtime/runtime-manifest.yaml","runtime/execution-rules.md",
 "docs/create-mode.md","docs/change-mode.md","docs/improve-mode.md","docs/next-step-state-machine.md","docs/completion-verification.md",
-"docs/zip-mode.md","docs/github-mode.md","docs/release-readiness-standard.md",
+"docs/zip-mode.md","docs/github-mode.md","docs/release-readiness-standard.md","docs/capability-discovery.md","docs/execution-profiles.md",
 "docs/functional-specification-standard.md","docs/architecture-standard.md","docs/decision-records-standard.md",
 "docs/development-plan-standard.md","docs/risk-feasibility-standard.md","docs/test-verification-standard.md",
 "docs/security-baseline.md","docs/project-complexity.md","docs/document-state-architecture.md",
@@ -13,7 +13,7 @@ FILES=[
 "docs/github-actions-baseline.md","docs/knowledge-architecture.md","knowledge/README.md",
 "knowledge/technology-patterns.md","knowledge/platform-reference.md","knowledge/terminology.md",
 "schemas/project.schema.json","schemas/work-status.schema.json","schemas/traceability.schema.json",
-"schemas/deployment-profile.schema.json"]
+"schemas/deployment-profile.schema.json","schemas/capability-discovery.schema.json","schemas/execution-profile.schema.json"]
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument("--project-root",required=True); ap.add_argument("--output",required=True); a=ap.parse_args()
     root=Path(a.project_root); out=Path(a.output); out.parent.mkdir(parents=True,exist_ok=True)
