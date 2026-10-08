@@ -12,6 +12,7 @@ core_references:
 - docs/zip-mode.md
 - docs/github-mode.md
 - docs/release-readiness-standard.md
+- docs/capability-discovery.md
 standards:
 - docs/functional-specification-standard.md
 - docs/architecture-standard.md
