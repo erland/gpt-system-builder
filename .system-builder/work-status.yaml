@@ -78,25 +78,25 @@ progress:
   in_progress: SB-70
   next:
     recommended: SB-70
-    reason: SB-69 passed PR #13 CI and is merged; implement capability discovery next.
+    reason: Capability discovery implementation is complete; run required project CI before completion.
 blockers: []
 verification:
-  last_status: passed
+  last_status: pending
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-69 verified by successful System Builder CI run 37722983957 on c15524e7e4ff898892b4bb42dc7bd9705833b616 and merged as 53eb8546f1f44d0f37e0467f532606cf40f723af.
+  notes: SB-70 implementation includes canonical discovery rules, schema, example and deterministic validator; full PR CI pending.
 source_state:
   drift: none
   reference: change/capability-aware-execution
 execution:
-  next_action: implement
+  next_action: verify
   step: SB-70
-  operation: implement
-  reason: SB-69 is verified and completed; implement capability discovery.
+  operation: verify
+  reason: Run full project CI for the SB-70 implementation revision before completion.
 
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: 53eb8546f1f44d0f37e0467f532606cf40f723af
-  evidence_status: passed
+  implementation_revision: null
+  evidence_status: pending
