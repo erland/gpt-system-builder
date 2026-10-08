@@ -1,37 +1,43 @@
 # System Builder – Status
 
 ## Övergripande status
-**READY_WITH_WARNINGS – v1.3.2 release candidate**
 
-## Release readiness
+**CHANGE IN PROGRESS – capability-aware execution**
 
-Release readiness är klar för SB-67–SB-68.
+System Builder har fem aktiva runtime-distributioner: Chat ZIP, Custom GPT, Claude Projects, OpenCode och OpenAI Plugin.
 
-- Version: `1.3.2`
-- Tag: `v1.3.2`
-- Required gates: **24/24 PASS**
-- Blockers: **0**
-- Warnings: **1**
-- Full kandidat-CI: PASS för `c7822cda56b47ccf05bab309bd92992784994c98`
+PR #11 och PR #12 är mergade. Den tidigare release-readiness-evidensen för `v1.3.2` togs fram före OpenAI Plugin-ändringen i PR #12 och är därför inte längre aktuell release-evidens för nuvarande `main`.
 
-`v1.3.1` finns och bevaras. `v1.3.2` är ännu inte använd.
+## Aktiv change-serie
 
-## Inkluderade förändringar
+Change request: `capability-aware-execution`
 
-- saknad Chromium/WebKit/browser binary i ZIP/Chat-runtime behandlas som environment-limited verification,
-- övrig möjlig verifiering körs ändå,
-- browserprov defereras med varning och rapporteras aldrig som PASS utan faktisk körning,
-- faktiskt Playwright-testfel är fortsatt project failure,
-- GitHub-projekt använder normalt en Playwright CI-miljö som matchar projektets Playwright-version,
-- PWA-kritiska browserkontroller ska normalt ha faktisk browser-evidens före release readiness,
-- regressionsskyddet omfattar **49 instruction-adherence-fall, 41 critical**.
+Planerade steg:
 
-Custom GPT-instruktionen är **7 960 tecken**.
+- **SB-69** – reconcile current project state
+- **SB-70** – capability discovery
+- **SB-71** – capability-aware tool routing/execution profiles
+- **SB-72** – Agent Workspace-integration
+- **SB-73** – PWA Preview-integration
+- **SB-74** – Browser Screenshot-integration
+- **SB-75** – capability-aware degradation och regression coverage
 
-## Warning
+## Aktuellt steg
 
-Live Coolify target verification är fortsatt pending eftersom ingen faktisk Coolify-miljö varit tillgänglig. Den rapporteras inte som PASS och blockerar inte artifact release.
+**SB-69 – Reconcile current project state**
+
+SB-69 korrigerar stale post-merge state, registrerar den nya fortsättningsserien och synkar projektdefinitionen med de fem aktiva runtimes som faktiskt finns.
+
+Ingen capability-routing eller integration med companion plugins implementeras i SB-69.
+
+## Release state
+
+`VERSION` är fortsatt `1.3.2`, men projektet är tillbaka i aktiv CHANGE-fas. En ny release readiness-bedömning krävs efter den nya change-serien innan någon release kan deklareras redo.
+
+## Verifiering
+
+SB-69 är implementerad på change-branchen men ska verifieras innan steget markeras completed.
 
 ## Nästa åtgärd
 
-Mergea PR #11. Efter merge kan `v1.3.2` taggas och release-workflowet publicera runtime-distributionerna.
+Verifiera SB-69 mot projektets state/schema/CI-kontrakt. Vid PASS markeras SB-69 completed och SB-70 blir nästa rekommenderade steg.

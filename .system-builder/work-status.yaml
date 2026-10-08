@@ -2,8 +2,8 @@ schema_version: 1
 active_work:
   mode: CHANGE
   plan: docs/development-plan.md
-  change_request: playwright-pwa-browser-verification
-  selected_step: null
+  change_request: capability-aware-execution
+  selected_step: SB-69
 progress:
   completed:
   - SB-01
@@ -74,27 +74,27 @@ progress:
   - SB-66
   - SB-67
   - SB-68
-  in_progress: null
+  in_progress: SB-69
   next:
-    recommended: null
-    reason: Release readiness passed with one documented warning; merge PR #11 before tagging v1.3.2.
+    recommended: SB-69
+    reason: Verify the state/documentation reconciliation before completing SB-69 and advancing to capability discovery.
 blockers: []
 verification:
-  last_status: passed
+  last_status: pending
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: v1.3.2 release-readiness full required CI passed for c7822cda56b47ccf05bab309bd92992784994c98.
+  notes: Prior v1.3.2 readiness evidence predates PR #12 and is not current release evidence; SB-69 verification is pending.
 source_state:
   drift: none
-  reference: change/playwright-pwa-browser-verification
+  reference: change/capability-aware-execution
 execution:
-  next_action: merge
-  step: null
-  operation: merge
-  reason: Release readiness is READY_WITH_WARNINGS; merge PR #11 before creating tag v1.3.2.
+  next_action: verify
+  step: SB-69
+  operation: verify
+  reason: Verify reconciliation/state consistency before completion.
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: c7822cda56b47ccf05bab309bd92992784994c98
-  evidence_status: passed
+  implementation_revision: null
+  evidence_status: pending

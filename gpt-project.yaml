@@ -259,7 +259,7 @@ release:
   - distribution-build-manifest.json
   runtime_count: 5
   registry_driven: true
-  status: release_candidate
+  status: development
   candidate_version: 1.3.2
   candidate_tag: v1.3.2
 release_readiness:

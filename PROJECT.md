@@ -17,10 +17,15 @@ Canonical identitet, målgrupp, ansvar och avgränsningar finns i `docs/canonica
 - ZIP
 - GitHub
 
-## Planerade runtimes
+## Aktiva runtimes
 
 - Chat ZIP
 - Custom GPT
+- Claude Projects
+- OpenCode
+- OpenAI Plugin – skills-first och host-dependent/reduced parity
+
+Alla runtime-distributioner härleds från samma canonical beteende- och capability-kontrakt. OpenAI Plugin förutsätter kompatibla host capabilities och får inte simulera saknad exekvering eller verifiering.
 
 ## Projektprofil
 
