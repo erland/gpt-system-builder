@@ -17,6 +17,8 @@ REFERENCES = [
     "docs/zip-mode.md",
     "docs/github-mode.md",
     "docs/release-readiness-standard.md",
+    "docs/capability-discovery.md",
+    "docs/execution-profiles.md",
     "docs/test-verification-standard.md",
     "docs/security-baseline.md",
     "knowledge/technology-patterns.md",
