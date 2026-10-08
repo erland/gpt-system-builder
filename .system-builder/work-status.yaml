@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: capability-aware-execution
-  selected_step: SB-71
+  selected_step: SB-72
 progress:
   completed:
   - SB-01
@@ -76,28 +76,29 @@ progress:
   - SB-68
   - SB-69
   - SB-70
-  in_progress: SB-71
+  - SB-71
+  in_progress: SB-72
   next:
-    recommended: SB-71
-    reason: Deterministic execution profile routing is implemented; run required project CI before completion.
+    recommended: SB-72
+    reason: SB-71 passed full PR CI; implement optional Agent Workspace execution integration next.
 blockers: []
 verification:
-  last_status: pending
+  last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-71 implementation defines deterministic routing profiles, machine-readable decision contract, runtime references and distribution packaging; full PR CI pending.
+  notes: SB-71 verified by successful System Builder CI run 37723907980 on f63624f91ab392271aceb87296765f4d320068be.
 source_state:
   drift: none
   reference: change/capability-aware-execution
 execution:
-  next_action: verify
-  step: SB-71
-  operation: verify
-  reason: Run full project CI for the SB-71 implementation revision before completion.
+  next_action: implement
+  step: SB-72
+  operation: implement
+  reason: SB-71 is verified and completed; implement optional Agent Workspace execution integration.
 
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: null
-  evidence_status: pending
+  implementation_revision: f63624f91ab392271aceb87296765f4d320068be
+  evidence_status: passed
