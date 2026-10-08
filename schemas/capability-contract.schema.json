@@ -199,7 +199,9 @@
         "use_when",
         "lifecycle",
         "cleanup",
-        "repository_authority_in_github_mode"
+        "repository_authority_in_github_mode",
+        "capability_probe",
+        "verify_vs_build"
       ],
       "properties": {
         "canonical_reference": {
@@ -230,6 +232,7 @@
         },
         "lifecycle": {
           "const": [
+            "probe",
             "create",
             "upload",
             "verify_or_build",
@@ -242,6 +245,54 @@
         },
         "repository_authority_in_github_mode": {
           "const": true
+        },
+        "capability_probe": {
+          "type": "object",
+          "required": [
+            "provider_connection_required",
+            "runtime_versions",
+            "build_systems",
+            "workspace_lifetime",
+            "artifact_capabilities"
+          ],
+          "properties": {
+            "provider_connection_required": {
+              "const": true
+            },
+            "runtime_versions": {
+              "const": "discover_dynamically"
+            },
+            "build_systems": {
+              "const": "discover_dynamically"
+            },
+            "workspace_lifetime": {
+              "const": "discover_dynamically"
+            },
+            "artifact_capabilities": {
+              "const": "discover_dynamically"
+            }
+          },
+          "additionalProperties": false
+        },
+        "verify_vs_build": {
+          "type": "object",
+          "required": [
+            "prefer_verify_when_no_artifact_needed",
+            "build_only_when_artifact_needed",
+            "signed_download_link_for_external_handoff_when_available"
+          ],
+          "properties": {
+            "prefer_verify_when_no_artifact_needed": {
+              "const": true
+            },
+            "build_only_when_artifact_needed": {
+              "const": true
+            },
+            "signed_download_link_for_external_handoff_when_available": {
+              "const": true
+            }
+          },
+          "additionalProperties": false
         }
       },
       "additionalProperties": false
