@@ -82,25 +82,25 @@ progress:
   in_progress: SB-74
   next:
     recommended: SB-74
-    reason: SB-73 passed full PR CI; implement optional Browser Screenshot integration next.
+    reason: Browser Screenshot integration is implemented against the live backend; run full project CI before completion.
 blockers: []
 verification:
-  last_status: passed
+  last_status: pending
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-73 verified by successful full System Builder CI run 37725422318 on 820d986c7d1255df671bb0af486c55c4fc167af0.
+  notes: SB-74 implements optional Browser Screenshot visual-evidence rules from the live backend; full PR CI pending.
 source_state:
   drift: none
   reference: change/capability-aware-execution
 execution:
-  next_action: implement
+  next_action: verify
   step: SB-74
-  operation: implement
-  reason: SB-73 is verified and completed; implement optional Browser Screenshot integration.
+  operation: verify
+  reason: Run full project CI for the SB-74 implementation revision before completion.
 
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: 820d986c7d1255df671bb0af486c55c4fc167af0
-  evidence_status: passed
+  implementation_revision: null
+  evidence_status: pending
