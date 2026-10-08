@@ -8,7 +8,7 @@ plan:
 progress:
   current_phase: change
   current_step: 75
-  last_completed_step: 74
+  last_completed_step: 75
   completed_steps:
   - 1
   - 2
@@ -91,6 +91,7 @@ progress:
   - 73
 
   - 74
+  - 75
   completed_step_ids:
   - SB-01
   - SB-02
@@ -173,6 +174,7 @@ progress:
   - SB-73
 
   - SB-74
+  - SB-75
   skipped_steps: []
   inserted_steps:
   - 55
@@ -201,9 +203,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: implement
-  title: Implement SB-75 capability-aware degradation and regression coverage
-  reason: SB-74 passed full System Builder CI run 37725850680; next safe step is the final regression/parity gate for the capability-aware execution series.
+  recommended: review
+  title: Review and merge PR #14
+  reason: SB-75 passed full System Builder CI run 37727005465; capability-aware execution series is complete and ready for merge review.
 resume:
   supported: true
   required_files:
