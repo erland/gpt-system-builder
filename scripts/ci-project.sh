@@ -46,6 +46,7 @@ $PYTHON scripts/validate_capability_discovery.py
 $PYTHON scripts/validate_execution_profile.py
 $PYTHON scripts/validate_agent_workspace_integration.py
 $PYTHON scripts/validate_pwa_preview_integration.py
+$PYTHON scripts/validate_browser_screenshot_integration.py
 $PYTHON scripts/validate_distribution_registry.py
 $PYTHON scripts/validate_final_release_readiness.py evals/final-release-readiness.yaml
 $PYTHON scripts/validate_release_candidate.py
