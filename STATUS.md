@@ -24,11 +24,9 @@ Planerade steg:
 
 ## Aktuellt steg
 
-**SB-70 – Capability discovery**
+**SB-71 – Capability-aware tool routing / execution profiles**
 
-SB-69 är verifierad och mergad. SB-70 inför canonical capability discovery före val av exekveringsväg.
-
-SB-70 ska endast definiera discovery-modellen och dess maskinläsbara resultat. Själva tool routing/execution profiles hör till SB-71.
+SB-70 är verifierad av full PR-CI. SB-71 använder discovery-resultatet för att välja en deterministisk execution profile utan att duplicera companion-pluginernas specialistfunktionalitet.
 
 ## Release state
 
@@ -36,8 +34,8 @@ SB-70 ska endast definiera discovery-modellen och dess maskinläsbara resultat. 
 
 ## Verifiering
 
-SB-69 verifierades av System Builder CI run `37722983957` och mergades i PR #13. SB-70-implementationen är klar men full PR-CI återstår innan steget kan markeras completed.
+SB-70 verifierades av System Builder CI run `37723538840` på commit `de1e29458163ba01ac60080833286a01dab04519`.
 
 ## Nästa åtgärd
 
-Kör full projekt-CI för SB-70. Vid PASS görs en completion-only state transition; därefter är SB-71 capability-aware tool routing nästa steg.
+Implementera och verifiera SB-71 deterministic execution profiles på samma PR #14.

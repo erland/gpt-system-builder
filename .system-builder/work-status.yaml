@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: capability-aware-execution
-  selected_step: SB-70
+  selected_step: SB-71
 progress:
   completed:
   - SB-01
@@ -75,28 +75,29 @@ progress:
   - SB-67
   - SB-68
   - SB-69
-  in_progress: SB-70
+  - SB-70
+  in_progress: SB-71
   next:
-    recommended: SB-70
-    reason: Capability discovery implementation is complete; run required project CI before completion.
+    recommended: SB-71
+    reason: SB-70 passed full PR CI; implement capability-aware execution profile routing next.
 blockers: []
 verification:
-  last_status: pending
+  last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-70 implementation includes canonical discovery rules, schema, example and deterministic validator; full PR CI pending.
+  notes: SB-70 verified by successful System Builder CI run 37723538840 on de1e29458163ba01ac60080833286a01dab04519.
 source_state:
   drift: none
   reference: change/capability-aware-execution
 execution:
-  next_action: verify
-  step: SB-70
-  operation: verify
-  reason: Run full project CI for the SB-70 implementation revision before completion.
+  next_action: implement
+  step: SB-71
+  operation: implement
+  reason: SB-70 is verified and completed; implement deterministic execution profile routing.
 
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: null
-  evidence_status: pending
+  implementation_revision: de1e29458163ba01ac60080833286a01dab04519
+  evidence_status: passed

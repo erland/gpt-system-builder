@@ -7,8 +7,8 @@ plan:
   total_steps: 75
 progress:
   current_phase: change
-  current_step: 70
-  last_completed_step: 69
+  current_step: 71
+  last_completed_step: 70
   completed_steps:
   - 1
   - 2
@@ -80,6 +80,8 @@ progress:
   - 68
 
   - 69
+
+  - 70
   completed_step_ids:
   - SB-01
   - SB-02
@@ -151,6 +153,8 @@ progress:
   - SB-68
 
   - SB-69
+
+  - SB-70
   skipped_steps: []
   inserted_steps:
   - 55
@@ -179,9 +183,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: verify
-  title: Verify SB-70 capability discovery
-  reason: SB-70 capability discovery är implementerad och inväntar full projekt-CI innan completion.
+  recommended: implement
+  title: Implement SB-71 execution profiles
+  reason: SB-70 verifierades av full System Builder CI run 37723538840; nästa säkra steg är deterministic capability-aware routing.
 resume:
   supported: true
   required_files:
