@@ -24,9 +24,9 @@ Planerade steg:
 
 ## Aktuellt steg
 
-**SB-71 – Capability-aware tool routing / execution profiles**
+**SB-72 – Agent Workspace integration**
 
-SB-70 är verifierad av full PR-CI. SB-71 är implementerad och använder discovery-resultatet för att välja den enklaste deterministiska execution profile som uppfyller operationens required capabilities. GitHub behåller repository authority även vid extern execution.
+SB-71 är verifierad av full PR-CI och completed. SB-72 ska implementera Agent Workspace som optional execution backend för build/test/verification utan att göra den till project-state authority.
 
 ## Release state
 
@@ -34,8 +34,8 @@ SB-70 är verifierad av full PR-CI. SB-71 är implementerad och använder discov
 
 ## Verifiering
 
-SB-70 verifierades av System Builder CI run `37723538840`. SB-71 full PR-CI är pending.
+SB-71 verifierades av System Builder CI run `37723907980` på commit `f63624f91ab392271aceb87296765f4d320068be`.
 
 ## Nästa åtgärd
 
-Kör full projekt-CI för SB-71. Vid PASS kan SB-71 completed och SB-72 Agent Workspace-integration blir nästa steg på samma PR #14.
+Implementera SB-72 Agent Workspace-integration på samma PR #14.
