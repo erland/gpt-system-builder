@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: capability-aware-execution
-  selected_step: SB-72
+  selected_step: SB-73
 progress:
   completed:
   - SB-01
@@ -77,28 +77,29 @@ progress:
   - SB-69
   - SB-70
   - SB-71
-  in_progress: SB-72
+  - SB-72
+  in_progress: SB-73
   next:
-    recommended: SB-72
-    reason: Live Agent Workspace capability reconciliation changed verification-relevant source; full project CI must be rerun.
+    recommended: SB-73
+    reason: Reconciled SB-72 passed full PR CI; implement optional PWA Preview integration next.
 blockers: []
 verification:
-  last_status: pending
+  last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-72 was previously verified, but live Agent Workspace capability reconciliation changed the runtime contract. Re-verification pending.
+  notes: Reconciled SB-72 verified by full System Builder CI run 37724972653 on 8998ec6fd41ce79c1e3f59dce831588b0f20afc6.
 source_state:
   drift: none
   reference: change/capability-aware-execution
 execution:
-  next_action: verify
-  step: SB-72
-  operation: verify
-  reason: Re-run full project CI after live Agent Workspace contract reconciliation.
+  next_action: implement
+  step: SB-73
+  operation: implement
+  reason: SB-72 is verified and completed; implement optional PWA Preview integration.
 
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: null
-  evidence_status: pending
+  implementation_revision: 8998ec6fd41ce79c1e3f59dce831588b0f20afc6
+  evidence_status: passed
