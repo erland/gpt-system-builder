@@ -51,6 +51,15 @@ def main() -> int:
         rel = agent_workspace.get(key)
         if not rel or not (ROOT / rel).is_file():
             raise SystemExit(f'FAIL: Agent Workspace {key} missing or unreadable: {rel}')
+    pwa_preview = contract['capabilities'].get('pwa_preview', {})
+    for key in ('canonical_reference', 'evidence_schema'):
+        rel = pwa_preview.get(key)
+        if not rel or not (ROOT / rel).is_file():
+            raise SystemExit(f'FAIL: PWA Preview {key} missing or unreadable: {rel}')
+    if pwa_preview.get('preview_is_functional_verification') is not False:
+        raise SystemExit('FAIL: PWA Preview cannot count as functional verification')
+    if pwa_preview.get('preview_is_production_deployment') is not False:
+        raise SystemExit('FAIL: PWA Preview cannot count as production deployment')
     if agent_workspace.get('github_policy') != 'prefer_github_actions_when_sufficient':
         raise SystemExit('FAIL: Agent Workspace must prefer GitHub Actions when sufficient')
     if agent_workspace.get('redundant_execution_forbidden') is not True:
