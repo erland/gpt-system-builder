@@ -7,8 +7,8 @@ plan:
   total_steps: 75
 progress:
   current_phase: change
-  current_step: 69
-  last_completed_step: 68
+  current_step: 70
+  last_completed_step: 69
   completed_steps:
   - 1
   - 2
@@ -78,6 +78,8 @@ progress:
   - 66
   - 67
   - 68
+
+  - 69
   completed_step_ids:
   - SB-01
   - SB-02
@@ -147,6 +149,8 @@ progress:
   - SB-66
   - SB-67
   - SB-68
+
+  - SB-69
   skipped_steps: []
   inserted_steps:
   - 55
@@ -175,9 +179,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: verify
-  title: Verify SB-69 reconciliation
-  reason: SB-69 har implementerat state/documentation reconciliation för capability-aware-execution och ska verifieras innan completion.
+  recommended: implement
+  title: Implement SB-70 capability discovery
+  reason: SB-69 är verifierad via PR #13 CI och mergad; nästa säkra steg är SB-70.
 resume:
   supported: true
   required_files:
