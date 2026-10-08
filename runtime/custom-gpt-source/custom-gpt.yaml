@@ -24,3 +24,7 @@ behavior_contract:
   false_pass_forbidden: true
   zip_mode: true
   github_mode: true
+capability_parity:
+  capability_aware_execution: reduced
+  companion_integrations: not_guaranteed
+  core_safety_invariants_preserved: true
