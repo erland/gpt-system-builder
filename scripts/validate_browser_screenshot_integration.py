@@ -32,6 +32,12 @@ def main()->int:
         raise SystemExit("FAIL: extra screenshot viewports must be demand-driven")
     if policy.get("public_http_url_required") is not True:
         raise SystemExit("FAIL: Browser Screenshot must require a public HTTP(S) URL")
+    if policy.get("supported_presets")!=["desktop","tablet","mobile"]:
+        raise SystemExit("FAIL: Browser Screenshot live preset set mismatch")
+    if policy.get("custom_viewport_supported") is not True:
+        raise SystemExit("FAIL: Browser Screenshot must preserve custom viewport support")
+    if policy.get("full_page_supported") is not True:
+        raise SystemExit("FAIL: Browser Screenshot must preserve fullPage support")
 
     text=POLICY.read_text(encoding="utf-8").lower()
     for marker in ("desktop", "tablet", "mobile", "custom", "fullpage", "public", "playwright", "functional"):
