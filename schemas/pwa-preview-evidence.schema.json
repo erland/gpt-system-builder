@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "System Builder PWA Preview Evidence",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "backend",
+    "source",
+    "preview",
+    "purpose"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "backend": {
+      "const": "pwa_preview"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "identity",
+        "archive_type",
+        "verified"
+      ],
+      "properties": {
+        "identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "archive_type": {
+          "enum": [
+            "zip",
+            "tar.gz"
+          ]
+        },
+        "verified": {
+          "const": true
+        },
+        "sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-fA-F0-9]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "preview": {
+      "type": "object",
+      "required": [
+        "id",
+        "url",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "status": {
+          "enum": [
+            "READY",
+            "PENDING",
+            "FAILED",
+            "UNKNOWN"
+          ]
+        },
+        "expires_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reused": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "purpose": {
+      "enum": [
+        "review",
+        "visual_check",
+        "browser_handoff",
+        "stakeholder_demo"
+      ]
+    },
+    "functional_verification": {
+      "const": false
+    },
+    "production_deployment": {
+      "const": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -73,7 +73,11 @@ def main() -> int:
     instruction = root / "runtime" / "canonical-instructions.md"
     contract_path = root / "runtime" / "runtime-contract.json"
     execution_rules = root / "runtime" / "execution-rules.md"
-    required = [instruction, execution_rules, contract_path] + [root / p for p in KNOWLEDGE_FILES]
+    execution_profiles = root / "docs" / "execution-profiles.md"
+    agent_workspace = root / "docs" / "agent-workspace-integration.md"
+    pwa_preview = root / "docs" / "pwa-preview-integration.md"
+    browser_screenshot = root / "docs" / "browser-screenshot-integration.md"
+    required = [instruction, execution_rules, execution_profiles, agent_workspace, pwa_preview, browser_screenshot, contract_path] + [root / p for p in KNOWLEDGE_FILES]
     missing = [str(p.relative_to(root)) for p in required if not p.is_file()]
     if missing:
         raise FileNotFoundError("missing Claude Projects source files: " + ", ".join(missing))
@@ -87,6 +91,10 @@ def main() -> int:
         zf.writestr("README.md", README)
         zf.writestr("project-instructions.md", instruction.read_text(encoding="utf-8"))
         zf.write(execution_rules, "runtime/execution-rules.md")
+        zf.write(execution_profiles, "docs/execution-profiles.md")
+        zf.write(agent_workspace, "docs/agent-workspace-integration.md")
+        zf.write(pwa_preview, "docs/pwa-preview-integration.md")
+        zf.write(browser_screenshot, "docs/browser-screenshot-integration.md")
         zf.writestr("runtime-contract.json", json.dumps(contract, indent=2) + "\n")
         zf.writestr("compatibility.md", COMPATIBILITY)
         for rel in KNOWLEDGE_FILES:

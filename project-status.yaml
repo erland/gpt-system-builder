@@ -7,8 +7,8 @@ plan:
   total_steps: 75
 progress:
   current_phase: change
-  current_step: 69
-  last_completed_step: 68
+  current_step: 75
+  last_completed_step: 75
   completed_steps:
   - 1
   - 2
@@ -78,6 +78,20 @@ progress:
   - 66
   - 67
   - 68
+
+  - 69
+
+  - 70
+
+  - 71
+
+
+  - 72
+
+  - 73
+
+  - 74
+  - 75
   completed_step_ids:
   - SB-01
   - SB-02
@@ -147,6 +161,20 @@ progress:
   - SB-66
   - SB-67
   - SB-68
+
+  - SB-69
+
+  - SB-70
+
+  - SB-71
+
+
+  - SB-72
+
+  - SB-73
+
+  - SB-74
+  - SB-75
   skipped_steps: []
   inserted_steps:
   - 55
@@ -175,9 +203,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: verify
-  title: Verify SB-69 reconciliation
-  reason: SB-69 har implementerat state/documentation reconciliation för capability-aware-execution och ska verifieras innan completion.
+  recommended: review
+  title: Review and merge PR #14
+  reason: SB-75 passed full System Builder CI run 37727138092 on implementation revision 12feba26fc113d4199d1adb3ef541a8a1bd8ded2; capability-aware execution series is complete.
 resume:
   supported: true
   required_files:
@@ -193,6 +221,11 @@ resume:
   - docs/end-to-end-process.md
   - docs/project-complexity.md
   - docs/document-state-architecture.md
+  - docs/capability-discovery.md
+  - docs/execution-profiles.md
+  - docs/agent-workspace-integration.md
+  - docs/pwa-preview-integration.md
+  - docs/browser-screenshot-integration.md
   - .system-builder/project.yaml
   - .system-builder/work-status.yaml
   - schemas/project.schema.json
@@ -282,10 +315,25 @@ resume:
   - runtime/distribution-registry.yaml
   - schemas/behavior-contract.schema.json
   - schemas/capability-contract.schema.json
+  - schemas/capability-discovery.schema.json
+  - schemas/execution-profile.schema.json
+  - schemas/agent-workspace-evidence.schema.json
+  - schemas/pwa-preview-evidence.schema.json
+  - schemas/browser-screenshot-evidence.schema.json
   - schemas/artifact-contract.schema.json
   - schemas/workspace-state-contract.schema.json
   - schemas/tool-contract.schema.json
   - scripts/validate_runtime_contract.py
+  - examples/capability-discovery.example.yaml
+  - examples/execution-profile.example.yaml
+  - examples/agent-workspace-evidence.example.yaml
+  - examples/pwa-preview-evidence.example.yaml
+  - examples/browser-screenshot-evidence.example.yaml
+  - scripts/validate_browser_screenshot_integration.py
+  - scripts/validate_pwa_preview_integration.py
+  - scripts/validate_agent_workspace_integration.py
+  - scripts/validate_execution_profile.py
+  - scripts/validate_capability_discovery.py
   - scripts/validate_runtime_instruction.py
   - scripts/build_all_distributions.py
   - scripts/validate_all_distributions.py

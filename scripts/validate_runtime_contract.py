@@ -34,6 +34,45 @@ def main() -> int:
         if name not in contract:
             raise SystemExit(f'FAIL: missing runtime contract component: {name}')
         validate_component(name, contract[name])
+    discovery = contract['capabilities'].get('discovery', {})
+    for key in ('result_schema', 'canonical_reference'):
+        rel = discovery.get(key)
+        if not rel or not (ROOT / rel).is_file():
+            raise SystemExit(f'FAIL: capability discovery {key} missing or unreadable: {rel}')
+    routing = contract['capabilities'].get('routing', {})
+    for key in ('decision_schema', 'canonical_reference'):
+        rel = routing.get(key)
+        if not rel or not (ROOT / rel).is_file():
+            raise SystemExit(f'FAIL: execution routing {key} missing or unreadable: {rel}')
+    if routing.get('selection_rule') != 'simplest_profile_that_satisfies_required_capabilities':
+        raise SystemExit('FAIL: execution routing selection rule mismatch')
+    agent_workspace = contract['capabilities'].get('agent_workspace', {})
+    for key in ('canonical_reference', 'evidence_schema'):
+        rel = agent_workspace.get(key)
+        if not rel or not (ROOT / rel).is_file():
+            raise SystemExit(f'FAIL: Agent Workspace {key} missing or unreadable: {rel}')
+    pwa_preview = contract['capabilities'].get('pwa_preview', {})
+    for key in ('canonical_reference', 'evidence_schema'):
+        rel = pwa_preview.get(key)
+        if not rel or not (ROOT / rel).is_file():
+            raise SystemExit(f'FAIL: PWA Preview {key} missing or unreadable: {rel}')
+    browser_screenshot = contract['capabilities'].get('browser_screenshot', {})
+    for key in ('canonical_reference', 'evidence_schema'):
+        rel = browser_screenshot.get(key)
+        if not rel or not (ROOT / rel).is_file():
+            raise SystemExit(f'FAIL: Browser Screenshot {key} missing or unreadable: {rel}')
+    if browser_screenshot.get('default_preset') != 'desktop':
+        raise SystemExit('FAIL: Browser Screenshot default preset must be desktop')
+    if browser_screenshot.get('screenshot_is_functional_verification') is not False:
+        raise SystemExit('FAIL: Browser Screenshot cannot count as functional verification')
+    if pwa_preview.get('preview_is_functional_verification') is not False:
+        raise SystemExit('FAIL: PWA Preview cannot count as functional verification')
+    if pwa_preview.get('preview_is_production_deployment') is not False:
+        raise SystemExit('FAIL: PWA Preview cannot count as production deployment')
+    if agent_workspace.get('github_policy') != 'prefer_github_actions_when_sufficient':
+        raise SystemExit('FAIL: Agent Workspace must prefer GitHub Actions when sufficient')
+    if agent_workspace.get('redundant_execution_forbidden') is not True:
+        raise SystemExit('FAIL: redundant Agent Workspace execution must be forbidden')
     instruction_path = ROOT / contract['behavior']['canonical_instruction']
     if not instruction_path.is_file():
         raise SystemExit(f'FAIL: canonical instruction missing: {instruction_path.relative_to(ROOT)}')

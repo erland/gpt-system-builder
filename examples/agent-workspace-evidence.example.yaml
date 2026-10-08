@@ -1,0 +1,13 @@
+schema_version: 1
+backend: agent_workspace
+source:
+  mode: github
+  identity: commit:abc123
+operation: verify
+result: pass
+verification: npm test
+artifact_ids: []
+cleanup:
+  attempted: true
+  status: destroyed
+  warning: null

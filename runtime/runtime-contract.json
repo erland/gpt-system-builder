@@ -14,7 +14,12 @@
       "ZIP is a first-class source/delivery mode",
       "GitHub is a first-class source mode",
       "completion-only",
-      "Older System Builder projects"
+      "Older System Builder projects",
+      "## 2A. Capability discovery",
+      "## 2B. Execution profile routing",
+      "## 2C. Agent Workspace",
+      "## 2D. PWA Preview",
+      "## 2E. Browser Screenshot"
     ]
   },
   "capabilities": {
@@ -56,6 +61,107 @@
       "image_generation": {
         "level": "not_required"
       }
+    },
+    "discovery": {
+      "result_schema": "schemas/capability-discovery.schema.json",
+      "canonical_reference": "docs/capability-discovery.md",
+      "refresh_policy": "per_run_before_execution_profile_selection",
+      "source_of_truth": "actual_host_tool_availability",
+      "companion_capabilities": [
+        "companion.agent_workspace",
+        "companion.pwa_preview",
+        "companion.browser_screenshot"
+      ],
+      "missing_optional_behavior": "degrade_without_blocking",
+      "missing_required_behavior": "block_or_use_explicit_safe_fallback"
+    },
+    "routing": {
+      "decision_schema": "schemas/execution-profile.schema.json",
+      "canonical_reference": "docs/execution-profiles.md",
+      "profiles": [
+        "github_first",
+        "hybrid_github_external_execution",
+        "agent_workspace",
+        "zip_local",
+        "degraded_manual"
+      ],
+      "blocked_without_profile": true,
+      "selection_rule": "simplest_profile_that_satisfies_required_capabilities",
+      "repository_authority_preserved_in_github_mode": true,
+      "companion_presence_alone_must_not_select_profile": true
+    },
+    "agent_workspace": {
+      "canonical_reference": "docs/agent-workspace-integration.md",
+      "evidence_schema": "schemas/agent-workspace-evidence.schema.json",
+      "requirement": "optional",
+      "github_policy": "prefer_github_actions_when_sufficient",
+      "redundant_execution_forbidden": true,
+      "use_when": [
+        "required_capability_missing_from_repository_ci",
+        "isolated_interactive_execution_required",
+        "immediate_build_artifact_handoff_required",
+        "explicit_workflow_benefit_justifies_execution_cost"
+      ],
+      "lifecycle": [
+        "probe",
+        "create",
+        "upload",
+        "verify_or_build",
+        "collect_if_needed",
+        "destroy"
+      ],
+      "cleanup": "best_effort_required",
+      "repository_authority_in_github_mode": true,
+      "capability_probe": {
+        "provider_connection_required": true,
+        "runtime_versions": "discover_dynamically",
+        "build_systems": "discover_dynamically",
+        "workspace_lifetime": "discover_dynamically",
+        "artifact_capabilities": "discover_dynamically"
+      },
+      "verify_vs_build": {
+        "prefer_verify_when_no_artifact_needed": true,
+        "build_only_when_artifact_needed": true,
+        "signed_download_link_for_external_handoff_when_available": true
+      }
+    },
+    "pwa_preview": {
+      "canonical_reference": "docs/pwa-preview-integration.md",
+      "evidence_schema": "schemas/pwa-preview-evidence.schema.json",
+      "requirement": "optional",
+      "source_transport": "https_archive_url",
+      "accepted_archives": [
+        "zip",
+        "tar.gz"
+      ],
+      "lifecycle": [
+        "create_or_update",
+        "get_if_needed",
+        "extend_only_if_needed",
+        "delete_or_expire"
+      ],
+      "preview_is_functional_verification": false,
+      "preview_is_production_deployment": false,
+      "agent_workspace_policy": "do_not_start_only_for_preview_when_cheaper_source_exists",
+      "github_policy": "keep_github_actions_for_build_and_test_when_sufficient",
+      "reuse_policy": "prefer_update_for_same_work_series_when_stable_url_is_useful"
+    },
+    "browser_screenshot": {
+      "canonical_reference": "docs/browser-screenshot-integration.md",
+      "evidence_schema": "schemas/browser-screenshot-evidence.schema.json",
+      "requirement": "optional",
+      "public_http_url_required": true,
+      "default_preset": "desktop",
+      "supported_presets": [
+        "desktop",
+        "tablet",
+        "mobile"
+      ],
+      "custom_viewport_supported": true,
+      "full_page_supported": true,
+      "screenshot_is_functional_verification": false,
+      "extra_viewports_policy": "only_when_requirement_risk_or_user_justifies",
+      "preview_policy": "use_existing_public_url_before_creating_new_preview"
     }
   },
   "artifacts": {

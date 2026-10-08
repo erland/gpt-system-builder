@@ -67,7 +67,11 @@ def main() -> int:
     instruction_path = root / "runtime" / "canonical-instructions.md"
     contract_path = root / "runtime" / "runtime-contract.json"
     execution_rules = root / "runtime" / "execution-rules.md"
-    required = [instruction_path, execution_rules, contract_path] + [root / p for p in KNOWLEDGE_FILES]
+    execution_profiles = root / "docs" / "execution-profiles.md"
+    agent_workspace = root / "docs" / "agent-workspace-integration.md"
+    pwa_preview = root / "docs" / "pwa-preview-integration.md"
+    browser_screenshot = root / "docs" / "browser-screenshot-integration.md"
+    required = [instruction_path, execution_rules, execution_profiles, agent_workspace, pwa_preview, browser_screenshot, contract_path] + [root / p for p in KNOWLEDGE_FILES]
     missing = [str(p.relative_to(root)) for p in required if not p.is_file()]
     if missing:
         raise FileNotFoundError("missing OpenCode source files: " + ", ".join(missing))
@@ -165,6 +169,10 @@ def main() -> int:
         zf.writestr("README.md", README)
         zf.writestr("AGENTS.md", instruction_path.read_text(encoding="utf-8"))
         zf.write(execution_rules, "runtime/execution-rules.md")
+        zf.write(execution_profiles, "docs/execution-profiles.md")
+        zf.write(agent_workspace, "docs/agent-workspace-integration.md")
+        zf.write(pwa_preview, "docs/pwa-preview-integration.md")
+        zf.write(browser_screenshot, "docs/browser-screenshot-integration.md")
         zf.writestr("opencode.json", json.dumps(config, indent=2) + "\n")
         zf.writestr(".opencode/runtime-contract.json", json.dumps(snapshot, indent=2) + "\n")
         zf.writestr(".opencode/tool-mapping.json", json.dumps(tool_mapping, indent=2) + "\n")

@@ -24,11 +24,9 @@ Planerade steg:
 
 ## Aktuellt steg
 
-**SB-69 – Reconcile current project state**
+**SB-75 – capability-aware degradation och regression coverage**
 
-SB-69 korrigerar stale post-merge state, registrerar den nya fortsättningsserien och synkar projektdefinitionen med de fem aktiva runtimes som faktiskt finns.
-
-Ingen capability-routing eller integration med companion plugins implementeras i SB-69.
+SB-75 är verifierad och completed. Custom GPT behåller sin befintliga instruktionstext och deklarerar explicit reducerat capability-aware stöd i metadata; övriga runtimes behåller sin starkare capability-aware funktionalitet enligt parity-kontraktet.
 
 ## Release state
 
@@ -36,8 +34,8 @@ Ingen capability-routing eller integration med companion plugins implementeras i
 
 ## Verifiering
 
-SB-69 är implementerad på change-branchen men ska verifieras innan steget markeras completed.
+SB-75 verifierades av full System Builder CI run `37727138092` på implementation revision `12feba26fc113d4199d1adb3ef541a8a1bd8ded2`. Full gate inkluderade project-ZIP build/integritetskontroll, fem distributionsbyggen/-valideringar och capability-aware runtime parity.
 
 ## Nästa åtgärd
 
-Verifiera SB-69 mot projektets state/schema/CI-kontrakt. Vid PASS markeras SB-69 completed och SB-70 blir nästa rekommenderade steg.
+PR #14 är redo för slutlig merge review.

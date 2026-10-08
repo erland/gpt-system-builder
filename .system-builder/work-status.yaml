@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: capability-aware-execution
-  selected_step: SB-69
+  selected_step: null
 progress:
   completed:
   - SB-01
@@ -74,27 +74,35 @@ progress:
   - SB-66
   - SB-67
   - SB-68
-  in_progress: SB-69
+  - SB-69
+  - SB-70
+  - SB-71
+  - SB-72
+  - SB-73
+  - SB-74
+  - SB-75
+  in_progress: null
   next:
-    recommended: SB-69
-    reason: Verify the state/documentation reconciliation before completing SB-69 and advancing to capability discovery.
+    recommended: merge-review
+    reason: SB-75 passed final full PR CI with runtime-specific capability parity and complete project-ZIP gates; review PR #14 for merge.
 blockers: []
 verification:
-  last_status: pending
+  last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: Prior v1.3.2 readiness evidence predates PR #12 and is not current release evidence; SB-69 verification is pending.
+  notes: SB-75 verified by full System Builder CI run 37727138092 on 12feba26fc113d4199d1adb3ef541a8a1bd8ded2. Custom GPT kept its instruction text unchanged and declares reduced capability-aware parity in metadata; project-ZIP and five-runtime parity gates passed.
 source_state:
   drift: none
   reference: change/capability-aware-execution
 execution:
-  next_action: verify
-  step: SB-69
-  operation: verify
-  reason: Verify reconciliation/state consistency before completion.
+  next_action: review
+  step: null
+  operation: review
+  reason: Capability-aware execution change series is complete; perform merge review for PR #14.
+
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: null
-  evidence_status: pending
+  implementation_revision: 12feba26fc113d4199d1adb3ef541a8a1bd8ded2
+  evidence_status: passed

@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "System Builder Capability Discovery Snapshot",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "captured_for",
+    "capabilities",
+    "summary"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "captured_for": {
+      "type": "object",
+      "required": [
+        "source_mode",
+        "operation"
+      ],
+      "properties": {
+        "source_mode": {
+          "enum": [
+            "github",
+            "zip",
+            "workspace",
+            "unknown"
+          ]
+        },
+        "operation": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/capability"
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "blocked",
+        "degraded"
+      ],
+      "properties": {
+        "blocked": {
+          "type": "boolean"
+        },
+        "degraded": {
+          "type": "boolean"
+        },
+        "blocking_capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "degraded_capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "capability": {
+      "type": "object",
+      "required": [
+        "id",
+        "availability",
+        "requirement",
+        "outcome",
+        "evidence"
+      ],
+      "properties": {
+        "id": {
+          "enum": [
+            "repository.read",
+            "repository.write",
+            "filesystem.read",
+            "filesystem.write",
+            "code_execution",
+            "persistent_state",
+            "project_packaging",
+            "companion.agent_workspace",
+            "companion.pwa_preview",
+            "companion.browser_screenshot"
+          ]
+        },
+        "availability": {
+          "enum": [
+            "available",
+            "unavailable",
+            "unknown",
+            "not_applicable"
+          ]
+        },
+        "requirement": {
+          "enum": [
+            "required",
+            "recommended",
+            "optional",
+            "not_required"
+          ]
+        },
+        "outcome": {
+          "enum": [
+            "satisfied",
+            "degraded",
+            "blocked",
+            "ignored"
+          ]
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fallback": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "probe": {
+          "enum": [
+            "host_declared",
+            "observed",
+            "safe_probe",
+            "not_probed"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

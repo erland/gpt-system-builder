@@ -12,6 +12,11 @@ core_references:
 - docs/zip-mode.md
 - docs/github-mode.md
 - docs/release-readiness-standard.md
+- docs/capability-discovery.md
+- docs/execution-profiles.md
+- docs/agent-workspace-integration.md
+- docs/pwa-preview-integration.md
+- docs/browser-screenshot-integration.md
 standards:
 - docs/functional-specification-standard.md
 - docs/architecture-standard.md

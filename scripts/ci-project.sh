@@ -42,10 +42,21 @@ $PYTHON scripts/validate_readme_current_state.py
 $PYTHON scripts/validate_knowledge_architecture.py .
 $PYTHON scripts/validate_runtime_instruction.py .
 $PYTHON scripts/validate_runtime_contract.py
+$PYTHON scripts/validate_capability_discovery.py
+$PYTHON scripts/validate_execution_profile.py
+$PYTHON scripts/validate_agent_workspace_integration.py
+$PYTHON scripts/validate_pwa_preview_integration.py
+$PYTHON scripts/validate_browser_screenshot_integration.py
+$PYTHON scripts/run_e2e_capability_aware_degradation.py
 $PYTHON scripts/validate_distribution_registry.py
 $PYTHON scripts/validate_final_release_readiness.py evals/final-release-readiness.yaml
 $PYTHON scripts/validate_release_candidate.py
 $PYTHON scripts/validate_instruction_evals.py evals/instruction-adherence.yaml
+
+echo "== Complete project ZIP gate =="
+PROJECT_ZIP="$DIST_DIR/system-builder-project-ci.zip"
+$PYTHON scripts/build_project_zip.py --project-root . --output "$PROJECT_ZIP"
+$PYTHON scripts/validate_zip_artifact.py "$PROJECT_ZIP"
 
 echo "== Fresh distribution build =="
 $PYTHON scripts/build_all_distributions.py --output-dir "$DIST_DIR" --version ci

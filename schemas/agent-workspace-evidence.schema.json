@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "System Builder Agent Workspace Execution Evidence",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "backend",
+    "source",
+    "operation",
+    "result",
+    "cleanup"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "backend": {
+      "const": "agent_workspace"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "mode",
+        "identity"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "github",
+            "zip",
+            "workspace"
+          ]
+        },
+        "identity": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "operation": {
+      "enum": [
+        "verify",
+        "build",
+        "build_and_handoff"
+      ]
+    },
+    "result": {
+      "enum": [
+        "pass",
+        "fail",
+        "environment_limited"
+      ]
+    },
+    "verification": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "artifact_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "cleanup": {
+      "type": "object",
+      "required": [
+        "attempted",
+        "status"
+      ],
+      "properties": {
+        "attempted": {
+          "const": true
+        },
+        "status": {
+          "enum": [
+            "destroyed",
+            "failed",
+            "unknown"
+          ]
+        },
+        "warning": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

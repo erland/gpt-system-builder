@@ -143,6 +143,15 @@ def main():
         rows.append({"dimension":"tool","runtime":runtime,"expected":expected,"actual":actual,"result":result})
         if result=="fail": errors.append(f"tool parity mismatch for {runtime}")
 
+    custom_manifest=runtimes["custom_gpt"].get("manifest",{})
+    custom_capability=custom_manifest.get("capability_parity",{})
+    if custom_capability.get("capability_aware_execution")!="reduced":
+        errors.append("Custom GPT must declare reduced capability-aware parity")
+    if custom_capability.get("companion_integrations")!="not_guaranteed":
+        errors.append("Custom GPT must explicitly declare companion integrations as not guaranteed")
+    if custom_capability.get("core_safety_invariants_preserved") is not True:
+        errors.append("Custom GPT must preserve core safety invariants")
+
     claude=runtimes["claude_projects"]
     compat=claude["compatibility"]
     for phrase in contract["runtime_policy"]["reduced_runtime_requirements"]["claude_projects"]["must_document_limitations"]:
@@ -168,6 +177,32 @@ def main():
     if plugin_req.get("persistent_state",{}).get("level")!="required":
         errors.append("Plugin persistent state requirement must be required")
 
+    capability_aware=contract.get("capability_aware_execution",{})
+    ca_expectations=capability_aware.get("runtime_expectations",{})
+    if set(ca_expectations)!=set(runtimes):
+        errors.append("capability-aware runtime expectation set mismatch")
+    else:
+        for runtime,expected in ca_expectations.items():
+            text=runtimes[runtime]["text"]
+            if expected=="equivalent":
+                for req in capability_aware.get("required_invariants",[])+capability_aware.get("full_runtime_invariants",[]):
+                    if not text_ok(text,req):
+                        errors.append(f"capability-aware invariant {req['id']} missing in {runtime}")
+                        rows.append({"dimension":"capability_aware_execution","id":req["id"],"runtime":runtime,"result":"fail"})
+                    else:
+                        rows.append({"dimension":"capability_aware_execution","id":req["id"],"runtime":runtime,"result":"pass"})
+            elif expected=="reduced":
+                reduced=capability_aware.get("reduced_runtime_requirements",{}).get(runtime,{})
+                for idx,group in enumerate(reduced.get("invariant_groups",[]),start=1):
+                    ok=any(alt.lower() in text for alt in group)
+                    rows.append({"dimension":"capability_aware_execution","id":f"{runtime}-reduced-{idx}","runtime":runtime,"result":"pass" if ok else "fail"})
+                    if not ok:
+                        errors.append(f"capability-aware reduced invariant {idx} missing in {runtime}")
+                if reduced.get("companion_details_required") is True:
+                    errors.append(f"{runtime} reduced capability parity must not require companion-specific details")
+            else:
+                errors.append(f"unsupported capability-aware expectation for {runtime}: {expected}")
+
     mapping=runtimes["opencode"]["tool_mapping"].get("tools",{})
     if set(mapping)!=declared:
         errors.append("OpenCode tool mapping does not match canonical tool set")
@@ -180,7 +215,7 @@ def main():
     out={
         "result":"PASS" if not errors else "FAIL",
         "runtimes":list(artifacts),
-        "dimensions":["behavior","capability","artifact","workspace_state","tool"],
+        "dimensions":["behavior","capability","artifact","workspace_state","tool","capability_aware_execution"],
         "rows":rows,
         "critical_failures":crit_fail,
         "errors":errors,

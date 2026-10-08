@@ -2,53 +2,445 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Platform-neutral Capability Contract",
   "type": "object",
-  "required": ["contract_version", "recommendation_mode", "requirements"],
+  "required": [
+    "contract_version",
+    "recommendation_mode",
+    "requirements"
+  ],
   "properties": {
-    "contract_version": {"type": "integer", "const": 1},
-    "recommendation_mode": {"enum": ["inferred_from_use_case", "explicit"]},
-    "ask_user_only_when_business_choice_is_ambiguous": {"type": "boolean"},
+    "contract_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "recommendation_mode": {
+      "enum": [
+        "inferred_from_use_case",
+        "explicit"
+      ]
+    },
+    "ask_user_only_when_business_choice_is_ambiguous": {
+      "type": "boolean"
+    },
     "requirements": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "web": {"$ref": "#/$defs/requirement"},
+        "web": {
+          "$ref": "#/$defs/requirement"
+        },
         "filesystem": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "read": {"$ref": "#/$defs/level"},
-            "write": {"$ref": "#/$defs/level"}
+            "read": {
+              "$ref": "#/$defs/level"
+            },
+            "write": {
+              "$ref": "#/$defs/level"
+            }
           }
         },
-        "shell": {"$ref": "#/$defs/requirement"},
-        "code_execution": {"$ref": "#/$defs/requirement"},
-        "structured_data": {"$ref": "#/$defs/requirement"},
-        "persistent_state": {"$ref": "#/$defs/requirement"},
+        "shell": {
+          "$ref": "#/$defs/requirement"
+        },
+        "code_execution": {
+          "$ref": "#/$defs/requirement"
+        },
+        "structured_data": {
+          "$ref": "#/$defs/requirement"
+        },
+        "persistent_state": {
+          "$ref": "#/$defs/requirement"
+        },
         "external_tools": {
-          "allOf": [{"$ref": "#/$defs/requirement"}],
+          "allOf": [
+            {
+              "$ref": "#/$defs/requirement"
+            }
+          ],
           "properties": {
             "preferred_protocols": {
               "type": "array",
-              "items": {"type": "string", "minLength": 1},
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
               "uniqueItems": true
             }
           }
         },
-        "image_generation": {"$ref": "#/$defs/requirement"}
+        "image_generation": {
+          "$ref": "#/$defs/requirement"
+        }
       }
     },
-    "legacy_mapping": {"type": "object", "additionalProperties": {"type": "string"}},
-    "schema": {"type": "string", "minLength": 1}
+    "legacy_mapping": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "schema": {
+      "type": "string",
+      "minLength": 1
+    },
+    "discovery": {
+      "type": "object",
+      "required": [
+        "result_schema",
+        "canonical_reference",
+        "refresh_policy",
+        "source_of_truth",
+        "companion_capabilities",
+        "missing_optional_behavior",
+        "missing_required_behavior"
+      ],
+      "properties": {
+        "result_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "canonical_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "refresh_policy": {
+          "enum": [
+            "per_run_before_execution_profile_selection"
+          ]
+        },
+        "source_of_truth": {
+          "enum": [
+            "actual_host_tool_availability"
+          ]
+        },
+        "companion_capabilities": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "companion.agent_workspace",
+              "companion.pwa_preview",
+              "companion.browser_screenshot"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "missing_optional_behavior": {
+          "enum": [
+            "degrade_without_blocking"
+          ]
+        },
+        "missing_required_behavior": {
+          "enum": [
+            "block_or_use_explicit_safe_fallback"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "routing": {
+      "type": "object",
+      "required": [
+        "decision_schema",
+        "canonical_reference",
+        "profiles",
+        "blocked_without_profile",
+        "selection_rule",
+        "repository_authority_preserved_in_github_mode",
+        "companion_presence_alone_must_not_select_profile"
+      ],
+      "properties": {
+        "decision_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "canonical_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "profiles": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "github_first",
+              "hybrid_github_external_execution",
+              "agent_workspace",
+              "zip_local",
+              "degraded_manual"
+            ]
+          },
+          "uniqueItems": true,
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "blocked_without_profile": {
+          "const": true
+        },
+        "selection_rule": {
+          "const": "simplest_profile_that_satisfies_required_capabilities"
+        },
+        "repository_authority_preserved_in_github_mode": {
+          "const": true
+        },
+        "companion_presence_alone_must_not_select_profile": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "agent_workspace": {
+      "type": "object",
+      "required": [
+        "canonical_reference",
+        "evidence_schema",
+        "requirement",
+        "github_policy",
+        "redundant_execution_forbidden",
+        "use_when",
+        "lifecycle",
+        "cleanup",
+        "repository_authority_in_github_mode",
+        "capability_probe",
+        "verify_vs_build"
+      ],
+      "properties": {
+        "canonical_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requirement": {
+          "const": "optional"
+        },
+        "github_policy": {
+          "const": "prefer_github_actions_when_sufficient"
+        },
+        "redundant_execution_forbidden": {
+          "const": true
+        },
+        "use_when": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "lifecycle": {
+          "const": [
+            "probe",
+            "create",
+            "upload",
+            "verify_or_build",
+            "collect_if_needed",
+            "destroy"
+          ]
+        },
+        "cleanup": {
+          "const": "best_effort_required"
+        },
+        "repository_authority_in_github_mode": {
+          "const": true
+        },
+        "capability_probe": {
+          "type": "object",
+          "required": [
+            "provider_connection_required",
+            "runtime_versions",
+            "build_systems",
+            "workspace_lifetime",
+            "artifact_capabilities"
+          ],
+          "properties": {
+            "provider_connection_required": {
+              "const": true
+            },
+            "runtime_versions": {
+              "const": "discover_dynamically"
+            },
+            "build_systems": {
+              "const": "discover_dynamically"
+            },
+            "workspace_lifetime": {
+              "const": "discover_dynamically"
+            },
+            "artifact_capabilities": {
+              "const": "discover_dynamically"
+            }
+          },
+          "additionalProperties": false
+        },
+        "verify_vs_build": {
+          "type": "object",
+          "required": [
+            "prefer_verify_when_no_artifact_needed",
+            "build_only_when_artifact_needed",
+            "signed_download_link_for_external_handoff_when_available"
+          ],
+          "properties": {
+            "prefer_verify_when_no_artifact_needed": {
+              "const": true
+            },
+            "build_only_when_artifact_needed": {
+              "const": true
+            },
+            "signed_download_link_for_external_handoff_when_available": {
+              "const": true
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "pwa_preview": {
+      "type": "object",
+      "required": [
+        "canonical_reference",
+        "evidence_schema",
+        "requirement",
+        "source_transport",
+        "accepted_archives",
+        "lifecycle",
+        "preview_is_functional_verification",
+        "preview_is_production_deployment",
+        "agent_workspace_policy",
+        "github_policy",
+        "reuse_policy"
+      ],
+      "properties": {
+        "canonical_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requirement": {
+          "const": "optional"
+        },
+        "source_transport": {
+          "const": "https_archive_url"
+        },
+        "accepted_archives": {
+          "const": [
+            "zip",
+            "tar.gz"
+          ]
+        },
+        "lifecycle": {
+          "const": [
+            "create_or_update",
+            "get_if_needed",
+            "extend_only_if_needed",
+            "delete_or_expire"
+          ]
+        },
+        "preview_is_functional_verification": {
+          "const": false
+        },
+        "preview_is_production_deployment": {
+          "const": false
+        },
+        "agent_workspace_policy": {
+          "const": "do_not_start_only_for_preview_when_cheaper_source_exists"
+        },
+        "github_policy": {
+          "const": "keep_github_actions_for_build_and_test_when_sufficient"
+        },
+        "reuse_policy": {
+          "const": "prefer_update_for_same_work_series_when_stable_url_is_useful"
+        }
+      },
+      "additionalProperties": false
+    },
+    "browser_screenshot": {
+      "type": "object",
+      "required": [
+        "canonical_reference",
+        "evidence_schema",
+        "requirement",
+        "public_http_url_required",
+        "default_preset",
+        "supported_presets",
+        "custom_viewport_supported",
+        "full_page_supported",
+        "screenshot_is_functional_verification",
+        "extra_viewports_policy",
+        "preview_policy"
+      ],
+      "properties": {
+        "canonical_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requirement": {
+          "const": "optional"
+        },
+        "public_http_url_required": {
+          "const": true
+        },
+        "default_preset": {
+          "const": "desktop"
+        },
+        "supported_presets": {
+          "const": [
+            "desktop",
+            "tablet",
+            "mobile"
+          ]
+        },
+        "custom_viewport_supported": {
+          "const": true
+        },
+        "full_page_supported": {
+          "const": true
+        },
+        "screenshot_is_functional_verification": {
+          "const": false
+        },
+        "extra_viewports_policy": {
+          "const": "only_when_requirement_risk_or_user_justifies"
+        },
+        "preview_policy": {
+          "const": "use_existing_public_url_before_creating_new_preview"
+        }
+      },
+      "additionalProperties": false
+    }
   },
   "additionalProperties": false,
   "$defs": {
-    "level": {"enum": ["required", "recommended", "optional", "not_required", "to_be_recommended"]},
+    "level": {
+      "enum": [
+        "required",
+        "recommended",
+        "optional",
+        "not_required",
+        "to_be_recommended"
+      ]
+    },
     "requirement": {
       "type": "object",
-      "required": ["level"],
+      "required": [
+        "level"
+      ],
       "properties": {
-        "level": {"$ref": "#/$defs/level"},
-        "reason": {"type": "string"}
+        "level": {
+          "$ref": "#/$defs/level"
+        },
+        "reason": {
+          "type": "string"
+        }
       },
       "additionalProperties": true
     }

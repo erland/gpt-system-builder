@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "System Builder Execution Profile Decision",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "source_mode",
+    "operation",
+    "status",
+    "selected_profile",
+    "reasons",
+    "capability_basis"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "source_mode": {
+      "enum": [
+        "github",
+        "zip",
+        "workspace",
+        "unknown"
+      ]
+    },
+    "operation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "selected",
+        "degraded",
+        "blocked"
+      ]
+    },
+    "selected_profile": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "github_first",
+        "hybrid_github_external_execution",
+        "agent_workspace",
+        "zip_local",
+        "degraded_manual",
+        null
+      ]
+    },
+    "reasons": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "capability_basis": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "fallback": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "repository_authority": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "blocked"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "selected_profile": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "selected",
+              "degraded"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "selected_profile": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false
+}
