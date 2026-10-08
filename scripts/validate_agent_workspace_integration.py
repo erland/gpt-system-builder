@@ -49,6 +49,9 @@ def main()->int:
             raise SystemExit(f"FAIL: Agent Workspace policy documentation missing marker: {marker}")
     if "execution cost" not in policy_text and "execution-kostnad" not in policy_text:
         raise SystemExit("FAIL: Agent Workspace policy documentation missing execution cost marker")
+    for marker in ("project_verify", "project_build", "signed https download links"):
+        if marker not in policy_text:
+            raise SystemExit(f"FAIL: Agent Workspace live capability semantics missing marker: {marker}")
 
     invalid=copy.deepcopy(example)
     invalid["cleanup"]["attempted"]=False
