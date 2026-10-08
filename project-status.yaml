@@ -183,9 +183,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: implement
-  title: Implement SB-71 execution profiles
-  reason: SB-70 verifierades av full System Builder CI run 37723538840; nästa säkra steg är deterministic capability-aware routing.
+  recommended: verify
+  title: Verify SB-71 execution profiles
+  reason: SB-71 deterministic capability-aware routing är implementerad och inväntar full projekt-CI innan completion.
 resume:
   supported: true
   required_files:
@@ -202,6 +202,7 @@ resume:
   - docs/project-complexity.md
   - docs/document-state-architecture.md
   - docs/capability-discovery.md
+  - docs/execution-profiles.md
   - .system-builder/project.yaml
   - .system-builder/work-status.yaml
   - schemas/project.schema.json
@@ -292,11 +293,14 @@ resume:
   - schemas/behavior-contract.schema.json
   - schemas/capability-contract.schema.json
   - schemas/capability-discovery.schema.json
+  - schemas/execution-profile.schema.json
   - schemas/artifact-contract.schema.json
   - schemas/workspace-state-contract.schema.json
   - schemas/tool-contract.schema.json
   - scripts/validate_runtime_contract.py
   - examples/capability-discovery.example.yaml
+  - examples/execution-profile.example.yaml
+  - scripts/validate_execution_profile.py
   - scripts/validate_capability_discovery.py
   - scripts/validate_runtime_instruction.py
   - scripts/build_all_distributions.py
