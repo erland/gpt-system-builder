@@ -137,6 +137,56 @@
         }
       },
       "additionalProperties": false
+    },
+    "routing": {
+      "type": "object",
+      "required": [
+        "decision_schema",
+        "canonical_reference",
+        "profiles",
+        "blocked_without_profile",
+        "selection_rule",
+        "repository_authority_preserved_in_github_mode",
+        "companion_presence_alone_must_not_select_profile"
+      ],
+      "properties": {
+        "decision_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "canonical_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "profiles": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "github_first",
+              "hybrid_github_external_execution",
+              "agent_workspace",
+              "zip_local",
+              "degraded_manual"
+            ]
+          },
+          "uniqueItems": true,
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "blocked_without_profile": {
+          "const": true
+        },
+        "selection_rule": {
+          "const": "simplest_profile_that_satisfies_required_capabilities"
+        },
+        "repository_authority_preserved_in_github_mode": {
+          "const": true
+        },
+        "companion_presence_alone_must_not_select_profile": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false,
