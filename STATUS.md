@@ -26,7 +26,7 @@ Planerade steg:
 
 **SB-74 – Browser Screenshot integration**
 
-SB-73 är verifierad och completed. PWA Preview är nu optional review-evidens för verifierade statiska artifacts, med live HTTPS ZIP/tar.gz-source, kort TTL, reuse/update och tydlig separation från funktionell/release/deployment PASS. SB-74 är nästa planerade steg.
+SB-73 är verifierad och completed. SB-74 är implementerad mot den live Browser Screenshot-backenden: publik HTTP(S)-URL, desktop som default, demand-driven tablet/mobile/custom/fullPage och strikt separation mellan visuell evidens och funktionell browser-PASS.
 
 ## Release state
 
@@ -34,8 +34,8 @@ SB-73 är verifierad och completed. PWA Preview är nu optional review-evidens f
 
 ## Verifiering
 
-SB-73 verifierades av full System Builder CI run `37725422318` på commit `820d986c7d1255df671bb0af486c55c4fc167af0`.
+SB-73 verifierades av full System Builder CI run `37725422318`. SB-74 full PR-CI är pending.
 
 ## Nästa åtgärd
 
-Implementera SB-74 Browser Screenshot-integration på samma PR #14.
+Kör full projekt-CI för SB-74. Vid PASS blir SB-75 capability-aware degradation/regression nästa steg på samma PR #14.
