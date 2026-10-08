@@ -14,6 +14,7 @@ core_references:
 - docs/release-readiness-standard.md
 - docs/capability-discovery.md
 - docs/execution-profiles.md
+- docs/agent-workspace-integration.md
 standards:
 - docs/functional-specification-standard.md
 - docs/architecture-standard.md
