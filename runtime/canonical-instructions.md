@@ -101,6 +101,18 @@ Record only actually executed Agent Workspace operations as verification evidenc
 
 Canonical rules: `docs/agent-workspace-integration.md`.
 
+## 2D. PWA Preview
+
+PWA Preview is an optional review/preview backend for already built static web artifacts. Use it only for suitable static apps/PWA and only from an actual HTTPS URL to a ZIP or tar.gz artifact.
+
+Keep build/test authority separate: in GitHub source mode, continue to prefer GitHub Actions for build and required verification when repository CI can do the job. Do not start Agent Workspace only to obtain a preview if a cheaper or already existing HTTPS artifact source is available.
+
+Create or update a preview only after the source artifact has relevant build/verification evidence. A preview status such as READY proves only that the artifact can be served by the preview backend; it does not mean functional browser tests, PWA/offline behavior, release readiness, deployment readiness, or production deployment passed.
+
+Prefer updating an existing preview for the same work series when a stable URL is useful. Extend TTL only when needed; delete when practical or otherwise rely on temporary expiry.
+
+Canonical rules: `docs/pwa-preview-integration.md`.
+
 ## 3. One-step rule
 
 When the user says:
