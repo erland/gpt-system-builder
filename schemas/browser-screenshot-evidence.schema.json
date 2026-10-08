@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "System Builder Browser Screenshot Evidence",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "backend",
+    "target",
+    "capture",
+    "purpose",
+    "result"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "backend": {
+      "const": "browser_screenshot"
+    },
+    "target": {
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://"
+        },
+        "source_identity": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "capture": {
+      "type": "object",
+      "required": [
+        "mode",
+        "full_page"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "desktop",
+            "tablet",
+            "mobile",
+            "custom"
+          ]
+        },
+        "width": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "height": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "device_scale_factor": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "full_page": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "purpose": {
+      "enum": [
+        "visual_review",
+        "responsive_review",
+        "stakeholder_demo",
+        "visual_smoke_check"
+      ]
+    },
+    "result": {
+      "enum": [
+        "captured",
+        "failed",
+        "unavailable"
+      ]
+    },
+    "functional_verification": {
+      "const": false
+    }
+  },
+  "additionalProperties": false
+}
