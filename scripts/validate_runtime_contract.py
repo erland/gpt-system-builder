@@ -46,6 +46,15 @@ def main() -> int:
             raise SystemExit(f'FAIL: execution routing {key} missing or unreadable: {rel}')
     if routing.get('selection_rule') != 'simplest_profile_that_satisfies_required_capabilities':
         raise SystemExit('FAIL: execution routing selection rule mismatch')
+    agent_workspace = contract['capabilities'].get('agent_workspace', {})
+    for key in ('canonical_reference', 'evidence_schema'):
+        rel = agent_workspace.get(key)
+        if not rel or not (ROOT / rel).is_file():
+            raise SystemExit(f'FAIL: Agent Workspace {key} missing or unreadable: {rel}')
+    if agent_workspace.get('github_policy') != 'prefer_github_actions_when_sufficient':
+        raise SystemExit('FAIL: Agent Workspace must prefer GitHub Actions when sufficient')
+    if agent_workspace.get('redundant_execution_forbidden') is not True:
+        raise SystemExit('FAIL: redundant Agent Workspace execution must be forbidden')
     instruction_path = ROOT / contract['behavior']['canonical_instruction']
     if not instruction_path.is_file():
         raise SystemExit(f'FAIL: canonical instruction missing: {instruction_path.relative_to(ROOT)}')
