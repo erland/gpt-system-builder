@@ -2,53 +2,166 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Platform-neutral Capability Contract",
   "type": "object",
-  "required": ["contract_version", "recommendation_mode", "requirements"],
+  "required": [
+    "contract_version",
+    "recommendation_mode",
+    "requirements"
+  ],
   "properties": {
-    "contract_version": {"type": "integer", "const": 1},
-    "recommendation_mode": {"enum": ["inferred_from_use_case", "explicit"]},
-    "ask_user_only_when_business_choice_is_ambiguous": {"type": "boolean"},
+    "contract_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "recommendation_mode": {
+      "enum": [
+        "inferred_from_use_case",
+        "explicit"
+      ]
+    },
+    "ask_user_only_when_business_choice_is_ambiguous": {
+      "type": "boolean"
+    },
     "requirements": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "web": {"$ref": "#/$defs/requirement"},
+        "web": {
+          "$ref": "#/$defs/requirement"
+        },
         "filesystem": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "read": {"$ref": "#/$defs/level"},
-            "write": {"$ref": "#/$defs/level"}
+            "read": {
+              "$ref": "#/$defs/level"
+            },
+            "write": {
+              "$ref": "#/$defs/level"
+            }
           }
         },
-        "shell": {"$ref": "#/$defs/requirement"},
-        "code_execution": {"$ref": "#/$defs/requirement"},
-        "structured_data": {"$ref": "#/$defs/requirement"},
-        "persistent_state": {"$ref": "#/$defs/requirement"},
+        "shell": {
+          "$ref": "#/$defs/requirement"
+        },
+        "code_execution": {
+          "$ref": "#/$defs/requirement"
+        },
+        "structured_data": {
+          "$ref": "#/$defs/requirement"
+        },
+        "persistent_state": {
+          "$ref": "#/$defs/requirement"
+        },
         "external_tools": {
-          "allOf": [{"$ref": "#/$defs/requirement"}],
+          "allOf": [
+            {
+              "$ref": "#/$defs/requirement"
+            }
+          ],
           "properties": {
             "preferred_protocols": {
               "type": "array",
-              "items": {"type": "string", "minLength": 1},
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
               "uniqueItems": true
             }
           }
         },
-        "image_generation": {"$ref": "#/$defs/requirement"}
+        "image_generation": {
+          "$ref": "#/$defs/requirement"
+        }
       }
     },
-    "legacy_mapping": {"type": "object", "additionalProperties": {"type": "string"}},
-    "schema": {"type": "string", "minLength": 1}
+    "legacy_mapping": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "schema": {
+      "type": "string",
+      "minLength": 1
+    },
+    "discovery": {
+      "type": "object",
+      "required": [
+        "result_schema",
+        "canonical_reference",
+        "refresh_policy",
+        "source_of_truth",
+        "companion_capabilities",
+        "missing_optional_behavior",
+        "missing_required_behavior"
+      ],
+      "properties": {
+        "result_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "canonical_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "refresh_policy": {
+          "enum": [
+            "per_run_before_execution_profile_selection"
+          ]
+        },
+        "source_of_truth": {
+          "enum": [
+            "actual_host_tool_availability"
+          ]
+        },
+        "companion_capabilities": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "companion.agent_workspace",
+              "companion.pwa_preview",
+              "companion.browser_screenshot"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "missing_optional_behavior": {
+          "enum": [
+            "degrade_without_blocking"
+          ]
+        },
+        "missing_required_behavior": {
+          "enum": [
+            "block_or_use_explicit_safe_fallback"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
   },
   "additionalProperties": false,
   "$defs": {
-    "level": {"enum": ["required", "recommended", "optional", "not_required", "to_be_recommended"]},
+    "level": {
+      "enum": [
+        "required",
+        "recommended",
+        "optional",
+        "not_required",
+        "to_be_recommended"
+      ]
+    },
     "requirement": {
       "type": "object",
-      "required": ["level"],
+      "required": [
+        "level"
+      ],
       "properties": {
-        "level": {"$ref": "#/$defs/level"},
-        "reason": {"type": "string"}
+        "level": {
+          "$ref": "#/$defs/level"
+        },
+        "reason": {
+          "type": "string"
+        }
       },
       "additionalProperties": true
     }
