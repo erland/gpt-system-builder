@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: capability-aware-execution
-  selected_step: null
+  selected_step: SB-75
 progress:
   completed:
   - SB-01
@@ -80,29 +80,28 @@ progress:
   - SB-72
   - SB-73
   - SB-74
-  - SB-75
-  in_progress: null
+  in_progress: SB-75
   next:
-    recommended: merge-review
-    reason: SB-75 passed final full PR CI with capability-aware parity and project-ZIP gates; review PR #14 for merge.
+    recommended: SB-75
+    reason: Custom GPT reduced capability parity repair changed verification-relevant source; rerun full project CI before completion.
 blockers: []
 verification:
-  last_status: passed
+  last_status: pending
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-75 verified by final full System Builder CI run 37727005465 on c468f6a25616fcf6361e4988327663e58df2c3e2; capability-aware parity and complete project-ZIP gates passed.
+  notes: SB-75 parity repair now explicitly declares Custom GPT reduced capability-aware support without changing its instruction text; full re-verification pending.
 source_state:
   drift: none
   reference: change/capability-aware-execution
 execution:
-  next_action: review
-  step: null
-  operation: review
-  reason: Capability-aware execution change series is complete; perform merge review for PR #14.
+  next_action: verify
+  step: SB-75
+  operation: verify
+  reason: Re-run full project CI after the final runtime parity repair.
 
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: c468f6a25616fcf6361e4988327663e58df2c3e2
-  evidence_status: passed
+  implementation_revision: null
+  evidence_status: pending
