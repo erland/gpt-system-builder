@@ -14,7 +14,8 @@
       "ZIP is a first-class source/delivery mode",
       "GitHub is a first-class source mode",
       "completion-only",
-      "Older System Builder projects"
+      "Older System Builder projects",
+      "## 2A. Capability discovery"
     ]
   },
   "capabilities": {
@@ -56,6 +57,19 @@
       "image_generation": {
         "level": "not_required"
       }
+    },
+    "discovery": {
+      "result_schema": "schemas/capability-discovery.schema.json",
+      "canonical_reference": "docs/capability-discovery.md",
+      "refresh_policy": "per_run_before_execution_profile_selection",
+      "source_of_truth": "actual_host_tool_availability",
+      "companion_capabilities": [
+        "companion.agent_workspace",
+        "companion.pwa_preview",
+        "companion.browser_screenshot"
+      ],
+      "missing_optional_behavior": "degrade_without_blocking",
+      "missing_required_behavior": "block_or_use_explicit_safe_fallback"
     }
   },
   "artifacts": {
