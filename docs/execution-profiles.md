@@ -16,7 +16,9 @@ Ansvar:
 
 - repositoryt är source of truth,
 - branch/commit/PR/CI används som execution state,
-- lokal eller repository-baserad verifiering används enligt projektets kontrakt.
+- lokal eller repository-baserad verifiering används enligt projektets kontrakt,
+- befintlig eller säkert genererbar GitHub Actions ska föredras framför Agent Workspace när den kan utföra required verifiering,
+- Agent Workspace får inte köras parallellt enbart för redundant verifiering.
 
 ### `hybrid_github_external_execution`
 
@@ -25,8 +27,11 @@ Använd när GitHub är source of truth men code execution behöver en separat t
 Typiskt:
 
 - GitHub read/write finns,
+- GitHub Actions/repository CI kan inte uppfylla required verifiering eller ett explicit workflowbehov motiverar extern execution,
 - lokal code execution saknas eller är otillräcklig,
 - `companion.agent_workspace` finns.
+
+Att Agent Workspace är installerad är inte tillräckligt skäl. När GitHub Actions kan göra jobbet ska `github_first` behållas för att undvika onödiga Agent Workspace-minuter.
 
 GitHub äger source/commit/PR-state. Execution backend får verifiera/builda men får inte bli ny repository authority.
 
