@@ -21,6 +21,7 @@ REFERENCES = [
     "docs/execution-profiles.md",
     "docs/agent-workspace-integration.md",
     "docs/pwa-preview-integration.md",
+    "docs/browser-screenshot-integration.md",
     "docs/test-verification-standard.md",
     "docs/security-baseline.md",
     "knowledge/technology-patterns.md",
