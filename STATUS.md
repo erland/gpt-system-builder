@@ -36,8 +36,8 @@ SB-70 ska endast definiera discovery-modellen och dess maskinläsbara resultat. 
 
 ## Verifiering
 
-SB-69 verifierades av System Builder CI run `37722983957` på commit `c15524e7e4ff898892b4bb42dc7bd9705833b616` och mergades i PR #13.
+SB-69 verifierades av System Builder CI run `37722983957` och mergades i PR #13. SB-70-implementationen är klar men full PR-CI återstår innan steget kan markeras completed.
 
 ## Nästa åtgärd
 
-Implementera och verifiera SB-70 capability discovery.
+Kör full projekt-CI för SB-70. Vid PASS görs en completion-only state transition; därefter är SB-71 capability-aware tool routing nästa steg.
