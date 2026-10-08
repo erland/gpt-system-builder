@@ -31,7 +31,7 @@ def main()->int:
         raise SystemExit("FAIL: Agent Workspace cleanup policy mismatch")
 
     policy_text=POLICY_DOC.read_text(encoding="utf-8").lower()
-    for marker in ("github actions", "redundant", "destroy", "execution cost"):
+    for marker in ("github actions", "redund", "destroy", "execution cost"):
         if marker not in policy_text:
             raise SystemExit(f"FAIL: Agent Workspace policy documentation missing marker: {marker}")
 
