@@ -34,6 +34,11 @@ def main() -> int:
         if name not in contract:
             raise SystemExit(f'FAIL: missing runtime contract component: {name}')
         validate_component(name, contract[name])
+    discovery = contract['capabilities'].get('discovery', {})
+    for key in ('result_schema', 'canonical_reference'):
+        rel = discovery.get(key)
+        if not rel or not (ROOT / rel).is_file():
+            raise SystemExit(f'FAIL: capability discovery {key} missing or unreadable: {rel}')
     instruction_path = ROOT / contract['behavior']['canonical_instruction']
     if not instruction_path.is_file():
         raise SystemExit(f'FAIL: canonical instruction missing: {instruction_path.relative_to(ROOT)}')
