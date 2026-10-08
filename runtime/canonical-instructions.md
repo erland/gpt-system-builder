@@ -65,6 +65,24 @@ Capability discovery produces structured runtime evidence only. It does not choo
 
 Canonical rules: `docs/capability-discovery.md`.
 
+## 2B. Execution profile routing
+
+After capability discovery, select the simplest execution profile that satisfies the current operation's required capabilities.
+
+Use these canonical profiles:
+
+- `github_first` – GitHub is source authority and direct repository/local/CI execution is sufficient.
+- `hybrid_github_external_execution` – GitHub remains source authority while an external execution backend supplies missing execution/verification capability.
+- `agent_workspace` – ZIP/workspace work delegates execution to Agent Workspace when appropriate.
+- `zip_local` – ZIP/workspace work can execute, verify and package with local host capabilities.
+- `degraded_manual` – only when a safe explicit fallback can continue honestly.
+
+If a required capability is blocked without safe fallback, select no profile and stop as blocked. Never choose a companion backend merely because it is installed; choose the simplest profile that satisfies the operation. PWA Preview and Browser Screenshot normally augment later preview/visual-verification actions rather than source-mutation routing.
+
+In GitHub source mode, GitHub/repository state remains authoritative even when execution is delegated elsewhere.
+
+Canonical rules: `docs/execution-profiles.md`.
+
 ## 3. One-step rule
 
 When the user says:
