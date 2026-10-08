@@ -24,11 +24,11 @@ Planerade steg:
 
 ## Aktuellt steg
 
-**SB-69 – Reconcile current project state**
+**SB-70 – Capability discovery**
 
-SB-69 korrigerar stale post-merge state, registrerar den nya fortsättningsserien och synkar projektdefinitionen med de fem aktiva runtimes som faktiskt finns.
+SB-69 är verifierad och mergad. SB-70 inför canonical capability discovery före val av exekveringsväg.
 
-Ingen capability-routing eller integration med companion plugins implementeras i SB-69.
+SB-70 ska endast definiera discovery-modellen och dess maskinläsbara resultat. Själva tool routing/execution profiles hör till SB-71.
 
 ## Release state
 
@@ -36,8 +36,8 @@ Ingen capability-routing eller integration med companion plugins implementeras i
 
 ## Verifiering
 
-SB-69 är implementerad på change-branchen men ska verifieras innan steget markeras completed.
+SB-69 verifierades av System Builder CI run `37722983957` på commit `c15524e7e4ff898892b4bb42dc7bd9705833b616` och mergades i PR #13.
 
 ## Nästa åtgärd
 
-Verifiera SB-69 mot projektets state/schema/CI-kontrakt. Vid PASS markeras SB-69 completed och SB-70 blir nästa rekommenderade steg.
+Implementera och verifiera SB-70 capability discovery.
