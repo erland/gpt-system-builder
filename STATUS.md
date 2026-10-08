@@ -24,9 +24,9 @@ Planerade steg:
 
 ## Aktuellt steg
 
-**SB-72 – Agent Workspace integration (re-verification)**
+**SB-73 – PWA Preview integration**
 
-Den live Agent Workspace-installationen är nu åtkomlig. SB-72 har reconcilerats mot faktiska capabilities: dynamisk provider/capability-probe, verify före build när artifact inte behövs, build endast för artifact-handoff och signed download links när hosten erbjuder dem. Eftersom detta ändrade runtime-kontraktet är SB-72 återöppnad tills full CI passerar igen.
+SB-72 är reconcilerad mot den live Agent Workspace-installationen och verifierad av full projekt-CI. SB-73 ska nu integrera PWA Preview som optional preview/review-evidens för verifierade statiska artifacts.
 
 ## Release state
 
@@ -34,8 +34,8 @@ Den live Agent Workspace-installationen är nu åtkomlig. SB-72 har reconcilerat
 
 ## Verifiering
 
-Tidigare SB-72-PASS är superseded av live capability reconciliation. Ny full PR-CI är pending.
+Reconcilerad SB-72 verifierades av full System Builder CI run `37724972653` på commit `8998ec6fd41ce79c1e3f59dce831588b0f20afc6`.
 
 ## Nästa åtgärd
 
-Kör full projekt-CI för reconcilerad SB-72. Vid PASS blir SB-73 åter nästa steg på samma PR #14.
+Implementera och verifiera SB-73 PWA Preview-integration på samma PR #14.
