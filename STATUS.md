@@ -26,7 +26,7 @@ Planerade steg:
 
 **SB-75 – capability-aware degradation och regression coverage**
 
-SB-75 är implementerad och genomgår slutlig re-verifiering efter parity-reparationen. Custom GPT deklarerar nu explicit reducerat capability-aware stöd i metadata, utan ändring av instruktionstexten.
+SB-75 är verifierad och completed. Custom GPT behåller sin befintliga instruktionstext och deklarerar explicit reducerat capability-aware stöd i metadata; övriga runtimes behåller sin starkare capability-aware funktionalitet enligt parity-kontraktet.
 
 ## Release state
 
@@ -34,8 +34,8 @@ SB-75 är implementerad och genomgår slutlig re-verifiering efter parity-repara
 
 ## Verifiering
 
-Tidigare SB-75 PASS är superseded av slutlig parity-reparation. Ny full PR-CI är pending.
+SB-75 verifierades av full System Builder CI run `37727138092` på implementation revision `12feba26fc113d4199d1adb3ef541a8a1bd8ded2`. Full gate inkluderade project-ZIP build/integritetskontroll, fem distributionsbyggen/-valideringar och capability-aware runtime parity.
 
 ## Nästa åtgärd
 
-Kör full projekt-CI efter parity-reparationen. Vid PASS görs completion-transition och slutlig mergebedömning för PR #14.
+PR #14 är redo för slutlig merge review.
