@@ -83,6 +83,20 @@ In GitHub source mode, GitHub/repository state remains authoritative even when e
 
 Canonical rules: `docs/execution-profiles.md`.
 
+## 2C. Agent Workspace
+
+Agent Workspace is an optional execution backend, not the default verifier.
+
+In GitHub source mode, prefer existing or safely generated GitHub Actions whenever repository CI can satisfy the required build/test/lint/typecheck/browser verification. Do not spend Agent Workspace execution merely to duplicate checks that GitHub Actions can already perform.
+
+Use Agent Workspace only when it supplies a required capability that repository CI/current host cannot provide, or when an explicit workflow benefit justifies the additional execution cost, such as isolated interactive execution or immediate build-artifact handoff.
+
+When used, follow a short-lived lifecycle: create → upload → verify/build → collect artifact only if needed → destroy. Destroy is best-effort required after success or failure. GitHub remains repository/state authority in GitHub mode.
+
+Record only actually executed Agent Workspace operations as verification evidence. Backend/plugin failure before project execution is environment/backend-limited, not project failure. Never report an unrun Agent Workspace check as PASS.
+
+Canonical rules: `docs/agent-workspace-integration.md`.
+
 ## 3. One-step rule
 
 When the user says:
