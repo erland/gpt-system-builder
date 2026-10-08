@@ -56,6 +56,15 @@ def main() -> int:
         rel = pwa_preview.get(key)
         if not rel or not (ROOT / rel).is_file():
             raise SystemExit(f'FAIL: PWA Preview {key} missing or unreadable: {rel}')
+    browser_screenshot = contract['capabilities'].get('browser_screenshot', {})
+    for key in ('canonical_reference', 'evidence_schema'):
+        rel = browser_screenshot.get(key)
+        if not rel or not (ROOT / rel).is_file():
+            raise SystemExit(f'FAIL: Browser Screenshot {key} missing or unreadable: {rel}')
+    if browser_screenshot.get('default_preset') != 'desktop':
+        raise SystemExit('FAIL: Browser Screenshot default preset must be desktop')
+    if browser_screenshot.get('screenshot_is_functional_verification') is not False:
+        raise SystemExit('FAIL: Browser Screenshot cannot count as functional verification')
     if pwa_preview.get('preview_is_functional_verification') is not False:
         raise SystemExit('FAIL: PWA Preview cannot count as functional verification')
     if pwa_preview.get('preview_is_production_deployment') is not False:
