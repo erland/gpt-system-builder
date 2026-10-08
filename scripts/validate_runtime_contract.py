@@ -39,6 +39,13 @@ def main() -> int:
         rel = discovery.get(key)
         if not rel or not (ROOT / rel).is_file():
             raise SystemExit(f'FAIL: capability discovery {key} missing or unreadable: {rel}')
+    routing = contract['capabilities'].get('routing', {})
+    for key in ('decision_schema', 'canonical_reference'):
+        rel = routing.get(key)
+        if not rel or not (ROOT / rel).is_file():
+            raise SystemExit(f'FAIL: execution routing {key} missing or unreadable: {rel}')
+    if routing.get('selection_rule') != 'simplest_profile_that_satisfies_required_capabilities':
+        raise SystemExit('FAIL: execution routing selection rule mismatch')
     instruction_path = ROOT / contract['behavior']['canonical_instruction']
     if not instruction_path.is_file():
         raise SystemExit(f'FAIL: canonical instruction missing: {instruction_path.relative_to(ROOT)}')
