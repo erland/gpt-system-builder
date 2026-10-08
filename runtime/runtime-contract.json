@@ -15,7 +15,8 @@
       "GitHub is a first-class source mode",
       "completion-only",
       "Older System Builder projects",
-      "## 2A. Capability discovery"
+      "## 2A. Capability discovery",
+      "## 2B. Execution profile routing"
     ]
   },
   "capabilities": {
@@ -70,6 +71,21 @@
       ],
       "missing_optional_behavior": "degrade_without_blocking",
       "missing_required_behavior": "block_or_use_explicit_safe_fallback"
+    },
+    "routing": {
+      "decision_schema": "schemas/execution-profile.schema.json",
+      "canonical_reference": "docs/execution-profiles.md",
+      "profiles": [
+        "github_first",
+        "hybrid_github_external_execution",
+        "agent_workspace",
+        "zip_local",
+        "degraded_manual"
+      ],
+      "blocked_without_profile": true,
+      "selection_rule": "simplest_profile_that_satisfies_required_capabilities",
+      "repository_authority_preserved_in_github_mode": true,
+      "companion_presence_alone_must_not_select_profile": true
     }
   },
   "artifacts": {
