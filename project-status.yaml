@@ -197,9 +197,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: implement
-  title: Implement SB-74 Browser Screenshot integration
-  reason: SB-73 passed full System Builder CI run 37725422318; next safe step is optional Browser Screenshot integration.
+  recommended: verify
+  title: Verify SB-74 Browser Screenshot integration
+  reason: SB-74 is implemented against the live Browser Screenshot contract and awaits full project CI before completion.
 resume:
   supported: true
   required_files:
@@ -219,6 +219,7 @@ resume:
   - docs/execution-profiles.md
   - docs/agent-workspace-integration.md
   - docs/pwa-preview-integration.md
+  - docs/browser-screenshot-integration.md
   - .system-builder/project.yaml
   - .system-builder/work-status.yaml
   - schemas/project.schema.json
@@ -312,6 +313,7 @@ resume:
   - schemas/execution-profile.schema.json
   - schemas/agent-workspace-evidence.schema.json
   - schemas/pwa-preview-evidence.schema.json
+  - schemas/browser-screenshot-evidence.schema.json
   - schemas/artifact-contract.schema.json
   - schemas/workspace-state-contract.schema.json
   - schemas/tool-contract.schema.json
@@ -320,6 +322,8 @@ resume:
   - examples/execution-profile.example.yaml
   - examples/agent-workspace-evidence.example.yaml
   - examples/pwa-preview-evidence.example.yaml
+  - examples/browser-screenshot-evidence.example.yaml
+  - scripts/validate_browser_screenshot_integration.py
   - scripts/validate_pwa_preview_integration.py
   - scripts/validate_agent_workspace_integration.py
   - scripts/validate_execution_profile.py
