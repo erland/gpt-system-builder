@@ -1893,11 +1893,15 @@ Använd Agent Workspace som optional execution backend för isolerad build/test/
 - verifiera stödda Node/Java-projekt,
 - hämta build artifacts när steget kräver det,
 - destruera workspace efter användning,
-- rapportera faktisk execution evidence.
+- rapportera faktisk execution evidence,
+- i GitHub source mode föredra befintlig eller säkert genererbar GitHub Actions när CI kan utföra required verifiering,
+- undvika Agent Workspace-minuter för redundant verifiering som GitHub Actions redan kan göra.
 
 ### Klart när
 
 - integrationen är optional,
+- GitHub Actions är default för GitHub-repo när repository CI räcker,
+- Agent Workspace används i GitHub mode endast när CI saknar required capability eller ett explicit workflowbehov motiverar extra execution-kostnad,
 - ingen verifiering simuleras när Agent Workspace saknas,
 - fallback till befintlig GitHub/ZIP-verifiering fungerar,
 - workspace alltid städas efter användning.
