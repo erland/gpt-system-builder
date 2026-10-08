@@ -1,0 +1,14 @@
+schema_version: 1
+backend: browser_screenshot
+target:
+  url: https://p-example.preview.example
+  source_identity: preview:p-example
+capture:
+  mode: desktop
+  width: null
+  height: null
+  device_scale_factor: null
+  full_page: false
+purpose: visual_review
+result: captured
+functional_verification: false
