@@ -79,25 +79,25 @@ progress:
   in_progress: SB-71
   next:
     recommended: SB-71
-    reason: SB-70 passed full PR CI; implement capability-aware execution profile routing next.
+    reason: Deterministic execution profile routing is implemented; run required project CI before completion.
 blockers: []
 verification:
-  last_status: passed
+  last_status: pending
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-70 verified by successful System Builder CI run 37723538840 on de1e29458163ba01ac60080833286a01dab04519.
+  notes: SB-71 implementation defines deterministic routing profiles, machine-readable decision contract, runtime references and distribution packaging; full PR CI pending.
 source_state:
   drift: none
   reference: change/capability-aware-execution
 execution:
-  next_action: implement
+  next_action: verify
   step: SB-71
-  operation: implement
-  reason: SB-70 is verified and completed; implement deterministic execution profile routing.
+  operation: verify
+  reason: Run full project CI for the SB-71 implementation revision before completion.
 
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: de1e29458163ba01ac60080833286a01dab04519
-  evidence_status: passed
+  implementation_revision: null
+  evidence_status: pending
