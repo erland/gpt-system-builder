@@ -65,7 +65,7 @@ Live backend stöder:
 
 Regler:
 
-1. använd kortast praktiska lifetime inom hostens tillåtna intervall,
+1. använd kortast praktiska lifetime inom live-backendens tillåtna intervall, för närvarande 5–1440 minuter,
 2. återanvänd/update samma preview för samma work series när stabil URL är värdefull,
 3. extend endast när review faktiskt behöver mer tid,
 4. delete när preview inte längre behövs och explicit cleanup är praktiskt,
