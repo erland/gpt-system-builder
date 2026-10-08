@@ -101,6 +101,7 @@
         "explicit_workflow_benefit_justifies_execution_cost"
       ],
       "lifecycle": [
+        "probe",
         "create",
         "upload",
         "verify_or_build",
@@ -108,7 +109,19 @@
         "destroy"
       ],
       "cleanup": "best_effort_required",
-      "repository_authority_in_github_mode": true
+      "repository_authority_in_github_mode": true,
+      "capability_probe": {
+        "provider_connection_required": true,
+        "runtime_versions": "discover_dynamically",
+        "build_systems": "discover_dynamically",
+        "workspace_lifetime": "discover_dynamically",
+        "artifact_capabilities": "discover_dynamically"
+      },
+      "verify_vs_build": {
+        "prefer_verify_when_no_artifact_needed": true,
+        "build_only_when_artifact_needed": true,
+        "signed_download_link_for_external_handoff_when_available": true
+      }
     }
   },
   "artifacts": {
