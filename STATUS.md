@@ -26,7 +26,7 @@ Planerade steg:
 
 **SB-71 – Capability-aware tool routing / execution profiles**
 
-SB-70 är verifierad av full PR-CI. SB-71 använder discovery-resultatet för att välja en deterministisk execution profile utan att duplicera companion-pluginernas specialistfunktionalitet.
+SB-70 är verifierad av full PR-CI. SB-71 är implementerad och använder discovery-resultatet för att välja den enklaste deterministiska execution profile som uppfyller operationens required capabilities. GitHub behåller repository authority även vid extern execution.
 
 ## Release state
 
@@ -34,8 +34,8 @@ SB-70 är verifierad av full PR-CI. SB-71 använder discovery-resultatet för at
 
 ## Verifiering
 
-SB-70 verifierades av System Builder CI run `37723538840` på commit `de1e29458163ba01ac60080833286a01dab04519`.
+SB-70 verifierades av System Builder CI run `37723538840`. SB-71 full PR-CI är pending.
 
 ## Nästa åtgärd
 
-Implementera och verifiera SB-71 deterministic execution profiles på samma PR #14.
+Kör full projekt-CI för SB-71. Vid PASS kan SB-71 completed och SB-72 Agent Workspace-integration blir nästa steg på samma PR #14.
