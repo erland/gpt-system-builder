@@ -26,7 +26,7 @@ Planerade steg:
 
 **SB-73 – PWA Preview integration**
 
-SB-72 är reconcilerad mot den live Agent Workspace-installationen och verifierad av full projekt-CI. SB-73 ska nu integrera PWA Preview som optional preview/review-evidens för verifierade statiska artifacts.
+SB-72 är verifierad och completed. SB-73 är implementerad mot den live PWA Preview-backenden: HTTPS ZIP/tar.gz source, temporär lifecycle, reuse/update, TTL och strikt separation mellan preview-evidens och funktionell/release/deployment PASS.
 
 ## Release state
 
@@ -34,8 +34,8 @@ SB-72 är reconcilerad mot den live Agent Workspace-installationen och verifiera
 
 ## Verifiering
 
-Reconcilerad SB-72 verifierades av full System Builder CI run `37724972653` på commit `8998ec6fd41ce79c1e3f59dce831588b0f20afc6`.
+SB-72 verifierades av full System Builder CI run `37724972653`. SB-73 full PR-CI är pending.
 
 ## Nästa åtgärd
 
-Implementera och verifiera SB-73 PWA Preview-integration på samma PR #14.
+Kör full projekt-CI för SB-73. Vid PASS blir SB-74 Browser Screenshot-integration nästa steg på samma PR #14.
