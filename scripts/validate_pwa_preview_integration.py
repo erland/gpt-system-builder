@@ -36,9 +36,11 @@ def main()->int:
         raise SystemExit("FAIL: PWA Preview lifecycle must preserve create/update/get/extend/delete-or-expire semantics")
 
     text=POLICY.read_text(encoding="utf-8").lower()
-    for marker in ("zip", "tar.gz", "https", "github actions", "ready", "functional", "production", "5", "1440", "update", "extend", "delete"):
+    for marker in ("zip", "tar.gz", "https", "github actions", "ready", "production", "5", "1440", "update", "extend", "delete"):
         if marker not in text:
             raise SystemExit(f"FAIL: PWA Preview policy missing marker: {marker}")
+    if "functional" not in text and "funktionell" not in text:
+        raise SystemExit("FAIL: PWA Preview policy missing functional-verification separation")
 
     invalid=copy.deepcopy(example)
     invalid["source"]["verified"]=False
