@@ -7,8 +7,8 @@ plan:
   total_steps: 75
 progress:
   current_phase: change
-  current_step: 71
-  last_completed_step: 70
+  current_step: 72
+  last_completed_step: 71
   completed_steps:
   - 1
   - 2
@@ -82,6 +82,8 @@ progress:
   - 69
 
   - 70
+
+  - 71
   completed_step_ids:
   - SB-01
   - SB-02
@@ -155,6 +157,8 @@ progress:
   - SB-69
 
   - SB-70
+
+  - SB-71
   skipped_steps: []
   inserted_steps:
   - 55
@@ -183,9 +187,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: verify
-  title: Verify SB-71 execution profiles
-  reason: SB-71 deterministic capability-aware routing är implementerad och inväntar full projekt-CI innan completion.
+  recommended: implement
+  title: Implement SB-72 Agent Workspace integration
+  reason: SB-71 verifierades av full System Builder CI run 37723907980; nästa säkra steg är optional Agent Workspace execution integration.
 resume:
   supported: true
   required_files:
