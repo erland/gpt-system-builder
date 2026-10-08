@@ -358,6 +358,64 @@
         }
       },
       "additionalProperties": false
+    },
+    "browser_screenshot": {
+      "type": "object",
+      "required": [
+        "canonical_reference",
+        "evidence_schema",
+        "requirement",
+        "public_http_url_required",
+        "default_preset",
+        "supported_presets",
+        "custom_viewport_supported",
+        "full_page_supported",
+        "screenshot_is_functional_verification",
+        "extra_viewports_policy",
+        "preview_policy"
+      ],
+      "properties": {
+        "canonical_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requirement": {
+          "const": "optional"
+        },
+        "public_http_url_required": {
+          "const": true
+        },
+        "default_preset": {
+          "const": "desktop"
+        },
+        "supported_presets": {
+          "const": [
+            "desktop",
+            "tablet",
+            "mobile"
+          ]
+        },
+        "custom_viewport_supported": {
+          "const": true
+        },
+        "full_page_supported": {
+          "const": true
+        },
+        "screenshot_is_functional_verification": {
+          "const": false
+        },
+        "extra_viewports_policy": {
+          "const": "only_when_requirement_risk_or_user_justifies"
+        },
+        "preview_policy": {
+          "const": "use_existing_public_url_before_creating_new_preview"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false,
