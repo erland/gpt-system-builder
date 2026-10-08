@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: capability-aware-execution
-  selected_step: SB-69
+  selected_step: SB-70
 progress:
   completed:
   - SB-01
@@ -74,27 +74,29 @@ progress:
   - SB-66
   - SB-67
   - SB-68
-  in_progress: SB-69
+  - SB-69
+  in_progress: SB-70
   next:
-    recommended: SB-69
-    reason: Verify the state/documentation reconciliation before completing SB-69 and advancing to capability discovery.
+    recommended: SB-70
+    reason: SB-69 passed PR #13 CI and is merged; implement capability discovery next.
 blockers: []
 verification:
-  last_status: pending
+  last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: Prior v1.3.2 readiness evidence predates PR #12 and is not current release evidence; SB-69 verification is pending.
+  notes: SB-69 verified by successful System Builder CI run 37722983957 on c15524e7e4ff898892b4bb42dc7bd9705833b616 and merged as 53eb8546f1f44d0f37e0467f532606cf40f723af.
 source_state:
   drift: none
   reference: change/capability-aware-execution
 execution:
-  next_action: verify
-  step: SB-69
-  operation: verify
-  reason: Verify reconciliation/state consistency before completion.
+  next_action: implement
+  step: SB-70
+  operation: implement
+  reason: SB-69 is verified and completed; implement capability discovery.
+
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: null
-  evidence_status: pending
+  implementation_revision: 53eb8546f1f44d0f37e0467f532606cf40f723af
+  evidence_status: passed
