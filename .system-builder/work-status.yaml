@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: capability-aware-execution
-  selected_step: SB-73
+  selected_step: SB-74
 progress:
   completed:
   - SB-01
@@ -78,28 +78,29 @@ progress:
   - SB-70
   - SB-71
   - SB-72
-  in_progress: SB-73
+  - SB-73
+  in_progress: SB-74
   next:
-    recommended: SB-73
-    reason: PWA Preview integration is implemented against the live backend; run full project CI before completion.
+    recommended: SB-74
+    reason: SB-73 passed full PR CI; implement optional Browser Screenshot integration next.
 blockers: []
 verification:
-  last_status: pending
+  last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-73 implements optional PWA Preview lifecycle/evidence rules from the live backend; full PR CI pending.
+  notes: SB-73 verified by successful full System Builder CI run 37725422318 on 820d986c7d1255df671bb0af486c55c4fc167af0.
 source_state:
   drift: none
   reference: change/capability-aware-execution
 execution:
-  next_action: verify
-  step: SB-73
-  operation: verify
-  reason: Run full project CI for the SB-73 implementation revision before completion.
+  next_action: implement
+  step: SB-74
+  operation: implement
+  reason: SB-73 is verified and completed; implement optional Browser Screenshot integration.
 
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: null
-  evidence_status: pending
+  implementation_revision: 820d986c7d1255df671bb0af486c55c4fc167af0
+  evidence_status: passed
