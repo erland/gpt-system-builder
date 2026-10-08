@@ -7,8 +7,8 @@ plan:
   total_steps: 75
 progress:
   current_phase: change
-  current_step: 72
-  last_completed_step: 71
+  current_step: 73
+  last_completed_step: 72
   completed_steps:
   - 1
   - 2
@@ -84,6 +84,8 @@ progress:
   - 70
 
   - 71
+
+  - 72
   completed_step_ids:
   - SB-01
   - SB-02
@@ -159,6 +161,8 @@ progress:
   - SB-70
 
   - SB-71
+
+  - SB-72
   skipped_steps: []
   inserted_steps:
   - 55
@@ -187,9 +191,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: verify
-  title: Verify SB-72 Agent Workspace integration
-  reason: SB-72 är implementerad med GitHub Actions-first kostnadspolicy och inväntar full projekt-CI före completion.
+  recommended: implement
+  title: Implement SB-73 PWA Preview integration
+  reason: SB-72 verifierades av full System Builder CI run 37724643707; nästa säkra steg är optional PWA Preview integration.
 resume:
   supported: true
   required_files:
