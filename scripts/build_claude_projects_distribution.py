@@ -74,7 +74,8 @@ def main() -> int:
     contract_path = root / "runtime" / "runtime-contract.json"
     execution_rules = root / "runtime" / "execution-rules.md"
     execution_profiles = root / "docs" / "execution-profiles.md"
-    required = [instruction, execution_rules, execution_profiles, contract_path] + [root / p for p in KNOWLEDGE_FILES]
+    agent_workspace = root / "docs" / "agent-workspace-integration.md"
+    required = [instruction, execution_rules, execution_profiles, agent_workspace, contract_path] + [root / p for p in KNOWLEDGE_FILES]
     missing = [str(p.relative_to(root)) for p in required if not p.is_file()]
     if missing:
         raise FileNotFoundError("missing Claude Projects source files: " + ", ".join(missing))
@@ -89,6 +90,7 @@ def main() -> int:
         zf.writestr("project-instructions.md", instruction.read_text(encoding="utf-8"))
         zf.write(execution_rules, "runtime/execution-rules.md")
         zf.write(execution_profiles, "docs/execution-profiles.md")
+        zf.write(agent_workspace, "docs/agent-workspace-integration.md")
         zf.writestr("runtime-contract.json", json.dumps(contract, indent=2) + "\n")
         zf.writestr("compatibility.md", COMPATIBILITY)
         for rel in KNOWLEDGE_FILES:
