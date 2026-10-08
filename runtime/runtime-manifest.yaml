@@ -15,6 +15,7 @@ core_references:
 - docs/capability-discovery.md
 - docs/execution-profiles.md
 - docs/agent-workspace-integration.md
+- docs/pwa-preview-integration.md
 standards:
 - docs/functional-specification-standard.md
 - docs/architecture-standard.md
