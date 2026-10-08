@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: capability-aware-execution
-  selected_step: SB-72
+  selected_step: SB-73
 progress:
   completed:
   - SB-01
@@ -77,28 +77,29 @@ progress:
   - SB-69
   - SB-70
   - SB-71
-  in_progress: SB-72
+  - SB-72
+  in_progress: SB-73
   next:
-    recommended: SB-72
-    reason: Agent Workspace integration is implemented with GitHub Actions-first routing; run full project CI before completion.
+    recommended: SB-73
+    reason: SB-72 passed full PR CI; implement optional PWA Preview integration next.
 blockers: []
 verification:
-  last_status: pending
+  last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-72 implementation adds optional Agent Workspace lifecycle/evidence rules and forbids redundant paid execution when GitHub Actions can satisfy required verification; full PR CI pending.
+  notes: SB-72 verified by successful full System Builder CI run 37724643707 on b36faa2863915eb0c3bf884fd50b13f2330f2913.
 source_state:
   drift: none
   reference: change/capability-aware-execution
 execution:
-  next_action: verify
-  step: SB-72
-  operation: verify
-  reason: Run full project CI for the SB-72 implementation revision before completion.
+  next_action: implement
+  step: SB-73
+  operation: implement
+  reason: SB-72 is verified and completed; implement optional PWA Preview integration.
 
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: null
-  evidence_status: pending
+  implementation_revision: b36faa2863915eb0c3bf884fd50b13f2330f2913
+  evidence_status: passed
