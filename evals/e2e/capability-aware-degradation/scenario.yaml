@@ -1,0 +1,73 @@
+schema_version: 1
+suite: capability-aware-degradation
+scenarios:
+  - id: CAP-001
+    title: GitHub with Agent Workspace but repository CI is sufficient
+    source_mode: github
+    available: [repository.read, repository.write, persistent_state, code_execution, companion.agent_workspace]
+    required: [repository.read, repository.write, persistent_state, code_execution]
+    expected:
+      profile: github_first
+      blocked: false
+      use_agent_workspace: false
+  - id: CAP-002
+    title: GitHub without Agent Workspace
+    source_mode: github
+    available: [repository.read, repository.write, persistent_state, code_execution]
+    required: [repository.read, repository.write, persistent_state, code_execution]
+    expected:
+      profile: github_first
+      blocked: false
+  - id: CAP-003
+    title: ZIP with local execution
+    source_mode: zip
+    available: [filesystem.read, filesystem.write, code_execution, persistent_state, project_packaging]
+    required: [filesystem.read, filesystem.write, code_execution, persistent_state, project_packaging]
+    expected:
+      profile: zip_local
+      blocked: false
+  - id: CAP-004
+    title: OpenAI Plugin with required execution capability
+    source_mode: workspace
+    runtime: openai_plugin
+    available: [filesystem.read, filesystem.write, code_execution, persistent_state]
+    required: [filesystem.read, filesystem.write, code_execution, persistent_state]
+    expected:
+      blocked: false
+      false_pass: false
+  - id: CAP-005
+    title: OpenAI Plugin without required execution capability
+    source_mode: workspace
+    runtime: openai_plugin
+    available: [filesystem.read, filesystem.write, persistent_state]
+    required: [filesystem.read, filesystem.write, code_execution, persistent_state]
+    expected:
+      blocked: true
+      selected_profile: null
+      false_pass: false
+  - id: CAP-006
+    title: PWA Preview optional availability
+    source_mode: github
+    variants:
+      - available: [companion.pwa_preview]
+        expected: {optional_capability_blocks: false}
+      - available: []
+        expected: {optional_capability_blocks: false}
+  - id: CAP-007
+    title: Browser Screenshot optional availability
+    source_mode: github
+    variants:
+      - available: [companion.browser_screenshot]
+        expected: {optional_capability_blocks: false}
+      - available: []
+        expected: {optional_capability_blocks: false}
+  - id: CAP-008
+    title: No companion plugins
+    source_mode: github
+    available: [repository.read, repository.write, persistent_state, code_execution]
+    required: [repository.read, repository.write, persistent_state, code_execution]
+    expected:
+      profile: github_first
+      blocked: false
+      companion_plugins_required: false
+      false_pass: false
