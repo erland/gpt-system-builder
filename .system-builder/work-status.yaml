@@ -81,25 +81,25 @@ progress:
   in_progress: SB-73
   next:
     recommended: SB-73
-    reason: Reconciled SB-72 passed full PR CI; implement optional PWA Preview integration next.
+    reason: PWA Preview integration is implemented against the live backend; run full project CI before completion.
 blockers: []
 verification:
-  last_status: passed
+  last_status: pending
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: Reconciled SB-72 verified by full System Builder CI run 37724972653 on 8998ec6fd41ce79c1e3f59dce831588b0f20afc6.
+  notes: SB-73 implements optional PWA Preview lifecycle/evidence rules from the live backend; full PR CI pending.
 source_state:
   drift: none
   reference: change/capability-aware-execution
 execution:
-  next_action: implement
+  next_action: verify
   step: SB-73
-  operation: implement
-  reason: SB-72 is verified and completed; implement optional PWA Preview integration.
+  operation: verify
+  reason: Run full project CI for the SB-73 implementation revision before completion.
 
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: 8998ec6fd41ce79c1e3f59dce831588b0f20afc6
-  evidence_status: passed
+  implementation_revision: null
+  evidence_status: pending
