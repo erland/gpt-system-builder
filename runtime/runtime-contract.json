@@ -16,7 +16,8 @@
       "completion-only",
       "Older System Builder projects",
       "## 2A. Capability discovery",
-      "## 2B. Execution profile routing"
+      "## 2B. Execution profile routing",
+      "## 2C. Agent Workspace"
     ]
   },
   "capabilities": {
@@ -86,6 +87,28 @@
       "selection_rule": "simplest_profile_that_satisfies_required_capabilities",
       "repository_authority_preserved_in_github_mode": true,
       "companion_presence_alone_must_not_select_profile": true
+    },
+    "agent_workspace": {
+      "canonical_reference": "docs/agent-workspace-integration.md",
+      "evidence_schema": "schemas/agent-workspace-evidence.schema.json",
+      "requirement": "optional",
+      "github_policy": "prefer_github_actions_when_sufficient",
+      "redundant_execution_forbidden": true,
+      "use_when": [
+        "required_capability_missing_from_repository_ci",
+        "isolated_interactive_execution_required",
+        "immediate_build_artifact_handoff_required",
+        "explicit_workflow_benefit_justifies_execution_cost"
+      ],
+      "lifecycle": [
+        "create",
+        "upload",
+        "verify_or_build",
+        "collect_if_needed",
+        "destroy"
+      ],
+      "cleanup": "best_effort_required",
+      "repository_authority_in_github_mode": true
     }
   },
   "artifacts": {
