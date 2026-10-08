@@ -25,8 +25,21 @@ def main()->int:
         raise SystemExit("FAIL: GitHub Actions-first policy is missing")
     if policy.get("redundant_execution_forbidden") is not True:
         raise SystemExit("FAIL: redundant Agent Workspace execution must be forbidden")
-    if policy.get("lifecycle")!=["create","upload","verify_or_build","collect_if_needed","destroy"]:
+    if policy.get("lifecycle")!=["probe","create","upload","verify_or_build","collect_if_needed","destroy"]:
         raise SystemExit("FAIL: Agent Workspace lifecycle mismatch")
+    probe=policy.get("capability_probe",{})
+    if probe.get("provider_connection_required") is not True:
+        raise SystemExit("FAIL: Agent Workspace provider connection must be probed")
+    for key in ("runtime_versions","build_systems","workspace_lifetime","artifact_capabilities"):
+        if probe.get(key)!="discover_dynamically":
+            raise SystemExit(f"FAIL: Agent Workspace {key} must be discovered dynamically")
+    verify_build=policy.get("verify_vs_build",{})
+    if verify_build.get("prefer_verify_when_no_artifact_needed") is not True:
+        raise SystemExit("FAIL: project_verify must be preferred when no artifact is needed")
+    if verify_build.get("build_only_when_artifact_needed") is not True:
+        raise SystemExit("FAIL: project_build must be reserved for artifact-producing workflows")
+    if verify_build.get("signed_download_link_for_external_handoff_when_available") is not True:
+        raise SystemExit("FAIL: signed artifact links should be used for external handoff when available")
     if policy.get("cleanup")!="best_effort_required":
         raise SystemExit("FAIL: Agent Workspace cleanup policy mismatch")
 
