@@ -80,25 +80,25 @@ progress:
   in_progress: SB-72
   next:
     recommended: SB-72
-    reason: SB-71 passed full PR CI; implement optional Agent Workspace execution integration next.
+    reason: Agent Workspace integration is implemented with GitHub Actions-first routing; run full project CI before completion.
 blockers: []
 verification:
-  last_status: passed
+  last_status: pending
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-71 verified by successful System Builder CI run 37723907980 on f63624f91ab392271aceb87296765f4d320068be.
+  notes: SB-72 implementation adds optional Agent Workspace lifecycle/evidence rules and forbids redundant paid execution when GitHub Actions can satisfy required verification; full PR CI pending.
 source_state:
   drift: none
   reference: change/capability-aware-execution
 execution:
-  next_action: implement
+  next_action: verify
   step: SB-72
-  operation: implement
-  reason: SB-71 is verified and completed; implement optional Agent Workspace execution integration.
+  operation: verify
+  reason: Run full project CI for the SB-72 implementation revision before completion.
 
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: f63624f91ab392271aceb87296765f4d320068be
-  evidence_status: passed
+  implementation_revision: null
+  evidence_status: pending
