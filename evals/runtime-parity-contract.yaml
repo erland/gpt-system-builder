@@ -120,3 +120,22 @@ runtime_policy:
         - canonical behavior
         - workspace-file authority
         - no false PASS for unrun verification
+
+capability_aware_execution:
+  required_invariants:
+    - capability discovery uses actual host/tool availability
+    - optional companion capability absence does not block base functionality
+    - required capability absence blocks or uses an explicit safe fallback
+    - GitHub Actions are preferred over redundant Agent Workspace execution
+    - PWA Preview READY is not functional verification
+    - Browser Screenshot capture is not functional verification
+    - unrun verification is never reported as PASS
+  scenarios:
+    - github_with_agent_workspace
+    - github_without_agent_workspace
+    - zip_with_local_execution
+    - openai_plugin_with_required_execution
+    - openai_plugin_without_required_execution
+    - pwa_preview_available_unavailable
+    - browser_screenshot_available_unavailable
+    - no_companion_plugins
