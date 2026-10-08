@@ -143,6 +143,15 @@ def main():
         rows.append({"dimension":"tool","runtime":runtime,"expected":expected,"actual":actual,"result":result})
         if result=="fail": errors.append(f"tool parity mismatch for {runtime}")
 
+    custom_manifest=runtimes["custom_gpt"].get("manifest",{})
+    custom_capability=custom_manifest.get("capability_parity",{})
+    if custom_capability.get("capability_aware_execution")!="reduced":
+        errors.append("Custom GPT must declare reduced capability-aware parity")
+    if custom_capability.get("companion_integrations")!="not_guaranteed":
+        errors.append("Custom GPT must explicitly declare companion integrations as not guaranteed")
+    if custom_capability.get("core_safety_invariants_preserved") is not True:
+        errors.append("Custom GPT must preserve core safety invariants")
+
     claude=runtimes["claude_projects"]
     compat=claude["compatibility"]
     for phrase in contract["runtime_policy"]["reduced_runtime_requirements"]["claude_projects"]["must_document_limitations"]:
