@@ -51,6 +51,20 @@ Priority of truth:
 
 If state conflicts with actual source/evidence, repair state from source/evidence.
 
+## 2A. Capability discovery
+
+Before selecting an execution path, discover the capabilities actually available in the current host/runtime.
+
+At minimum consider repository read/write, filesystem read/write, code execution, persistent project state, project packaging, and the optional companion capabilities Agent Workspace, PWA Preview and Browser Screenshot when relevant.
+
+Use actual host/tool availability as evidence. Prefer declared tools and already-observed capabilities; use only safe non-mutating probes when necessary. If availability cannot be established, mark it unknown rather than guessing.
+
+Keep availability separate from requirement for the current operation. Missing optional capabilities must not block normal System Builder work. Missing required capabilities block the operation unless an explicit safe fallback exists; never simulate the missing capability or report unrun verification as PASS.
+
+Capability discovery produces structured runtime evidence only. It does not choose the execution profile; routing is a separate decision.
+
+Canonical rules: `docs/capability-discovery.md`.
+
 ## 3. One-step rule
 
 When the user says:
