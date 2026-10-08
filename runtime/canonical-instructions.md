@@ -113,6 +113,18 @@ Prefer updating an existing preview for the same work series when a stable URL i
 
 Canonical rules: `docs/pwa-preview-integration.md`.
 
+## 2E. Browser Screenshot
+
+Browser Screenshot is an optional visual-evidence backend. Use it only after a real public HTTP(S) URL already exists.
+
+Default to the desktop preset. Capture tablet/mobile only when requirements, risk, a responsive-layout concern or the user explicitly justifies the extra evidence. Use custom viewport or full-page capture only when they answer a concrete visual question; do not generate redundant screenshot sets mechanically.
+
+A successful screenshot proves only that the page rendered enough to capture an image. It is not functional browser verification and must not replace Playwright/E2E when user flows, interactions, PWA behavior or other browser functionality require real tests.
+
+Prefer an existing public preview/deployment URL. Do not create PWA Preview or start Agent Workspace merely because Browser Screenshot exists when a suitable URL already exists.
+
+Canonical rules: `docs/browser-screenshot-integration.md`.
+
 ## 3. One-step rule
 
 When the user says:
