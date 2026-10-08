@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: capability-aware-execution
-  selected_step: SB-75
+  selected_step: null
 progress:
   completed:
   - SB-01
@@ -80,28 +80,29 @@ progress:
   - SB-72
   - SB-73
   - SB-74
-  in_progress: SB-75
+  - SB-75
+  in_progress: null
   next:
-    recommended: SB-75
-    reason: SB-74 passed full PR CI; implement capability-aware degradation and regression coverage next.
+    recommended: merge-review
+    reason: SB-75 passed final full PR CI with capability-aware parity and project-ZIP gates; review PR #14 for merge.
 blockers: []
 verification:
   last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-74 verified by successful full System Builder CI run 37725850680 on 807b26741881581585ca3be1d875b90c7bc50607.
+  notes: SB-75 verified by final full System Builder CI run 37727005465 on c468f6a25616fcf6361e4988327663e58df2c3e2; capability-aware parity and complete project-ZIP gates passed.
 source_state:
   drift: none
   reference: change/capability-aware-execution
 execution:
-  next_action: implement
-  step: SB-75
-  operation: implement
-  reason: SB-74 is verified and completed; implement the final capability-aware degradation/regression gate.
+  next_action: review
+  step: null
+  operation: review
+  reason: Capability-aware execution change series is complete; perform merge review for PR #14.
 
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: 807b26741881581585ca3be1d875b90c7bc50607
+  implementation_revision: c468f6a25616fcf6361e4988327663e58df2c3e2
   evidence_status: passed
