@@ -1,0 +1,16 @@
+schema_version: 1
+source_mode: github
+operation: implement_step
+status: selected
+selected_profile: hybrid_github_external_execution
+reasons:
+  - GitHub repository read/write is available and remains canonical source authority.
+  - Direct code execution is unavailable in the host.
+  - Agent Workspace is available as an optional external execution backend.
+capability_basis:
+  - repository.read
+  - repository.write
+  - persistent_state
+  - companion.agent_workspace
+fallback: github_first when equivalent repository CI can satisfy required verification without external execution
+repository_authority: true
