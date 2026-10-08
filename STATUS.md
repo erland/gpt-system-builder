@@ -24,9 +24,9 @@ Planerade steg:
 
 ## Aktuellt steg
 
-**SB-74 – Browser Screenshot integration**
+**SB-75 – capability-aware degradation och regression coverage**
 
-SB-73 är verifierad och completed. SB-74 är implementerad mot den live Browser Screenshot-backenden: publik HTTP(S)-URL, desktop som default, demand-driven tablet/mobile/custom/fullPage och strikt separation mellan visuell evidens och funktionell browser-PASS.
+SB-74 är verifierad och completed. Browser Screenshot är nu optional visual-evidence backend med desktop som default, demand-driven extra viewports och tydlig separation från funktionell browser-verifiering. SB-75 är sista planerade steget i change-serien.
 
 ## Release state
 
@@ -34,8 +34,8 @@ SB-73 är verifierad och completed. SB-74 är implementerad mot den live Browser
 
 ## Verifiering
 
-SB-73 verifierades av full System Builder CI run `37725422318`. SB-74 full PR-CI är pending.
+SB-74 verifierades av full System Builder CI run `37725850680` på commit `807b26741881581585ca3be1d875b90c7bc50607`.
 
 ## Nästa åtgärd
 
-Kör full projekt-CI för SB-74. Vid PASS blir SB-75 capability-aware degradation/regression nästa steg på samma PR #14.
+Implementera SB-75 capability-aware degradation och regression coverage på samma PR #14. Efter PASS bör PR #14 vara redo för mergebedömning.
