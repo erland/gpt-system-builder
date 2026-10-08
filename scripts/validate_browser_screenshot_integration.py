@@ -40,9 +40,13 @@ def main()->int:
         raise SystemExit("FAIL: Browser Screenshot must preserve fullPage support")
 
     text=POLICY.read_text(encoding="utf-8").lower()
-    for marker in ("desktop", "tablet", "mobile", "custom", "fullpage", "public", "playwright", "functional"):
+    for marker in ("desktop", "tablet", "mobile", "custom", "fullpage", "playwright"):
         if marker not in text:
             raise SystemExit(f"FAIL: Browser Screenshot policy missing marker: {marker}")
+    if "public" not in text and "publik" not in text:
+        raise SystemExit("FAIL: Browser Screenshot policy missing public-URL requirement")
+    if "functional" not in text and "funktionell" not in text:
+        raise SystemExit("FAIL: Browser Screenshot policy missing functional-verification separation")
 
     invalid=copy.deepcopy(example)
     invalid["functional_verification"]=True
