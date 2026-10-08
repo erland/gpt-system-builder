@@ -1797,3 +1797,172 @@ Skydda Playwright/PWA-regeln över alla aktiva runtimes.
 - alla aktiva runtime-distributioner behåller reglerna,
 - full regression passerar.
 
+---
+
+# Fortsättningsplan – capability-aware execution och companion plugins
+
+## SB-69 – Reconcile current project state
+
+### Mål
+
+Återställ project/work-state till faktisk repository-state efter att PR #11 och PR #12 mergats, och etablera nästa change-serie utan att felaktigt återanvända äldre release-readiness-evidens.
+
+### Omfattning
+
+- ersätt stale next-action som fortfarande pekar på merge av PR #11,
+- registrera att fem runtime-distributioner nu är aktiva,
+- markera att tidigare v1.3.2 release-readiness-evidens föregår PR #12 och därför inte är aktuell för nuvarande source,
+- öppna change-serien `capability-aware-execution`,
+- lägg SB-70–SB-75 i canonical development plan,
+- ändra inte runtimebeteendet för capability discovery/routing i detta steg.
+
+### Klart när
+
+- `STATUS.md`, `project-status.yaml` och `.system-builder/work-status.yaml` beskriver samma aktiva change-serie,
+- projektdefinitionen listar alla fem aktiva runtimes,
+- planens totalantal steg är 75,
+- gammal merge-åtgärd för PR #11 är borttagen,
+- release readiness behandlas som ej aktuell under aktiv utveckling,
+- state/schema/CI-relevanta kontroller passerar.
+
+## SB-70 – Capability discovery
+
+### Mål
+
+Inför ett canonical sätt att upptäcka vilka host capabilities som faktiskt finns i den aktuella körningen innan System Builder väljer exekveringsväg.
+
+### Minst
+
+Identifiera när relevant:
+
+- GitHub/repository read/write,
+- writable workspace/filesystem,
+- code execution,
+- persistent project state,
+- ZIP/project packaging,
+- Agent Workspace,
+- PWA Preview,
+- Browser Screenshot.
+
+Capability discovery ska utgå från faktisk host/tool availability och inte anta att optional companion plugins finns installerade.
+
+### Klart när
+
+- canonical capability model finns,
+- discovery-resultatet kan representeras maskinläsbart,
+- saknad optional capability är inte i sig blockerande,
+- required capability kan blockera eller degradera operationen ärligt.
+
+## SB-71 – Capability-aware tool routing och execution profiles
+
+### Mål
+
+Definiera hur System Builder väljer konkret execution profile från capability discovery-resultatet.
+
+### Profiler
+
+Minst:
+
+- GitHub-first,
+- workspace/Agent Workspace,
+- ZIP/local artifact,
+- hybrid GitHub + external execution,
+- degraded/manual fallback.
+
+### Regler
+
+System Builder äger process och beslut. Externa verktyg äger sin specialiserade execution capability. Routing får inte duplicera specialistfunktionalitet i kärnan.
+
+### Klart när
+
+- samma development step kan routas olika beroende på capabilities,
+- GitHub state förblir repository authority när GitHub source mode används,
+- fallback är deterministisk,
+- saknad plugin bryter inte basfunktionaliteten.
+
+## SB-72 – Agent Workspace-integration
+
+### Mål
+
+Använd Agent Workspace som optional execution backend för isolerad build/test/verification när plugin/capability finns.
+
+### Omfattning
+
+- skapa kortlivad workspace,
+- ladda upp/hämta relevant project source,
+- verifiera stödda Node/Java-projekt,
+- hämta build artifacts när steget kräver det,
+- destruera workspace efter användning,
+- rapportera faktisk execution evidence.
+
+### Klart när
+
+- integrationen är optional,
+- ingen verifiering simuleras när Agent Workspace saknas,
+- fallback till befintlig GitHub/ZIP-verifiering fungerar,
+- workspace alltid städas efter användning.
+
+## SB-73 – PWA Preview-integration
+
+### Mål
+
+Använd PWA Preview som optional preview/deployment-evidens för lämpliga statiska webbappar och PWA.
+
+### Omfattning
+
+- publicera byggd statisk artifact när preview är relevant,
+- behandla preview som temporär verifierings-/review-evidens,
+- undvik PWA Preview för backend/system som inte passar dess kontrakt,
+- behåll ordinarie release/deployment readiness separat från preview.
+
+### Klart när
+
+- preview kan skapas från verifierad artifact,
+- preview-URL/state registreras som evidens när relevant,
+- saknad PWA Preview degraderar utan att bryta utvecklingsflödet.
+
+## SB-74 – Browser Screenshot-integration
+
+### Mål
+
+Använd Browser Screenshot som optional visuell browser-evidens efter att en körbar URL finns.
+
+### Standard
+
+- desktop som default,
+- mobil/tablet endast när krav, risk eller användare motiverar det,
+- screenshot kompletterar men ersätter inte funktionella browser-test där sådana krävs.
+
+### Klart när
+
+- visuell kontroll kan kopplas till preview/deployed URL,
+- evidens skiljs från faktisk funktionell PASS,
+- saknad Browser Screenshot är en optional capability, inte project failure.
+
+## SB-75 – Capability-aware degradation och regression coverage
+
+### Mål
+
+Skydda capability discovery, routing och companion-plugin-beteende över aktiva runtimes.
+
+### Scenarier
+
+Minst:
+
+- GitHub + Agent Workspace,
+- GitHub utan Agent Workspace,
+- ZIP med lokal/code execution,
+- OpenAI Plugin med host capabilities,
+- OpenAI Plugin utan required execution capability,
+- PWA Preview tillgänglig/otillgänglig,
+- Browser Screenshot tillgänglig/otillgänglig,
+- companion plugins saknas helt men System Builder fungerar fortfarande.
+
+### Klart när
+
+- deterministic/static/E2E regression täcker routing och degradation,
+- optional capability saknas utan falskt blockeringsfel,
+- required capability-brist rapporteras ärligt,
+- ingen unrun verification rapporteras PASS,
+- alla aktiva runtime-distributioner behåller canonical invariants.
+

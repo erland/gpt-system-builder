@@ -4,10 +4,10 @@ project:
   name: System Builder
 plan:
   path: docs/development-plan.md
-  total_steps: 68
+  total_steps: 75
 progress:
-  current_phase: release
-  current_step: 68
+  current_phase: change
+  current_step: 69
   last_completed_step: 68
   completed_steps:
   - 1
@@ -163,14 +163,21 @@ progress:
   - 66
   - 67
   - 68
+  - 69
+  - 70
+  - 71
+  - 72
+  - 73
+  - 74
+  - 75
 state:
   overall: pass
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: merge
-  title: Merge PR #11
-  reason: Release readiness är READY_WITH_WARNINGS för v1.3.2 med 24/24 required gates PASS; mergea change-serien före tagg och GitHub Release.
+  recommended: verify
+  title: Verify SB-69 reconciliation
+  reason: SB-69 har implementerat state/documentation reconciliation för capability-aware-execution och ska verifieras innan completion.
 resume:
   supported: true
   required_files:
@@ -292,6 +299,8 @@ resume:
   - scripts/validate_opencode_distribution.py
   - scripts/validate_claude_projects_distribution.py
   - scripts/validate_custom_gpt_distribution.py
+  - scripts/build_plugin_distribution.py
+  - scripts/validate_plugin_distribution.py
   - evals/instruction-adherence.yaml
   - evals/static-contract-requirements.yaml
   - evals/live-eval-scorecard-template.yaml
