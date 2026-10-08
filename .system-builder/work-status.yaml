@@ -3,7 +3,7 @@ active_work:
   mode: CHANGE
   plan: docs/development-plan.md
   change_request: capability-aware-execution
-  selected_step: SB-74
+  selected_step: SB-75
 progress:
   completed:
   - SB-01
@@ -79,28 +79,29 @@ progress:
   - SB-71
   - SB-72
   - SB-73
-  in_progress: SB-74
+  - SB-74
+  in_progress: SB-75
   next:
-    recommended: SB-74
-    reason: Browser Screenshot integration is implemented against the live backend; run full project CI before completion.
+    recommended: SB-75
+    reason: SB-74 passed full PR CI; implement capability-aware degradation and regression coverage next.
 blockers: []
 verification:
-  last_status: pending
+  last_status: passed
   baseline: green
   commands:
   - bash scripts/ci-project.sh
-  notes: SB-74 implements optional Browser Screenshot visual-evidence rules from the live backend; full PR CI pending.
+  notes: SB-74 verified by successful full System Builder CI run 37725850680 on 807b26741881581585ca3be1d875b90c7bc50607.
 source_state:
   drift: none
   reference: change/capability-aware-execution
 execution:
-  next_action: verify
-  step: SB-74
-  operation: verify
-  reason: Run full project CI for the SB-74 implementation revision before completion.
+  next_action: implement
+  step: SB-75
+  operation: implement
+  reason: SB-74 is verified and completed; implement the final capability-aware degradation/regression gate.
 
 completion:
   allowed: false
   waiting_for: null
-  implementation_revision: null
-  evidence_status: pending
+  implementation_revision: 807b26741881581585ca3be1d875b90c7bc50607
+  evidence_status: passed
