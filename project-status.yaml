@@ -179,9 +179,9 @@ state:
   blocking_issues: []
   warnings: []
 next_step:
-  recommended: implement
-  title: Implement SB-70 capability discovery
-  reason: SB-69 är verifierad via PR #13 CI och mergad; nästa säkra steg är SB-70.
+  recommended: verify
+  title: Verify SB-70 capability discovery
+  reason: SB-70 capability discovery är implementerad och inväntar full projekt-CI innan completion.
 resume:
   supported: true
   required_files:
@@ -197,6 +197,7 @@ resume:
   - docs/end-to-end-process.md
   - docs/project-complexity.md
   - docs/document-state-architecture.md
+  - docs/capability-discovery.md
   - .system-builder/project.yaml
   - .system-builder/work-status.yaml
   - schemas/project.schema.json
@@ -286,10 +287,13 @@ resume:
   - runtime/distribution-registry.yaml
   - schemas/behavior-contract.schema.json
   - schemas/capability-contract.schema.json
+  - schemas/capability-discovery.schema.json
   - schemas/artifact-contract.schema.json
   - schemas/workspace-state-contract.schema.json
   - schemas/tool-contract.schema.json
   - scripts/validate_runtime_contract.py
+  - examples/capability-discovery.example.yaml
+  - scripts/validate_capability_discovery.py
   - scripts/validate_runtime_instruction.py
   - scripts/build_all_distributions.py
   - scripts/validate_all_distributions.py
