@@ -53,6 +53,11 @@ $PYTHON scripts/validate_final_release_readiness.py evals/final-release-readines
 $PYTHON scripts/validate_release_candidate.py
 $PYTHON scripts/validate_instruction_evals.py evals/instruction-adherence.yaml
 
+echo "== Complete project ZIP gate =="
+PROJECT_ZIP="$DIST_DIR/system-builder-project-ci.zip"
+$PYTHON scripts/build_project_zip.py --project-root . --output "$PROJECT_ZIP"
+$PYTHON scripts/validate_zip_artifact.py "$PROJECT_ZIP"
+
 echo "== Fresh distribution build =="
 $PYTHON scripts/build_all_distributions.py --output-dir "$DIST_DIR" --version ci
 
