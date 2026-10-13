@@ -41,7 +41,7 @@ jobs:
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             TAG="${{ inputs.tag }}"
           else
-            TAG="${GITHUB_REF_NAME}"
+            TAG="${{ github.event.release.tag_name || github.ref_name }}"
           fi
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
 
@@ -57,7 +57,14 @@ jobs:
       - name: Build release artifacts
         env:
           RELEASE_TAG: ${{ steps.tag.outputs.tag }}
-        run: bash scripts/build_release.sh
+        shell: bash
+        run: |
+          VERSION="${RELEASE_TAG#v}"
+          bash scripts/ci-migrated.sh "$VERSION"
+          python3 scripts/validate_distribution_registry.py
+          python3 scripts/validate_distributions.py
+          mkdir -p release-artifacts
+          cp dist/*.zip dist/SHA256SUMS.txt dist/DELIVERY-MANIFEST.json release-artifacts/
 
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
