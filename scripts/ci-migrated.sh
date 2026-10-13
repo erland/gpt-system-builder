@@ -2,7 +2,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 PYTHON="${PYTHON:-python3}"
-VERSION="${1:-1.4.1}"
+VERSION="${1:-$(cat VERSION)}"
 echo '== Canonical migration registry =='
 "$PYTHON" scripts/validate_distribution_registry.py
 "$PYTHON" scripts/validate_runtime_contract.py
@@ -17,6 +17,7 @@ if [[ "${RUN_DOCKER_SCENARIO:-0}" == "1" ]]; then
 fi
 "$PYTHON" scripts/build_distributions.py --version "$VERSION"
 "$PYTHON" scripts/validate_distributions.py
+"$PYTHON" scripts/verify_skill_packages.py "$VERSION"
 
 "$PYTHON" scripts/validate_distribution_registry.py
 printf 'PASS: migrated CI pipeline\n'

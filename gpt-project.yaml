@@ -221,39 +221,74 @@ skills:
   contract_version: 1
   schema: schemas/skill-contract.schema.json
   mode: explicit
+  resource_policy: explicit
   definitions:
   - id: plan
     name: plan
     description: Behovsanalys, arkitektur och planering
     source: src/skills/plan.md
+    references:
+    - knowledge/terminology.md
+    assets: []
+    scripts: []
   - id: create
     name: create
     description: CREATE och nyutveckling
     source: src/skills/create.md
+    references:
+    - knowledge/technology-patterns.md
+    assets: []
+    scripts: []
   - id: change
     name: change
     description: CHANGE av befintliga system
     source: src/skills/change.md
+    references: []
+    assets: []
+    scripts: []
   - id: improve
     name: improve
     description: IMPROVE och teknisk förbättring
     source: src/skills/improve.md
+    references:
+    - knowledge/technology-patterns.md
+    assets: []
+    scripts: []
   - id: verify
     name: verify
     description: Tester, säkerhet och CI
     source: src/skills/verify.md
+    references: []
+    assets: []
+    scripts:
+    - scripts/validate_model_robustness.py
+    - scripts/lint_gpt_project.py
   - id: deploy
     name: deploy
     description: Driftsättning, Docker, Coolify och integrationer
     source: src/skills/deploy.md
+    references:
+    - knowledge/platform-reference.md
+    assets: []
+    scripts: []
   - id: release
     name: release
     description: Release readiness och dokumentation
     source: src/skills/release.md
+    references: []
+    assets: []
+    scripts:
+    - scripts/build_distributions.py
+    - scripts/validate_distributions.py
   - id: workflow
     name: workflow
     description: Arbetsflödesstyrning, ZIP och GitHub
     source: src/skills/workflow.md
+    references: []
+    assets: []
+    scripts:
+    - scripts/recommend_next_step.py
+    - scripts/project_hygiene.py
 capabilities:
   contract_version: 1
   schema: schemas/capability-contract.schema.json
