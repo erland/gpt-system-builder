@@ -1,0 +1,171 @@
+{
+  "sources": {
+    "core": "src/instructions/core.md",
+    "plan": "src/skills/plan.md",
+    "create": "src/skills/create.md",
+    "change": "src/skills/change.md",
+    "improve": "src/skills/improve.md",
+    "verify": "src/skills/verify.md",
+    "deploy": "src/skills/deploy.md",
+    "release": "src/skills/release.md",
+    "workflow": "src/skills/workflow.md"
+  },
+  "sections": [
+    {
+      "owner": "core",
+      "title": "0. Critical invariants"
+    },
+    {
+      "owner": "core",
+      "title": "1. Operating modes"
+    },
+    {
+      "owner": "core",
+      "title": "2. Core behavior"
+    },
+    {
+      "owner": "deploy",
+      "title": "2A. Capability discovery"
+    },
+    {
+      "owner": "deploy",
+      "title": "2B. Execution profile routing"
+    },
+    {
+      "owner": "deploy",
+      "title": "2C. Agent Workspace"
+    },
+    {
+      "owner": "deploy",
+      "title": "2D. PWA Preview"
+    },
+    {
+      "owner": "deploy",
+      "title": "2E. Browser Screenshot"
+    },
+    {
+      "owner": "workflow",
+      "title": "3. One-step rule"
+    },
+    {
+      "owner": "workflow",
+      "title": "4. Selection priority"
+    },
+    {
+      "owner": "workflow",
+      "title": "5. Step completion"
+    },
+    {
+      "owner": "plan",
+      "title": "6. Functional specification"
+    },
+    {
+      "owner": "plan",
+      "title": "7. Architecture"
+    },
+    {
+      "owner": "plan",
+      "title": "8. Development plan"
+    },
+    {
+      "owner": "plan",
+      "title": "9. Risk and feasibility"
+    },
+    {
+      "owner": "verify",
+      "title": "10. Testing and verification"
+    },
+    {
+      "owner": "verify",
+      "title": "11. Security"
+    },
+    {
+      "owner": "create",
+      "title": "12. CREATE"
+    },
+    {
+      "owner": "change",
+      "title": "13. CHANGE"
+    },
+    {
+      "owner": "improve",
+      "title": "14. IMPROVE"
+    },
+    {
+      "owner": "plan",
+      "title": "15. Project complexity"
+    },
+    {
+      "owner": "workflow",
+      "title": "16. State and traceability"
+    },
+    {
+      "owner": "workflow",
+      "title": "17. ZIP mode"
+    },
+    {
+      "owner": "workflow",
+      "title": "18. GitHub mode"
+    },
+    {
+      "owner": "verify",
+      "title": "19. Repository hygiene"
+    },
+    {
+      "owner": "verify",
+      "title": "20. CI"
+    },
+    {
+      "owner": "deploy",
+      "title": "21. Deployment and packaging"
+    },
+    {
+      "owner": "deploy",
+      "title": "22. Docker"
+    },
+    {
+      "owner": "deploy",
+      "title": "23. Coolify"
+    },
+    {
+      "owner": "deploy",
+      "title": "24. Operational documentation"
+    },
+    {
+      "owner": "release",
+      "title": "25. Release readiness"
+    },
+    {
+      "owner": "release",
+      "title": "26. Knowledge"
+    },
+    {
+      "owner": "release",
+      "title": "27. Documentation discipline"
+    },
+    {
+      "owner": "plan",
+      "title": "28. Questions"
+    },
+    {
+      "owner": "plan",
+      "title": "29. Default technical preferences"
+    },
+    {
+      "owner": "release",
+      "title": "30. Output after a completed step"
+    },
+    {
+      "owner": "release",
+      "title": "31. Non-goals"
+    },
+    {
+      "owner": "release",
+      "title": "32. Backward compatibility"
+    },
+    {
+      "owner": "release",
+      "title": "33. Canonical references"
+    }
+  ]
+}
