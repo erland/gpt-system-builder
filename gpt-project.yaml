@@ -222,16 +222,38 @@ skills:
   schema: schemas/skill-contract.schema.json
   mode: explicit
   definitions:
-  - id: system-development
-    name: system-development
-    description: Genomför System Builders CREATE, CHANGE, IMPROVE, planering, verifiering och release enligt det kanoniska beteendet.
-    source: runtime/canonical-instructions.md
-    references:
-    - docs/canonical-scope.md
-    - docs/architecture-standard.md
-    - docs/development-plan.md
-    - docs/zip-mode.md
-    - docs/github-mode.md
+  - id: plan
+    name: plan
+    description: Behovsanalys, arkitektur och planering
+    source: src/skills/plan.md
+  - id: create
+    name: create
+    description: CREATE och nyutveckling
+    source: src/skills/create.md
+  - id: change
+    name: change
+    description: CHANGE av befintliga system
+    source: src/skills/change.md
+  - id: improve
+    name: improve
+    description: IMPROVE och teknisk förbättring
+    source: src/skills/improve.md
+  - id: verify
+    name: verify
+    description: Tester, säkerhet och CI
+    source: src/skills/verify.md
+  - id: deploy
+    name: deploy
+    description: Driftsättning, Docker, Coolify och integrationer
+    source: src/skills/deploy.md
+  - id: release
+    name: release
+    description: Release readiness och dokumentation
+    source: src/skills/release.md
+  - id: workflow
+    name: workflow
+    description: Arbetsflödesstyrning, ZIP och GitHub
+    source: src/skills/workflow.md
 capabilities:
   contract_version: 1
   schema: schemas/capability-contract.schema.json
@@ -592,7 +614,7 @@ file_classification:
 instructions:
   architecture: docs/instruction-architecture.md
   schema: schemas/instruction-architecture.schema.json
-  mode: monolithic
+  mode: modular_skills
   canonical: runtime/canonical-instructions.md
   policies:
     include:
@@ -617,6 +639,8 @@ instructions:
     required_runtime_dependencies: []
     max_required_file_hops: 1
     knowledge_may_not_be_required_for_core_behavior: true
+  core: src/instructions/core.md
+  assembly: src/instructions/assembly.json
 knowledge_architecture:
   model: docs/knowledge-architecture.md
   schema: schemas/knowledge-architecture.schema.json
