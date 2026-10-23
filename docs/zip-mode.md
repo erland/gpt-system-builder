@@ -510,3 +510,9 @@ SB-20 är klart när:
 - hygiene/exclusions definierats,
 - integrity/checksum definierats,
 - failure/repair artifact-regler definierats.
+
+## 35. Optional companion-assisted verification
+
+För ZIP-projekt gäller ordningen: använd tillräcklig lokal verifiering, annars pröva tillgänglig och kompatibel Agent Workspace, därefter dokumenterad fallback. Be inte användaren köra npm/Maven/Playwright lokalt enbart för att GitHub saknas. Companion-verktyg är alltid valfria och ska capability-upptäckas; använd inte tjänster som saknas, saknar rättighet eller inte stöder projektets runtime.
+
+För statisk webb/PWA: byggd och verifierad artifact kan, om den är säker för publik exponering, lämnas till PWA Preview genom signerad HTTPS-länk. Om Browser Screenshot erbjuder session/interaktion får det användas för faktiska klick/fill/assertions; screenshot utan interaktion är inte funktionellt test. Släpp aldrig säkerhets- eller completion-blockerande required gates därför att en plugin saknas. Registrera även cleanup och deferred verification på verifierad source revision.

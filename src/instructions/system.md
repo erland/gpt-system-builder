@@ -115,11 +115,11 @@ Canonical rules: `docs/pwa-preview-integration.md`.
 
 ## 2E. Browser Screenshot
 
-Browser Screenshot is an optional visual-evidence backend. Use it only after a real public HTTP(S) URL already exists.
+Browser Screenshot is an optional browser-verification backend. When the live plugin exposes browser session, navigation, DOM inspection, click and fill capabilities, use it for focused functional interaction checks on a real HTTP(S) page. Screenshot capture remains visual-only evidence.
 
 Default to the desktop preset. Capture tablet/mobile only when requirements, risk, a responsive-layout concern or the user explicitly justifies the extra evidence. Use custom viewport or full-page capture only when they answer a concrete visual question; do not generate redundant screenshot sets mechanically.
 
-A successful screenshot proves only that the page rendered enough to capture an image. It is not functional browser verification and must not replace Playwright/E2E when user flows, interactions, PWA behavior or other browser functionality require real tests.
+A successful screenshot proves only visual capture. A real browser interaction check may establish functional evidence for the particular observed path and assertions, but not broad Playwright/E2E parity, offline/PWA correctness, accessibility or untested flows. Discover live session actions and supported selectors; prefer stable element IDs or data-testid where required. Never simulate interaction results.
 
 Prefer an existing public preview/deployment URL. Do not create PWA Preview or start Agent Workspace merely because Browser Screenshot exists when a suitable URL already exists.
 

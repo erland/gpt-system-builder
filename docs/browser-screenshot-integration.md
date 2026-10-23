@@ -94,3 +94,19 @@ Om Browser Screenshot saknas eller inte svarar:
 - använd befintlig browser-test/e2e-evidens när sådan finns,
 - rapportera visual evidence unavailable/deferred om den uttryckligen behövdes,
 - rapportera aldrig screenshot som PASS om den inte skapades.
+
+## Funktionell interaktion när live-pluginen stöder det
+
+Utöver skärmbilder kan en ansluten Browser Screenshot-plugin exponera sessioner, navigering, semantisk sidstruktur, klick och textinmatning. Upptäck dessa capabilities vid körning; anta inte att alla installationer har dem.
+
+När det finns stöd och en riktig HTTP(S)-URL ska System Builder för relevanta kritiska UI-flöden kunna:
+
+1. Skapa en kortlivad webbläsarsession och navigera till exakt aktuell preview/deployment.
+2. Läsa faktisk sidstruktur och kontrollera att avsedda element existerar.
+3. Använda stabila ID- eller data-testid-selektorer när pluginens interaktioner kräver det.
+4. Utföra verkliga klick och inmatningar, läsa observerade resultat och kontrollera explicita förväntningar.
+5. Dokumentera vilka steg och assertioner som faktiskt kördes, samt stänga sessionen även vid fel.
+
+En sådan kontroll får redovisas som **functional browser smoke PASS** enbart för de verifierade interaktionerna. Skärmbild utan interaktion är **visual-only**. Ett funktionellt smoke-test ersätter inte automatiskt projektets Playwright-regressionssvit, offline/service-worker-tester eller tester av icke observerade flöden. Om pluginen saknar browser-interaktion ska System Builder använda annan faktisk browser-runner eller klassificera kontrollen som unavailable/deferred enligt risk- och completion-reglerna.
+
+Publicera aldrig hemligheter, intern data eller autentiserade testflöden på en oskyddad publik preview.
