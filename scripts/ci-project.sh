@@ -48,6 +48,9 @@ $PYTHON scripts/validate_agent_workspace_integration.py
 $PYTHON scripts/validate_pwa_preview_integration.py
 $PYTHON scripts/validate_browser_screenshot_integration.py
 $PYTHON scripts/run_e2e_capability_aware_degradation.py
+
+echo "== Offline companion fallback regression (no MCP network calls) =="
+$PYTHON -m unittest discover -s tests -p "test_offline_companion_fallback.py" -v
 $PYTHON scripts/validate_distribution_registry.py
 $PYTHON scripts/validate_final_release_readiness.py evals/final-release-readiness.yaml
 $PYTHON scripts/validate_release_candidate.py
