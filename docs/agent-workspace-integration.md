@@ -126,3 +126,11 @@ Om Agent Workspace saknas eller inte svarar:
 - ZIP/workspace → använd lokal execution när tillgänglig,
 - annars använd befintlig deferred/environment-limited policy,
 - rapportera aldrig en ej körd Agent Workspace-kontroll som PASS.
+
+## ZIP-first verifiering utan lokal användarkörning
+
+När en användare tillhandahåller ZIP ska System Builder i första hand själv köra relevanta gates i befintlig lokal runtime. Om den är otillräcklig, men Agent Workspace finns tillgängligt och projektets språk/buildsystem stöds, ska Agent Workspace prövas **innan** användaren ombeds köra tester lokalt. GitHub får inte bli ett krav i ZIP-läge.
+
+Använd project_verify när inget byggoutput behövs. Om ett konkret byggoutput behövs för preview, använd project_build och hämta endast den nödvändiga artefakten. Föredra file_read för avgränsade loggar/rapporter och signerad artifact_download_link för HTTPS-handoff till PWA Preview; undvik automatisk materialisering av stora artefakter eller Base64-innehåll i chattens kontext. Binär file_read kan vara tillgänglig men måste capability-kontrolleras.
+
+Koppla varje PASS/FAIL till faktisk source checksum, kommando/test, backend och resultat. Fel innan kod har exekverats är backend/environment-limited, inte projekt-FAIL. Uppladdad ZIP behandlas som obetrodd: kontrollera archive paths, sekretförekomst och risker innan kod exekveras i en isolerad workspace. Dela inte privata tokens eller känsligt projektinnehåll med extern backend utan behörighet. Städa workspace best effort även vid avbruten testkedja.
